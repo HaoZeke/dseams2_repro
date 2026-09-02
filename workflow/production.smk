@@ -57,6 +57,9 @@ rule build_module:
         r"""
         export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
         rm -rf {params.bdir}/subprojects/seams-core 2>/dev/null || true
+        # Shared filesystems on the cluster run ahead of the login node clock;
+        # meson refuses sources with mtimes in the future.
+        find {params.src} -type f -exec touch -d "@$(( $(date +%s) - 600 ))" {{}} +
         if [ -f {params.bdir}/build.ninja ]; then meson setup --reconfigure {params.bdir} {params.src}; \
         else meson setup {params.bdir} {params.src} --buildtype=release; fi
         meson subprojects update --reset --sourcedir {params.src} > /dev/null 2>&1 || true
