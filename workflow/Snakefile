@@ -698,6 +698,30 @@ rule ion_atlas:
         "SEAMS_BUILD={params.tbuild} "
         "python scripts/ion_atlas.py > {output}'"
 
+
+rule polymorph_library:
+    # Topology key library over the GenIce lattices (three hops, mutual
+    # four-nearest graph) read back against the jittered ice I lattices and
+    # the displaced atlas. Needs the engine's topology keys (pydseamslib
+    # 2.8 or later); not part of the manifest until the lock carries them.
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        library=R + "/polymorph_library.txt",
+        match=R + "/polymorph_match.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/polymorph_library.py --hops 3 --library-out {output.library} "
+        "> {output.match}'"
+
 rule aggregate:
     input:
         conditions=R + "/conditions.txt",
