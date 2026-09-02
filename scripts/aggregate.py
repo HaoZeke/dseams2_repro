@@ -252,6 +252,21 @@ def parse_walk(text):
     }
 
 
+def parse_atlas(text):
+    """genice_atlas key=value lines -> list of rows, one per structure and
+    noise level."""
+    rows = []
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        row = {}
+        for tok in line.split():
+            k, _, v = tok.partition("=")
+            row[k] = v
+        rows.append(row)
+    return rows
+
+
 def parse_sota(text):
     """sota_compare key=value lines -> mean and spread per method/system/sigma."""
     import statistics
@@ -345,6 +360,9 @@ def main():
         "sota": parse_sota(read(out_dir / "sota_compare.txt"))
         if (out_dir / "sota_compare.txt").exists()
         else {},
+        "atlas": parse_atlas(read(out_dir / "genice_atlas.txt"))
+        if (out_dir / "genice_atlas.txt").exists()
+        else [],
     }
     json.dump(manifest, sys.stdout, indent=2, sort_keys=True)
     print()

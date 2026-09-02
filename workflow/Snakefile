@@ -656,6 +656,27 @@ rule sota_sweep:
         "--sigmas {params.sigmas} > {output}'"
 
 
+
+rule genice_atlas:
+    # Specificity over the GenIce polymorph library: ice I positives,
+    # dense polymorphs, empty clathrate frameworks, porous ices and
+    # amorphous networks, ideal and under positional noise
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/genice_atlas.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/genice_atlas.py > {output}'"
+
 rule aggregate:
     input:
         conditions=R + "/conditions.txt",
@@ -674,6 +695,7 @@ rule aggregate:
         ql_dseams=R + "/ql-dseams.txt",
         ql_python=R + "/ql-python.txt",
         figshare_demos=R + "/figshare-demos/figshare-demos.json",
+        atlas=R + "/genice_atlas.txt",
         figshare_notebooks=expand(
             R + "/notebooks/{nb}.ipynb", nb=NOTEBOOKS
         ),

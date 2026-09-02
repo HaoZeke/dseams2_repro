@@ -41,6 +41,7 @@ pyyaml = "*"
 snakemake = ">=8.0"
 # OVITO ships PTM and CHILL+ as a pip wheel; used by the tool comparison
 ovito = ">=3.10"
+genice2 = ">=2.2"
 
 [tasks]
 # Login node: sources, wraps, data, HyperQueue
