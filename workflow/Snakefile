@@ -16,13 +16,11 @@ import json
 import os
 import shutil
 
-from snakemake.shell import shell
-
 configfile: "config/config.yaml"
 
 # Host cargo configuration (a user-level linker choice, say) must not leak
 # into the locked Rust builds; an explicit RUSTFLAGS wins over ~/.cargo
-shell.prefix('export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; ')
+RUST_ENV = 'export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"; '
 
 ROOT = os.path.abspath(".")
 R = "results"
@@ -148,7 +146,7 @@ rule build_tip:
         hq=lambda wc: hq(8),
         bdir=TIP_BUILD,
     shell:
-        "{params.hq} meson compile -C {params.bdir}"
+        RUST_ENV + "{params.hq} meson compile -C {params.bdir}"
 
 
 rule identity_gate:
@@ -174,7 +172,7 @@ rule install_python:
         source=PYTHON_ROOT,
         site=PYTHON_SITE,
     shell:
-        "python -m pip install --no-build-isolation --no-deps --upgrade "
+        RUST_ENV + "python -m pip install --no-build-isolation --no-deps --upgrade "
         "--target {params.site} {params.source} && "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
         "python -c 'import pydseams; print(pydseams.__file__)'"
@@ -192,6 +190,7 @@ rule build_base:
     shell:
         r"""
         test -d {params.tree} || {{ echo "baseline tree missing; run scripts/elja_submit.sh prep" >&2; exit 1; }}
+        export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
         meson setup {params.bbuild} {params.tree} --buildtype=release \
           -Dwith_python=false -Dwith_tests=false > results/base-setup.log 2>&1
         {params.hq} meson compile -C {params.bbuild}
@@ -460,6 +459,7 @@ rule build_yoda:
     shell:
         r"""
         test -d {params.yoda}/lua || {{ echo "locked yodaStruct source missing: {params.yoda}" >&2; exit 1; }}
+        export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
         meson setup {params.bdir} {params.yoda} --buildtype=release --wrap-mode=nodownload \
           > results/yoda-setup.log 2>&1
         {params.hq} meson compile -C {params.bdir}
