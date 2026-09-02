@@ -71,6 +71,22 @@ class LockTests(unittest.TestCase):
                 ecosystem_sources.load_lock(lock_path)
 
 
+class RepositoryTests(unittest.TestCase):
+    def test_ssh_and_https_spell_the_same_repository(self) -> None:
+        self.assertTrue(
+            ecosystem_sources.same_repository(
+                "git@github.com:d-SEAMS/linkcell.git",
+                "https://github.com/d-SEAMS/linkcell.git",
+            )
+        )
+        self.assertFalse(
+            ecosystem_sources.same_repository(
+                "https://github.com/d-SEAMS/linkcell.git",
+                "https://github.com/HaoZeke/linkcell.git",
+            )
+        )
+
+
 class WireTests(unittest.TestCase):
     def test_wire_links_every_binding_to_one_core(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

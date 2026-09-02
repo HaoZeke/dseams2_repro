@@ -80,6 +80,27 @@ def _assert_clean_repository(path: Path, *, include_untracked: bool = True) -> N
         raise RuntimeError(f"locked source has local changes: {path}")
 
 
+def same_repository(a: str, b: str) -> bool:
+    """Compare repository URLs modulo transport and a trailing .git.
+
+    `git remote get-url` returns the URL after any url.<base>.insteadOf
+    rewrite, so an https lock entry may read back as an ssh address.
+    """
+
+    def norm(url: str) -> str:
+        url = url.strip().lower()
+        for prefix in ("https://", "http://", "ssh://git@", "ssh://", "git://"):
+            if url.startswith(prefix):
+                url = url[len(prefix):]
+        if url.startswith("git@"):
+            url = url[4:].replace(":", "/", 1)
+        if url.endswith(".git"):
+            url = url[:-4]
+        return url.rstrip("/")
+
+    return norm(a) == norm(b)
+
+
 def fetch(lock: dict[str, Any], root: Path) -> None:
     """Materialize every component at its locked revision."""
     root.mkdir(parents=True, exist_ok=True)
@@ -93,7 +114,7 @@ def fetch(lock: dict[str, Any], root: Path) -> None:
                 )
             _assert_clean_repository(destination, include_untracked=False)
             configured = _git("remote", "get-url", "origin", cwd=destination)
-            if configured != component["repository"]:
+            if not same_repository(configured, component["repository"]):
                 raise RuntimeError(
                     f"origin mismatch for {name}: {configured!r} != "
                     f"{component['repository']!r}"
