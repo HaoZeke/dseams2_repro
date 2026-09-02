@@ -22,8 +22,8 @@ payload. Pin the software to a release tag, not a commit.
 | `figshare-demos/` | the five v1 deposits through `require("dseams")` |
 | `figshare-incremental.json` | per-frame incremental rings and seeded labels |
 
-Fill `payload/` from `repro/results/` after `repro/elja_submit.sh run`
-exits 0. The driver is `repro/stage_zenodo.sh`. Pin each software record
+Fill `payload/` from `results/` after `scripts/elja_submit.sh run`
+exits 0. The driver is `scripts/stage_zenodo.sh`. Pin each software record
 to the paper release tag, verify that each locked revision belongs to that
 tag, and use the tags rather than commits as the deposit provenance.
 

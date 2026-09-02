@@ -1,86 +1,83 @@
 #!/usr/bin/env bash
 # Reproducibility campaign driver for an IRHPC-style Slurm cluster.
 #
-#   repro/elja_submit.sh prep     # login node: env, wraps, baseline, hq
-#   repro/elja_submit.sh submit   # sbatch the exclusive campaign
-#   repro/elja_submit.sh run      # the sbatch body (hq server + snakemake)
+#   scripts/elja_submit.sh prep     # login node: env, sources, wraps, data, hq
+#   scripts/elja_submit.sh submit   # sbatch the exclusive campaign
+#   scripts/elja_submit.sh run      # the sbatch body (hq server + snakemake)
 #
 # Environment:
-#   ELJA_ACCOUNT    Slurm account for submit (required for submit)
+#   ELJA_ACCOUNT    Slurm account for submit (default chem-ui)
 #   ELJA_PARTITION  partition (default 64cpu_256mem)
-#   BASE_SHA        baseline commit (default: repro/config.yaml value)
+#   ELJA_TIME       walltime (default 08:00:00)
+#   CONFIG          workflow config (default config/config.yaml)
 #   HQ_VERSION      HyperQueue release to fetch (default v0.19.0)
 set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 ROOT=$(dirname "$SCRIPT_DIR")
-BASE_SHA=${BASE_SHA:-$(grep '^base_sha' "$SCRIPT_DIR/config.yaml" | sed 's/.*"\(.*\)".*/\1/')}
-BASE_TREE=$ROOT/../seams-base-repro
-SOURCE_ROOT=${DSEAMS_SOURCE_ROOT:-$ROOT/../dseams-repro-sources}
+CONFIG=${CONFIG:-config/config.yaml}
+SOURCE_ROOT=${DSEAMS_SOURCE_ROOT:-$ROOT/sources}
 HQ_VERSION=${HQ_VERSION:-v0.19.0}
-export PATH=$HOME/.pixi/bin:$ROOT/repro/bin:$PATH
+export PATH=$HOME/.pixi/bin:$ROOT/bin:$PATH
 export DSEAMS_SOURCE_ROOT=$SOURCE_ROOT
 
 case "${1:-}" in
 prep)
   cd "$ROOT"
-  pixi install -e repro
-  pixi run -e repro -- python repro/scripts/ecosystem_sources.py fetch \
-    --root "$SOURCE_ROOT"
-  pixi run -e repro -- python repro/scripts/ecosystem_sources.py wire \
-    --root "$SOURCE_ROOT" --core "$ROOT"
-  pixi run -e repro -- meson subprojects download
-  git rev-parse HEAD > .tip_sha
-  if [ ! -d "$BASE_TREE" ]; then
-    git worktree add --detach "$BASE_TREE" "$BASE_SHA"
-  fi
-  (cd "$BASE_TREE" &&
-   pixi run -e repro --manifest-path "$ROOT/pixi.toml" -- \
-     meson subprojects download)
-  # Compute nodes are offline; the figshare deposits download here
-  pixi run -e repro -- python repro/scripts/figshare_demos.py fetch repro/figshare
+  pixi install
+  # Every component of config/ecosystem-lock.json, the engine and its
+  # baseline included, at its immutable revision
+  pixi run -- python scripts/ecosystem_sources.py fetch --root "$SOURCE_ROOT"
+  pixi run -- python scripts/ecosystem_sources.py wire --root "$SOURCE_ROOT"
+  # Meson wraps for both engine trees need the network
+  (cd "$SOURCE_ROOT/seams-core" && pixi run --manifest-path "$ROOT/pixi.toml" -- meson subprojects download)
+  (cd "$SOURCE_ROOT/seams-base" && pixi run --manifest-path "$ROOT/pixi.toml" -- meson subprojects download)
+  # Compute nodes are offline; the public trajectories download here
+  pixi run -- python scripts/figshare_demos.py fetch data/figshare
+  pixi run -- python scripts/public_ice.py fetch data/public-ice
   # HyperQueue is a single static binary
   if ! command -v hq > /dev/null; then
-    mkdir -p repro/bin
+    mkdir -p bin
     curl -sL "https://github.com/It4innovations/hyperqueue/releases/download/${HQ_VERSION}/hq-${HQ_VERSION}-linux-x64.tar.gz" |
-      tar -xz -C repro/bin
+      tar -xz -C bin
   fi
-  echo "prep done: tip $(cat .tip_sha), sources $SOURCE_ROOT, base tree $BASE_TREE, hq $(hq --version)"
+  pixi run -- snakemake -s workflow/Snakefile --configfile "$CONFIG" --dry-run --cores 1 > /dev/null
+  echo "prep done: core $(git -C "$SOURCE_ROOT/seams-core" rev-parse --short HEAD), base $(git -C "$SOURCE_ROOT/seams-base" rev-parse --short HEAD), hq $(hq --version)"
   ;;
 submit)
   : "${ELJA_ACCOUNT:=chem-ui}"
   cd "$ROOT"
+  mkdir -p results
   sbatch --partition="${ELJA_PARTITION:-64cpu_256mem}" --exclusive \
-    --ntasks=1 --cpus-per-task=32 --hint=nomultithread --time=04:00:00 \
-    --mem=32G --account="$ELJA_ACCOUNT" --job-name=seams-repro \
-    --output=repro-%j.out --wrap "repro/elja_submit.sh run"
+    --ntasks=1 --cpus-per-task=32 --hint=nomultithread --time="${ELJA_TIME:-08:00:00}" \
+    --mem=32G --account="$ELJA_ACCOUNT" --job-name=dseams2-repro \
+    --output=results/repro-%j.out --wrap "CONFIG=$CONFIG $ROOT/scripts/elja_submit.sh run"
   ;;
 run)
   cd "$ROOT"
-  mkdir -p repro/results
+  mkdir -p results
   # One HyperQueue server and one worker own the allocation; Snakemake
   # submits every heavy rule through it
-  export HQ_SERVER_DIR=$ROOT/repro/results/hq-server
+  export HQ_SERVER_DIR=$ROOT/results/hq-server
   mkdir -p "$HQ_SERVER_DIR"
-  hq server start > repro/results/hq-server.log 2>&1 &
+  hq server start > results/hq-server.log 2>&1 &
   HQ_SERVER_PID=$!
   sleep 3
   # Tasks inherit the worker environment, so the worker starts inside the
-  # repro pixi environment; meson, ninja and python resolve there
-  pixi run -e repro -- hq worker start --cpus "${SLURM_CPUS_PER_TASK:-32}" \
-    > repro/results/hq-worker.log 2>&1 &
+  # pixi environment; meson, ninja and python resolve there
+  pixi run -- hq worker start --cpus "${SLURM_CPUS_PER_TASK:-32}" \
+    > results/hq-worker.log 2>&1 &
   HQ_WORKER_PID=$!
   sleep 2
   trap 'hq server stop > /dev/null 2>&1 || true; kill $HQ_WORKER_PID $HQ_SERVER_PID 2> /dev/null || true' EXIT
 
   # Node-local build root: the cluster NFS clock skews against the nodes,
   # which meson refuses at configure time
-  export SEAMS_BUILD_ROOT=/tmp/seams-repro-${SLURM_JOB_ID:-manual}
+  export SEAMS_BUILD_ROOT=/tmp/dseams2-repro-${SLURM_JOB_ID:-manual}
   mkdir -p "$SEAMS_BUILD_ROOT"
-  LOAD=$(cut -d' ' -f1 /proc/loadavg)
-  echo "loadavg_before_workflow: $LOAD"
-  pixi run -e repro -- snakemake -s repro/Snakefile --cores all --printshellcmds
-  echo "manifest: repro/results/paper_manifest.json"
+  echo "loadavg_before_workflow: $(cut -d' ' -f1 /proc/loadavg)"
+  pixi run -- snakemake -s workflow/Snakefile --configfile "$CONFIG" --cores all --printshellcmds
+  echo "manifest: results/paper_manifest.json"
   ;;
 *)
   echo "usage: $0 {prep|submit|run}" >&2

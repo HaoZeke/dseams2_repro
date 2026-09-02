@@ -7,13 +7,13 @@
 #SBATCH --exclusive
 #SBATCH --mem=32G
 #SBATCH --time=04:00:00
-#SBATCH --output=repro/results/terra-%j.out
+#SBATCH --output=results/terra-%j.out
 # Tip-only campaign: pipeline, incremental, stages. No baseline worktree.
 set -euo pipefail
 export PATH=$HOME/.pixi/bin:$PATH
 export SLURM_CONF=${SLURM_CONF:-/etc/slurm-llnl/slurm.conf}
 ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-OUT=$ROOT/repro/results
+OUT=$ROOT/results
 BUILD=/tmp/seams-repro-${SLURM_JOB_ID:-manual}
 mkdir -p "$OUT" "$BUILD"
 cd "$ROOT"
@@ -42,8 +42,8 @@ done
 "$BUILD/tests/bench_stages" traj/mW_cubic.lammpstrj 1 1 5 | tee "$OUT/tip-stages-cubic.txt"
 "$BUILD/tests/bench_cages" traj/mW_cubic.lammpstrj 1 5 | tee "$OUT/tip-cages.txt"
 "$BUILD/tests/bench_trajectory_incremental" traj/mW_cubic.lammpstrj 11 | tee "$OUT/trajectory-incremental.txt"
-if [ -f "$ROOT/repro/figshare/nucleation.lammpstrj" ]; then
-  "$BUILD/tests/bench_stages" "$ROOT/repro/figshare/nucleation.lammpstrj" 1 1 5 \
+if [ -f "$ROOT/data/figshare/nucleation.lammpstrj" ]; then
+  "$BUILD/tests/bench_stages" "$ROOT/data/figshare/nucleation.lammpstrj" 1 1 5 \
     | tee "$OUT/tip-stages-nucleation.txt"
 fi
 echo DONE

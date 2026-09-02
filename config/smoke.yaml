@@ -1,20 +1,21 @@
+# Small matrix for a laptop or CI sanity run; not paper numbers.
 # Reproducibility campaign configuration. The baseline is the commit the
 # paper's "v1" columns are measured against; the tip is the seams-core
 # component of config/ecosystem-lock.json, recorded in the conditions file.
 base_sha: "1c8efa382c4ae88ebc68e40a991260c4d57edbd5"
 trajectory: "traj/mW_cubic.lammpstrj"
 trajectory_frames: 11
-scaling_sizes: [1000, 2000, 4000, 8000, 16000, 32000]
-overhead_sizes: [4096, 16000]
-strong_atoms: 65536
-strong_threads: [1, 2, 4, 8, 16, 32]
-cage_reps: 5
-incremental_frames: 5
+scaling_sizes: [1000, 2000]
+overhead_sizes: [4096]
+strong_atoms: 8192
+strong_threads: [1, 2]
+cage_reps: 1
+incremental_frames: 2
 incremental_sites: 3
 # Applications: per-frame walks of the public trajectories
-walk_stride: 1
+walk_stride: 100
 figshare_dir: "data/figshare"
 public_ice_dir: "data/public-ice"
 # Comparison with existing tools: jitter realizations per sigma, sigma grid (A)
-sweep_seeds: 5
-sweep_sigmas: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4]
+sweep_seeds: 1
+sweep_sigmas: [0.0, 0.3]

@@ -1,0 +1,9 @@
+# Snakemake profile for one exclusive Elja node; heavy rules go through
+# HyperQueue inside the allocation (scripts/elja_submit.sh run).
+#   snakemake -s workflow/Snakefile --configfile config/config.yaml --profile profiles/elja
+executor: local
+cores: 32
+local-cores: 32
+jobs: 32
+printshellcmds: true
+rerun-incomplete: true
