@@ -33,13 +33,19 @@ from pydseams.frame import Frame  # noqa: E402
 
 # Two hops see no ring in a four-connected network (a six-ring closes at
 # three), so every tetrahedral ice shares one two-hop key; three hops is
-# the first depth that separates polymorphs by their ring structure
+# the first depth that separates polymorphs by their ring structure. Four
+# hops reach the periodic images of the 360-molecule test lattice and the
+# keys stop matching the reference, so the depth stays at three.
 HOPS = 3
 LIBRARY_STRUCTURES = ["Ih", "Ic", "XI", "0", "III", "IV", "V", "VI", "VII", "VIII", "IX",
-                      "XII", "XIV", "XVI", "XVII", "sI", "sT", "sIV", "iceA", "iceB", "FAU",
-                      "RHO", "SOD"]
-# ice I under any name is one class for the accuracy test
-ICE1 = {"Ih": "Ih", "Ic": "Ic", "XI": "Ih"}
+                      "XII", "XIV", "XVI", "XVII", "sI", "sII", "sT", "sIV", "iceA", "iceB",
+                      "FAU", "RHO", "SOD"]
+# Structures that share one oxygen network carry one label: the proton
+# ordered and disordered pairs (Ih/XI, III/IX, XII/XIV, VII/VIII) and the
+# empty sII framework under its two names. The key sees oxygens only.
+ICE1 = {"Ih": "Ih", "Ic": "Ic", "XI": "Ih", "III": "III/IX", "IX": "III/IX",
+        "XII": "XII/XIV", "XIV": "XII/XIV", "VII": "VII/VIII", "VIII": "VII/VIII",
+        "XVI": "sII"}
 
 
 def set_hops(h):
