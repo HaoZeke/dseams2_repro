@@ -9,7 +9,7 @@
     "pydseamslib": {
       "directory": "PydSEAMSlib",
       "repository": "https://github.com/d-SEAMS/PydSEAMSlib.git",
-      "revision": "21a80cf40a693a15b72d7e6f0e4cc05457225c31"
+      "revision": "8aa40517e018a8a786fcda084dc9fdda4f937261"
     },
     "seams-base": {
       "directory": "seams-base",
@@ -19,12 +19,12 @@
     "seams-core": {
       "directory": "seams-core",
       "repository": "https://github.com/d-SEAMS/seams-core.git",
-      "revision": ""
+      "revision": "70c2a7c0b54ccfe91f2b9055bd7a84e4c4ce12c7"
     },
     "yodastruct": {
       "directory": "yodaStruct",
       "repository": "https://github.com/d-SEAMS/yodaStruct.git",
-      "revision": "255a94eb1602b5f92c4f4a471aa69ab878b4f2f9"
+      "revision": "969bb867cb51d738578c46c93028f25d7323493a"
     }
   }
 }
