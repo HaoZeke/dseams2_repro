@@ -16,6 +16,8 @@ import json
 import os
 import shutil
 
+from snakemake.shell import shell
+
 configfile: "config/config.yaml"
 
 # Host cargo configuration (a user-level linker choice, say) must not leak
