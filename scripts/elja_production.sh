@@ -18,7 +18,7 @@ prep)
 submit)
   : "${ELJA_ACCOUNT:=chem-ui}"
   mkdir -p results/production
-  for T in $(python -c "import yaml,sys;print(*yaml.safe_load(open('$CONFIG'))['temperatures'])"); do
+  for T in $(pixi run -e production -- python -c "import yaml,sys;print(*yaml.safe_load(open('$CONFIG'))['temperatures'])"); do
     sbatch --partition="${ELJA_PARTITION:-64cpu_256mem}" --exclusive --ntasks=1 --cpus-per-task=32 \
       --time="${ELJA_TIME:-24:00:00}" --mem=32G --account="$ELJA_ACCOUNT" --job-name="seed-T$T" \
       --output=results/production/seed-T$T-%j.out \
