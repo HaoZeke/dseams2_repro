@@ -60,8 +60,10 @@ rule build_module:
         # the future. The engine is linked statically into the module so the
         # single .so is the whole artifact.
         BLOCAL="${{TMPDIR:-/tmp}}/${{USER}}-dseams-plumed-build"
-        rm -rf "$BLOCAL"
-        meson setup "$BLOCAL" {params.src} --buildtype=release -Dseams-core:default_library=static
+        rm -rf "$BLOCAL" "$BLOCAL-src"
+        cp -r {params.src} "$BLOCAL-src"
+        find "$BLOCAL-src" -exec touch {{}} +
+        meson setup "$BLOCAL" "$BLOCAL-src" --buildtype=release -Dseams-core:default_library=static
         meson compile -C "$BLOCAL"
         install -D "$BLOCAL/libdseams_plumed.so" {output}
         """
