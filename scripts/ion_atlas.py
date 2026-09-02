@@ -38,10 +38,10 @@ from sota_compare import (  # noqa: E402
 HOSTS = {"Ih": "1h", "Ic": "1c", "sI": "CS1"}
 MIN_EDGE = 16.0
 # Substitution sites are unit-cell indices, replicated with the cell;
-# GenIce refuses a site whose hydrogen-bond pattern cannot host the ion at
-# the chosen replication, so candidates are tried in order at that
-# replication until the requested count is reached
-CANDIDATES = list(range(0, 40))
+# GenIce refuses a dopant set whose hydrogen-bond pattern it cannot close
+# at the chosen replication, so candidate pairs are tried in order at
+# that replication until the requested count is reached
+CANDIDATES = list(range(0, 24))
 
 
 def run_genice(exe, kind, rep, anions, cations, seed):
@@ -71,23 +71,27 @@ def run_genice(exe, kind, rep, anions, cations, seed):
 
 
 def choose_sites(exe, kind, rep, n_pairs, seed):
-    """Pick n_pairs anion sites and n_pairs cation sites GenIce accepts."""
+    """Pick n_pairs (anion, cation) site pairs GenIce accepts together.
+
+    GenIce needs a neutral dopant set to close its directed graph, so an
+    anion is never tried without its cation."""
     anions, cations = [], []
-    for idx in CANDIDATES:
-        if len(anions) < n_pairs:
-            try:
-                run_genice(exe, kind, rep, anions + [idx], cations, seed)
-                anions.append(idx)
+    used = set()
+    for a in CANDIDATES:
+        if len(anions) == n_pairs:
+            break
+        if a in used:
+            continue
+        for c in CANDIDATES:
+            if c == a or c in used:
                 continue
-            except RuntimeError:
-                pass
-        if len(cations) < n_pairs and idx not in anions:
             try:
-                run_genice(exe, kind, rep, anions, cations + [idx], seed)
-                cations.append(idx)
+                run_genice(exe, kind, rep, anions + [a], cations + [c], seed)
             except RuntimeError:
-                pass
-        if len(anions) == n_pairs and len(cations) == n_pairs:
+                continue
+            anions.append(a)
+            cations.append(c)
+            used.update((a, c))
             break
     return anions, cations
 
