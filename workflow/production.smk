@@ -171,3 +171,108 @@ rule committor:
         melt=config["melt_basin"],
     shell:
         "python scripts/committor.py " + R + " --melt {params.melt} > {output}"
+
+# --- Ice/brine direct coexistence: TIP4P/2005 water, Madrid 2019 NaCl ---
+BRINE = config.get("brine", {})
+BRINE_RUNS = [
+    f"T{T}_m{m}_r{r}"
+    for T, m, r in itertools.product(
+        BRINE.get("temperatures", []), BRINE.get("pairs", []), range(BRINE.get("replicas", 0))
+    )
+]
+RB = "results/brine"
+
+
+def brine_meta(wc):
+    T, m, r = wc.brun.split("_")
+    return dict(temperature=int(T[1:]), pairs=int(m[1:]), replica=int(r[1:]))
+
+
+rule brine_build:
+    # GenIce ice Ih with TIP4P geometry, upper half marked liquid, NaCl pairs
+    # drawn among its molecules
+    output:
+        data=RB + "/{brun}/brine.data",
+        groups=RB + "/{brun}/groups.lmp",
+    params:
+        m=brine_meta,
+        rep=" ".join(str(x) for x in BRINE.get("rep", [4, 4, 6])),
+    shell:
+        "python scripts/brine_system.py --rep {params.rep} --pairs {params.m[pairs]} "
+        "--seed {params.m[replica]} --data {output.data} --groups {output.groups} "
+        "> $(dirname {output.data})/build.txt"
+
+
+rule brine_plumed:
+    input:
+        data=RB + "/{brun}/brine.data",
+        module=MODULE,
+    output:
+        RB + "/{brun}/plumed.dat",
+    params:
+        stride=BRINE.get("plumed_stride", 500),
+    run:
+        oxygens, ions = [], []
+        with open(input.data) as fh:
+            in_atoms = False
+            for line in fh:
+                if line.startswith("Atoms"):
+                    in_atoms = True
+                    continue
+                if in_atoms:
+                    if line.startswith(("Bonds", "Angles", "Velocities")):
+                        break
+                    cols = line.split()
+                    if len(cols) >= 7:
+                        aid, typ = int(cols[0]), int(cols[2])
+                        if typ == 1:
+                            oxygens.append(aid)
+                        elif typ in (3, 4):
+                            ions.append(aid)
+
+        def ranges(ids):
+            ids = sorted(ids)
+            out, start, prev = [], ids[0], ids[0]
+            for x in ids[1:]:
+                if x != prev + 1:
+                    out.append(f"{start}-{prev}" if start != prev else f"{start}")
+                    start = x
+                prev = x
+            out.append(f"{start}-{prev}" if start != prev else f"{start}")
+            return ",".join(out)
+
+        text = open("templates/plumed_brine.dat").read()
+        text = (text.replace("@MODULE@", input.module).replace("@OXYGENS@", ranges(oxygens))
+                .replace("@IONS@", ranges(ions)).replace("@STRIDE@", str(params.stride)))
+        open(output[0], "w").write(text)
+
+
+rule brine_run:
+    input:
+        data=RB + "/{brun}/brine.data",
+        groups=RB + "/{brun}/groups.lmp",
+        plumed=RB + "/{brun}/plumed.dat",
+    output:
+        RB + "/{brun}/BRINE",
+    params:
+        m=brine_meta,
+        P=config["pressure_bar"],
+        melt=BRINE.get("melt_steps", 50000),
+        steps=BRINE.get("steps", 2500000),
+        dump=BRINE.get("dump_every", 25000),
+    threads: config["lammps_threads"]
+    shell:
+        r"""
+        cd $(dirname {output})
+        OMP_NUM_THREADS={threads} lmp -sf omp -log log.lammps -in ../../../templates/in.brine.lammps           -var data brine.data -var groups groups.lmp -var T {params.m[temperature]} -var P {params.P}           -var steps_melt {params.melt} -var steps {params.steps} -var dumpevery {params.dump}           -var seed {params.m[replica]}3 -var plumed plumed.dat -var dump traj.lammpstrj > lammps.out 2>&1
+        test -s BRINE
+        """
+
+
+rule brine_all:
+    input:
+        expand(RB + "/{brun}/BRINE", brun=BRINE_RUNS),
+    output:
+        RB + "/summary.txt",
+    shell:
+        "python scripts/brine_summary.py " + RB + " > {output}"

@@ -1,0 +1,8 @@
+# PLUMED input for an ice/brine front: the d-SEAMS cage assignment on the
+# oxygens every STRIDE steps, CHILL+ next to it, and every ion read against
+# the assignment as in ice, at the front or in liquid.
+# Placeholders: @MODULE@ @OXYGENS@ @IONS@ @STRIDE@
+UNITS LENGTH=A
+LOAD FILE=@MODULE@
+brine: DSEAMS_CAGES ATOMS=@OXYGENS@ IONS=@IONS@ ION_CUTOFF=3.5 CUTOFF=3.5 CANDIDATE=5.5 K=4 LENGTH_SCALE=1.0 COMPLETE
+PRINT ARG=brine.nice,brine.nmax,brine.nclus,brine.nic,brine.nih,brine.nmixed,brine.chillice,brine.chillmax,brine.chillinterfacial,brine.sixrings,brine.nionice,brine.nionfront,brine.nionliq STRIDE=@STRIDE@ FILE=BRINE FMT=%8.0f

@@ -13,3 +13,12 @@ grow_factor: 2.0
 lammps_threads: 2
 liquid_melt_steps: 2000
 liquid_eq_steps: 2000
+brine:
+  temperatures: [240]
+  pairs: [4]
+  replicas: 1
+  rep: [2, 2, 4]
+  melt_steps: 200
+  steps: 400
+  dump_every: 200
+  plumed_stride: 100

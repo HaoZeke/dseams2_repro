@@ -15,3 +15,18 @@ grow_factor: 2.0       # grow basin at grow_factor * seed size
 lammps_threads: 4
 liquid_melt_steps: 20000    # 100 ps at 5 fs
 liquid_eq_steps: 30000      # 300 ps at 10 fs
+
+# Ice Ih / NaCl brine direct coexistence, TIP4P/2005 with the Madrid 2019
+# ions: the front grows into brine below the depressed freezing point and
+# rejects the ions; the cage assignment with ions reports how many ions end
+# up in ice, at the front, or in the liquid. TIP4P/2005 melts at 250 K;
+# 1 mol/kg NaCl depresses that by about 3.5 K.
+brine:
+  temperatures: [230, 240, 245]
+  pairs: [0, 10, 20, 40]        # NaCl pairs in the liquid half (~0.3, 0.6, 1.2 mol/kg)
+  replicas: 2
+  rep: [4, 4, 6]                # GenIce 1h replication: 1152 molecules
+  melt_steps: 50000             # 2 fs: 100 ps melt, 100 ps quench, ice held
+  steps: 2500000                # 5 ns front run
+  dump_every: 25000
+  plumed_stride: 500            # 1 ps
