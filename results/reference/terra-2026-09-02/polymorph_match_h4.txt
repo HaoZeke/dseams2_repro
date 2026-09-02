@@ -1,0 +1,101 @@
+library=Ih label=Ih n=288 classes=1
+library=Ic label=Ic n=216 classes=1
+library=XI label=Ih n=288 classes=1
+library=0 label=0 n=216 classes=2
+library=III label=III n=324 classes=2
+library=IV label=IV n=384 classes=4
+library=V label=V n=504 classes=4
+library=VI label=VI n=270 classes=2
+library=VII label=VII n=432 classes=430
+library=VIII label=VIII n=512 classes=470
+library=IX label=IX n=324 classes=2
+library=XII label=XII n=648 classes=2
+library=XIV label=XIV n=192 classes=2
+library=XVI label=XVI n=136 classes=3
+library=XVII label=XVII n=216 classes=2
+library=sI label=sI n=368 classes=3
+library=sT label=sT n=920 classes=21
+library=sIV label=sIV n=320 classes=5
+library=iceA label=iceA n=324 classes=2
+library=iceB label=iceB n=384 classes=2
+library=FAU label=FAU n=192 classes=1
+library=RHO label=RHO n=384 classes=1
+library=SOD label=SOD n=324 classes=1
+library=census method=wl hops=4 keys=958 ambiguous=3 perlabel=0:2,FAU:1,IV:4,Ic:1,Ih:1,RHO:1,SOD:1,V:4,VI:2,VII:430,VIII:470,XII:2,XIV:2,XVI:3,XVII:2,ambiguous:3,iceB:2,sI:3,sIV:4,sT:20
+test=Ic sigma=0.00 n=512 correct=1.000 other=0.000 unnamed=0.000
+test=Ic sigma=0.10 n=512 correct=1.000 other=0.000 unnamed=0.000
+test=Ic sigma=0.20 n=512 correct=0.849 other=0.000 unnamed=0.151
+test=Ic sigma=0.30 n=512 correct=0.033 other=0.000 unnamed=0.967
+test=Ih sigma=0.00 n=360 correct=0.000 other=0.000 unnamed=1.000
+test=Ih sigma=0.10 n=360 correct=0.000 other=0.000 unnamed=1.000
+test=Ih sigma=0.20 n=360 correct=0.000 other=0.000 unnamed=1.000
+test=Ih sigma=0.30 n=360 correct=0.000 other=0.000 unnamed=1.000
+atlas=Ih noise=0.0 n=288 correct=1.000 unnamed=0.000 other=0.000
+atlas=Ih noise=1.0 n=288 correct=1.000 unnamed=0.000 other=0.000
+atlas=Ih noise=2.0 n=288 correct=0.003 unnamed=0.997 other=0.000
+atlas=Ic noise=0.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=Ic noise=1.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=Ic noise=2.0 n=216 correct=0.014 unnamed=0.986 other=0.000
+atlas=XI noise=0.0 n=288 correct=1.000 unnamed=0.000 other=0.000
+atlas=XI noise=1.0 n=288 correct=1.000 unnamed=0.000 other=0.000
+atlas=XI noise=2.0 n=288 correct=0.003 unnamed=0.997 other=0.000
+atlas=0 noise=0.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=0 noise=1.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=0 noise=2.0 n=216 correct=0.000 unnamed=1.000 other=0.000
+atlas=III noise=0.0 n=324 correct=0.000 unnamed=0.000 other=1.000
+atlas=III noise=1.0 n=324 correct=0.000 unnamed=0.994 other=0.006
+atlas=III noise=2.0 n=324 correct=0.000 unnamed=1.000 other=0.000
+atlas=IV noise=0.0 n=384 correct=1.000 unnamed=0.000 other=0.000
+atlas=IV noise=1.0 n=384 correct=0.000 unnamed=1.000 other=0.000
+atlas=IV noise=2.0 n=384 correct=0.000 unnamed=0.997 other=0.003
+atlas=V noise=0.0 n=504 correct=1.000 unnamed=0.000 other=0.000
+atlas=V noise=1.0 n=504 correct=0.000 unnamed=1.000 other=0.000
+atlas=V noise=2.0 n=504 correct=0.000 unnamed=1.000 other=0.000
+atlas=VI noise=0.0 n=270 correct=1.000 unnamed=0.000 other=0.000
+atlas=VI noise=1.0 n=270 correct=0.000 unnamed=1.000 other=0.000
+atlas=VI noise=2.0 n=270 correct=0.000 unnamed=1.000 other=0.000
+atlas=VII noise=0.0 n=432 correct=1.000 unnamed=0.000 other=0.000
+atlas=VII noise=1.0 n=432 correct=0.000 unnamed=1.000 other=0.000
+atlas=VII noise=2.0 n=432 correct=0.002 unnamed=0.998 other=0.000
+atlas=VIII noise=0.0 n=512 correct=1.000 unnamed=0.000 other=0.000
+atlas=VIII noise=1.0 n=512 correct=0.000 unnamed=1.000 other=0.000
+atlas=VIII noise=2.0 n=512 correct=0.000 unnamed=0.998 other=0.002
+atlas=IX noise=0.0 n=324 correct=0.000 unnamed=0.000 other=1.000
+atlas=IX noise=1.0 n=324 correct=0.000 unnamed=1.000 other=0.000
+atlas=IX noise=2.0 n=324 correct=0.000 unnamed=1.000 other=0.000
+atlas=XII noise=0.0 n=648 correct=1.000 unnamed=0.000 other=0.000
+atlas=XII noise=1.0 n=648 correct=0.000 unnamed=1.000 other=0.000
+atlas=XII noise=2.0 n=648 correct=0.000 unnamed=1.000 other=0.000
+atlas=XIV noise=0.0 n=192 correct=1.000 unnamed=0.000 other=0.000
+atlas=XIV noise=1.0 n=192 correct=0.000 unnamed=1.000 other=0.000
+atlas=XIV noise=2.0 n=192 correct=0.000 unnamed=1.000 other=0.000
+atlas=XVI noise=0.0 n=136 correct=1.000 unnamed=0.000 other=0.000
+atlas=XVI noise=1.0 n=136 correct=1.000 unnamed=0.000 other=0.000
+atlas=XVI noise=2.0 n=136 correct=0.000 unnamed=1.000 other=0.000
+atlas=XVII noise=0.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=XVII noise=1.0 n=216 correct=1.000 unnamed=0.000 other=0.000
+atlas=XVII noise=2.0 n=216 correct=0.000 unnamed=1.000 other=0.000
+atlas=sI noise=0.0 n=368 correct=1.000 unnamed=0.000 other=0.000
+atlas=sI noise=1.0 n=368 correct=1.000 unnamed=0.000 other=0.000
+atlas=sI noise=2.0 n=368 correct=0.022 unnamed=0.978 other=0.000
+atlas=sT noise=0.0 n=920 correct=0.961 unnamed=0.000 other=0.039
+atlas=sT noise=1.0 n=920 correct=0.961 unnamed=0.000 other=0.039
+atlas=sT noise=2.0 n=920 correct=0.007 unnamed=0.993 other=0.000
+atlas=sIV noise=0.0 n=320 correct=0.850 unnamed=0.000 other=0.150
+atlas=sIV noise=1.0 n=320 correct=0.850 unnamed=0.000 other=0.150
+atlas=sIV noise=2.0 n=320 correct=0.000 unnamed=1.000 other=0.000
+atlas=iceA noise=0.0 n=324 correct=0.000 unnamed=0.000 other=1.000
+atlas=iceA noise=1.0 n=324 correct=0.000 unnamed=0.682 other=0.318
+atlas=iceA noise=2.0 n=324 correct=0.000 unnamed=1.000 other=0.000
+atlas=iceB noise=0.0 n=384 correct=1.000 unnamed=0.000 other=0.000
+atlas=iceB noise=1.0 n=384 correct=0.555 unnamed=0.445 other=0.000
+atlas=iceB noise=2.0 n=384 correct=0.000 unnamed=1.000 other=0.000
+atlas=FAU noise=0.0 n=192 correct=1.000 unnamed=0.000 other=0.000
+atlas=FAU noise=1.0 n=192 correct=1.000 unnamed=0.000 other=0.000
+atlas=FAU noise=2.0 n=192 correct=0.000 unnamed=1.000 other=0.000
+atlas=RHO noise=0.0 n=384 correct=1.000 unnamed=0.000 other=0.000
+atlas=RHO noise=1.0 n=384 correct=1.000 unnamed=0.000 other=0.000
+atlas=RHO noise=2.0 n=384 correct=0.000 unnamed=1.000 other=0.000
+atlas=SOD noise=0.0 n=324 correct=1.000 unnamed=0.000 other=0.000
+atlas=SOD noise=1.0 n=324 correct=1.000 unnamed=0.000 other=0.000
+atlas=SOD noise=2.0 n=324 correct=0.000 unnamed=1.000 other=0.000
