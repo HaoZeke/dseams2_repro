@@ -203,6 +203,90 @@ def digest_figshare_incremental(obj):
     }
 
 
+WALK_NC = 314
+
+
+def parse_walk(text):
+    """walk_compare table -> per-file digest for the Applications section."""
+    cols = None
+    rows = []
+    for line in text.splitlines():
+        if line.startswith("# frame"):
+            cols = line[2:].split()
+            continue
+        if not line.strip() or line.startswith("#"):
+            continue
+        rows.append(dict(zip(cols, (int(x) for x in line.split()))))
+    if not rows:
+        return {"frames": 0}
+
+    def first_at_least(key):
+        for r in rows:
+            if r[key] >= WALK_NC:
+                return r["frame"]
+        return None
+
+    last = rows[-1]
+    ratios = sorted(
+        r["chill_max"] / r["seed_max"] for r in rows if r["seed_max"] >= 50
+    )
+    return {
+        "frames": len(rows),
+        "first_frame": rows[0]["frame"],
+        "last_frame": last["frame"],
+        "nop": last["nop"],
+        "final": {k: last[k] for k in cols if k != "frame"},
+        "first_frame_at_or_above_nc": {
+            "seed_max": first_at_least("seed_max"),
+            "cut_max": first_at_least("cut_max"),
+            "chill_max": first_at_least("chill_max"),
+        },
+        "peak": {
+            k: max(r[k] for r in rows) for k in ("seed_max", "cut_max", "chill_max")
+        },
+        "frames_seed_equals_cut": sum(1 for r in rows if r["seed_max"] == r["cut_max"]),
+        "max_abs_seed_minus_cut": max(abs(r["seed_max"] - r["cut_max"]) for r in rows),
+        "chill_over_seed_max_median": ratios[len(ratios) // 2] if ratios else None,
+        "chill_over_seed_max_min": ratios[0] if ratios else None,
+        "chill_over_seed_max_max": ratios[-1] if ratios else None,
+    }
+
+
+def parse_sota(text):
+    """sota_compare key=value lines -> mean and spread per method/system/sigma."""
+    import statistics
+
+    groups = {}
+    for line in text.splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        kv = dict(item.split("=", 1) for item in line.split() if "=" in item)
+        key = (kv["method"], kv["system"], kv.get("sigma", "0.00"))
+        groups.setdefault(key, []).append(kv)
+    out = {}
+    for (method, system, sigma), runs in sorted(groups.items()):
+        entry = {"n": len(runs)}
+        for field in ("acc", "cubic", "hex", "crystal", "false_crystal", "ms"):
+            vals = []
+            for r in runs:
+                v = r.get(field)
+                if v is None or v == "nan":
+                    continue
+                v = float(v)
+                if field == "ms" and v < 0:
+                    continue
+                vals.append(v)
+            if vals:
+                entry[field] = {
+                    "mean": statistics.fmean(vals),
+                    "min": min(vals),
+                    "max": max(vals),
+                    "stdev": statistics.pstdev(vals) if len(vals) > 1 else 0.0,
+                }
+        out.setdefault(method, {}).setdefault(system, {})[sigma] = entry
+    return out
+
+
 def main():
     out_dir = pathlib.Path(sys.argv[1])
     conditions = {}
@@ -255,6 +339,12 @@ def main():
                 load_json(out_dir / "figshare-incremental.json")
             ),
         },
+        "walks": {
+            p.stem: parse_walk(read(p)) for p in sorted(out_dir.glob("walks/*.txt"))
+        },
+        "sota": parse_sota(read(out_dir / "sota_compare.txt"))
+        if (out_dir / "sota_compare.txt").exists()
+        else {},
     }
     json.dump(manifest, sys.stdout, indent=2, sort_keys=True)
     print()

@@ -25,6 +25,7 @@ false-crystal rate on the null. Output is key=value lines per
 
 from __future__ import annotations
 
+import argparse
 import importlib.util
 import sys
 import time
@@ -371,9 +372,24 @@ def centroid_classifier(train):
     return classify
 
 
+def timed(run):
+    t0 = time.perf_counter()
+    out = run()
+    return out, (time.perf_counter() - t0) * 1e3
+
+
 def main():
     import os
     import tempfile
+
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--seeds", type=int, default=1,
+                        help="independent jitter realizations per sigma")
+    parser.add_argument("--sigmas", type=float, nargs="+", default=SIGMAS,
+                        help="Gaussian displacement standard deviations, Angstrom")
+    args = parser.parse_args()
+    sigmas = list(args.sigmas)
+    seeds = list(range(args.seeds))
 
     rng = np.random.default_rng(SEED)
     scratch = tempfile.mkdtemp() + os.sep
@@ -430,10 +446,13 @@ def main():
 
     systems = [("ic", ic_pos, ic_box, "cubic"), ("ih", ih_pos, ih_box, "hexagonal")]
     for name, pos0, box, truth in systems:
-        for sigma in SIGMAS:
+      for seed in seeds:
+        for sigma in sigmas:
             pos = jitter(
-                pos0, box, sigma, np.random.default_rng(SEED + int(sigma * 1000))
+                pos0, box, sigma,
+                np.random.default_rng(SEED + int(sigma * 1000) + 7919 * seed),
             )
+            tag = f"system={name} sigma={sigma:.2f} seed={seed}"
 
             for method, run in (
                 ("dseams-topo", lambda: dseams_topo(pos, box)),
@@ -445,54 +464,57 @@ def main():
                 ),
                 ("chill+", lambda: chill_plus(pos, box, scratch)),
             ):
-                t0 = time.perf_counter()
-                labels = run()
-                dt = time.perf_counter() - t0
+                labels, ms = timed(run)
                 s = score(labels, truth)
                 print(
-                    f"method={method} system={name} sigma={sigma:.2f} "
+                    f"method={method} {tag} "
                     f"acc={s['acc']:.3f} cubic={s['cubic']:.3f} "
                     f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} "
-                    f"ms={dt * 1e3:.1f}"
+                    f"ms={ms:.1f}"
                 )
 
-            feats = freud_features(pos, box)
-            ld = ld_classify(np.column_stack([feats[(4, True)], feats[(6, True)]]))
+            feats, ms_feat = timed(lambda: freud_features(pos, box))
+            ld, ms_ld = timed(lambda: ld_classify(
+                np.column_stack([feats[(4, True)], feats[(6, True)]])))
             s = score(ld, truth)
             print(
-                f"method=freud-ld system={name} sigma={sigma:.2f} "
+                f"method=freud-ld {tag} "
                 f"acc={s['acc']:.3f} cubic={s['cubic']:.3f} "
-                f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} ms=-1"
+                f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} "
+                f"ms={ms_feat + ms_ld:.1f}"
             )
             q6 = feats[(6, False)]
             ice = q6 > q6_ice_threshold
             print(
-                f"method=freud-q6 system={name} sigma={sigma:.2f} "
+                f"method=freud-q6 {tag} "
                 f"acc=nan cubic=nan hex=nan "
-                f"crystal={float(ice.sum()) / len(q6):.3f} ms=-1 "
+                f"crystal={float(ice.sum()) / len(q6):.3f} ms={ms_feat:.1f} "
                 f"note=ice-vs-not-only"
             )
 
             if ptm_ok:
                 try:
-                    labels = ovito_ptm(pos, box)
+                    labels, ms = timed(lambda: ovito_ptm(pos, box))
                     s = score(labels, truth)
                     print(
-                        f"method=ovito-ptm system={name} sigma={sigma:.2f} "
+                        f"method=ovito-ptm {tag} "
                         f"acc={s['acc']:.3f} cubic={s['cubic']:.3f} "
-                        f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} ms=-1"
+                        f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} "
+                        f"ms={ms:.1f}"
                     )
                 except Exception as exc:  # noqa: BLE001
                     print(f"# ovito-ptm failed: {exc}")
                     ptm_ok = False
 
             if twist_ok and twist_classify is not None:
-                tw = twist_classify(twist_features(pos, box).reshape(-1, 1))
+                tw, ms = timed(lambda: twist_classify(
+                    twist_features(pos, box).reshape(-1, 1)))
                 s = score(tw, truth)
                 print(
-                    f"method=twist-op system={name} sigma={sigma:.2f} "
+                    f"method=twist-op {tag} "
                     f"acc={s['acc']:.3f} cubic={s['cubic']:.3f} "
-                    f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} ms=-1"
+                    f"hex={s['hex']:.3f} crystal={s['crystal']:.3f} "
+                    f"ms={ms:.1f}"
                 )
 
     # False-crystal rate on the null, per label-producing method
