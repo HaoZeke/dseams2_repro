@@ -29,7 +29,25 @@ rule all:
         R + "/committor.txt",
 
 
+rule module_source:
+    # The action's source at its current revision; the module rebuilds when
+    # the revision changes, so a stale build cannot run with old engine
+    # semantics (the first smoke did exactly that)
+    output:
+        PLUMED_SRC + "/.revision",
+    params:
+        src=PLUMED_SRC,
+    shell:
+        r"""
+        if [ -d {params.src}/.git ]; then git -C {params.src} pull -q --ff-only; \
+        else git clone -q https://github.com/HaoZeke/dseams-plumed.git {params.src}; fi
+        git -C {params.src} rev-parse HEAD > {output}
+        """
+
+
 rule build_module:
+    input:
+        PLUMED_SRC + "/.revision",
     output:
         MODULE,
     params:
@@ -38,8 +56,10 @@ rule build_module:
     shell:
         r"""
         export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
-        test -d {params.src} || git clone --depth 1 https://github.com/HaoZeke/dseams-plumed.git {params.src}
-        meson setup {params.bdir} {params.src} --buildtype=release
+        rm -rf {params.bdir}/subprojects/seams-core 2>/dev/null || true
+        if [ -f {params.bdir}/build.ninja ]; then meson setup --reconfigure {params.bdir} {params.src}; \
+        else meson setup {params.bdir} {params.src} --buildtype=release; fi
+        meson subprojects update --reset --sourcedir {params.src} > /dev/null 2>&1 || true
         meson compile -C {params.bdir}
         """
 
