@@ -1,0 +1,8 @@
+# PLUMED input for a seeding run: the d-SEAMS ice score every STRIDE steps,
+# CHILL+ next to it, and a committor stop on the largest cage cluster.
+# Placeholders: @MODULE@ @NATOMS@ @STRIDE@ @MELT@ @GROW@
+UNITS LENGTH=A
+LOAD FILE=@MODULE@
+ice: DSEAMS_CAGES ATOMS=1-@NATOMS@ CUTOFF=3.5 CANDIDATE=5.5 K=4 LENGTH_SCALE=1.0 COMPLETE
+PRINT ARG=ice.nice,ice.nmax,ice.nclus,ice.nic,ice.nih,ice.nmixed,ice.chillice,ice.chillmax,ice.chillinterfacial,ice.sixrings STRIDE=@STRIDE@ FILE=ICE FMT=%8.0f
+COMMITTOR ARG=ice.nmax STRIDE=@STRIDE@ BASIN_LL1=0 BASIN_UL1=@MELT@ BASIN_LL2=@GROW@ BASIN_UL2=1000000 FILE=COMMITTOR

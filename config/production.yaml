@@ -1,0 +1,15 @@
+# mW seeding campaign: committor of the topological nucleus against the
+# CHILL+ nucleus, per temperature and seed size. Each replica is one LAMMPS
+# run with PLUMED logging DSEAMS_CAGES and stopping on a committor basin.
+n_liquid: 4096
+temperatures: [205, 215, 225]
+seed_sizes: [50, 100, 200, 300, 450, 700]
+polymorphs: [ic]
+replicas: 12
+pressure_bar: 1.0
+steps: 500000          # 10 fs timestep: 5 ns
+dump_every: 5000       # 50 ps
+plumed_stride: 500     # 5 ps
+melt_basin: 20
+grow_factor: 2.0       # grow basin at grow_factor * seed size
+lammps_threads: 4

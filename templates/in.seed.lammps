@@ -1,0 +1,22 @@
+# mW seeding run: a spherical ice seed in supercooled liquid, NPT, PLUMED logs
+# the topological ice score and stops on a committor basin.
+# Variables from the command line: data (seeded data file), T (K), P (bar),
+# steps, dumpevery, seed, plumed (plumed input), dump (trajectory path)
+units           real
+atom_style      atomic
+boundary        p p p
+read_data       ${data}
+pair_style      sw
+pair_coeff      * * mW.sw mW
+mass            1 18.015
+velocity        all create ${T} ${seed} dist gaussian
+timestep        10.0
+neighbor        2.0 bin
+neigh_modify    every 1 delay 0 check yes
+fix             npt all npt temp ${T} ${T} 1000.0 iso ${P} ${P} 10000.0
+fix             pl all plumed plumedfile ${plumed} outfile plumed.log
+thermo          1000
+thermo_style    custom step temp press vol pe
+dump            d all custom ${dumpevery} ${dump} id type x y z
+dump_modify     d sort id
+run             ${steps}

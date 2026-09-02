@@ -1,0 +1,117 @@
+# mW seeding campaign (Elja production). Run from the repository root:
+#   pixi run -e production -- snakemake -s workflow/production.smk --configfile config/production.yaml --cores all
+# The PLUMED module comes from dseams-plumed built in the production env
+# (rule build_module); LAMMPS with PLUMED from conda-forge.
+import itertools
+import json
+import os
+
+configfile: "config/production.yaml"
+
+R = "results/production"
+MODULE = os.path.abspath(config.get("module", "build-plumed/libdseams_plumed.so"))
+PLUMED_SRC = config.get("plumed_source", "sources/dseams-plumed")
+RUNS = [
+    f"T{T}_s{s}_{p}_r{r}"
+    for T, s, p, r in itertools.product(
+        config["temperatures"], config["seed_sizes"], config["polymorphs"], range(config["replicas"])
+    )
+]
+
+
+def run_meta(wc):
+    T, s, p, r = wc.run.split("_")
+    return dict(temperature=int(T[1:]), seed_size=int(s[1:]), polymorph=p, replica=int(r[1:]))
+
+
+rule all:
+    input:
+        R + "/committor.txt",
+
+
+rule build_module:
+    output:
+        MODULE,
+    params:
+        src=PLUMED_SRC,
+        bdir=os.path.dirname(MODULE),
+    shell:
+        r"""
+        export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
+        test -d {params.src} || git clone --depth 1 https://github.com/HaoZeke/dseams-plumed.git {params.src}
+        meson setup {params.bdir} {params.src} --buildtype=release
+        meson compile -C {params.bdir}
+        """
+
+
+rule seed:
+    output:
+        data=R + "/{run}/seeded.data",
+        meta=R + "/{run}/run.json",
+    params:
+        m=run_meta,
+        n=config["n_liquid"],
+    run:
+        m = params.m
+        shell(
+            "python scripts/seed_ice.py --n-liquid {params.n} --seed-size %d --polymorph %s "
+            "--rng %d --out {output.data}" % (m["seed_size"], m["polymorph"], 1000 + m["replica"])
+        )
+        with open(output.meta, "w") as fh:
+            json.dump(m, fh)
+
+
+rule plumed_input:
+    input:
+        data=R + "/{run}/seeded.data",
+        module=MODULE,
+    output:
+        R + "/{run}/plumed.dat",
+    params:
+        m=run_meta,
+        stride=config["plumed_stride"],
+        melt=config["melt_basin"],
+        grow=config["grow_factor"],
+    run:
+        natoms = int(next(l.split()[0] for l in open(input.data) if l.strip().endswith("atoms")))
+        text = open("templates/plumed_seed.dat").read()
+        text = (text.replace("@MODULE@", input.module).replace("@NATOMS@", str(natoms))
+                .replace("@STRIDE@", str(params.stride)).replace("@MELT@", str(params.melt))
+                .replace("@GROW@", str(int(params.grow * params.m["seed_size"]))))
+        open(output[0], "w").write(text)
+
+
+rule run:
+    input:
+        data=R + "/{run}/seeded.data",
+        plumed=R + "/{run}/plumed.dat",
+    output:
+        ice=R + "/{run}/ICE",
+        log=R + "/{run}/log.lammps",
+    params:
+        m=run_meta,
+        steps=config["steps"],
+        dump=config["dump_every"],
+        P=config["pressure_bar"],
+    threads: config["lammps_threads"]
+    shell:
+        r"""
+        d=$(dirname {output.ice}); cp templates/mW.sw $d/; cd $d
+        OMP_NUM_THREADS={threads} lmp -sf omp -log log.lammps -in ../../../templates/in.seed.lammps \
+          -var data seeded.data -var T {params.m[temperature]} -var P {params.P} \
+          -var steps {params.steps} -var dumpevery {params.dump} -var seed {params.m[replica]}1 \
+          -var plumed plumed.dat -var dump traj.lammpstrj > lammps.out 2>&1 || true
+        # COMMITTOR stops the run early; an ICE file is the result either way
+        test -s ICE
+        """
+
+
+rule committor:
+    input:
+        expand(R + "/{run}/ICE", run=RUNS),
+    output:
+        R + "/committor.txt",
+    params:
+        melt=config["melt_basin"],
+    shell:
+        "python scripts/committor.py " + R + " --melt {params.melt} > {output}"

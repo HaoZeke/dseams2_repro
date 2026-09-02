@@ -1,0 +1,13 @@
+# Tiny matrix for a laptop or one terra core: not a result.
+n_liquid: 512
+temperatures: [215]
+seed_sizes: [50, 100]
+polymorphs: [ic]
+replicas: 2
+pressure_bar: 1.0
+steps: 2000
+dump_every: 500
+plumed_stride: 100
+melt_basin: 10
+grow_factor: 2.0
+lammps_threads: 2
