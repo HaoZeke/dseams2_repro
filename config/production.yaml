@@ -13,3 +13,5 @@ plumed_stride: 500     # 5 ps
 melt_basin: 20
 grow_factor: 2.0       # grow basin at grow_factor * seed size
 lammps_threads: 4
+liquid_melt_steps: 20000    # 100 ps at 5 fs
+liquid_eq_steps: 30000      # 300 ps at 10 fs

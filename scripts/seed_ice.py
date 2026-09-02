@@ -54,6 +54,30 @@ def sphere(pos, box, n_target):
     return pos[order[:n_target]] - centre
 
 
+def write_data(path, pos, L, header):
+    with open(path, "w") as f:
+        f.write(header + "\n\n")
+        f.write(f"{len(pos)} atoms\n1 atom types\n\n")
+        f.write(f"0.0 {L:.6f} xlo xhi\n0.0 {L:.6f} ylo yhi\n0.0 {L:.6f} zlo zhi\n\n")
+        f.write("Masses\n\n1 18.015\n\nAtoms # atomic\n\n")
+        for i, (x, y, z) in enumerate(pos, 1):
+            f.write(f"{i} 1 {x % L:.6f} {y % L:.6f} {z % L:.6f}\n")
+
+
+def read_data(path):
+    """Positions and cubic box length from a LAMMPS data file (atomic style)."""
+    lines = open(path).read().splitlines()
+    n = int(next(l.split()[0] for l in lines if l.strip().endswith("atoms")))
+    xlo, xhi = (float(x) for x in next(l for l in lines if "xlo" in l).split()[:2])
+    L = xhi - xlo
+    i = next(k for k, l in enumerate(lines) if l.startswith("Atoms")) + 2
+    pos = []
+    for l in lines[i:i + n]:
+        w = l.split()
+        pos.append((float(w[2]) - xlo, float(w[3]) - xlo, float(w[4]) - xlo))
+    return np.asarray(pos) % L, L
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-liquid", type=int, default=4096)
@@ -62,16 +86,22 @@ def main():
     ap.add_argument("--density", type=float, default=0.0332, help="molecules per A^3")
     ap.add_argument("--exclusion", type=float, default=2.6)
     ap.add_argument("--rng", type=int, default=1)
+    ap.add_argument("--liquid-data", default=None,
+                    help="equilibrated LAMMPS data file to cut the seed into")
+    ap.add_argument("--no-seed", action="store_true",
+                    help="write the random packing only (input to the liquid stage)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
     L = (a.n_liquid / a.density) ** (1.0 / 3.0)
     rng = np.random.default_rng(a.rng)
-    # liquid: random insertion with a hard core, good enough for a run that
-    # relaxes it at the target temperature before the seed matters
-    liquid = []
+    if a.liquid_data:
+        liquid, L = read_data(a.liquid_data)
+    # liquid: random insertion with a hard core; the liquid stage melts and
+    # equilibrates it before any seed is cut in
+    liquid = [] if not a.liquid_data else list(liquid)
     tries = 0
-    while len(liquid) < a.n_liquid and tries < 200 * a.n_liquid:
+    while not a.liquid_data and len(liquid) < a.n_liquid and tries < 200 * a.n_liquid:
         p = rng.random(3) * L
         tries += 1
         if liquid:
@@ -82,8 +112,12 @@ def main():
                 continue
         liquid.append(p)
     liquid = np.asarray(liquid)
-    if len(liquid) < a.n_liquid:
+    if not a.liquid_data and len(liquid) < a.n_liquid:
         raise SystemExit(f"packed {len(liquid)} < {a.n_liquid}; lower --density")
+    if a.no_seed:
+        write_data(a.out, liquid, L, f"mW random packing, {len(liquid)} molecules, L={L:.4f}")
+        print(f"liquid {len(liquid)} L {L:.3f}")
+        return
 
     reps = max(3, int(np.ceil((a.seed_size / 8.0) ** (1.0 / 3.0))) + 2)
     lat, lbox = lattice(a.polymorph, reps)
@@ -93,13 +127,8 @@ def main():
     keep = (np.einsum("ijk,ijk->ij", d, d) >= a.exclusion ** 2).all(axis=1)
     liquid = liquid[keep]
     pos = np.vstack([seed, liquid])
-    with open(a.out, "w") as f:
-        f.write(f"mW seeded: {a.polymorph} seed {len(seed)} molecules, {len(liquid)} liquid, L={L:.4f}\n\n")
-        f.write(f"{len(pos)} atoms\n1 atom types\n\n")
-        f.write(f"0.0 {L:.6f} xlo xhi\n0.0 {L:.6f} ylo yhi\n0.0 {L:.6f} zlo zhi\n\n")
-        f.write("Masses\n\n1 18.015\n\nAtoms # atomic\n\n")
-        for i, (x, y, z) in enumerate(pos, 1):
-            f.write(f"{i} 1 {x % L:.6f} {y % L:.6f} {z % L:.6f}\n")
+    write_data(a.out, pos, L,
+               f"mW seeded: {a.polymorph} seed {len(seed)} molecules, {len(liquid)} liquid, L={L:.4f}")
     print(f"seed {len(seed)} liquid {len(liquid)} total {len(pos)} L {L:.3f}")
 
 

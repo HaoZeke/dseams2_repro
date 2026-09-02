@@ -11,3 +11,5 @@ plumed_stride: 100
 melt_basin: 10
 grow_factor: 2.0
 lammps_threads: 2
+liquid_melt_steps: 2000
+liquid_eq_steps: 2000

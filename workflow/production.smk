@@ -44,7 +44,38 @@ rule build_module:
         """
 
 
+rule packing:
+    output:
+        R + "/liquid/T{T}/packing.data",
+    params:
+        n=config["n_liquid"],
+    shell:
+        "python scripts/seed_ice.py --n-liquid {params.n} --no-seed --rng {wildcards.T} --out {output}"
+
+
+rule liquid:
+    # Melt the packing hot, settle at T and P: the liquid every seed of this
+    # temperature is cut into
+    input:
+        R + "/liquid/T{T}/packing.data",
+    output:
+        R + "/liquid/T{T}/liquid.data",
+    params:
+        P=config["pressure_bar"],
+        melt=config.get("liquid_melt_steps", 20000),
+        eq=config.get("liquid_eq_steps", 20000),
+    threads: config["lammps_threads"]
+    shell:
+        r"""
+        d=$(dirname {output}); cp templates/mW.sw $d/; cd $d
+        OMP_NUM_THREADS={threads} lmp -sf omp -log log.liquid -in ../../../../templates/in.liquid.lammps           -var data packing.data -var T {wildcards.T} -var P {params.P}           -var steps_melt {params.melt} -var steps_eq {params.eq} -var seed 7{wildcards.T}           -var out liquid.data > lammps.out 2>&1
+        test -s liquid.data
+        """
+
+
 rule seed:
+    input:
+        lambda wc: R + "/liquid/T%d/liquid.data" % run_meta(wc)["temperature"],
     output:
         data=R + "/{run}/seeded.data",
         meta=R + "/{run}/run.json",
@@ -55,7 +86,7 @@ rule seed:
         m = params.m
         shell(
             "python scripts/seed_ice.py --n-liquid {params.n} --seed-size %d --polymorph %s "
-            "--rng %d --out {output.data}" % (m["seed_size"], m["polymorph"], 1000 + m["replica"])
+            "--liquid-data {input} --rng %d --out {output.data}" % (m["seed_size"], m["polymorph"], 1000 + m["replica"])
         )
         with open(output.meta, "w") as fh:
             json.dump(m, fh)
