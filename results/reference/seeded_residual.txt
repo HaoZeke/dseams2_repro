@@ -1,0 +1,28 @@
+system=ic sigma=0.25 seed=0 n=512 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.25 seed=0 n=360 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ic sigma=0.25 seed=1 n=512 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.25 seed=1 n=360 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ic sigma=0.25 seed=2 n=512 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.25 seed=2 n=360 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=null sigma=0.25 seeded_false=0.0000 embedded_false=0.0000 adjacent_false=0.0000 embedded+adjacent_false=0.0000
+system=ic sigma=0.30 seed=0 n=512 seeded=0.9980 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=1 missed_star_in_ice=1 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.30 seed=0 n=360 seeded=0.9972 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=1 missed_star_in_ice=1 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ic sigma=0.30 seed=1 n=512 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.30 seed=1 n=360 seeded=1.0000 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=0 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ic sigma=0.30 seed=2 n=512 seeded=0.9980 embedded=0.9980 adjacent=1.0000 embedded+adjacent=1.0000 missed=1 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=ih sigma=0.30 seed=2 n=360 seeded=0.9972 embedded=1.0000 adjacent=1.0000 embedded+adjacent=1.0000 missed=1 missed_star_in_ice=1 missed_no_strict_ring=0 missed_no_perm_ring=0
+system=null sigma=0.30 seeded_false=0.0000 embedded_false=0.0000 adjacent_false=0.0000 embedded+adjacent_false=0.0000
+system=ic sigma=0.35 seed=0 n=512 seeded=0.9668 embedded=0.9707 adjacent=0.9980 embedded+adjacent=0.9980 missed=17 missed_star_in_ice=2 missed_no_strict_ring=2 missed_no_perm_ring=1
+system=ih sigma=0.35 seed=0 n=360 seeded=0.8944 embedded=0.8944 adjacent=0.9972 embedded+adjacent=0.9972 missed=38 missed_star_in_ice=0 missed_no_strict_ring=0 missed_no_perm_ring=1
+system=ic sigma=0.35 seed=1 n=512 seeded=0.9766 embedded=0.9785 adjacent=1.0000 embedded+adjacent=1.0000 missed=12 missed_star_in_ice=1 missed_no_strict_ring=4 missed_no_perm_ring=0
+system=ih sigma=0.35 seed=1 n=360 seeded=0.9278 embedded=0.9417 adjacent=0.9972 embedded+adjacent=0.9972 missed=26 missed_star_in_ice=5 missed_no_strict_ring=1 missed_no_perm_ring=1
+system=ic sigma=0.35 seed=2 n=512 seeded=0.9785 embedded=0.9824 adjacent=1.0000 embedded+adjacent=1.0000 missed=11 missed_star_in_ice=2 missed_no_strict_ring=1 missed_no_perm_ring=0
+system=ih sigma=0.35 seed=2 n=360 seeded=0.9250 embedded=0.9278 adjacent=1.0000 embedded+adjacent=1.0000 missed=27 missed_star_in_ice=1 missed_no_strict_ring=1 missed_no_perm_ring=0
+system=null sigma=0.35 seeded_false=0.0000 embedded_false=0.0000 adjacent_false=0.0000 embedded+adjacent_false=0.0000
+system=ic sigma=0.40 seed=0 n=512 seeded=0.5801 embedded=0.5840 adjacent=0.9766 embedded+adjacent=0.9766 missed=215 missed_star_in_ice=2 missed_no_strict_ring=27 missed_no_perm_ring=5
+system=ih sigma=0.40 seed=0 n=360 seeded=0.6722 embedded=0.6806 adjacent=0.9833 embedded+adjacent=0.9833 missed=118 missed_star_in_ice=3 missed_no_strict_ring=7 missed_no_perm_ring=4
+system=ic sigma=0.40 seed=1 n=512 seeded=0.7539 embedded=0.7598 adjacent=0.9902 embedded+adjacent=0.9902 missed=126 missed_star_in_ice=3 missed_no_strict_ring=18 missed_no_perm_ring=2
+system=ih sigma=0.40 seed=1 n=360 seeded=0.7222 embedded=0.7333 adjacent=0.9528 embedded+adjacent=0.9528 missed=100 missed_star_in_ice=4 missed_no_strict_ring=9 missed_no_perm_ring=5
+system=ic sigma=0.40 seed=2 n=512 seeded=0.8047 embedded=0.8145 adjacent=0.9902 embedded+adjacent=0.9902 missed=100 missed_star_in_ice=5 missed_no_strict_ring=14 missed_no_perm_ring=5
+system=ih sigma=0.40 seed=2 n=360 seeded=0.6778 embedded=0.6806 adjacent=0.9861 embedded+adjacent=0.9861 missed=116 missed_star_in_ice=1 missed_no_strict_ring=13 missed_no_perm_ring=5
+system=null sigma=0.40 seeded_false=0.0000 embedded_false=0.0000 adjacent_false=0.0000 embedded+adjacent_false=0.0000

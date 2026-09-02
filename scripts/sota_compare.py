@@ -9,6 +9,10 @@ wrong lattice fails loudly instead of poisoning the ground truth.
 
 Methods:
   dseams-topo   per-atom labels from HC/DDC cage affiliation (this work)
+  dseams-topo-4nn / -seeded / -seeded5 / -seeded-adj
+                the same predicates on the mutual four-nearest graph, the
+                seeded hysteresis, its rank-5 variant, and the seeded pass
+                with ring-adjacent completion
   chill+        d-SEAMS CHILL+ (four nearest neighbours)
   freud-q6      Steinhardt q6 threshold, ice versus not (cannot split Ic/Ih)
   freud-ld      nearest-centroid on Lechner-Dellago (q4bar, q6bar)
@@ -183,10 +187,12 @@ def dseams_topo_4nn(pos, box, mutual=True):
     return _affiliation_labels(cloud, idx, len(pos))
 
 
-def dseams_topo_seeded(pos, box, permissive_k=4, permissive_mutual=False):
+def dseams_topo_seeded(pos, box, permissive_k=4, permissive_mutual=False,
+                       ring_adjacent=False):
     """TUM v2.1, seeded affiliation via the library: strict mutual seeds,
     permissive completion, component-gated acceptance (structural null
-    specificity)."""
+    specificity). ring_adjacent extends accepted labels over permissive
+    six-rings that share an edge with an accepted ring."""
     n = len(pos)
     cloud = make_cloud(pos, box)
     strict = yoda.neighbourListByIndex(
@@ -198,7 +204,8 @@ def dseams_topo_seeded(pos, box, permissive_k=4, permissive_mutual=False):
     )
     six_s = [r for r in yoda.ringNetwork(strict, 7) if len(r) == 6]
     six_p = [r for r in yoda.ringNetwork(perm_rows, 7) if len(r) == 6]
-    hc, ddc = yoda.seededCageAffiliation(six_s, strict, six_p, perm_rows)
+    hc, ddc = yoda.seededCageAffiliation(six_s, strict, six_p, perm_rows,
+                                         ring_adjacent)
     labels = []
     for i in range(n):
         if hc[i] and ddc[i]:
@@ -462,6 +469,10 @@ def main():
                     "dseams-topo-seeded5",
                     lambda: dseams_topo_seeded(pos, box, 5, True),
                 ),
+                (
+                    "dseams-topo-seeded-adj",
+                    lambda: dseams_topo_seeded(pos, box, ring_adjacent=True),
+                ),
                 ("chill+", lambda: chill_plus(pos, box, scratch)),
             ):
                 labels, ms = timed(run)
@@ -525,6 +536,10 @@ def main():
         (
             "dseams-topo-seeded5",
             lambda: dseams_topo_seeded(null_pos, ic_box, 5, True),
+        ),
+        (
+            "dseams-topo-seeded-adj",
+            lambda: dseams_topo_seeded(null_pos, ic_box, ring_adjacent=True),
         ),
         ("chill+", lambda: chill_plus(null_pos, ic_box, scratch)),
     ):
