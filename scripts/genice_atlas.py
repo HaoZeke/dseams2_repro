@@ -38,9 +38,9 @@ from sota_compare import (  # noqa: E402
 )
 from pydseams import yoda  # noqa: E402
 
-# name -> (GenIce type, class). Classes: ice1 (positive), dense (high
-# pressure polymorph), clathrate (empty hydrate framework), porous
-# (hypothetical low-density ice), amorphous.
+# name -> (GenIce type, class[, guests]). Classes: ice1 (positive), dense
+# (high pressure polymorph), clathrate (empty hydrate framework), hydrate
+# (framework with guests), porous (hypothetical low-density ice), amorphous.
 STRUCTURES = {
     "Ih": ("1h", "ice1"),
     "Ic": ("1c", "ice1"),
@@ -74,6 +74,10 @@ STRUCTURES = {
     "CRN1": ("CRN1", "amorphous"),
     "CRN2": ("CRN2", "amorphous"),
     "CRN3": ("CRN3", "amorphous"),
+    # filled hydrates: methane in every cage of the unit cell; the guests are
+    # not water and never enter the graph
+    "sI+CH4": ("CS1", "hydrate", ["12=me", "14=me"]),
+    "sII+CH4": ("CS2", "hydrate", ["12=me", "16=me"]),
 }
 MIN_EDGE = 16.0  # Angstrom; every box edge above 4 cutoffs
 # GenIce --add_noise units: 1 unit displaces each oxygen by an rms of
@@ -82,8 +86,10 @@ MIN_EDGE = 16.0  # Angstrom; every box edge above 4 cutoffs
 NOISE = [0.0, 1.0, 2.0]
 
 
-def genice(exe: str, kind: str, rep, noise: float, seed: int):
+def genice(exe: str, kind: str, rep, noise: float, seed: int, guests=()):
     cmd = [exe, kind, "--rep", *map(str, rep), "--format", "gromacs", "--seed", str(seed)]
+    for g in guests:
+        cmd += ["--guest", g]
     if noise > 0:
         cmd += ["--add_noise", str(noise)]
     out = subprocess.run(cmd, check=True, capture_output=True, text=True).stdout
@@ -135,7 +141,9 @@ def main():
     ap.add_argument("--seed", type=int, default=1)
     args = ap.parse_args()
     scratch = tempfile.mkdtemp(prefix="genice-atlas-")
-    for name, (kind, klass) in STRUCTURES.items():
+    for name, spec in STRUCTURES.items():
+        kind, klass = spec[0], spec[1]
+        guests = spec[2] if len(spec) > 2 else ()
         if args.only and name not in args.only:
             continue
         try:
@@ -146,7 +154,7 @@ def main():
         ideal = None
         for noise in args.noise:
             try:
-                pos, box = genice(args.genice, kind, rep, noise, args.seed)
+                pos, box = genice(args.genice, kind, rep, noise, args.seed, guests)
             except subprocess.CalledProcessError as exc:
                 emit(structure=name, kind=kind, klass=klass, noise=noise, status="genice-failed")
                 continue
