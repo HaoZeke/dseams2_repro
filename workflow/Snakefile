@@ -719,7 +719,7 @@ rule polymorph_library:
         "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
         "SEAMS_BUILD={params.tbuild} "
-        "python scripts/polymorph_library.py --hops 3 --library-out {output.library} "
+        "python scripts/polymorph_library.py --hops 3 --fallback-hops 2 --library-out {output.library} "
         "> {output.match}'"
 
 rule aggregate:

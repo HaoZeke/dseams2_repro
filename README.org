@@ -50,7 +50,10 @@ under =profiles/=, results, and an archive tarball for deposition.
   =scripts/polymorph_library.py=). The library stores rooted keys on
   the mutual four-nearest graph. A read-back against the jittered ice I
   lattices and the displaced atlas names each molecule by the polymorph
-  whose environment it matches.
+  whose environment it matches. A second library at two hops stands
+  behind it (=--fallback-hops 2=): a molecule the three-hop library
+  does not name falls back to the two-hop one, and the output records
+  the depth that named each molecule.
 - An mW seeding campaign lives on =workflow/production.smk= with the
   matrix in =config/production.yaml=. Spherical ice Ic seeds sit in
   supercooled liquid. LAMMPS logs the PLUMED action =DSEAMS_CAGES= and

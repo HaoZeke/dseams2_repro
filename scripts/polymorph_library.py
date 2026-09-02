@@ -59,9 +59,18 @@ def mutual_rows(pos, box, cut=5.0):
     return frame, yoda.neighbourListByIndex(frame.cloud, knn)
 
 
-def keys_of(pos, box):
+def keys_of(pos, box, hops=None):
     _, rows = mutual_rows(pos, box)
-    return yoda.topologyFingerprint(rows, HOPS, 7, [])
+    return yoda.topologyFingerprint(rows, HOPS if hops is None else hops, 7, [])
+
+
+def match_stack(pos, box, libs):
+    """Name every molecule by the deepest library that knows it (engine
+    matchLibraries); one library falls back to a plain match."""
+    _, rows = mutual_rows(pos, box)
+    if len(libs) == 1:
+        return yoda.matchLibrary(yoda.topologyFingerprint(rows, libs[0].hops, 7, []), libs[0])
+    return yoda.matchLibraries(rows, libs, 7, [])
 
 
 def emit(**kv):
@@ -75,10 +84,14 @@ def main():
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--library-out", default=None)
     ap.add_argument("--hops", type=int, default=HOPS)
+    ap.add_argument("--fallback-hops", type=int, nargs="*", default=[],
+                    help="shallower libraries built from the same lattices; a molecule "
+                    "the deepest library does not name falls back to them in order")
     args = ap.parse_args()
     set_hops(args.hops)
 
     lib = yoda.KeyLibrary()
+    fallback = {h: yoda.KeyLibrary() for h in args.fallback_hops}
     ideal = {}
     for name in LIBRARY_STRUCTURES:
         spec = STRUCTURES[name]
@@ -92,6 +105,8 @@ def main():
         ideal[name] = (pos, box)
         fp = keys_of(pos, box)
         yoda.addToLibrary(lib, fp, ICE1.get(name, name))
+        for h, flib in fallback.items():
+            yoda.addToLibrary(flib, keys_of(pos, box, h), ICE1.get(name, name))
         emit(library=name, label=ICE1.get(name, name), n=len(pos), classes=len(fp.classes))
     text = yoda.writeLibrary(lib)
     if args.library_out:
@@ -103,6 +118,10 @@ def main():
     emit(library="census", method=lib.method, hops=lib.hops, keys=len(lib.labelOf),
          ambiguous=labels.get("ambiguous", 0),
          perlabel=",".join(f"{k}:{v}" for k, v in sorted(labels.items())))
+    for h, flib in fallback.items():
+        shared = sum(1 for v in flib.labelOf.values() if "|" in v)
+        emit(library="fallback", hops=h, keys=len(flib.labelOf), shared=shared)
+    stack = [lib] + [fallback[h] for h in sorted(fallback, reverse=True)]
 
     # the jitter sweep lattices of the accuracy comparison
     rng0 = 88172645463325252
@@ -113,8 +132,7 @@ def main():
             correct = other = unnamed = 0
             for seed in range(args.seeds if sigma > 0 else 1):
                 pos = jitter(pos0, box, sigma, np.random.default_rng(rng0 + int(sigma * 1000) + 7919 * seed))
-                fp = keys_of(pos, box)
-                match = yoda.matchLibrary(fp, lib)
+                match = match_stack(pos, box, stack)
                 for lab in match.labels:
                     if lab == truth:
                         correct += 1
@@ -124,7 +142,8 @@ def main():
                         other += 1
             tot = max(1, correct + other + unnamed)
             emit(test=truth, sigma=f"{sigma:.2f}", n=len(pos0), correct=f"{correct / tot:.3f}",
-                 other=f"{other / tot:.3f}", unnamed=f"{unnamed / tot:.3f}")
+                 other=f"{other / tot:.3f}", unnamed=f"{unnamed / tot:.3f}",
+                 stack=",".join(str(l.hops) for l in stack))
 
     # the atlas at rest and under noise: does the library name each polymorph as itself
     for name, (pos, box) in ideal.items():
@@ -136,13 +155,18 @@ def main():
                 p, b = genice(args.genice, kind, rep, noise, 1, guests)
             except subprocess.CalledProcessError:
                 continue
-            match = yoda.matchLibrary(keys_of(p, b), lib)
+            match = match_stack(p, b, stack)
             truth = ICE1.get(name, name)
             n = max(1, len(match.labels))
             correct = sum(1 for lab in match.labels if lab == truth) / n
             unnamed = sum(1 for lab in match.labels if lab == "") / n
+            # a shared label (III/IX|iceA) counts as correct when it names the truth
+            shared = sum(1 for lab in match.labels if lab != truth and truth in lab.split("|")) / n
+            depth = ",".join(f"{h}:{sum(1 for d in match.depth if d == h)}"
+                             for h in sorted(set(match.depth) - {0}, reverse=True)) if len(stack) > 1 else ""
             emit(atlas=name, noise=noise, n=len(p), correct=f"{correct:.3f}",
-                 unnamed=f"{unnamed:.3f}", other=f"{1 - correct - unnamed:.3f}")
+                 shared=f"{shared:.3f}", unnamed=f"{unnamed:.3f}",
+                 other=f"{max(0.0, 1 - correct - shared - unnamed):.3f}", depth=depth)
 
 
 if __name__ == "__main__":

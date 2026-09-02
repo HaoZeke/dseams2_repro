@@ -1,0 +1,106 @@
+library=Ih label=Ih n=288 classes=1
+library=Ic label=Ic n=216 classes=1
+library=XI label=Ih n=288 classes=1
+library=0 label=0 n=216 classes=2
+library=III label=III/IX n=324 classes=2
+library=IV label=IV n=384 classes=2
+library=V label=V n=504 classes=4
+library=VI label=VI n=270 classes=2
+library=VII label=VII/VIII n=432 classes=422
+library=VIII label=VII/VIII n=512 classes=319
+library=IX label=III/IX n=324 classes=2
+library=XII label=XII/XIV n=648 classes=2
+library=XIV label=XII/XIV n=192 classes=2
+library=XVI label=sII n=136 classes=3
+library=XVII label=XVII n=216 classes=1
+library=sI label=sI n=368 classes=3
+library=sII label=sII n=136 classes=3
+library=sT label=sT n=920 classes=10
+library=sIV label=sIV n=320 classes=5
+library=iceA label=iceA n=324 classes=2
+library=iceB label=iceB n=384 classes=1
+library=FAU label=FAU n=192 classes=1
+library=RHO label=RHO n=384 classes=1
+library=SOD label=SOD n=324 classes=1
+library=census method=wl hops=3 keys=773 ambiguous=0 perlabel=0:2,FAU:1,III/IX|iceA:2,IV:2,Ic:1,Ih:1,RHO:1,SOD:1,V:4,VI:2,VII/VIII:740,XII/XIV:2,XVII:1,iceB:1,sI:2,sII|sIV|sT:1,sII|sT:2,sIV|sT:3,sI|sIV|sT:1,sT:3
+library=fallback hops=2 keys=181 shared=8
+test=Ic sigma=0.00 n=512 correct=1.000 other=0.000 unnamed=0.000 stack=3,2
+test=Ic sigma=0.10 n=512 correct=1.000 other=0.000 unnamed=0.000 stack=3,2
+test=Ic sigma=0.20 n=512 correct=0.926 other=0.074 unnamed=0.000 stack=3,2
+test=Ic sigma=0.30 n=512 correct=0.174 other=0.706 unnamed=0.120 stack=3,2
+test=Ih sigma=0.00 n=360 correct=1.000 other=0.000 unnamed=0.000 stack=3,2
+test=Ih sigma=0.10 n=360 correct=1.000 other=0.000 unnamed=0.000 stack=3,2
+test=Ih sigma=0.20 n=360 correct=0.976 other=0.024 unnamed=0.000 stack=3,2
+test=Ih sigma=0.30 n=360 correct=0.182 other=0.681 unnamed=0.136 stack=3,2
+atlas=Ih noise=0.0 n=288 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:288
+atlas=Ih noise=1.0 n=288 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:288
+atlas=Ih noise=2.0 n=288 correct=0.087 shared=0.406 unnamed=0.156 other=0.351 depth=3:25,2:218
+atlas=Ic noise=0.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=Ic noise=1.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=Ic noise=2.0 n=216 correct=0.194 shared=0.398 unnamed=0.056 other=0.352 depth=3:42,2:162
+atlas=XI noise=0.0 n=288 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:288
+atlas=XI noise=1.0 n=288 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:288
+atlas=XI noise=2.0 n=288 correct=0.125 shared=0.410 unnamed=0.135 other=0.330 depth=3:36,2:213
+atlas=0 noise=0.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=0 noise=1.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=0 noise=2.0 n=216 correct=0.301 shared=0.153 unnamed=0.537 other=0.009 depth=3:6,2:94
+atlas=III noise=0.0 n=324 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:324
+atlas=III noise=1.0 n=324 correct=0.000 shared=0.562 unnamed=0.423 other=0.015 depth=3:34,2:153
+atlas=III noise=2.0 n=324 correct=0.000 shared=0.006 unnamed=0.840 other=0.154 depth=3:1,2:51
+atlas=IV noise=0.0 n=384 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:384
+atlas=IV noise=1.0 n=384 correct=0.000 shared=0.016 unnamed=0.198 other=0.786 depth=3:4,2:304
+atlas=IV noise=2.0 n=384 correct=0.000 shared=0.000 unnamed=0.810 other=0.190 depth=3:3,2:70
+atlas=V noise=0.0 n=504 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:504
+atlas=V noise=1.0 n=504 correct=0.198 shared=0.000 unnamed=0.585 other=0.216 depth=3:2,2:207
+atlas=V noise=2.0 n=504 correct=0.004 shared=0.000 unnamed=0.788 other=0.208 depth=3:1,2:106
+atlas=VI noise=0.0 n=270 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:270
+atlas=VI noise=1.0 n=270 correct=0.144 shared=0.026 unnamed=0.278 other=0.552 depth=2:195
+atlas=VI noise=2.0 n=270 correct=0.000 shared=0.000 unnamed=0.863 other=0.137 depth=2:37
+atlas=VII noise=0.0 n=432 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:432
+atlas=VII noise=1.0 n=432 correct=0.637 shared=0.000 unnamed=0.361 other=0.002 depth=3:9,2:267
+atlas=VII noise=2.0 n=432 correct=0.162 shared=0.000 unnamed=0.838 other=0.000 depth=3:1,2:69
+atlas=VIII noise=0.0 n=512 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:512
+atlas=VIII noise=1.0 n=512 correct=0.484 shared=0.002 unnamed=0.510 other=0.004 depth=3:3,2:248
+atlas=VIII noise=2.0 n=512 correct=0.090 shared=0.000 unnamed=0.910 other=0.000 depth=3:2,2:44
+atlas=IX noise=0.0 n=324 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:324
+atlas=IX noise=1.0 n=324 correct=0.000 shared=0.370 unnamed=0.565 other=0.065 depth=3:21,2:120
+atlas=IX noise=2.0 n=324 correct=0.000 shared=0.003 unnamed=0.790 other=0.207 depth=3:1,2:67
+atlas=XII noise=0.0 n=648 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:648
+atlas=XII noise=1.0 n=648 correct=0.000 shared=0.113 unnamed=0.341 other=0.546 depth=3:1,2:426
+atlas=XII noise=2.0 n=648 correct=0.000 shared=0.000 unnamed=0.832 other=0.168 depth=3:1,2:108
+atlas=XIV noise=0.0 n=192 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:192
+atlas=XIV noise=1.0 n=192 correct=0.005 shared=0.208 unnamed=0.182 other=0.604 depth=3:1,2:156
+atlas=XIV noise=2.0 n=192 correct=0.000 shared=0.005 unnamed=0.885 other=0.109 depth=3:1,2:21
+atlas=XVI noise=0.0 n=136 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:136
+atlas=XVI noise=1.0 n=136 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:136
+atlas=XVI noise=2.0 n=136 correct=0.000 shared=0.206 unnamed=0.772 other=0.022 depth=3:1,2:30
+atlas=XVII noise=0.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=XVII noise=1.0 n=216 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:216
+atlas=XVII noise=2.0 n=216 correct=0.014 shared=0.255 unnamed=0.713 other=0.019 depth=3:3,2:59
+atlas=sI noise=0.0 n=368 correct=0.478 shared=0.522 unnamed=0.000 other=0.000 depth=3:368
+atlas=sI noise=1.0 n=368 correct=0.478 shared=0.522 unnamed=0.000 other=0.000 depth=3:368
+atlas=sI noise=2.0 n=368 correct=0.068 shared=0.465 unnamed=0.465 other=0.003 depth=3:55,2:142
+atlas=sII noise=0.0 n=136 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:136
+atlas=sII noise=1.0 n=136 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:136
+atlas=sII noise=2.0 n=136 correct=0.000 shared=0.206 unnamed=0.772 other=0.022 depth=3:1,2:30
+atlas=sT noise=0.0 n=920 correct=0.287 shared=0.713 unnamed=0.000 other=0.000 depth=3:920
+atlas=sT noise=1.0 n=920 correct=0.287 shared=0.713 unnamed=0.000 other=0.000 depth=3:920
+atlas=sT noise=2.0 n=920 correct=0.043 shared=0.452 unnamed=0.500 other=0.004 depth=3:113,2:347
+atlas=sIV noise=0.0 n=320 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:320
+atlas=sIV noise=1.0 n=320 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:320
+atlas=sIV noise=2.0 n=320 correct=0.000 shared=0.328 unnamed=0.672 other=0.000 depth=3:7,2:98
+atlas=iceA noise=0.0 n=324 correct=0.000 shared=1.000 unnamed=0.000 other=0.000 depth=3:324
+atlas=iceA noise=1.0 n=324 correct=0.000 shared=0.867 unnamed=0.127 other=0.006 depth=3:208,2:75
+atlas=iceA noise=2.0 n=324 correct=0.000 shared=0.052 unnamed=0.830 other=0.117 depth=2:55
+atlas=iceB noise=0.0 n=384 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:384
+atlas=iceB noise=1.0 n=384 correct=0.820 shared=0.117 unnamed=0.000 other=0.062 depth=3:315,2:69
+atlas=iceB noise=2.0 n=384 correct=0.000 shared=0.039 unnamed=0.560 other=0.401 depth=2:169
+atlas=FAU noise=0.0 n=192 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:192
+atlas=FAU noise=1.0 n=192 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:192
+atlas=FAU noise=2.0 n=192 correct=0.016 shared=0.125 unnamed=0.583 other=0.276 depth=3:3,2:77
+atlas=RHO noise=0.0 n=384 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:384
+atlas=RHO noise=1.0 n=384 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:384
+atlas=RHO noise=2.0 n=384 correct=0.013 shared=0.128 unnamed=0.529 other=0.331 depth=3:5,2:176
+atlas=SOD noise=0.0 n=324 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:324
+atlas=SOD noise=1.0 n=324 correct=1.000 shared=0.000 unnamed=0.000 other=0.000 depth=3:324
+atlas=SOD noise=2.0 n=324 correct=0.194 shared=0.000 unnamed=0.315 other=0.491 depth=3:1,2:221
