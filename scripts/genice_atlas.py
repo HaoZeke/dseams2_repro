@@ -64,7 +64,7 @@ STRUCTURES = {
     "sII": ("CS2", "clathrate"),
     "sH": ("DOH", "clathrate"),
     "sT": ("T", "clathrate"),
-    "HS1": ("HS1", "ice1"),
+    "sIV": ("HS1", "clathrate"),
     "iceA": ("A", "porous"),
     "iceB": ("B", "porous"),
     "FAU": ("FAU", "porous"),
@@ -76,7 +76,10 @@ STRUCTURES = {
     "CRN3": ("CRN3", "amorphous"),
 }
 MIN_EDGE = 16.0  # Angstrom; every box edge above 4 cutoffs
-NOISE = [0.0, 5.0, 10.0]  # GenIce --add_noise, percent of a molecular diameter
+# GenIce --add_noise units: 1 unit displaces each oxygen by an rms of
+# 0.28 Angstrom, a per-component sigma of 0.16 Angstrom; the measured sigma
+# is reported with every row so the levels line up with the jitter sweep
+NOISE = [0.0, 1.0, 2.0]
 
 
 def genice(exe: str, kind: str, rep, noise: float, seed: int):
@@ -140,18 +143,25 @@ def main():
         except (subprocess.CalledProcessError, SystemExit) as exc:
             emit(structure=name, kind=kind, klass=klass, status=f"skip:{str(exc)[:60]!r}")
             continue
+        ideal = None
         for noise in args.noise:
             try:
                 pos, box = genice(args.genice, kind, rep, noise, args.seed)
             except subprocess.CalledProcessError as exc:
                 emit(structure=name, kind=kind, klass=klass, noise=noise, status="genice-failed")
                 continue
+            if ideal is None:
+                ideal = pos
+            d = pos - ideal
+            d -= box * np.round(d / box)
+            sigma = math.sqrt((d ** 2).sum(axis=1).mean() / 3.0)
             census, n_hc, n_ddc = cages_and_rings(pos, box)
             f_cut = fractions(dseams_topo(pos, box))
             f_seed = fractions(dseams_topo_seeded(pos, box, ring_adjacent=True))
             f_chill = fractions(chill_plus(pos, box, scratch))
             emit(
-                structure=name, kind=kind, klass=klass, noise=noise, n=len(pos),
+                structure=name, kind=kind, klass=klass, noise=noise,
+                sigma=f"{sigma:.3f}", n=len(pos),
                 rep="x".join(map(str, rep)),
                 rings=",".join(f"{k}:{census[k]}" for k in sorted(census)),
                 hc=n_hc, ddc=n_ddc,
