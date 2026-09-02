@@ -19,7 +19,7 @@
     "seams-core": {
       "directory": "seams-core",
       "repository": "https://github.com/HaoZeke/seams-core.git",
-      "revision": "f1d6b75719276a9c56251d03f865b765d10d4fc7"
+      "revision": "770accf96b99c080442d6047742bfef09d16af6b"
     },
     "yodastruct": {
       "directory": "yodaStruct",
