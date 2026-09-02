@@ -38,6 +38,11 @@ under =profiles/=, results, and an archive tarball for deposition.
 - Ice labels of the water around substitutional Na and Cl in ice Ih, Ic and
   the sI framework (rule =ion_atlas=), ions removed from the graph, from one
   pair to sixteen per box.
+- A topology key library over the GenIce lattices
+  (=scripts/polymorph_library.py=): rooted three-hop keys on the mutual
+  four-nearest graph, read back against the jittered ice I lattices and the
+  displaced atlas, so every molecule is named by the polymorph whose
+  environment it matches.
 - Cross-frontend parity of the stable workflows (CLI, Python, Lua) and a
   source manifest of every locked component.
 
