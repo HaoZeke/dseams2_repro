@@ -363,6 +363,9 @@ def main():
         "atlas": parse_atlas(read(out_dir / "genice_atlas.txt"))
         if (out_dir / "genice_atlas.txt").exists()
         else [],
+        "ions": parse_atlas(read(out_dir / "ion_atlas.txt"))
+        if (out_dir / "ion_atlas.txt").exists()
+        else [],
     }
     json.dump(manifest, sys.stdout, indent=2, sort_keys=True)
     print()

@@ -677,6 +677,26 @@ rule genice_atlas:
         "SEAMS_BUILD={params.tbuild} "
         "python scripts/genice_atlas.py > {output}'"
 
+
+rule ion_atlas:
+    # Ice labels of the water network around substitutional Na and Cl in
+    # GenIce ice Ih, Ic and the sI framework, ions removed from the graph
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/ion_atlas.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/ion_atlas.py > {output}'"
+
 rule aggregate:
     input:
         conditions=R + "/conditions.txt",
@@ -696,6 +716,7 @@ rule aggregate:
         ql_python=R + "/ql-python.txt",
         figshare_demos=R + "/figshare-demos/figshare-demos.json",
         atlas=R + "/genice_atlas.txt",
+        ions=R + "/ion_atlas.txt",
         figshare_notebooks=expand(
             R + "/notebooks/{nb}.ipynb", nb=NOTEBOOKS
         ),
