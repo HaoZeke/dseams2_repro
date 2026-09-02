@@ -1,0 +1,16 @@
+.pixi/
+.snakemake/
+sources/
+build-*/
+python-site/
+results/hq-*
+results/*.done
+results/*.log
+results/notebooks/
+data/figshare/
+data/public-ice/
+__pycache__/
+*.tar.xz
+*.tar.gz
+.tip_sha
+bin/
