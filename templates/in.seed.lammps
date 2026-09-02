@@ -13,8 +13,9 @@ velocity        all create ${T} ${seed} dist gaussian
 timestep        10.0
 neighbor        2.0 bin
 neigh_modify    every 1 delay 0 check yes
-fix             npt all npt temp ${T} ${T} 1000.0 iso ${P} ${P} 10000.0
+# fix plumed must precede any fix that computes the pressure internally
 fix             pl all plumed plumedfile ${plumed} outfile plumed.log
+fix             npt all npt temp ${T} ${T} 1000.0 iso ${P} ${P} 10000.0
 thermo          1000
 thermo_style    custom step temp press vol pe
 dump            d all custom ${dumpevery} ${dump} id type x y z
