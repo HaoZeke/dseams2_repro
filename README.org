@@ -31,6 +31,10 @@ under =profiles/=, results, and an archive tarball for deposition.
   Lechner-Dellago), OVITO PTM and the twist order parameter on labelled Ic
   and Ih lattices under Gaussian jitter and on a disordered null, with seeds
   and wall time per method.
+- The specificity atlas over the GenIce polymorph library (rule
+  =genice_atlas=): ice I, dense polymorphs, empty hydrate frameworks, porous
+  ices and continuous random networks, ideal and under positional noise,
+  labelled by the seeded cages, the cutoff cages and CHILL+.
 - Cross-frontend parity of the stable workflows (CLI, Python, Lua) and a
   source manifest of every locked component.
 
@@ -91,6 +95,7 @@ can tell.
 |-----------+------+------|
 | =results/reference/elja-1798666= | AMD EPYC 7713, exclusive =128cpu_256mem=, Slurm 1798666 | full DAG at seams-core e785640: timings, walks (every frame), five-seed sweep, notebooks, demos, parity |
 | =results/reference/terra-2026-09-01= | shared workstation | walks and sweep at the same sources; label tables identical to the Elja run line for line |
+| =results/reference/terra-2026-09-02= | shared workstation | five-seed sweep with the vacancy-rule completion (engine ba0634f) and the GenIce atlas |
 | =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript's main tables read |
 | =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | terra | the stride-ten walks, the single-seed sweep and the residual diagnosis that preceded the campaign |
 
