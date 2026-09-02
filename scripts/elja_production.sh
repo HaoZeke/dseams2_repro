@@ -11,7 +11,7 @@ cd "$ROOT"
 case "${1:-}" in
 prep)
   pixi install -e production
-  pixi run -e production -- snakemake -s workflow/production.smk --configfile "$CONFIG" --cores 4 -- build-plumed/libdseams_plumed.so
+  pixi run -e production -- snakemake -s workflow/production.smk --configfile "$CONFIG" --cores 4 -- build_module
   pixi run -e production -- snakemake -s workflow/production.smk --configfile "$CONFIG" --dry-run --cores 1 > /dev/null
   echo "prep done"
   ;;
