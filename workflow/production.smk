@@ -63,8 +63,9 @@ rule build_module:
         rm -rf "$BLOCAL" "$BLOCAL-src"
         cp -r {params.src} "$BLOCAL-src"
         # the wrap revision moves with the module; a cached engine checkout
-        # would otherwise be reused at its old revision
-        rm -rf "$BLOCAL-src/subprojects/seams-core"
+        # would otherwise be reused at its old revision (the redirect wraps
+        # need the directory to exist, so reset rather than delete)
+        meson subprojects update --reset --sourcedir "$BLOCAL-src" seams-core
         find "$BLOCAL-src" -exec touch {{}} +
         meson setup "$BLOCAL" "$BLOCAL-src" --buildtype=release -Dseams-core:default_library=static
         meson compile -C "$BLOCAL"
