@@ -31,12 +31,20 @@ from sota_compare import cubic_diamond, jitter, lonsdaleite  # noqa: E402
 from pydseams import yoda  # noqa: E402
 from pydseams.frame import Frame  # noqa: E402
 
-HOPS = 2
+# Two hops see no ring in a four-connected network (a six-ring closes at
+# three), so every tetrahedral ice shares one two-hop key; three hops is
+# the first depth that separates polymorphs by their ring structure
+HOPS = 3
 LIBRARY_STRUCTURES = ["Ih", "Ic", "XI", "0", "III", "IV", "V", "VI", "VII", "VIII", "IX",
                       "XII", "XIV", "XVI", "XVII", "sI", "sT", "sIV", "iceA", "iceB", "FAU",
                       "RHO", "SOD"]
 # ice I under any name is one class for the accuracy test
 ICE1 = {"Ih": "Ih", "Ic": "Ic", "XI": "Ih"}
+
+
+def set_hops(h):
+    global HOPS
+    HOPS = int(h)
 
 
 def mutual_rows(pos, box, cut=5.0):
@@ -60,7 +68,9 @@ def main():
     ap.add_argument("--sigmas", nargs="*", type=float, default=[0.0, 0.1, 0.2, 0.3])
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--library-out", default=None)
+    ap.add_argument("--hops", type=int, default=HOPS)
     args = ap.parse_args()
+    set_hops(args.hops)
 
     lib = yoda.KeyLibrary()
     ideal = {}
