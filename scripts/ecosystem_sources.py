@@ -14,7 +14,7 @@ from typing import Any
 
 LOCK_SCHEMA = "dseams.ecosystem-lock/v1"
 MANIFEST_SCHEMA = "dseams.source-manifest/v1"
-REQUIRED_COMPONENTS = {"linkcell", "pydseamslib", "yodastruct"}
+REQUIRED_COMPONENTS = {"seams-core", "seams-base", "linkcell", "pydseamslib", "yodastruct"}
 FULL_REVISION = re.compile(r"[0-9a-f]{40}")
 
 
@@ -133,10 +133,10 @@ def _ensure_symlink(path: Path, target: Path) -> None:
     os.symlink(expected, path, target_is_directory=True)
 
 
-def wire(lock: dict[str, Any], root: Path, core: Path) -> None:
+def wire(lock: dict[str, Any], root: Path, core: Path | None = None) -> None:
     """Point every frontend and the engine at one locked source graph."""
-    core = core.resolve()
     root = root.resolve()
+    core = (core or _component_path(lock, root, "seams-core")).resolve()
     linkcell = _component_path(lock, root, "linkcell")
     python = _component_path(lock, root, "pydseamslib")
     lua = _component_path(lock, root, "yodastruct")
@@ -148,10 +148,18 @@ def wire(lock: dict[str, Any], root: Path, core: Path) -> None:
     _ensure_symlink(lua / "subprojects" / "seams-core", core)
 
 
-def source_manifest(lock: dict[str, Any], root: Path, core: Path) -> dict[str, Any]:
-    """Verify and describe the exact source graph used by a run."""
+def source_manifest(lock: dict[str, Any], root: Path, core: Path | None = None) -> dict[str, Any]:
+    """Verify and describe the exact source graph used by a run.
+
+    Every component, the engine included, must sit at its locked revision
+    with no tracked local changes. An explicit ``core`` path replaces the
+    locked engine checkout (a working tree under test) and is recorded as
+    such.
+    """
     components: dict[str, dict[str, str]] = {}
     for name, locked in sorted(lock["components"].items()):
+        if name == "seams-core" and core is not None:
+            continue
         source = _component_path(lock, root, name)
         _assert_clean_repository(source, include_untracked=False)
         actual = _git("rev-parse", "HEAD", cwd=source)
@@ -164,14 +172,16 @@ def source_manifest(lock: dict[str, Any], root: Path, core: Path) -> dict[str, A
             "revision": actual,
         }
 
-    core = core.resolve()
-    tracked = _git("status", "--porcelain", "--untracked-files=no", cwd=core)
-    if tracked:
-        raise RuntimeError(f"seams-core has tracked local changes: {core}")
-    components["seams-core"] = {
-        "repository": _git("remote", "get-url", "origin", cwd=core),
-        "revision": _git("rev-parse", "HEAD", cwd=core),
-    }
+    if core is not None:
+        core = core.resolve()
+        tracked = _git("status", "--porcelain", "--untracked-files=no", cwd=core)
+        if tracked:
+            raise RuntimeError(f"seams-core has tracked local changes: {core}")
+        components["seams-core"] = {
+            "repository": _git("remote", "get-url", "origin", cwd=core),
+            "revision": _git("rev-parse", "HEAD", cwd=core),
+            "override": str(core),
+        }
     return {"schema": MANIFEST_SCHEMA, "components": components}
 
 
@@ -180,7 +190,7 @@ def main() -> int:
     parser.add_argument(
         "--lock",
         type=Path,
-        default=Path("repro/ecosystem-lock.json"),
+        default=Path("config/ecosystem-lock.json"),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -189,11 +199,11 @@ def main() -> int:
 
     wire_parser = subparsers.add_parser("wire")
     wire_parser.add_argument("--root", type=Path, required=True)
-    wire_parser.add_argument("--core", type=Path, default=Path.cwd())
+    wire_parser.add_argument("--core", type=Path, default=None)
 
     manifest_parser = subparsers.add_parser("manifest")
     manifest_parser.add_argument("--root", type=Path, required=True)
-    manifest_parser.add_argument("--core", type=Path, default=Path.cwd())
+    manifest_parser.add_argument("--core", type=Path, default=None)
     manifest_parser.add_argument("--output", type=Path, required=True)
 
     args = parser.parse_args()

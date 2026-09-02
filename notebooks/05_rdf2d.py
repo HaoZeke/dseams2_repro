@@ -33,9 +33,9 @@ plt.switch_backend("Agg")
 ROOT = next(
     p
     for p in [Path.cwd(), *Path.cwd().parents]
-    if (p / "repro" / "figshare").is_dir()
+    if (p / "data" / "figshare").is_dir()
 )
-TRAJ = ROOT / "repro" / "figshare" / "dump-320.lammpstrj"
+TRAJ = ROOT / "data" / "figshare" / "dump-320.lammpstrj"
 
 traj = Trajectory(
     TRAJ,

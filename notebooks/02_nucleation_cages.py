@@ -40,10 +40,10 @@ plt.switch_backend("Agg")
 ROOT = next(
     p
     for p in [Path.cwd(), *Path.cwd().parents]
-    if (p / "repro" / "figshare").is_dir()
+    if (p / "data" / "figshare").is_dir()
 )
-TRAJ = ROOT / "repro" / "figshare" / "nucleation.lammpstrj"
-RESULTS = ROOT / "repro" / "results"
+TRAJ = ROOT / "data" / "figshare" / "nucleation.lammpstrj"
+RESULTS = ROOT / "results"
 RESULTS.mkdir(parents=True, exist_ok=True)
 
 n_frames = sum(

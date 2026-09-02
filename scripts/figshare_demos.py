@@ -15,7 +15,7 @@ Subcommands (all paths relative to the repository root):
                                         run the five deposits via require("dseams")
 
 The Python-bindings demonstrations live as percent-format notebooks
-under repro/notebooks/; jupytext converts them and papermill executes
+under notebooks/; jupytext converts them and papermill executes
 them via the figshare_notebook Snakemake rule.
 """
 

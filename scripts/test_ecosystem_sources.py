@@ -23,6 +23,16 @@ def write_lock(path: Path, revision: str = "a" * 40) -> None:
             {
                 "schema": "dseams.ecosystem-lock/v1",
                 "components": {
+                    "seams-core": {
+                        "directory": "seams-core",
+                        "repository": "https://example.test/seams-core.git",
+                        "revision": "d" * 40,
+                    },
+                    "seams-base": {
+                        "directory": "seams-base",
+                        "repository": "https://example.test/seams-core.git",
+                        "revision": "e" * 40,
+                    },
                     "linkcell": {
                         "directory": "linkcell",
                         "repository": "https://example.test/linkcell.git",
@@ -68,14 +78,11 @@ class WireTests(unittest.TestCase):
             lock_path = root / "lock.json"
             write_lock(lock_path)
             sources = root / "sources"
-            core = root / "seams-core"
-            for name in ("linkcell", "PydSEAMSlib", "yodaStruct"):
+            core = sources / "seams-core"
+            for name in ("linkcell", "PydSEAMSlib", "yodaStruct", "seams-core"):
                 (sources / name / "subprojects").mkdir(parents=True)
-            (core / "subprojects").mkdir(parents=True)
 
-            ecosystem_sources.wire(
-                ecosystem_sources.load_lock(lock_path), sources, core
-            )
+            ecosystem_sources.wire(ecosystem_sources.load_lock(lock_path), sources)
 
             self.assertEqual(
                 (core / "subprojects" / "linkcell").resolve(),
@@ -93,16 +100,14 @@ class WireTests(unittest.TestCase):
             lock_path = root / "lock.json"
             write_lock(lock_path)
             sources = root / "sources"
-            core = root / "seams-core"
+            core = sources / "seams-core"
             for name in ("linkcell", "PydSEAMSlib", "yodaStruct"):
                 (sources / name / "subprojects").mkdir(parents=True)
             occupied = core / "subprojects" / "linkcell"
             occupied.mkdir(parents=True)
 
             with self.assertRaisesRegex(FileExistsError, "refusing to replace"):
-                ecosystem_sources.wire(
-                    ecosystem_sources.load_lock(lock_path), sources, core
-                )
+                ecosystem_sources.wire(ecosystem_sources.load_lock(lock_path), sources)
 
 
 if __name__ == "__main__":

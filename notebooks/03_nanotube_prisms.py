@@ -29,9 +29,9 @@ from pydseamslib import Trajectory
 ROOT = next(
     p
     for p in [Path.cwd(), *Path.cwd().parents]
-    if (p / "repro" / "figshare").is_dir()
+    if (p / "data" / "figshare").is_dir()
 )
-TRAJ = ROOT / "repro" / "figshare" / "dump-240-square.lammpstrj"
+TRAJ = ROOT / "data" / "figshare" / "dump-240-square.lammpstrj"
 
 traj = Trajectory(TRAJ, frame=1, atom_type=2, cutoff=3.5)
 traj.n_atoms, traj.box

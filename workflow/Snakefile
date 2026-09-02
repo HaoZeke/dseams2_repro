@@ -1,26 +1,26 @@
 # Reproducibility DAG for the d-SEAMS 2.0 paper numbers.
 #
-# Run from the repository root inside the repro pixi environment, on one
-# exclusively allocated node (repro/elja_submit.sh does both):
+# Run from the repository root inside the pixi environment, on one
+# exclusively allocated node (scripts/elja_submit.sh does both):
 #
-#   pixi run -e repro -- snakemake -s repro/Snakefile --cores all
+#   pixi run -- snakemake -s workflow/Snakefile --configfile config/config.yaml --cores all
 #
-# Heavy rules execute through HyperQueue when an `hq` server is reachable
-# (the submit script starts one per allocation); set SEAMS_NO_HQ=1 or run
-# without hq on PATH to execute the same commands directly. The baseline
-# tree and subproject wraps are prepared on the login node by
-# `repro/elja_submit.sh prep`, since compute nodes carry neither git nor
-# network access.
+# The engine (seams-core), its baseline commit, linkcell and both language
+# front ends are locked components in config/ecosystem-lock.json and are
+# materialized under sources/ by `scripts/elja_submit.sh prep` (compute
+# nodes carry neither git nor network access). Heavy rules execute through
+# HyperQueue when an `hq` server is reachable; set SEAMS_NO_HQ=1 or run
+# without hq on PATH to execute the same commands directly.
 
 import json
 import os
 import shutil
 
-configfile: "repro/config.yaml"
+configfile: "config/config.yaml"
 
-R = "repro/results"
-LOCK = "repro/ecosystem-lock.json"
-BASE_TREE = config["base_tree"]
+ROOT = os.path.abspath(".")
+R = "results"
+LOCK = "config/ecosystem-lock.json"
 # Build directories default to the working tree but move to node-local
 # storage (SEAMS_BUILD_ROOT) on clusters whose NFS clocks skew against
 # the nodes, which meson refuses
@@ -28,30 +28,36 @@ BUILD = os.path.abspath(os.environ.get("SEAMS_BUILD_ROOT", "."))
 TIP_BUILD = os.path.join(BUILD, "build-repro")
 BASE_BUILD = os.path.join(BUILD, "build-base")
 SOURCE_ROOT = os.path.abspath(
-    os.environ.get("DSEAMS_SOURCE_ROOT", os.path.join("..", "dseams-repro-sources"))
+    os.environ.get("DSEAMS_SOURCE_ROOT", os.path.join(ROOT, "sources"))
 )
 with open(LOCK, encoding="utf-8") as lock_file:
     SOURCE_LOCK = json.load(lock_file)
-PYTHON_ROOT = os.path.join(
-    SOURCE_ROOT, SOURCE_LOCK["components"]["pydseamslib"]["directory"]
-)
-YODA_ROOT = os.path.join(
-    SOURCE_ROOT, SOURCE_LOCK["components"]["yodastruct"]["directory"]
-)
+
+
+def component(name):
+    return os.path.join(SOURCE_ROOT, SOURCE_LOCK["components"][name]["directory"])
+
+
+CORE = component("seams-core")
+BASE_TREE = component("seams-base")
+PYTHON_ROOT = component("pydseamslib")
+YODA_ROOT = component("yodastruct")
+CORE_INPUT = os.path.join(CORE, "input")
 PYTHON_SITE = os.path.join(BUILD, "python-site")
 YODA_BUILD = os.path.join(BUILD, "build-yoda")
 LUA_EXE = shutil.which("lua") or "lua"
+ABS = lambda p: os.path.join(ROOT, p)
 
 
 def hq(cpus):
     if os.environ.get("SEAMS_NO_HQ") or shutil.which("hq") is None:
         return ""
     return ("hq submit --wait --cpus {} "
-            "--stdout repro/results/hq-%{{JOB_ID}}.stdout "
-            "--stderr repro/results/hq-%{{JOB_ID}}.stderr --").format(cpus)
+            "--stdout results/hq-%{{JOB_ID}}.stdout "
+            "--stderr results/hq-%{{JOB_ID}}.stderr --").format(cpus)
 
 
-FIGSHARE_DIR = config.get("figshare_dir", "repro/figshare")
+FIGSHARE_DIR = config.get("figshare_dir", "data/figshare")
 FIGSHARE_FILES = [
     "nucleation.lammpstrj",
     "mW_cubic.lammpstrj",
@@ -59,6 +65,18 @@ FIGSHARE_FILES = [
     "dump-6-320-310.lammpstrj",
     "dump-320.lammpstrj",
 ]
+PUBLIC_ICE_DIR = config.get("public_ice_dir", "data/public-ice")
+# name -> (relative path inside PUBLIC_ICE_DIR, oxygen type)
+PUBLIC_DUMPS = {
+    "niu-traj1-extract": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-1", 1),
+    "niu-traj2-foursite": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-2", 1),
+    "niu-traj3-oxygen": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-3", 1),
+    "niu-critical-growing": ("critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-growing", 1),
+    "niu-critical-melting": ("critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-melting", 1),
+}
+WALK_STRIDE = config.get("walk_stride", 1)
+SWEEP_SEEDS = config.get("sweep_seeds", 5)
+SWEEP_SIGMAS = config.get("sweep_sigmas", [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4])
 
 
 rule all:
@@ -71,14 +89,16 @@ rule conditions:
         R + "/conditions.txt",
     params:
         base=config["base_sha"],
+        core=CORE,
     shell:
         r"""
         {{
           echo "hostname: $(hostname)"
           echo "jobid: ${{SLURM_JOB_ID:-none}}"
           echo "partition: ${{SLURM_JOB_PARTITION:-none}}"
-          echo "tip_sha: $(cat .tip_sha 2>/dev/null || echo unknown)"
+          echo "tip_sha: $(git -C {params.core} rev-parse HEAD 2>/dev/null || echo unknown)"
           echo "base_sha: {params.base}"
+          echo "repro_sha: $(git rev-parse HEAD 2>/dev/null || echo unknown)"
           echo "hq: $(hq --version 2>/dev/null || echo absent)"
           lscpu | grep -E 'Model name|Socket|Core|Thread' || true
           echo "loadavg_at_start: $(cut -d' ' -f1 /proc/loadavg)"
@@ -93,10 +113,9 @@ rule source_manifest:
         R + "/source-manifest.json",
     params:
         root=SOURCE_ROOT,
-        core=os.path.abspath("."),
     shell:
-        "python repro/scripts/ecosystem_sources.py --lock {input.lock} manifest "
-        "--root {params.root} --core {params.core} --output {output}"
+        "python scripts/ecosystem_sources.py --lock {input.lock} manifest "
+        "--root {params.root} --output {output}"
 
 
 rule setup_tip:
@@ -107,9 +126,11 @@ rule setup_tip:
     params:
         log=R + "/tip-setup.log",
         bdir=TIP_BUILD,
+        core=CORE,
     shell:
-        "meson setup {params.bdir} --prefix=$CONDA_PREFIX --buildtype=release "
-        "-Dwith_python=false -Dwith_tests=true > {params.log} 2>&1"
+        "meson setup {params.bdir} {params.core} --prefix=$CONDA_PREFIX "
+        "--buildtype=release -Dwith_python=false -Dwith_tests=true "
+        "> {params.log} 2>&1"
 
 
 rule build_tip:
@@ -154,6 +175,8 @@ rule install_python:
 
 
 rule build_base:
+    input:
+        R + "/source-manifest.json",
     output:
         touch(R + "/base-build.done"),
     params:
@@ -162,9 +185,9 @@ rule build_base:
         hq=lambda wc: hq(8),
     shell:
         r"""
-        test -d {params.tree} || {{ echo "baseline tree missing; run repro/elja_submit.sh prep" >&2; exit 1; }}
+        test -d {params.tree} || {{ echo "baseline tree missing; run scripts/elja_submit.sh prep" >&2; exit 1; }}
         meson setup {params.bbuild} {params.tree} --buildtype=release \
-          -Dwith_python=false -Dwith_tests=false > repro/results/base-setup.log 2>&1
+          -Dwith_python=false -Dwith_tests=false > results/base-setup.log 2>&1
         {params.hq} meson compile -C {params.bbuild}
         """
 
@@ -180,13 +203,14 @@ rule base_drivers:
     params:
         tree=BASE_TREE,
         bbuild=BASE_BUILD,
+        core=CORE,
     shell:
         r"""
         EIGEN=$CONDA_PREFIX/include/eigen3
         INC="-I{params.tree}/src/include/internal -I{params.tree}/src/include/external -I$EIGEN"
         LINK="-L{params.bbuild}/src -lyodaLib -Wl,-rpath,{params.bbuild}/src -Wl,--enable-new-dtags -Wl,--allow-shlib-undefined"
-        g++ -std=c++20 -O2 -o {output.scaling} tests/bench_scaling.cpp $INC $LINK
-        g++ -std=c++20 -O2 -o {output.cages} tests/bench_cages_base.cpp $INC $LINK
+        g++ -std=c++20 -O2 -o {output.scaling} {params.core}/tests/bench_scaling.cpp $INC $LINK
+        g++ -std=c++20 -O2 -o {output.cages} {params.core}/tests/bench_cages_base.cpp $INC $LINK
         """
 
 
@@ -196,12 +220,14 @@ rule tip_scaling:
     output:
         R + "/tip-scaling.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         sizes=" ".join(str(s) for s in config["scaling_sizes"]),
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
-        "{params.tbuild}/tests/bench_scaling {params.sizes} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_scaling {params.sizes} > {params.out}'"
 
 
 rule base_scaling:
@@ -210,11 +236,14 @@ rule base_scaling:
     output:
         R + "/base-scaling.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        bin=lambda wc, input: ABS(input[0]),
         hq=lambda wc: hq(1),
         sizes=" ".join(str(s) for s in config["scaling_sizes"]),
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
-        "../{input} {params.sizes} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.bin} {params.sizes} > {params.out}'"
 
 
 rule tip_cages:
@@ -223,14 +252,16 @@ rule tip_cages:
     output:
         R + "/tip-cages.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         traj=config["trajectory"],
         reps=config["cage_reps"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
         "{params.tbuild}/tests/bench_cages {params.traj} 1 {params.reps} "
-        "> ../{output}'"
+        "> {params.out}'"
 
 
 rule base_cages:
@@ -239,12 +270,15 @@ rule base_cages:
     output:
         R + "/base-cages.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        bin=lambda wc, input: ABS(input[0]),
         hq=lambda wc: hq(1),
         traj=config["trajectory"],
         reps=config["cage_reps"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
-        "../{input} {params.traj} 1 {params.reps} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.bin} {params.traj} 1 {params.reps} > {params.out}'"
 
 
 rule tip_overhead:
@@ -253,12 +287,14 @@ rule tip_overhead:
     output:
         R + "/tip-overhead.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         sizes=" ".join(str(s) for s in config["overhead_sizes"]),
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
-        "{params.tbuild}/tests/bench_overhead {params.sizes} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_overhead {params.sizes} > {params.out}'"
 
 
 rule tip_strong:
@@ -267,12 +303,14 @@ rule tip_strong:
     output:
         R + "/tip-strong-t{threads}.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(int(wc.threads)),
         tbuild=TIP_BUILD,
         atoms=config["strong_atoms"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS={wildcards.threads} "
-        "{params.tbuild}/tests/bench_strong {params.atoms} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS={wildcards.threads} "
+        "{params.tbuild}/tests/bench_strong {params.atoms} > {params.out}'"
 
 
 rule tip_pipeline:
@@ -281,12 +319,14 @@ rule tip_pipeline:
     output:
         R + "/tip-pipeline.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         sizes=" ".join(str(s) for s in config["scaling_sizes"]),
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
-        "{params.tbuild}/tests/bench_pipeline {params.sizes} > ../{output}'"
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_pipeline {params.sizes} > {params.out}'"
 
 
 rule tip_incremental:
@@ -295,14 +335,16 @@ rule tip_incremental:
     output:
         R + "/tip-incremental-{n}.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         frames=config["incremental_frames"],
         sites=config["incremental_sites"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
         "{params.tbuild}/tests/bench_rings_incremental {wildcards.n} "
-        "{params.frames} {params.sites} > ../{output}'"
+        "{params.frames} {params.sites} > {params.out}'"
 
 
 rule tip_stages_cubic:
@@ -311,14 +353,16 @@ rule tip_stages_cubic:
     output:
         R + "/tip-stages-cubic.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         traj=config["trajectory"],
         reps=config["cage_reps"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
         "{params.tbuild}/tests/bench_stages {params.traj} 1 1 {params.reps} "
-        "> ../{output}'"
+        "> {params.out}'"
 
 
 rule tip_stages_nucleation:
@@ -345,14 +389,16 @@ rule trajectory_incremental:
     output:
         R + "/trajectory-incremental.txt",
     params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
         hq=lambda wc: hq(1),
         tbuild=TIP_BUILD,
         traj=config["trajectory"],
         frames=config["trajectory_frames"],
     shell:
-        "{params.hq} bash -c 'cd input && OMP_NUM_THREADS=1 "
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
         "{params.tbuild}/tests/bench_trajectory_incremental {params.traj} "
-        "{params.frames} > ../{output}'"
+        "{params.frames} > {params.out}'"
 
 
 rule ql_compare_dseams:
@@ -376,20 +422,21 @@ rule ql_compare_python:
     params:
         hq=lambda wc: hq(1),
         site=PYTHON_SITE,
+        script=os.path.join(CORE, "scripts", "compare_ql_literature.py"),
     shell:
         "{params.hq} bash -c "
         "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
-        "python scripts/compare_ql_literature.py > {output}'"
+        "python {params.script} > {output}'"
 
 
 rule figshare_fetch:
     # Network access; on clusters whose compute nodes are offline this
-    # runs during `repro/elja_submit.sh prep` and verifies here as a no-op
+    # runs during `scripts/elja_submit.sh prep` and verifies here as a no-op
     output:
         expand(FIGSHARE_DIR + "/{f}", f=FIGSHARE_FILES),
     shell:
-        "python repro/scripts/figshare_demos.py fetch " + FIGSHARE_DIR
+        "python scripts/figshare_demos.py fetch " + FIGSHARE_DIR
 
 
 rule build_yoda:
@@ -408,7 +455,7 @@ rule build_yoda:
         r"""
         test -d {params.yoda}/lua || {{ echo "locked yodaStruct source missing: {params.yoda}" >&2; exit 1; }}
         meson setup {params.bdir} {params.yoda} --buildtype=release --wrap-mode=nodownload \
-          > repro/results/yoda-setup.log 2>&1
+          > results/yoda-setup.log 2>&1
         {params.hq} meson compile -C {params.bdir}
         """
 
@@ -432,9 +479,7 @@ rule workflow_parity:
         python=R + "/py-install.done",
         yoda=R + "/yoda-test.log",
         source=R + "/source-manifest.json",
-        water="input/traj/exampleTraj.lammpstrj",
-        ice="input/traj/mW_cubic.lammpstrj",
-        ions="repro/fixtures/tiny-ions.lammpstrj",
+        ions="data/fixtures/tiny-ions.lammpstrj",
     output:
         R + "/workflow-parity.json",
     params:
@@ -443,12 +488,14 @@ rule workflow_parity:
         yoda=YODA_ROOT,
         yoda_build=YODA_BUILD,
         site=PYTHON_SITE,
+        water=os.path.join(CORE_INPUT, "traj", "exampleTraj.lammpstrj"),
+        ice=os.path.join(CORE_INPUT, "traj", "mW_cubic.lammpstrj"),
     shell:
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
-        "python repro/scripts/workflow_parity.py "
+        "python scripts/workflow_parity.py "
         "--seams {params.cli} --lua {params.lua} "
         "--lua-source {params.yoda} --lua-build {params.yoda_build} "
-        "--water {input.water} --ice {input.ice} --ions {input.ions} "
+        "--water {params.water} --ice {params.ice} --ions {input.ions} "
         "--output {output}"
 
 
@@ -466,7 +513,7 @@ rule figshare_demos:
         bdir=YODA_BUILD,
     shell:
         "{params.hq} bash -c 'OMP_NUM_THREADS=4 "
-        "python repro/scripts/figshare_demos.py demos "
+        "python scripts/figshare_demos.py demos "
         "{params.yoda} {params.bdir} " + FIGSHARE_DIR + " "
         + R + "/figshare-demos'"
 
@@ -481,13 +528,13 @@ NOTEBOOKS = [
 
 NOTEBOOK_INPUTS = dict(
     py=R + "/py-install.done",
-    runner="repro/scripts/execute_notebook.sh",
+    runner="scripts/execute_notebook.sh",
     traj=expand(FIGSHARE_DIR + "/{f}", f=FIGSHARE_FILES),
 )
 
 
 rule figshare_notebook:
-    # Percent-format sources under repro/notebooks/; jupytext converts
+    # Percent-format sources under notebooks/; jupytext converts
     # and papermill executes. Execution is the test (each notebook
     # asserts its own headline numbers) and the executed .ipynb is the
     # artifact. 02_nucleation_cages is a separate rule because it also
@@ -495,7 +542,7 @@ rule figshare_notebook:
     # outputs before the job, so a later test -s stamp cannot see a
     # side-effect file).
     input:
-        nb="repro/notebooks/{nb}.py",
+        nb="notebooks/{nb}.py",
         **NOTEBOOK_INPUTS,
     output:
         R + "/notebooks/{nb}.ipynb",
@@ -508,12 +555,12 @@ rule figshare_notebook:
         "{params.hq} bash -c "
         "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=2 "
-        "repro/scripts/execute_notebook.sh {input.nb} {output}'"
+        "scripts/execute_notebook.sh {input.nb} {output}'"
 
 
 rule figshare_nucleation_notebook:
     input:
-        nb="repro/notebooks/02_nucleation_cages.py",
+        nb="notebooks/02_nucleation_cages.py",
         **NOTEBOOK_INPUTS,
     output:
         ipynb=R + "/notebooks/02_nucleation_cages.ipynb",
@@ -525,7 +572,82 @@ rule figshare_nucleation_notebook:
         "{params.hq} bash -c "
         "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=2 "
-        "repro/scripts/execute_notebook.sh {input.nb} {output.ipynb}'"
+        "scripts/execute_notebook.sh {input.nb} {output.ipynb}'"
+
+
+rule public_ice_fetch:
+    # Materials Cloud 10.24435/materialscloud:2020.0005/v1; same offline
+    # caveat as figshare_fetch
+    output:
+        PUBLIC_ICE_DIR + "/SOURCE.json",
+    shell:
+        "python scripts/public_ice.py fetch " + PUBLIC_ICE_DIR
+
+
+# --- Applications: per-frame comparison with CHILL+ on public trajectories
+
+
+rule walk_figshare:
+    # CHILL+ counts and largest cluster, cage membership on the cutoff graph,
+    # seeded assignment; every frame of the 148-frame mW nucleation deposit
+    input:
+        gate=R + "/tip-test.log",
+        traj=FIGSHARE_DIR + "/nucleation.lammpstrj",
+    output:
+        R + "/walks/figshare-nucleation.txt",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/walk_compare {input.traj} 0 1 1 > {output}'"
+
+
+rule walk_public:
+    input:
+        gate=R + "/tip-test.log",
+        source=PUBLIC_ICE_DIR + "/SOURCE.json",
+    output:
+        R + "/walks/{dump}.txt",
+    wildcard_constraints:
+        dump="niu-.+",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        traj=lambda wc: os.path.join(PUBLIC_ICE_DIR, PUBLIC_DUMPS[wc.dump][0]),
+        otype=lambda wc: PUBLIC_DUMPS[wc.dump][1],
+        stride=WALK_STRIDE,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/walk_compare {params.traj} 0 {params.otype} "
+        "{params.stride} > {output}'"
+
+
+# --- Comparison with existing tools on labelled lattices
+
+
+rule sota_sweep:
+    # Per-molecule accuracy of every runnable classifier on jittered Ic and
+    # Ih lattices and a disordered null, repeated over seeds, with the wall
+    # time of each method on the same frames
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/sota_compare.txt",
+    params:
+        hq=lambda wc: hq(4),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+        seeds=SWEEP_SEEDS,
+        sigmas=" ".join(str(s) for s in SWEEP_SIGMAS),
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/sota_compare.py --seeds {params.seeds} "
+        "--sigmas {params.sigmas} > {output}'"
 
 
 rule aggregate:
@@ -556,9 +678,12 @@ rule aggregate:
         ),
         stages_cubic=R + "/tip-stages-cubic.txt",
         stages_nucleation=R + "/tip-stages-nucleation.txt",
+        walks=[R + "/walks/figshare-nucleation.txt"]
+        + expand(R + "/walks/{dump}.txt", dump=list(PUBLIC_DUMPS)),
+        sota=R + "/sota_compare.txt",
     output:
         R + "/paper_manifest.json",
     params:
         results=R,
     shell:
-        "python repro/scripts/aggregate.py {params.results} > {output}"
+        "python scripts/aggregate.py {params.results} > {output}"
