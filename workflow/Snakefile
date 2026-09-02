@@ -722,6 +722,27 @@ rule polymorph_library:
         "python scripts/polymorph_library.py --hops 3 --fallback-hops 2 --library-out {output.library} "
         "> {output.match}'"
 
+rule hydrate_occupancy:
+    # Methane occupancy of the GenIce sI and sII hydrates: cages by ring-size
+    # signature on the water graph, every guest placed at the nearest periodic
+    # cage centroid. Needs the engine's signature enumerator and guest
+    # occupancy (pydseamslib past 2.8.1).
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/hydrate_occupancy.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/hydrate_occupancy.py > {output}'"
+
 rule aggregate:
     input:
         conditions=R + "/conditions.txt",

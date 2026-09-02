@@ -54,6 +54,10 @@ under =profiles/=, results, and an archive tarball for deposition.
   behind it (=--fallback-hops 2=): a molecule the three-hop library
   does not name falls back to the two-hop one, and the output records
   the depth that named each molecule.
+- Methane occupancy of the GenIce sI and sII hydrates comes from rule
+  =hydrate_occupancy= (script =scripts/hydrate_occupancy.py=): cages
+  by ring-size signature on the water graph, every methane placed at
+  the nearest periodic cage centroid.
 - An mW seeding campaign lives on =workflow/production.smk= with the
   matrix in =config/production.yaml=. Spherical ice Ic seeds sit in
   supercooled liquid. LAMMPS logs the PLUMED action =DSEAMS_CAGES= and
