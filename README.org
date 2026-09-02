@@ -6,7 +6,7 @@ Snakemake + HyperQueue reproducibility package for the d-SEAMS 2.0 paper
 ("d-SEAMS 2.0: Incremental ring and cage algorithms for ice structure
 analysis", Computer Physics Communications, submitted). Every number and
 figure in the paper's benchmark and application sections comes out of this
-workflow, or out of the result files it committed under =results/reference/=.
+workflow, or out of the campaign files under =results/reference/=.
 
 This package follows the shape of the other repro entries in this
 collection (=nebmmf_repro=, =rsx_bmc_repro=): a pixi environment,
@@ -15,36 +15,55 @@ under =profiles/=, results, and an archive tarball for deposition.
 
 * What this reproduces
 
-- The engine at the locked revision against its pre-2.0 baseline: neighbour
+- Locked-revision engine timings against the pre-2.0 baseline: neighbour
   list scaling, ring and cage pipeline, vesin overhead, thread sweep,
   hop-bound incremental updater, trajectory referee (nonzero exit on any
   ring or affiliation inequality).
-- The five figshare deposits of the 2020 paper (bulk Ic, homogeneous
-  nucleation, ice nanotube prisms, confined monolayer rings, in-plane RDF),
-  through =require("dseams")= and through =pydseams= notebooks that assert
-  their headline numbers.
-- Per-frame CHILL+ and cage-membership labels with their largest clusters on
-  every public nucleation trajectory of Niu, Yang and Parrinello (Materials
-  Cloud 2020.0005) and on the figshare mW nucleation deposit
+- Five figshare deposits of the 2020 paper (bulk Ic, homogeneous
+  nucleation, ice nanotube prisms, confined monolayer rings, in-plane
+  radial distribution function (RDF)), through =require("dseams")= and
+  through =pydseams= notebooks that assert the published numbers of each
+  deposit.
+- Per-frame four-neighbour ice classifier (CHILL), written =CHILL+=, and
+  cage-membership labels with their largest clusters on every public
+  nucleation trajectory of Niu, Yang and Parrinello (Materials Cloud
+  2020.0005) and on the figshare mW nucleation deposit
   (=tests/walk_compare= in the engine).
-- The per-molecule accuracy sweep against CHILL+, freud (Steinhardt and
-  Lechner-Dellago), OVITO PTM and the twist order parameter on labelled Ic
-  and Ih lattices under Gaussian jitter and on a disordered null, with seeds
-  and wall time per method.
-- The specificity atlas over the GenIce polymorph library (rule
-  =genice_atlas=): ice I, dense polymorphs, empty hydrate frameworks, porous
-  ices and continuous random networks, ideal and under positional noise,
-  labelled by the seeded cages, the cutoff cages and CHILL+.
-- Ice labels of the water around substitutional Na and Cl in ice Ih, Ic and
-  the sI framework (rule =ion_atlas=), ions removed from the graph, from one
-  pair to sixteen per box.
-- A topology key library over the GenIce lattices
-  (=scripts/polymorph_library.py=): rooted three-hop keys on the mutual
-  four-nearest graph, read back against the jittered ice I lattices and the
-  displaced atlas, so every molecule is named by the polymorph whose
-  environment it matches.
+- Rule =sota_sweep= (script =scripts/sota_compare.py=) runs the
+  per-molecule accuracy sweep against CHILL+, freud (Steinhardt and
+  Lechner-Dellago), Open Visualization Tool (OVITO) polyhedral template
+  matching (PTM) and the twist order parameter. Labelled Ic and Ih
+  lattices under Gaussian jitter, a dense disordered null, and the
+  liquid null of the sweep all go through the same methods. The liquid
+  null is the 512-molecule mW liquid at 215 K in
+  =data/mW_liquid_T215_512.data=, reported as =system=liquid= in
+  =sota_compare.txt=. Seeds and wall time go with each method.
+- GenIce specificity comes from rule =genice_atlas= (script
+  =scripts/genice_atlas.py=). Ice I, dense polymorphs, empty hydrate
+  frameworks, porous ices and continuous random networks take labels at
+  rest and under positional noise from the seeded cages, the cutoff
+  cages and CHILL+.
+- Substitutional Na and Cl in ice Ih, Ic and the sI framework go
+  through rule =ion_atlas= (script =scripts/ion_atlas.py=). The ions
+  stay off the graph. Pair counts run from one to sixteen per box.
+- Three-hop topology keys come from rule =polymorph_library= (script
+  =scripts/polymorph_library.py=). The library stores rooted keys on
+  the mutual four-nearest graph. A read-back against the jittered ice I
+  lattices and the displaced atlas names each molecule by the polymorph
+  whose environment it matches.
+- An mW seeding campaign lives on =workflow/production.smk= with the
+  matrix in =config/production.yaml=. Spherical ice Ic seeds sit in
+  supercooled liquid. LAMMPS logs the PLUMED action =DSEAMS_CAGES= and
+  stops on a committor basin. Comparison is the topological nucleus
+  against the CHILL+ nucleus. =scripts/seed_ice.py= cuts each seed.
+  =scripts/committor.py= reads the =ICE= files.
+- Ice/brine direct coexistence uses the same production directed
+  acyclic graph (DAG). A GenIce ice Ih slab, TIP4P/2005 water and
+  Madrid 2019 NaCl run at 230 K, 240 K and 245 K, with the ions off the
+  graph. =scripts/brine_system.py= builds the box.
+  =scripts/brine_summary.py= reads the =BRINE= files.
 - Cross-frontend parity of the stable workflows (CLI, Python, Lua) and a
-  source manifest of every locked component.
+  source inventory of every locked component.
 
 * Sources
 
@@ -57,19 +76,44 @@ engine; =manifest= records what ran.
 
 * Quick start (exclusive Slurm node)
 
+=scripts/elja_submit.sh= is the Slurm driver for the measurement DAG in
+=workflow/Snakefile=. =prep= materializes the locked sources and the
+public data on the login node. =submit= queues one exclusive job.
+
 #+begin_src bash
 cd dseams2_repro
-scripts/elja_submit.sh prep      # login node: env, sources, wraps, data, hq
-scripts/elja_submit.sh submit    # one exclusive job; hq server + snakemake
+scripts/elja_submit.sh prep
+scripts/elja_submit.sh submit
 #+end_src
 
 =prep= needs the network: it solves the pixi environment, materializes the
-locked sources, downloads the Meson wraps for both engine trees, fetches the
-figshare deposits (MD5-verified) and the Materials Cloud archives
-(MD5-verified), and fetches the HyperQueue binary. =submit= queues one
-exclusive job whose body runs the DAG through HyperQueue. Results land in
-=results/=, with =results/paper_manifest.json= as the single parsed object
-and =results/conditions.txt= recording node, load and revisions.
+locked sources, downloads the Meson wraps for both engine trees, fetches
+the figshare deposits (checksum-verified) and the Materials Cloud archives
+(checksum-verified), and fetches the HyperQueue binary. =submit= queues one
+exclusive job whose body runs the graph through HyperQueue. Campaign files
+land in =results/=, with =results/paper_manifest.json= as the single parsed
+object and =results/conditions.txt= recording the node and the load.
+
+* Production seeding and brine
+
+=scripts/elja_production.sh= is the Slurm driver for
+=workflow/production.smk=. The matrix lives in =config/production.yaml=.
+A smoke matrix lives in =config/production-smoke.yaml= and does not
+produce paper numbers. LAMMPS and PLUMED inputs live in =templates/=
+(=in.seed.lammps=, =in.brine.lammps=, =plumed_seed.dat=,
+=plumed_brine.dat=).
+
+=prep= installs the production pixi environment and builds the PLUMED
+module (rule =build_module=). =submit= queues one exclusive job per
+seeding temperature. =submit-brine= queues one exclusive job per brine
+temperature. Seeding outputs land in =results/production/=. Brine
+outputs land in =results/brine/=.
+
+#+begin_src bash
+scripts/elja_production.sh prep
+scripts/elja_production.sh submit
+scripts/elja_production.sh submit-brine
+#+end_src
 
 * Anywhere else
 
@@ -79,7 +123,7 @@ pixi run smoke         # small matrix (config/smoke.yaml); not paper numbers
 pixi run run-local     # full matrix without HyperQueue
 #+end_src
 
-Timings on a shared or loaded machine are not comparable to the paper's
+Timings on a shared or loaded machine do not compare to the paper's
 exclusive-node numbers; the conditions file records the load so a reader
 can tell.
 
@@ -87,13 +131,17 @@ can tell.
 
 | Path | What |
 |------+------|
-| =workflow/Snakefile= | the DAG |
+| =workflow/Snakefile= | measurement DAG (timings, walks, sweep, atlases, library) |
+| =workflow/production.smk= | seeding and brine DAG |
 | =config/config.yaml=, =config/smoke.yaml= | sizes, repetitions, sigma grid, seeds, stride |
+| =config/production.yaml=, =config/production-smoke.yaml= | seeding and brine matrix |
 | =config/ecosystem-lock.json= | immutable source revisions |
-| =scripts/= | source lock, fetchers, sweep, parity, aggregation, cluster drivers |
+| =scripts/= | source lock, fetchers, sweep, atlases, library, parity, aggregation, cluster drivers (=elja_submit.sh=, =elja_production.sh=) |
+| =templates/= | LAMMPS and PLUMED inputs for seeding and brine |
 | =notebooks/= | percent-format =pydseams= notebooks (executed by the DAG) |
 | =lua/= | =require("dseams")= demos |
-| =data/fixtures/= | tiny fixtures for parity checks |
+| =data/fixtures/= | parity fixtures |
+| =data/mW_liquid_T215_512.data= | liquid null of the sweep |
 | =results/reference/= | committed campaign outputs the paper reads |
 | =zenodo/= | deposition payload staging (=scripts/stage_zenodo.sh=) |
 
@@ -101,20 +149,27 @@ can tell.
 
 | directory | node | what |
 |-----------+------+------|
-| =results/reference/elja-1798666= | AMD EPYC 7713, exclusive =128cpu_256mem=, Slurm 1798666 | full DAG at seams-core e785640: timings, walks (every frame), five-seed sweep, notebooks, demos, parity |
+| =results/reference/elja-1798666= | Advanced Micro Devices (AMD) EPYC server processor (EPYC) 7713, exclusive =128cpu_256mem=, Slurm 1798666 | full DAG at seams-core e785640: timings, walks (every frame), five-seed sweep, notebooks, demos, parity |
 | =results/reference/terra-2026-09-01= | shared workstation | walks and sweep at the same sources; label tables identical to the Elja run line for line |
-| =results/reference/terra-2026-09-02= | shared workstation | five-seed sweep with the vacancy-rule completion (engine ba0634f) and the GenIce atlas |
-| =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript's main tables read |
-| =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | terra | the stride-ten walks, the single-seed sweep and the residual diagnosis that preceded the campaign |
+| =results/reference/terra-2026-09-02= | shared workstation | five-seed sweep with the vacancy-rule completion (engine ba0634f), the liquid null, the GenIce atlas, the ion atlas, and the three-hop polymorph library |
+| =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript tables read |
+| =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | shared workstation | the stride-ten walks, the single-seed sweep and the residual diagnosis |
+| =results/production/=, =results/brine/= | exclusive Slurm node, one job per temperature | outputs of =scripts/elja_production.sh submit= and =submit-brine= |
 
 * Archive for Zenodo
 
-After a full run exits 0:
+=scripts/stage_zenodo.sh= copies the parsed inventory, conditions,
+benches and identity files into =zenodo/payload/=. After a full
+measurement run exits 0:
 
 #+begin_src bash
 pixi run stage-zenodo
-pixi run package-archive     # dseams2_repro_archive_YYYYMMDD.tar.xz + sha256
+pixi run package-archive
 #+end_src
 
-The record is the measurement campaign and the software at a tag. The
-manuscript, cover letters and referee correspondence are not part of it.
+=pixi run package-archive= writes =dseams2_repro_archive_YYYYMMDD.tar.xz=
+and its sha256. The archive carries =results/reference/= (atlas, ion
+atlas, liquid-null sweep, polymorph library) and, when those directories
+exist, =results/production/= and =results/brine/=. The record is the
+measurement campaign and the software at a tag. The manuscript, cover
+letters and referee correspondence stay out of the payload.

@@ -1,34 +1,34 @@
 # Reproducibility deposit (Zenodo)
 
-The deposit is the measurement campaign, not the manuscript. Do not put
-`rg_main.org`, the CPC PDF, the cover letter, or the highlights in this
-payload. Pin the software to a release tag, not a commit.
+The deposit records the measurement campaign. Keep `rg_main.org`, the
+Computer Physics Communications (CPC) PDF, the cover letter, and the
+highlights out of this payload. Pin the software to a release tag.
 
 ## Payload
 
-| Path | What |
-|---|---|
-| `paper_manifest.json` | parsed timings, identity gates, source graph, parity evidence, conditions |
-| `source-manifest.json` | exact revisions used by the campaign |
-| `workflow-parity.json` | executable CLI/Python/Lua agreement report |
-| `conditions.txt` | host, job, SHAs, CPU, load |
-| `tip-*.txt`, `base-*.txt` | raw bench stdout |
-| `tip-incremental-*.txt` | hop-bound updater vs rebuild at each *n* |
-| `tip-pipeline.txt` | rings, k-NN, affiliation vs *n* |
-| `tip-stages-*.txt` | per-stage times on cubic and nucleation frames |
-| `config.yaml` | sizes, reps, baseline SHA |
-| `ecosystem-lock.json` | immutable frontend and linkcell source inputs |
-| `Snakefile` | the DAG that produced the files |
-| `figshare-demos/` | the five v1 deposits through `require("dseams")` |
-| `figshare-incremental.json` | per-frame incremental rings and seeded labels |
+`paper_manifest.json` records parsed timings, identity checks, the
+source graph, parity evidence and conditions.
+`source-manifest.json` records the exact revisions used by the
+campaign. `workflow-parity.json` is the CLI/Python/Lua agreement
+report. `conditions.txt` records host, job, revisions, CPU and load.
+`tip-*.txt` and `base-*.txt` are raw bench stdout.
+`tip-incremental-*.txt` compares the hop-bound updater to a rebuild.
+`tip-pipeline.txt` and `tip-stages-*.txt` break the ring, cage and
+affiliation times. `config.yaml` and `ecosystem-lock.json` pin sizes
+and source revisions. `Snakefile` is the directed acyclic graph (DAG)
+that produced the files. `figshare-demos/` and
+`figshare-incremental.json` cover the five v1 deposits.
 
-Fill `payload/` from `results/` after `scripts/elja_submit.sh run`
-exits 0. The driver is `scripts/stage_zenodo.sh`. Pin each software record
-to the paper release tag, verify that each locked revision belongs to that
-tag, and use the tags rather than commits as the deposit provenance.
+`scripts/stage_zenodo.sh` fills `payload/` from `results/` after
+`scripts/elja_submit.sh run` exits 0. Pin each software record to the
+paper release tag. Check that each locked revision belongs to that tag.
 
-## What this is not
+The campaign archive tarball also carries `results/reference/` (GenIce
+atlas, ion atlas, liquid-null sweep, polymorph library) and, when those
+directories exist, `results/production/` and `results/brine/` from
+`scripts/elja_production.sh`. Those campaign directories travel with
+the payload at the same release tag.
 
-A CPC-library software tarball. That is the tagged release of
-seams-core / PydSEAMSlib / yodaStruct. This record is the exclusive-node
-campaign that the paper's timing figures read.
+The exclusive-node campaign that the paper's timing figures read is
+this record. The tagged release of seams-core / PydSEAMSlib /
+yodaStruct is the CPC-library software tarball.
