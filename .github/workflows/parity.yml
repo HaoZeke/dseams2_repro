@@ -1,0 +1,75 @@
+name: Workflow parity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: prefix-dev/setup-pixi@f00437f565399d418b0acc85936d12c1fb668347 # v0.10.1
+        with:
+          cache-key: pixi-dseams2-repro-
+
+      - name: Check tooling
+        run: |
+          pixi run test
+          pixi run dry-run
+
+      - name: Materialize the locked source graph
+        run: |
+          pixi run -- python scripts/ecosystem_sources.py fetch --root sources
+          pixi run -- python scripts/ecosystem_sources.py wire --root sources
+          (cd sources/seams-core && pixi run --manifest-path "$GITHUB_WORKSPACE/pixi.toml" -- meson subprojects download)
+
+      - name: Build and test the engine
+        run: |
+          pixi run -- meson setup build-repro sources/seams-core --buildtype=release \
+            -Dwith_python=false -Dwith_tests=true --wrap-mode=nodownload
+          pixi run -- meson compile -C build-repro
+          pixi run -- meson test -C build-repro --print-errorlogs
+
+      - name: Build the Python binding from source
+        run: |
+          pixi run -- python -m pip install --no-build-isolation \
+            --no-deps --target python-site sources/PydSEAMSlib
+          PYTHONPATH=python-site pixi run -- python -c 'import pydseams; print(pydseams.__version__)'
+
+      - name: Build and test the Lua binding from source
+        run: |
+          pixi run -- meson setup build-yoda sources/yodaStruct --buildtype=release --wrap-mode=nodownload
+          pixi run -- meson compile -C build-yoda
+          pixi run -- meson test -C build-yoda --print-errorlogs
+
+      - name: Compare stable workflows
+        run: |
+          mkdir -p results
+          PYTHONPATH=python-site pixi run -- python scripts/workflow_parity.py \
+            --seams build-repro/seams \
+            --lua "$GITHUB_WORKSPACE/.pixi/envs/default/bin/lua" \
+            --lua-source sources/yodaStruct --lua-build build-yoda \
+            --water sources/seams-core/input/traj/exampleTraj.lammpstrj \
+            --ice sources/seams-core/input/traj/mW_cubic.lammpstrj \
+            --ions data/fixtures/tiny-ions.lammpstrj \
+            --output results/workflow-parity.json
+          pixi run -- python scripts/ecosystem_sources.py manifest \
+            --root sources --output results/source-manifest.json
+
+      - name: Upload parity manifests
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: workflow-parity
+          path: |
+            results/workflow-parity.json
+            results/source-manifest.json
+          if-no-files-found: warn
