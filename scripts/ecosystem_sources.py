@@ -119,10 +119,8 @@ def fetch(lock: dict[str, Any], root: Path) -> None:
                 )
             configured = _git("remote", "get-url", "origin", cwd=destination)
             if not same_repository(configured, component["repository"]):
-                raise RuntimeError(
-                    f"origin mismatch for {name}: {configured!r} != "
-                    f"{component['repository']!r}"
-                )
+                # The cache follows the lock, including a move to a fork
+                _git("remote", "set-url", "origin", component["repository"], cwd=destination)
         else:
             _git(
                 "clone",

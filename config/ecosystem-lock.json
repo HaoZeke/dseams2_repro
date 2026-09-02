@@ -23,8 +23,8 @@
     },
     "yodastruct": {
       "directory": "yodaStruct",
-      "repository": "https://github.com/d-SEAMS/yodaStruct.git",
-      "revision": "d350dd170a2162a93e441aad984bac9ea3a8202a"
+      "repository": "https://github.com/HaoZeke/yodaStruct.git",
+      "revision": "88f2dbf70b7a57e6d5033e7d91276ce0c11462d0"
     }
   }
 }
