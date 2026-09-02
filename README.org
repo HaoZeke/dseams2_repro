@@ -45,7 +45,7 @@ under =profiles/=, results, and an archive tarball for deposition.
   cages and CHILL+.
 - Substitutional Na and Cl in ice Ih, Ic and the sI framework go
   through rule =ion_atlas= (script =scripts/ion_atlas.py=). The ions
-  stay off the graph. Pair counts run from one to sixteen per box.
+  stay off the graph. Pair counts run over 0, 1, 2, 4, 8 and 16 per box.
 - Three-hop topology keys come from rule =polymorph_library= (script
   =scripts/polymorph_library.py=). The library stores rooted keys on
   the mutual four-nearest graph. A read-back against the jittered ice I
@@ -150,8 +150,8 @@ can tell.
 | directory | node | what |
 |-----------+------+------|
 | =results/reference/elja-1798666= | Advanced Micro Devices (AMD) EPYC server processor (EPYC) 7713, exclusive =128cpu_256mem=, Slurm 1798666 | full DAG at seams-core e785640: timings, walks (every frame), five-seed sweep, notebooks, demos, parity |
-| =results/reference/terra-2026-09-01= | shared workstation | walks and sweep at the same sources; label tables identical to the Elja run line for line |
-| =results/reference/terra-2026-09-02= | shared workstation | five-seed sweep with the vacancy-rule completion (engine ba0634f), the liquid null, the GenIce atlas, the ion atlas, and the three-hop polymorph library |
+| =results/reference/terra-2026-09-01= | shared workstation | walks match =elja-1798666=; five-seed sweep |
+| =results/reference/terra-2026-09-02= | shared workstation | one-seed sweep at sigmas 0.00 and 0.30, the liquid null, the GenIce atlas, the ion atlas, and the three-hop polymorph library |
 | =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript tables read |
 | =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | shared workstation | the stride-ten walks, the single-seed sweep and the residual diagnosis |
 | =results/production/=, =results/brine/= | exclusive Slurm node, one job per temperature | outputs of =scripts/elja_production.sh submit= and =submit-brine= |
