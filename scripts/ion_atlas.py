@@ -37,9 +37,10 @@ from sota_compare import (  # noqa: E402
 
 HOSTS = {"Ih": "1h", "Ic": "1c", "sI": "CS1"}
 MIN_EDGE = 16.0
-# Substitution sites are unit-cell indices; GenIce refuses a site whose
-# hydrogen-bond pattern cannot host the ion, so candidates are tried in
-# order until the requested count is reached
+# Substitution sites are unit-cell indices, replicated with the cell;
+# GenIce refuses a site whose hydrogen-bond pattern cannot host the ion at
+# the chosen replication, so candidates are tried in order at that
+# replication until the requested count is reached
 CANDIDATES = list(range(0, 40))
 
 
@@ -75,14 +76,14 @@ def choose_sites(exe, kind, rep, n_pairs, seed):
     for idx in CANDIDATES:
         if len(anions) < n_pairs:
             try:
-                run_genice(exe, kind, (1, 1, 1), anions + [idx], cations, seed)
+                run_genice(exe, kind, rep, anions + [idx], cations, seed)
                 anions.append(idx)
                 continue
             except RuntimeError:
                 pass
         if len(cations) < n_pairs and idx not in anions:
             try:
-                run_genice(exe, kind, (1, 1, 1), anions, cations + [idx], seed)
+                run_genice(exe, kind, rep, anions, cations + [idx], seed)
                 cations.append(idx)
             except RuntimeError:
                 pass
