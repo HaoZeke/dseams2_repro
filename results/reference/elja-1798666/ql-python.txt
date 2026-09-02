@@ -1,0 +1,26 @@
+python 3.12.14 | packaged by conda-forge | (main, Sep  1 2026, 15:55:32) [GCC 14.4.0]
+pkg freud present=True version=3.5.0
+pkg pyscal3 present=True version=?
+pkg dscribe present=False version=?
+pkg ovito present=True version=import_failed:libxkbcommon.so.0: cannot open shared object file: No such file or directory
+pkg featomic present=False version=?
+tool=freud lattice=fcc n=108 L=12.0 cut_ql=3.2
+  ql4=0.190941
+  ql6=0.574524
+  ql8=0.403915
+tool=pyscal3 lattice=fcc n=108 L=12.0 cut_ql=3.2
+  ql4=0.190941
+  ql6=0.574524
+  ql8=0.403915
+tool=dscribe lattice=fcc status=MISSING
+tool=ptm lattice=fcc n=108 L=12.0 status=MISSING
+tool=freud lattice=bcc n=54 L=12.0 cut_ql=4.0
+  ql4=0.509175
+  ql6=0.628539
+  ql8=0.212762
+tool=pyscal3 lattice=bcc n=54 L=12.0 cut_ql=4.0
+  ql4=0.509175
+  ql6=0.628539
+  ql8=0.212762
+tool=dscribe lattice=bcc status=MISSING
+tool=ptm lattice=bcc n=54 L=12.0 status=MISSING

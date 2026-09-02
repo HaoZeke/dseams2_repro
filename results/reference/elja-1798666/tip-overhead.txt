@@ -1,0 +1,11 @@
+nAtoms    vesin/ms      neighListO/ms overhead    Matoms/s        pairs/atom    
+--------------------------------------------------------------------------------
+4096      4.401         6.528         1.48        0.63            4.9           
+16000     19.553        32.488        1.66        0.49            5.3           
+
+Spherical harmonics, 2000000 directions (l=6)
+--------------------------------------------------------------------------------
+Cartesian -> angles only          165.18 ms
+Y_6m from angles only             267.95 ms
+combined (current path)           348.72 ms
+conversion share                  47.4 %

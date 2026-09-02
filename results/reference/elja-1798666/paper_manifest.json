@@ -1,0 +1,6319 @@
+{
+  "base": {
+    "cages": {
+      "atoms": 4096.0,
+      "findDDC/ms": 5107.98,
+      "findHC/ms": 4926.91,
+      "nCages": 1955.0,
+      "nDDCrings": 8192.0,
+      "nHCrings": 0.0,
+      "ringNetwork/ms": 147.777,
+      "rings": 8192.0,
+      "six-rings": 8192.0
+    },
+    "scaling": {
+      "1000": {
+        "byIndex_ms": 10.222,
+        "getCorrelPlus_ms": 4.917,
+        "neighListO_ms": 2.328,
+        "ringNetwork_ms": 160.41
+      },
+      "2000": {
+        "byIndex_ms": 42.414,
+        "getCorrelPlus_ms": 10.217,
+        "neighListO_ms": 7.221,
+        "ringNetwork_ms": 516.197
+      },
+      "4000": {
+        "byIndex_ms": 173.405,
+        "getCorrelPlus_ms": 18.886,
+        "neighListO_ms": 21.509,
+        "ringNetwork_ms": 628.901
+      },
+      "8000": {
+        "byIndex_ms": 552.157,
+        "getCorrelPlus_ms": 29.85,
+        "neighListO_ms": 58.768,
+        "ringNetwork_ms": 1026.559
+      },
+      "16000": {
+        "byIndex_ms": 2207.007,
+        "getCorrelPlus_ms": 69.911,
+        "neighListO_ms": 224.642,
+        "ringNetwork_ms": 3936.789
+      },
+      "32000": {
+        "byIndex_ms": 8689.63,
+        "getCorrelPlus_ms": 128.604,
+        "neighListO_ms": 862.833,
+        "ringNetwork_ms": 5111.481
+      }
+    }
+  },
+  "conditions": {
+    "Core(s) per socket": "64",
+    "Model name": "AMD EPYC 7713 64-Core Processor",
+    "Socket(s)": "2",
+    "Thread(s) per core": "2",
+    "base_sha": "1c8efa382c4ae88ebc68e40a991260c4d57edbd5",
+    "hostname": "amd-compute-2",
+    "hq": "hyperqueue v0.19.0",
+    "jobid": "1798666",
+    "loadavg_at_start": "0.24",
+    "partition": "128cpu_256mem",
+    "repro_sha": "unknown",
+    "tip_sha": "e785640850774b56bd540c4890869b13fa259523"
+  },
+  "figshare": {
+    "demos": {
+      "bulkTopologicalCriterion": {
+        "doi": "10.6084/m9.figshare.11448702.v1",
+        "frame": 148,
+        "frames_in_deposit": 148,
+        "returncode": 0,
+        "seconds": 0.47,
+        "stdout": "demo=bulkTopologicalCriterion frame=148 n_ddc=712 n_hc=632 nop=4096",
+        "trajectory": "nucleation.lammpstrj"
+      },
+      "chillPlus": {
+        "doi": "10.6084/m9.figshare.11448720.v1",
+        "frame": 1,
+        "frames_in_deposit": 11,
+        "returncode": 0,
+        "seconds": 0.38,
+        "stdout": "demo=chillPlus cubic=4096 n_ddc=4096 n_hc=0 nop=4096",
+        "trajectory": "mW_cubic.lammpstrj"
+      },
+      "iceNanotube": {
+        "doi": "10.6084/m9.figshare.11448768.v1",
+        "frame": 1,
+        "frames_in_deposit": 251,
+        "returncode": 0,
+        "seconds": 0.02,
+        "stdout": "demo=iceNanotube n_rings=427 nop=250",
+        "trajectory": "dump-240-square.lammpstrj"
+      },
+      "monolayer": {
+        "doi": "10.6084/m9.figshare.11448741.v1",
+        "frame": 1,
+        "frames_in_deposit": 1001,
+        "returncode": 0,
+        "seconds": 0.05,
+        "stdout": "demo=monolayer n_rings=119 nop=314",
+        "trajectory": "dump-6-320-310.lammpstrj"
+      },
+      "rdf2D": {
+        "doi": "10.6084/m9.figshare.11448711.v1",
+        "frame": 1,
+        "frames_in_deposit": 101,
+        "returncode": 0,
+        "seconds": 0.02,
+        "stdout": "demo=rdf2D gmax=37.3731 nop=314 rpeak=2.7750",
+        "trajectory": "dump-320.lammpstrj"
+      }
+    },
+    "incremental": {
+      "batch_ring_seconds": 4.773,
+      "doi": "10.6084/m9.figshare.11448702.v1",
+      "first_frame": {
+        "affiliation_reclassified": 3409,
+        "ddc_rings": 122,
+        "frame": 1,
+        "hc_rings": 115,
+        "natoms": 4096,
+        "ring_sources_recomputed": 4096,
+        "seeded_ddc_atoms": 139,
+        "seeded_hc_atoms": 182,
+        "six_rings": 3409
+      },
+      "frames": 148,
+      "incremental_ring_seconds": 8.442,
+      "last_frame": {
+        "affiliation_reclassified": 3916,
+        "ddc_rings": 704,
+        "frame": 148,
+        "hc_rings": 480,
+        "natoms": 4096,
+        "ring_sources_recomputed": 4094,
+        "seeded_ddc_atoms": 712,
+        "seeded_hc_atoms": 632,
+        "six_rings": 3916
+      },
+      "peak_seeded_ddc_atoms": 772,
+      "trajectory": "nucleation.lammpstrj"
+    }
+  },
+  "identity_gate": true,
+  "incremental": {
+    "1000": {
+      "balls": "154 / 1000",
+      "frames": "5",
+      "full/ms": 9.64,
+      "identical": "yes",
+      "incr/ms": 7.06,
+      "nAtoms": "1000",
+      "ratio": 1.37,
+      "recomp": "702 / 1000",
+      "sites": "3"
+    },
+    "2000": {
+      "balls": "135 / 2000",
+      "frames": "5",
+      "full/ms": 29.886,
+      "identical": "yes",
+      "incr/ms": 9.801,
+      "nAtoms": "2000",
+      "ratio": 3.05,
+      "recomp": "829 / 2000",
+      "sites": "3"
+    },
+    "4000": {
+      "balls": "135 / 4000",
+      "frames": "5",
+      "full/ms": 54.136,
+      "identical": "yes",
+      "incr/ms": 14.071,
+      "nAtoms": "4000",
+      "ratio": 3.85,
+      "recomp": "814 / 4000",
+      "sites": "3"
+    },
+    "8000": {
+      "balls": "126 / 8000",
+      "frames": "5",
+      "full/ms": 108.492,
+      "identical": "yes",
+      "incr/ms": 13.787,
+      "nAtoms": "8000",
+      "ratio": 7.87,
+      "recomp": "794 / 8000",
+      "sites": "3"
+    },
+    "16000": {
+      "balls": "106 / 16000",
+      "frames": "5",
+      "full/ms": 250.937,
+      "identical": "yes",
+      "incr/ms": 19.848,
+      "nAtoms": "16000",
+      "ratio": 12.64,
+      "recomp": "745 / 16000",
+      "sites": "3"
+    },
+    "32000": {
+      "balls": "128 / 32000",
+      "frames": "5",
+      "full/ms": 583.42,
+      "identical": "yes",
+      "incr/ms": 31.352,
+      "nAtoms": "32000",
+      "ratio": 18.61,
+      "recomp": "913 / 32000",
+      "sites": "3"
+    }
+  },
+  "pipeline": {
+    "1000": {
+      "affil_ms": 35.967,
+      "knn_ms": 18.904,
+      "knn_pair_ms": 5.867,
+      "neigh_ms": 1.746,
+      "rings_ms": 12.435
+    },
+    "2000": {
+      "affil_ms": 103.704,
+      "knn_ms": 2.856,
+      "knn_pair_ms": 5.81,
+      "neigh_ms": 3.431,
+      "rings_ms": 27.26
+    },
+    "4000": {
+      "affil_ms": 157.941,
+      "knn_ms": 7.03,
+      "knn_pair_ms": 9.103,
+      "neigh_ms": 6.628,
+      "rings_ms": 51.314
+    },
+    "8000": {
+      "affil_ms": 267.092,
+      "knn_ms": 12.023,
+      "knn_pair_ms": 11.78,
+      "neigh_ms": 14.152,
+      "rings_ms": 104.778
+    },
+    "16000": {
+      "affil_ms": 710.561,
+      "knn_ms": 15.837,
+      "knn_pair_ms": 17.632,
+      "neigh_ms": 35.63,
+      "rings_ms": 313.551
+    },
+    "32000": {
+      "affil_ms": 1006.917,
+      "knn_ms": 16.607,
+      "knn_pair_ms": 31.703,
+      "neigh_ms": 44.359,
+      "rings_ms": 615.33
+    }
+  },
+  "ql_compare": {
+    "dscribe": {
+      "bcc": {},
+      "fcc": {}
+    },
+    "dseams": {
+      "bcc": {
+        "ql4": 0.509175,
+        "ql6": 0.628539,
+        "ql8": 0.212762,
+        "vor_q4": 0.224025,
+        "vor_q6": 0.56694,
+        "vor_q8": 0.325955
+      },
+      "fcc": {
+        "ql4": 0.190941,
+        "ql6": 0.574524,
+        "ql8": 0.403915,
+        "vor_q4": 0.190941,
+        "vor_q6": 0.574524,
+        "vor_q8": 0.403915
+      }
+    },
+    "freud": {
+      "bcc": {
+        "ql4": 0.509175,
+        "ql6": 0.628539,
+        "ql8": 0.212762
+      },
+      "fcc": {
+        "ql4": 0.190941,
+        "ql6": 0.574524,
+        "ql8": 0.403915
+      }
+    },
+    "ptm": {
+      "bcc": {},
+      "fcc": {}
+    },
+    "pyscal3": {
+      "bcc": {
+        "ql4": 0.509175,
+        "ql6": 0.628539,
+        "ql8": 0.212762
+      },
+      "fcc": {
+        "ql4": 0.190941,
+        "ql6": 0.574524,
+        "ql8": 0.403915
+      }
+    }
+  },
+  "sota": {
+    "chill+": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 4.8,
+            "mean": 4.3,
+            "min": 4.0,
+            "stdev": 0.33466401061363016
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 5.2,
+            "mean": 4.4,
+            "min": 3.9,
+            "stdev": 0.43358966777357605
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 4.3,
+            "mean": 3.9200000000000004,
+            "min": 3.6,
+            "stdev": 0.27856776554368234
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9992000000000001,
+            "min": 0.996,
+            "stdev": 0.0016000000000000014
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9992000000000001,
+            "min": 0.996,
+            "stdev": 0.0016000000000000014
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 0.9992000000000001,
+            "min": 0.996,
+            "stdev": 0.0016000000000000014
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 4.5,
+            "mean": 4.24,
+            "min": 3.8,
+            "stdev": 0.23323807579381206
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 0.98,
+            "mean": 0.9692000000000001,
+            "min": 0.961,
+            "stdev": 0.006764613810115111
+          },
+          "crystal": {
+            "max": 0.98,
+            "mean": 0.9692000000000001,
+            "min": 0.961,
+            "stdev": 0.006764613810115111
+          },
+          "cubic": {
+            "max": 0.98,
+            "mean": 0.9692000000000001,
+            "min": 0.961,
+            "stdev": 0.006764613810115111
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 5.6,
+            "mean": 4.36,
+            "min": 3.9,
+            "stdev": 0.6343500610861481
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 0.887,
+            "mean": 0.8493999999999999,
+            "min": 0.826,
+            "stdev": 0.0202346237919068
+          },
+          "crystal": {
+            "max": 0.887,
+            "mean": 0.8497999999999999,
+            "min": 0.826,
+            "stdev": 0.02022275945562328
+          },
+          "cubic": {
+            "max": 0.887,
+            "mean": 0.8493999999999999,
+            "min": 0.826,
+            "stdev": 0.0202346237919068
+          },
+          "hex": {
+            "max": 0.002,
+            "mean": 0.0004,
+            "min": 0.0,
+            "stdev": 0.0008
+          },
+          "ms": {
+            "max": 5.2,
+            "mean": 4.38,
+            "min": 3.8,
+            "stdev": 0.4664761515876241
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.584,
+            "mean": 0.5538000000000001,
+            "min": 0.525,
+            "stdev": 0.02147929235333415
+          },
+          "crystal": {
+            "max": 0.584,
+            "mean": 0.5568,
+            "min": 0.527,
+            "stdev": 0.020390193721492665
+          },
+          "cubic": {
+            "max": 0.584,
+            "mean": 0.5538000000000001,
+            "min": 0.525,
+            "stdev": 0.02147929235333415
+          },
+          "hex": {
+            "max": 0.006,
+            "mean": 0.0032,
+            "min": 0.0,
+            "stdev": 0.0024000000000000002
+          },
+          "ms": {
+            "max": 5.3,
+            "mean": 4.26,
+            "min": 3.8,
+            "stdev": 0.5607138307550474
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.389,
+            "mean": 0.30219999999999997,
+            "min": 0.213,
+            "stdev": 0.06466343634543405
+          },
+          "crystal": {
+            "max": 0.395,
+            "mean": 0.3052,
+            "min": 0.213,
+            "stdev": 0.06711303897157393
+          },
+          "cubic": {
+            "max": 0.389,
+            "mean": 0.30219999999999997,
+            "min": 0.213,
+            "stdev": 0.06466343634543405
+          },
+          "hex": {
+            "max": 0.006,
+            "mean": 0.0032,
+            "min": 0.0,
+            "stdev": 0.002712931993250107
+          },
+          "ms": {
+            "max": 5.4,
+            "mean": 4.4,
+            "min": 4.0,
+            "stdev": 0.5215361924162121
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.125,
+            "mean": 0.0992,
+            "min": 0.076,
+            "stdev": 0.016678129391511507
+          },
+          "crystal": {
+            "max": 0.129,
+            "mean": 0.1036,
+            "min": 0.084,
+            "stdev": 0.01593235701332355
+          },
+          "cubic": {
+            "max": 0.125,
+            "mean": 0.0992,
+            "min": 0.076,
+            "stdev": 0.016678129391511507
+          },
+          "hex": {
+            "max": 0.008,
+            "mean": 0.004399999999999999,
+            "min": 0.002,
+            "stdev": 0.0019595917942265427
+          },
+          "ms": {
+            "max": 6.0,
+            "mean": 4.9,
+            "min": 4.0,
+            "stdev": 0.7641989269817121
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 2.6,
+            "mean": 2.52,
+            "min": 2.4,
+            "stdev": 0.07483314773547889
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 3.4,
+            "mean": 2.98,
+            "min": 2.6,
+            "stdev": 0.2561249694973139
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 2.9,
+            "mean": 2.7399999999999998,
+            "min": 2.6,
+            "stdev": 0.13564659966250528
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9975999999999999,
+            "min": 0.994,
+            "stdev": 0.0029393876913398165
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9975999999999999,
+            "min": 0.994,
+            "stdev": 0.0029393876913398165
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.9975999999999999,
+            "min": 0.994,
+            "stdev": 0.0029393876913398165
+          },
+          "ms": {
+            "max": 2.9,
+            "mean": 2.74,
+            "min": 2.7,
+            "stdev": 0.07999999999999989
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 0.972,
+            "mean": 0.9381999999999999,
+            "min": 0.919,
+            "stdev": 0.02035092135506397
+          },
+          "crystal": {
+            "max": 0.972,
+            "mean": 0.9381999999999999,
+            "min": 0.919,
+            "stdev": 0.02035092135506397
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.972,
+            "mean": 0.9381999999999999,
+            "min": 0.919,
+            "stdev": 0.02035092135506397
+          },
+          "ms": {
+            "max": 3.7,
+            "mean": 2.94,
+            "min": 2.6,
+            "stdev": 0.39293765408777004
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 0.864,
+            "mean": 0.8262,
+            "min": 0.797,
+            "stdev": 0.023785709995709604
+          },
+          "crystal": {
+            "max": 0.864,
+            "mean": 0.8262,
+            "min": 0.797,
+            "stdev": 0.023785709995709604
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.864,
+            "mean": 0.8262,
+            "min": 0.797,
+            "stdev": 0.023785709995709604
+          },
+          "ms": {
+            "max": 4.5,
+            "mean": 3.38,
+            "min": 2.9,
+            "stdev": 0.5706137047074842
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.606,
+            "mean": 0.5468,
+            "min": 0.458,
+            "stdev": 0.05618327153165788
+          },
+          "crystal": {
+            "max": 0.606,
+            "mean": 0.5468,
+            "min": 0.458,
+            "stdev": 0.05618327153165788
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.606,
+            "mean": 0.5468,
+            "min": 0.458,
+            "stdev": 0.05618327153165788
+          },
+          "ms": {
+            "max": 4.7,
+            "mean": 3.2,
+            "min": 2.7,
+            "stdev": 0.7563068160475616
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.333,
+            "mean": 0.2984,
+            "min": 0.203,
+            "stdev": 0.04855759466859947
+          },
+          "crystal": {
+            "max": 0.333,
+            "mean": 0.2984,
+            "min": 0.203,
+            "stdev": 0.04855759466859947
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.333,
+            "mean": 0.2984,
+            "min": 0.203,
+            "stdev": 0.04855759466859947
+          },
+          "ms": {
+            "max": 4.2,
+            "mean": 3.1,
+            "min": 2.7,
+            "stdev": 0.5549774770204644
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.169,
+            "mean": 0.1338,
+            "min": 0.117,
+            "stdev": 0.018669761648183947
+          },
+          "crystal": {
+            "max": 0.169,
+            "mean": 0.1338,
+            "min": 0.117,
+            "stdev": 0.018669761648183947
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.169,
+            "mean": 0.1338,
+            "min": 0.117,
+            "stdev": 0.018669761648183947
+          },
+          "ms": {
+            "max": 3.8,
+            "mean": 3.22,
+            "min": 2.8,
+            "stdev": 0.34871191548325386
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 0.897,
+            "mean": 0.897,
+            "min": 0.897,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "dseams-topo": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 42.7,
+            "mean": 39.4,
+            "min": 35.8,
+            "stdev": 2.7239676943752484
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 51.8,
+            "mean": 38.92,
+            "min": 34.0,
+            "stdev": 6.559695114866238
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 41.0,
+            "mean": 38.760000000000005,
+            "min": 36.6,
+            "stdev": 1.426323946374034
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 41.6,
+            "mean": 37.7,
+            "min": 35.6,
+            "stdev": 2.1052315787105234
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 92.9,
+            "mean": 48.92,
+            "min": 35.3,
+            "stdev": 22.11356144993384
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9960000000000001,
+            "min": 0.994,
+            "stdev": 0.0025298221281347057
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9960000000000001,
+            "min": 0.994,
+            "stdev": 0.0025298221281347057
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 0.9960000000000001,
+            "min": 0.994,
+            "stdev": 0.0025298221281347057
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 40.8,
+            "mean": 34.72,
+            "min": 31.2,
+            "stdev": 3.39964704050288
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.957,
+            "mean": 0.9396000000000001,
+            "min": 0.926,
+            "stdev": 0.010326664514740437
+          },
+          "crystal": {
+            "max": 0.957,
+            "mean": 0.9396000000000001,
+            "min": 0.926,
+            "stdev": 0.010326664514740437
+          },
+          "cubic": {
+            "max": 0.957,
+            "mean": 0.9396000000000001,
+            "min": 0.926,
+            "stdev": 0.010326664514740437
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 31.3,
+            "mean": 28.139999999999997,
+            "min": 24.1,
+            "stdev": 2.9069571720271354
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.838,
+            "mean": 0.7562,
+            "min": 0.672,
+            "stdev": 0.07159441318985718
+          },
+          "crystal": {
+            "max": 0.838,
+            "mean": 0.7562,
+            "min": 0.672,
+            "stdev": 0.07159441318985718
+          },
+          "cubic": {
+            "max": 0.838,
+            "mean": 0.7562,
+            "min": 0.672,
+            "stdev": 0.07159441318985718
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 22.4,
+            "mean": 20.74,
+            "min": 17.5,
+            "stdev": 1.9652989594461192
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.525,
+            "mean": 0.33799999999999997,
+            "min": 0.211,
+            "stdev": 0.11443775600735975
+          },
+          "crystal": {
+            "max": 0.525,
+            "mean": 0.33799999999999997,
+            "min": 0.211,
+            "stdev": 0.11443775600735975
+          },
+          "cubic": {
+            "max": 0.525,
+            "mean": 0.33799999999999997,
+            "min": 0.211,
+            "stdev": 0.11443775600735975
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 16.6,
+            "mean": 15.1,
+            "min": 12.1,
+            "stdev": 1.6443843832875575
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 23.6,
+            "mean": 23.34,
+            "min": 23.1,
+            "stdev": 0.2059126028197396
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 24.7,
+            "mean": 24.48,
+            "min": 24.3,
+            "stdev": 0.1599999999999997
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 25.2,
+            "mean": 23.78,
+            "min": 23.1,
+            "stdev": 0.8158431221748452
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 27.3,
+            "mean": 24.3,
+            "min": 23.1,
+            "stdev": 1.5962455951387933
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9987999999999999,
+            "min": 0.994,
+            "stdev": 0.002400000000000002
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9987999999999999,
+            "min": 0.994,
+            "stdev": 0.002400000000000002
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.9987999999999999,
+            "min": 0.994,
+            "stdev": 0.002400000000000002
+          },
+          "ms": {
+            "max": 26.6,
+            "mean": 23.76,
+            "min": 22.0,
+            "stdev": 1.6788091017146651
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 0.994,
+            "mean": 0.9856,
+            "min": 0.978,
+            "stdev": 0.006468384651518498
+          },
+          "crystal": {
+            "max": 0.994,
+            "mean": 0.9856,
+            "min": 0.978,
+            "stdev": 0.006468384651518498
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.994,
+            "mean": 0.9856,
+            "min": 0.978,
+            "stdev": 0.006468384651518498
+          },
+          "ms": {
+            "max": 23.9,
+            "mean": 22.04,
+            "min": 20.0,
+            "stdev": 1.4221111067704943
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.925,
+            "mean": 0.8724000000000001,
+            "min": 0.842,
+            "stdev": 0.029227384419410533
+          },
+          "crystal": {
+            "max": 0.925,
+            "mean": 0.8724000000000001,
+            "min": 0.842,
+            "stdev": 0.029227384419410533
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.925,
+            "mean": 0.8724000000000001,
+            "min": 0.842,
+            "stdev": 0.029227384419410533
+          },
+          "ms": {
+            "max": 18.8,
+            "mean": 18.12,
+            "min": 17.1,
+            "stdev": 0.6112282715974449
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.689,
+            "mean": 0.6048,
+            "min": 0.381,
+            "stdev": 0.11563113767493599
+          },
+          "crystal": {
+            "max": 0.689,
+            "mean": 0.6048,
+            "min": 0.381,
+            "stdev": 0.11563113767493599
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.689,
+            "mean": 0.6048,
+            "min": 0.381,
+            "stdev": 0.11563113767493599
+          },
+          "ms": {
+            "max": 15.6,
+            "mean": 13.180000000000001,
+            "min": 10.9,
+            "stdev": 1.493184516394407
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.439,
+            "mean": 0.3704,
+            "min": 0.322,
+            "stdev": 0.04048505897241598
+          },
+          "crystal": {
+            "max": 0.439,
+            "mean": 0.3704,
+            "min": 0.322,
+            "stdev": 0.04048505897241598
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.439,
+            "mean": 0.3704,
+            "min": 0.322,
+            "stdev": 0.04048505897241598
+          },
+          "ms": {
+            "max": 11.6,
+            "mean": 10.42,
+            "min": 9.6,
+            "stdev": 0.6584831053261732
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "dseams-topo-4nn": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 62.0,
+            "mean": 49.019999999999996,
+            "min": 42.3,
+            "stdev": 6.806291207405102
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 59.7,
+            "mean": 48.56,
+            "min": 43.3,
+            "stdev": 5.907148212124021
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 46.8,
+            "mean": 42.62,
+            "min": 39.6,
+            "stdev": 2.682088738278433
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 52.0,
+            "mean": 47.14,
+            "min": 40.7,
+            "stdev": 3.870710529088942
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 52.2,
+            "mean": 43.34,
+            "min": 39.6,
+            "stdev": 4.524422615096871
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 52.9,
+            "mean": 43.82,
+            "min": 33.9,
+            "stdev": 6.593147958297311
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.984,
+            "mean": 0.9804,
+            "min": 0.971,
+            "stdev": 0.005083306010855538
+          },
+          "crystal": {
+            "max": 0.984,
+            "mean": 0.9804,
+            "min": 0.971,
+            "stdev": 0.005083306010855538
+          },
+          "cubic": {
+            "max": 0.984,
+            "mean": 0.9804,
+            "min": 0.971,
+            "stdev": 0.005083306010855538
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 48.9,
+            "mean": 40.260000000000005,
+            "min": 35.3,
+            "stdev": 4.957660738695217
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.928,
+            "mean": 0.8844,
+            "min": 0.828,
+            "stdev": 0.03385025849236608
+          },
+          "crystal": {
+            "max": 0.928,
+            "mean": 0.8844,
+            "min": 0.828,
+            "stdev": 0.03385025849236608
+          },
+          "cubic": {
+            "max": 0.928,
+            "mean": 0.8844,
+            "min": 0.828,
+            "stdev": 0.03385025849236608
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 30.2,
+            "mean": 28.660000000000004,
+            "min": 26.6,
+            "stdev": 1.3514436725220917
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.631,
+            "mean": 0.446,
+            "min": 0.295,
+            "stdev": 0.11086388050217258
+          },
+          "crystal": {
+            "max": 0.631,
+            "mean": 0.446,
+            "min": 0.295,
+            "stdev": 0.11086388050217258
+          },
+          "cubic": {
+            "max": 0.631,
+            "mean": 0.446,
+            "min": 0.295,
+            "stdev": 0.11086388050217258
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 24.9,
+            "mean": 18.86,
+            "min": 16.3,
+            "stdev": 3.1155095891362614
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 36.3,
+            "mean": 32.82,
+            "min": 30.5,
+            "stdev": 1.8946239732464056
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 31.8,
+            "mean": 29.580000000000002,
+            "min": 26.3,
+            "stdev": 2.338717597316957
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 33.8,
+            "mean": 31.24,
+            "min": 29.2,
+            "stdev": 1.79510445378535
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 29.8,
+            "mean": 28.639999999999997,
+            "min": 27.6,
+            "stdev": 0.85463442476886
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 29.9,
+            "mean": 28.04,
+            "min": 26.4,
+            "stdev": 1.3632314550361577
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9994,
+            "min": 0.997,
+            "stdev": 0.001200000000000001
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9994,
+            "min": 0.997,
+            "stdev": 0.001200000000000001
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.9994,
+            "min": 0.997,
+            "stdev": 0.001200000000000001
+          },
+          "ms": {
+            "max": 31.5,
+            "mean": 28.96,
+            "min": 25.5,
+            "stdev": 2.089593261857436
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.983,
+            "mean": 0.9526,
+            "min": 0.936,
+            "stdev": 0.017488281790959334
+          },
+          "crystal": {
+            "max": 0.983,
+            "mean": 0.9526,
+            "min": 0.936,
+            "stdev": 0.017488281790959334
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.983,
+            "mean": 0.9526,
+            "min": 0.936,
+            "stdev": 0.017488281790959334
+          },
+          "ms": {
+            "max": 28.3,
+            "mean": 24.54,
+            "min": 21.6,
+            "stdev": 2.163885394377438
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.767,
+            "mean": 0.7188000000000001,
+            "min": 0.664,
+            "stdev": 0.044246581788879455
+          },
+          "crystal": {
+            "max": 0.767,
+            "mean": 0.7188000000000001,
+            "min": 0.664,
+            "stdev": 0.044246581788879455
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.767,
+            "mean": 0.7188000000000001,
+            "min": 0.664,
+            "stdev": 0.044246581788879455
+          },
+          "ms": {
+            "max": 20.4,
+            "mean": 18.6,
+            "min": 16.4,
+            "stdev": 1.331164903383499
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.461,
+            "mean": 0.3788,
+            "min": 0.303,
+            "stdev": 0.05836231660926424
+          },
+          "crystal": {
+            "max": 0.461,
+            "mean": 0.3788,
+            "min": 0.303,
+            "stdev": 0.05836231660926424
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.461,
+            "mean": 0.3788,
+            "min": 0.303,
+            "stdev": 0.05836231660926424
+          },
+          "ms": {
+            "max": 47.9,
+            "mean": 21.04,
+            "min": 13.2,
+            "stdev": 13.512453515183687
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "dseams-topo-seeded": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 65.7,
+            "mean": 54.67999999999999,
+            "min": 44.3,
+            "stdev": 7.3152990369498925
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 71.8,
+            "mean": 59.46,
+            "min": 42.3,
+            "stdev": 11.330772259647619
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 64.4,
+            "mean": 50.06,
+            "min": 41.2,
+            "stdev": 9.317424536855667
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 109.3,
+            "mean": 59.220000000000006,
+            "min": 40.5,
+            "stdev": 25.449746560624135
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 53.0,
+            "mean": 46.56,
+            "min": 41.5,
+            "stdev": 4.484016057063132
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 63.3,
+            "mean": 55.67999999999999,
+            "min": 47.5,
+            "stdev": 5.256767067314281
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.998,
+            "min": 0.996,
+            "stdev": 0.0012649110640673528
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.998,
+            "min": 0.996,
+            "stdev": 0.0012649110640673528
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 0.998,
+            "min": 0.996,
+            "stdev": 0.0012649110640673528
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 47.6,
+            "mean": 44.1,
+            "min": 38.4,
+            "stdev": 3.382306905057553
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.982,
+            "mean": 0.976,
+            "min": 0.967,
+            "stdev": 0.005059644256269411
+          },
+          "crystal": {
+            "max": 0.982,
+            "mean": 0.976,
+            "min": 0.967,
+            "stdev": 0.005059644256269411
+          },
+          "cubic": {
+            "max": 0.982,
+            "mean": 0.976,
+            "min": 0.967,
+            "stdev": 0.005059644256269411
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 46.4,
+            "mean": 37.019999999999996,
+            "min": 32.3,
+            "stdev": 5.241144913089125
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.871,
+            "mean": 0.7253999999999999,
+            "min": 0.58,
+            "stdev": 0.1106753811829894
+          },
+          "crystal": {
+            "max": 0.871,
+            "mean": 0.7253999999999999,
+            "min": 0.58,
+            "stdev": 0.1106753811829894
+          },
+          "cubic": {
+            "max": 0.871,
+            "mean": 0.7253999999999999,
+            "min": 0.58,
+            "stdev": 0.1106753811829894
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 32.3,
+            "mean": 26.560000000000002,
+            "min": 22.8,
+            "stdev": 3.168974597563065
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 29.9,
+            "mean": 26.139999999999997,
+            "min": 24.6,
+            "stdev": 1.9252012881774199
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 42.5,
+            "mean": 31.360000000000003,
+            "min": 25.8,
+            "stdev": 6.3288545567108745
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 36.6,
+            "mean": 30.98,
+            "min": 26.2,
+            "stdev": 3.957979282411671
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 49.4,
+            "mean": 32.1,
+            "min": 25.4,
+            "stdev": 8.766983517721474
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 40.5,
+            "mean": 31.78,
+            "min": 26.9,
+            "stdev": 5.076376660571987
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 36.3,
+            "mean": 31.1,
+            "min": 27.3,
+            "stdev": 3.1164081889251922
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9944,
+            "min": 0.986,
+            "stdev": 0.004923413450036473
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9944,
+            "min": 0.986,
+            "stdev": 0.004923413450036473
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.9944,
+            "min": 0.986,
+            "stdev": 0.004923413450036473
+          },
+          "ms": {
+            "max": 27.2,
+            "mean": 24.880000000000003,
+            "min": 22.1,
+            "stdev": 1.8258148865643518
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.931,
+            "mean": 0.9178000000000001,
+            "min": 0.894,
+            "stdev": 0.01373171511501751
+          },
+          "crystal": {
+            "max": 0.931,
+            "mean": 0.9178000000000001,
+            "min": 0.894,
+            "stdev": 0.01373171511501751
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.931,
+            "mean": 0.9178000000000001,
+            "min": 0.894,
+            "stdev": 0.01373171511501751
+          },
+          "ms": {
+            "max": 26.7,
+            "mean": 21.48,
+            "min": 19.0,
+            "stdev": 2.696219575628068
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.731,
+            "mean": 0.6849999999999999,
+            "min": 0.622,
+            "stdev": 0.03917141815150428
+          },
+          "crystal": {
+            "max": 0.731,
+            "mean": 0.6849999999999999,
+            "min": 0.622,
+            "stdev": 0.03917141815150428
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.731,
+            "mean": 0.6849999999999999,
+            "min": 0.622,
+            "stdev": 0.03917141815150428
+          },
+          "ms": {
+            "max": 18.2,
+            "mean": 17.080000000000002,
+            "min": 15.5,
+            "stdev": 1.1754148203932087
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "dseams-topo-seeded-adj": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 59.5,
+            "mean": 48.2,
+            "min": 41.9,
+            "stdev": 6.6241980646716785
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 48.4,
+            "mean": 45.0,
+            "min": 42.6,
+            "stdev": 2.370653918225938
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 55.2,
+            "mean": 50.64,
+            "min": 45.7,
+            "stdev": 4.221184667839114
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 66.8,
+            "mean": 51.67999999999999,
+            "min": 42.7,
+            "stdev": 9.087441884270842
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 62.8,
+            "mean": 53.779999999999994,
+            "min": 44.9,
+            "stdev": 6.944753415348884
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 65.4,
+            "mean": 50.239999999999995,
+            "min": 41.5,
+            "stdev": 8.649763002533655
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 43.7,
+            "mean": 39.160000000000004,
+            "min": 35.1,
+            "stdev": 2.838732111348304
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9996,
+            "min": 0.998,
+            "stdev": 0.0008000000000000007
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9996,
+            "min": 0.998,
+            "stdev": 0.0008000000000000007
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 0.9996,
+            "min": 0.998,
+            "stdev": 0.0008000000000000007
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 39.8,
+            "mean": 33.72,
+            "min": 31.6,
+            "stdev": 3.072067707587187
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.994,
+            "min": 0.99,
+            "stdev": 0.0037947331922020587
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.994,
+            "min": 0.99,
+            "stdev": 0.0037947331922020587
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 0.994,
+            "min": 0.99,
+            "stdev": 0.0037947331922020587
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 26.5,
+            "mean": 24.580000000000002,
+            "min": 21.9,
+            "stdev": 1.7554486605993358
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 36.8,
+            "mean": 30.439999999999998,
+            "min": 25.6,
+            "stdev": 4.476427146732088
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 39.9,
+            "mean": 32.519999999999996,
+            "min": 28.3,
+            "stdev": 3.990187965497364
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 31.6,
+            "mean": 28.5,
+            "min": 26.1,
+            "stdev": 2.154994199528157
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 35.4,
+            "mean": 29.939999999999998,
+            "min": 26.7,
+            "stdev": 3.0368404633763686
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 38.6,
+            "mean": 30.24,
+            "min": 25.4,
+            "stdev": 4.719576252165019
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 26.7,
+            "mean": 25.76,
+            "min": 24.6,
+            "stdev": 0.791454357496375
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 27.4,
+            "mean": 25.32,
+            "min": 23.0,
+            "stdev": 1.543243337908834
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.9982,
+            "min": 0.997,
+            "stdev": 0.0014696938456699082
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9982,
+            "min": 0.997,
+            "stdev": 0.0014696938456699082
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.9982,
+            "min": 0.997,
+            "stdev": 0.0014696938456699082
+          },
+          "ms": {
+            "max": 22.8,
+            "mean": 21.94,
+            "min": 19.1,
+            "stdev": 1.4319217855734994
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.997,
+            "mean": 0.9904,
+            "min": 0.986,
+            "stdev": 0.0044090815370097245
+          },
+          "crystal": {
+            "max": 0.997,
+            "mean": 0.9904,
+            "min": 0.986,
+            "stdev": 0.0044090815370097245
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.997,
+            "mean": 0.9904,
+            "min": 0.986,
+            "stdev": 0.0044090815370097245
+          },
+          "ms": {
+            "max": 17.3,
+            "mean": 16.66,
+            "min": 15.6,
+            "stdev": 0.6053098380168623
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "dseams-topo-seeded5": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 56.6,
+            "mean": 46.54,
+            "min": 38.0,
+            "stdev": 7.220969463998585
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 53.9,
+            "mean": 45.44,
+            "min": 38.5,
+            "stdev": 6.595634920157421
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 60.9,
+            "mean": 47.04,
+            "min": 39.5,
+            "stdev": 8.541568942530406
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 54.0,
+            "mean": 47.46,
+            "min": 38.2,
+            "stdev": 5.18906542645205
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 53.7,
+            "mean": 45.839999999999996,
+            "min": 42.4,
+            "stdev": 4.035641212992059
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 50.2,
+            "mean": 46.260000000000005,
+            "min": 43.4,
+            "stdev": 2.239285600364546
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.998,
+            "mean": 0.9916,
+            "min": 0.988,
+            "stdev": 0.003440930106817054
+          },
+          "crystal": {
+            "max": 0.998,
+            "mean": 0.9916,
+            "min": 0.988,
+            "stdev": 0.003440930106817054
+          },
+          "cubic": {
+            "max": 0.998,
+            "mean": 0.9916,
+            "min": 0.988,
+            "stdev": 0.003440930106817054
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 35.6,
+            "mean": 34.38,
+            "min": 32.3,
+            "stdev": 1.1923086848631117
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.963,
+            "mean": 0.9461999999999999,
+            "min": 0.932,
+            "stdev": 0.011303096920755816
+          },
+          "crystal": {
+            "max": 0.963,
+            "mean": 0.9461999999999999,
+            "min": 0.932,
+            "stdev": 0.011303096920755816
+          },
+          "cubic": {
+            "max": 0.963,
+            "mean": 0.9461999999999999,
+            "min": 0.932,
+            "stdev": 0.011303096920755816
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 106.6,
+            "mean": 44.78,
+            "min": 27.8,
+            "stdev": 30.92729538773153
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.82,
+            "mean": 0.6195999999999999,
+            "min": 0.391,
+            "stdev": 0.1433674998038258
+          },
+          "crystal": {
+            "max": 0.82,
+            "mean": 0.6195999999999999,
+            "min": 0.391,
+            "stdev": 0.1433674998038258
+          },
+          "cubic": {
+            "max": 0.82,
+            "mean": 0.6195999999999999,
+            "min": 0.391,
+            "stdev": 0.1433674998038258
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 44.6,
+            "mean": 31.639999999999997,
+            "min": 22.4,
+            "stdev": 7.797845856388802
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 73.0,
+            "mean": 39.58,
+            "min": 23.0,
+            "stdev": 18.33176478138425
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 43.0,
+            "mean": 33.72,
+            "min": 25.5,
+            "stdev": 7.4772722298977445
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 32.6,
+            "mean": 28.7,
+            "min": 26.7,
+            "stdev": 2.0287927444665224
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 42.3,
+            "mean": 31.98,
+            "min": 24.9,
+            "stdev": 6.166814412644505
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 31.6,
+            "mean": 27.48,
+            "min": 25.3,
+            "stdev": 2.248021352211763
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 38.4,
+            "mean": 27.76,
+            "min": 24.6,
+            "stdev": 5.332391583520474
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 1.0,
+            "mean": 0.99,
+            "min": 0.975,
+            "stdev": 0.008318653737234175
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.99,
+            "min": 0.975,
+            "stdev": 0.008318653737234175
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 0.99,
+            "min": 0.975,
+            "stdev": 0.008318653737234175
+          },
+          "ms": {
+            "max": 32.0,
+            "mean": 25.28,
+            "min": 22.0,
+            "stdev": 3.6885769613768398
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.911,
+            "mean": 0.8715999999999999,
+            "min": 0.819,
+            "stdev": 0.032308512810093906
+          },
+          "crystal": {
+            "max": 0.911,
+            "mean": 0.8715999999999999,
+            "min": 0.819,
+            "stdev": 0.032308512810093906
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.911,
+            "mean": 0.8715999999999999,
+            "min": 0.819,
+            "stdev": 0.032308512810093906
+          },
+          "ms": {
+            "max": 29.1,
+            "mean": 22.28,
+            "min": 18.9,
+            "stdev": 3.6815214246286825
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.706,
+            "mean": 0.629,
+            "min": 0.564,
+            "stdev": 0.05417379440282914
+          },
+          "crystal": {
+            "max": 0.706,
+            "mean": 0.629,
+            "min": 0.564,
+            "stdev": 0.05417379440282914
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.706,
+            "mean": 0.629,
+            "min": 0.564,
+            "stdev": 0.05417379440282914
+          },
+          "ms": {
+            "max": 19.4,
+            "mean": 17.2,
+            "min": 14.8,
+            "stdev": 1.668532289169136
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "freud-ld": {
+      "ic": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 29.0,
+            "mean": 15.26,
+            "min": 9.1,
+            "stdev": 7.217922138676753
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 12.5,
+            "mean": 10.92,
+            "min": 9.2,
+            "stdev": 1.2383860464330176
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 16.6,
+            "mean": 12.32,
+            "min": 9.5,
+            "stdev": 2.795281738930801
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 0.986,
+            "mean": 0.9792,
+            "min": 0.971,
+            "stdev": 0.005035871324805673
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.986,
+            "mean": 0.9792,
+            "min": 0.971,
+            "stdev": 0.005035871324805673
+          },
+          "hex": {
+            "max": 0.029,
+            "mean": 0.0208,
+            "min": 0.014,
+            "stdev": 0.005035871324805669
+          },
+          "ms": {
+            "max": 16.8,
+            "mean": 12.16,
+            "min": 9.4,
+            "stdev": 2.741240595059106
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 0.742,
+            "mean": 0.6008,
+            "min": 0.541,
+            "stdev": 0.07665611521594345
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9975999999999999,
+            "min": 0.99,
+            "stdev": 0.0038781438859330666
+          },
+          "cubic": {
+            "max": 0.742,
+            "mean": 0.6008,
+            "min": 0.541,
+            "stdev": 0.07665611521594345
+          },
+          "hex": {
+            "max": 0.453,
+            "mean": 0.3968,
+            "min": 0.258,
+            "stdev": 0.0749143510951006
+          },
+          "ms": {
+            "max": 13.5,
+            "mean": 11.459999999999999,
+            "min": 9.8,
+            "stdev": 1.3275541420220869
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 0.145,
+            "mean": 0.11439999999999999,
+            "min": 0.098,
+            "stdev": 0.016019987515600624
+          },
+          "crystal": {
+            "max": 0.98,
+            "mean": 0.9702,
+            "min": 0.955,
+            "stdev": 0.009325234581499822
+          },
+          "cubic": {
+            "max": 0.145,
+            "mean": 0.11439999999999999,
+            "min": 0.098,
+            "stdev": 0.016019987515600624
+          },
+          "hex": {
+            "max": 0.883,
+            "mean": 0.8558,
+            "min": 0.811,
+            "stdev": 0.024284974778656845
+          },
+          "ms": {
+            "max": 15.2,
+            "mean": 10.919999999999998,
+            "min": 9.6,
+            "stdev": 2.151650529244933
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.023,
+            "mean": 0.0142,
+            "min": 0.01,
+            "stdev": 0.004578209256903838
+          },
+          "crystal": {
+            "max": 0.766,
+            "mean": 0.7108,
+            "min": 0.66,
+            "stdev": 0.03725265091238475
+          },
+          "cubic": {
+            "max": 0.023,
+            "mean": 0.0142,
+            "min": 0.01,
+            "stdev": 0.004578209256903838
+          },
+          "hex": {
+            "max": 0.742,
+            "mean": 0.6968,
+            "min": 0.646,
+            "stdev": 0.0342893569493509
+          },
+          "ms": {
+            "max": 23.3,
+            "mean": 12.76,
+            "min": 9.2,
+            "stdev": 5.308333071690209
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.004,
+            "mean": 0.0012000000000000001,
+            "min": 0.0,
+            "stdev": 0.0016
+          },
+          "crystal": {
+            "max": 0.467,
+            "mean": 0.3778,
+            "min": 0.289,
+            "stdev": 0.06521778898429478
+          },
+          "cubic": {
+            "max": 0.004,
+            "mean": 0.0012000000000000001,
+            "min": 0.0,
+            "stdev": 0.0016
+          },
+          "hex": {
+            "max": 0.463,
+            "mean": 0.3766,
+            "min": 0.289,
+            "stdev": 0.06446890723441806
+          },
+          "ms": {
+            "max": 18.1,
+            "mean": 14.540000000000001,
+            "min": 9.6,
+            "stdev": 3.5813963757171594
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 0.162,
+            "mean": 0.1278,
+            "min": 0.084,
+            "stdev": 0.026738735946188627
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.162,
+            "mean": 0.1278,
+            "min": 0.084,
+            "stdev": 0.026738735946188627
+          },
+          "ms": {
+            "max": 20.0,
+            "mean": 13.940000000000001,
+            "min": 9.1,
+            "stdev": 4.817302149543871
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 9.8,
+            "mean": 8.940000000000001,
+            "min": 7.4,
+            "stdev": 0.8708616422830897
+          },
+          "n": 5
+        },
+        "0.05": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 13.4,
+            "mean": 9.8,
+            "min": 7.8,
+            "stdev": 1.9829271292712702
+          },
+          "n": 5
+        },
+        "0.10": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 15.5,
+            "mean": 10.3,
+            "min": 8.7,
+            "stdev": 2.6053790511171306
+          },
+          "n": 5
+        },
+        "0.15": {
+          "acc": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 10.7,
+            "mean": 8.86,
+            "min": 8.1,
+            "stdev": 0.9414881836751853
+          },
+          "n": 5
+        },
+        "0.20": {
+          "acc": {
+            "max": 0.994,
+            "mean": 0.9587999999999999,
+            "min": 0.936,
+            "stdev": 0.020252407264322918
+          },
+          "crystal": {
+            "max": 0.994,
+            "mean": 0.9587999999999999,
+            "min": 0.936,
+            "stdev": 0.020252407264322918
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.994,
+            "mean": 0.9587999999999999,
+            "min": 0.936,
+            "stdev": 0.020252407264322918
+          },
+          "ms": {
+            "max": 12.0,
+            "mean": 9.3,
+            "min": 7.7,
+            "stdev": 1.7308957218735044
+          },
+          "n": 5
+        },
+        "0.25": {
+          "acc": {
+            "max": 0.772,
+            "mean": 0.71,
+            "min": 0.667,
+            "stdev": 0.03894098098404814
+          },
+          "crystal": {
+            "max": 0.772,
+            "mean": 0.71,
+            "min": 0.667,
+            "stdev": 0.03894098098404814
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.772,
+            "mean": 0.71,
+            "min": 0.667,
+            "stdev": 0.03894098098404814
+          },
+          "ms": {
+            "max": 11.6,
+            "mean": 10.1,
+            "min": 8.9,
+            "stdev": 0.9757048734120373
+          },
+          "n": 5
+        },
+        "0.30": {
+          "acc": {
+            "max": 0.364,
+            "mean": 0.3196,
+            "min": 0.214,
+            "stdev": 0.055145625393135216
+          },
+          "crystal": {
+            "max": 0.364,
+            "mean": 0.3196,
+            "min": 0.214,
+            "stdev": 0.055145625393135216
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.364,
+            "mean": 0.3196,
+            "min": 0.214,
+            "stdev": 0.055145625393135216
+          },
+          "ms": {
+            "max": 18.6,
+            "mean": 12.580000000000002,
+            "min": 8.4,
+            "stdev": 4.526543935498694
+          },
+          "n": 5
+        },
+        "0.35": {
+          "acc": {
+            "max": 0.142,
+            "mean": 0.1072,
+            "min": 0.067,
+            "stdev": 0.025245989780557223
+          },
+          "crystal": {
+            "max": 0.142,
+            "mean": 0.1072,
+            "min": 0.067,
+            "stdev": 0.025245989780557223
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.142,
+            "mean": 0.1072,
+            "min": 0.067,
+            "stdev": 0.025245989780557223
+          },
+          "ms": {
+            "max": 10.6,
+            "mean": 9.1,
+            "min": 7.8,
+            "stdev": 1.065833007557938
+          },
+          "n": 5
+        },
+        "0.40": {
+          "acc": {
+            "max": 0.061,
+            "mean": 0.0328,
+            "min": 0.017,
+            "stdev": 0.015458331087151679
+          },
+          "crystal": {
+            "max": 0.061,
+            "mean": 0.0328,
+            "min": 0.017,
+            "stdev": 0.015458331087151679
+          },
+          "cubic": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0,
+            "stdev": 0.0
+          },
+          "hex": {
+            "max": 0.061,
+            "mean": 0.0328,
+            "min": 0.017,
+            "stdev": 0.015458331087151679
+          },
+          "ms": {
+            "max": 17.0,
+            "mean": 12.24,
+            "min": 7.6,
+            "stdev": 3.0974828490243493
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "acc": {
+            "max": 0.994,
+            "mean": 0.994,
+            "min": 0.994,
+            "stdev": 0.0
+          },
+          "false_crystal": {
+            "max": 0.006,
+            "mean": 0.006,
+            "min": 0.006,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    },
+    "freud-q6": {
+      "ic": {
+        "0.00": {
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 24.1,
+            "mean": 9.959999999999999,
+            "min": 3.9,
+            "stdev": 7.31726724945864
+          },
+          "n": 5
+        },
+        "0.05": {
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 6.8,
+            "mean": 5.3,
+            "min": 4.0,
+            "stdev": 0.9549869109050656
+          },
+          "n": 5
+        },
+        "0.10": {
+          "crystal": {
+            "max": 1.0,
+            "mean": 0.9968,
+            "min": 0.994,
+            "stdev": 0.0020396078054371156
+          },
+          "ms": {
+            "max": 11.4,
+            "mean": 7.140000000000001,
+            "min": 4.2,
+            "stdev": 2.8260219390514294
+          },
+          "n": 5
+        },
+        "0.15": {
+          "crystal": {
+            "max": 0.906,
+            "mean": 0.8728,
+            "min": 0.834,
+            "stdev": 0.025701361831622877
+          },
+          "ms": {
+            "max": 7.8,
+            "mean": 5.76,
+            "min": 4.3,
+            "stdev": 1.3335666462535722
+          },
+          "n": 5
+        },
+        "0.20": {
+          "crystal": {
+            "max": 0.715,
+            "mean": 0.6548,
+            "min": 0.619,
+            "stdev": 0.03443486605172146
+          },
+          "ms": {
+            "max": 7.7,
+            "mean": 6.08,
+            "min": 4.3,
+            "stdev": 1.2576167937809992
+          },
+          "n": 5
+        },
+        "0.25": {
+          "crystal": {
+            "max": 0.469,
+            "mean": 0.4324,
+            "min": 0.402,
+            "stdev": 0.024759644585494348
+          },
+          "ms": {
+            "max": 6.8,
+            "mean": 4.88,
+            "min": 3.7,
+            "stdev": 1.026450193628507
+          },
+          "n": 5
+        },
+        "0.30": {
+          "crystal": {
+            "max": 0.346,
+            "mean": 0.31639999999999996,
+            "min": 0.283,
+            "stdev": 0.020886359184884285
+          },
+          "ms": {
+            "max": 16.1,
+            "mean": 6.8,
+            "min": 4.2,
+            "stdev": 4.658325879540847
+          },
+          "n": 5
+        },
+        "0.35": {
+          "crystal": {
+            "max": 0.264,
+            "mean": 0.2508,
+            "min": 0.236,
+            "stdev": 0.009600000000000008
+          },
+          "ms": {
+            "max": 13.2,
+            "mean": 9.1,
+            "min": 4.6,
+            "stdev": 3.3105890714493698
+          },
+          "n": 5
+        },
+        "0.40": {
+          "crystal": {
+            "max": 0.217,
+            "mean": 0.1996,
+            "min": 0.186,
+            "stdev": 0.010268398122394749
+          },
+          "ms": {
+            "max": 12.9,
+            "mean": 8.120000000000001,
+            "min": 4.1,
+            "stdev": 3.856630653822064
+          },
+          "n": 5
+        }
+      },
+      "ih": {
+        "0.00": {
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 6.1,
+            "mean": 4.9799999999999995,
+            "min": 3.7,
+            "stdev": 0.8231646250902669
+          },
+          "n": 5
+        },
+        "0.05": {
+          "crystal": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "stdev": 0.0
+          },
+          "ms": {
+            "max": 7.5,
+            "mean": 5.279999999999999,
+            "min": 4.1,
+            "stdev": 1.2139192724394814
+          },
+          "n": 5
+        },
+        "0.10": {
+          "crystal": {
+            "max": 0.997,
+            "mean": 0.9932000000000001,
+            "min": 0.986,
+            "stdev": 0.004069397989875164
+          },
+          "ms": {
+            "max": 11.6,
+            "mean": 6.5,
+            "min": 5.0,
+            "stdev": 2.5526456863419176
+          },
+          "n": 5
+        },
+        "0.15": {
+          "crystal": {
+            "max": 0.894,
+            "mean": 0.8634000000000001,
+            "min": 0.831,
+            "stdev": 0.024204131878669002
+          },
+          "ms": {
+            "max": 7.1,
+            "mean": 5.14,
+            "min": 4.5,
+            "stdev": 0.98508882848198
+          },
+          "n": 5
+        },
+        "0.20": {
+          "crystal": {
+            "max": 0.714,
+            "mean": 0.6504,
+            "min": 0.594,
+            "stdev": 0.04159134525355005
+          },
+          "ms": {
+            "max": 5.1,
+            "mean": 4.32,
+            "min": 3.9,
+            "stdev": 0.4489988864128729
+          },
+          "n": 5
+        },
+        "0.25": {
+          "crystal": {
+            "max": 0.508,
+            "mean": 0.45,
+            "min": 0.425,
+            "stdev": 0.030311713907332928
+          },
+          "ms": {
+            "max": 7.0,
+            "mean": 6.0600000000000005,
+            "min": 5.2,
+            "stdev": 0.6280127387243032
+          },
+          "n": 5
+        },
+        "0.30": {
+          "crystal": {
+            "max": 0.364,
+            "mean": 0.324,
+            "min": 0.3,
+            "stdev": 0.02244994432064365
+          },
+          "ms": {
+            "max": 14.8,
+            "mean": 8.8,
+            "min": 4.7,
+            "stdev": 4.434861891874425
+          },
+          "n": 5
+        },
+        "0.35": {
+          "crystal": {
+            "max": 0.258,
+            "mean": 0.2346,
+            "min": 0.225,
+            "stdev": 0.011909659944767524
+          },
+          "ms": {
+            "max": 6.1,
+            "mean": 4.88,
+            "min": 4.0,
+            "stdev": 0.6968500556073737
+          },
+          "n": 5
+        },
+        "0.40": {
+          "crystal": {
+            "max": 0.219,
+            "mean": 0.18919999999999998,
+            "min": 0.147,
+            "stdev": 0.02646053665366597
+          },
+          "ms": {
+            "max": 13.3,
+            "mean": 7.659999999999999,
+            "min": 3.9,
+            "stdev": 3.111655507925002
+          },
+          "n": 5
+        }
+      },
+      "null": {
+        "0.00": {
+          "false_crystal": {
+            "max": 0.231,
+            "mean": 0.231,
+            "min": 0.231,
+            "stdev": 0.0
+          },
+          "n": 1
+        }
+      }
+    }
+  },
+  "source_manifest": {
+    "components": {
+      "linkcell": {
+        "repository": "https://github.com/d-SEAMS/linkcell.git",
+        "revision": "558401547e524b1b8015da856026ceb636d05651"
+      },
+      "pydseamslib": {
+        "repository": "https://github.com/d-SEAMS/PydSEAMSlib.git",
+        "revision": "36fa59d72489db289b4ff2933c511f5838c7a6ec"
+      },
+      "seams-base": {
+        "repository": "https://github.com/d-SEAMS/seams-core.git",
+        "revision": "1c8efa382c4ae88ebc68e40a991260c4d57edbd5"
+      },
+      "seams-core": {
+        "repository": "https://github.com/HaoZeke/seams-core.git",
+        "revision": "e785640850774b56bd540c4890869b13fa259523"
+      },
+      "yodastruct": {
+        "repository": "https://github.com/HaoZeke/yodaStruct.git",
+        "revision": "9f0dc7ad981892fd87120c3251869ff71ad698f9"
+      }
+    },
+    "schema": "dseams.source-manifest/v1"
+  },
+  "stages": {
+    "cubic": {
+      "affil_ms": 94.662,
+      "io_ms": 3.812,
+      "knn_ms": 7.409,
+      "knn_pair_ms": 26.277,
+      "neigh_ms": 6.262,
+      "rings_ms": 22.27,
+      "seeded_ms": 284.115
+    },
+    "nucleation": {
+      "affil_ms": 27.451,
+      "io_ms": 4.426,
+      "knn_ms": 31.712,
+      "knn_pair_ms": 17.44,
+      "neigh_ms": 7.819,
+      "rings_ms": 37.886,
+      "seeded_ms": 94.593
+    }
+  },
+  "tip": {
+    "cages": {
+      "atoms": 4096.0,
+      "findHC+findDDC/ms": 71.618,
+      "findHC/ms": 68.655,
+      "ringNetwork/ms": 21.355,
+      "rings": 8192.0,
+      "shapeMatchDDC/ms": 44.823,
+      "shapeMatchHC/ms": 0.002,
+      "six-rings": 8192.0
+    },
+    "overhead": {
+      "4096": {
+        "neighListO_ms": 6.528,
+        "vesin_ms": 4.401
+      },
+      "16000": {
+        "neighListO_ms": 32.488,
+        "vesin_ms": 19.553
+      }
+    },
+    "scaling": {
+      "1000": {
+        "byIndex_ms": 1.733,
+        "getCorrelPlus_ms": 1.904,
+        "neighListO_ms": 1.725,
+        "ringNetwork_ms": 10.268
+      },
+      "2000": {
+        "byIndex_ms": 3.489,
+        "getCorrelPlus_ms": 5.104,
+        "neighListO_ms": 3.832,
+        "ringNetwork_ms": 29.569
+      },
+      "4000": {
+        "byIndex_ms": 7.509,
+        "getCorrelPlus_ms": 8.915,
+        "neighListO_ms": 7.048,
+        "ringNetwork_ms": 53.096
+      },
+      "8000": {
+        "byIndex_ms": 14.505,
+        "getCorrelPlus_ms": 16.656,
+        "neighListO_ms": 15.248,
+        "ringNetwork_ms": 111.547
+      },
+      "16000": {
+        "byIndex_ms": 29.492,
+        "getCorrelPlus_ms": 41.961,
+        "neighListO_ms": 30.574,
+        "ringNetwork_ms": 360.326
+      },
+      "32000": {
+        "byIndex_ms": 59.256,
+        "getCorrelPlus_ms": 66.579,
+        "neighListO_ms": 60.985,
+        "ringNetwork_ms": 752.863
+      }
+    },
+    "strong": {
+      "1": {
+        "index_ms": 131.472,
+        "neigh_ms": 140.54,
+        "ql_ms": 89.262,
+        "rings_ms": 1893.899
+      },
+      "2": {
+        "index_ms": 132.215,
+        "neigh_ms": 140.537,
+        "ql_ms": 53.681,
+        "rings_ms": 1020.961
+      },
+      "4": {
+        "index_ms": 134.496,
+        "neigh_ms": 134.461,
+        "ql_ms": 36.408,
+        "rings_ms": 609.276
+      },
+      "8": {
+        "index_ms": 132.461,
+        "neigh_ms": 136.414,
+        "ql_ms": 29.366,
+        "rings_ms": 415.478
+      },
+      "16": {
+        "index_ms": 128.669,
+        "neigh_ms": 130.645,
+        "ql_ms": 23.104,
+        "rings_ms": 221.974
+      },
+      "32": {
+        "index_ms": 116.682,
+        "neigh_ms": 118.007,
+        "ql_ms": 26.436,
+        "rings_ms": 119.183
+      }
+    }
+  },
+  "trajectory_incremental": {
+    "frames": [],
+    "steady": {
+      "affilBatch_ms": 97.343,
+      "affilInc_ms": 11.333,
+      "allEqual": true,
+      "ringFull_ms": 20.522,
+      "ringInc_ms": 1.012
+    }
+  },
+  "walks": {
+    "figshare-nucleation": {
+      "chill_over_seed_max_max": 0.5095398428731762,
+      "chill_over_seed_max_median": 0.39544513457556935,
+      "chill_over_seed_max_min": 0.23897058823529413,
+      "final": {
+        "chill_clathrate": 42,
+        "chill_clus": 34,
+        "chill_cubic": 273,
+        "chill_hex": 224,
+        "chill_ice": 497,
+        "chill_interclathrate": 319,
+        "chill_interfacial": 397,
+        "chill_max": 454,
+        "chill_water": 2841,
+        "cut_clus": 7,
+        "cut_ice": 987,
+        "cut_max": 895,
+        "nop": 4096,
+        "seed_both": 377,
+        "seed_clus": 5,
+        "seed_ic": 335,
+        "seed_ice": 967,
+        "seed_ih": 255,
+        "seed_max": 891
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": 119,
+        "cut_max": 18,
+        "seed_max": 41
+      },
+      "frames": 148,
+      "frames_seed_equals_cut": 4,
+      "last_frame": 148,
+      "max_abs_seed_minus_cut": 81,
+      "nop": 4096,
+      "peak": {
+        "chill_max": 460,
+        "cut_max": 1075,
+        "seed_max": 1017
+      }
+    },
+    "niu-critical-growing": {
+      "chill_over_seed_max_max": 0.5323275862068966,
+      "chill_over_seed_max_median": 0.45083487940630795,
+      "chill_over_seed_max_min": 0.34140969162995594,
+      "final": {
+        "chill_clathrate": 17,
+        "chill_clus": 30,
+        "chill_cubic": 168,
+        "chill_hex": 161,
+        "chill_ice": 329,
+        "chill_interclathrate": 166,
+        "chill_interfacial": 288,
+        "chill_max": 295,
+        "chill_water": 2080,
+        "cut_clus": 6,
+        "cut_ice": 718,
+        "cut_max": 642,
+        "nop": 2880,
+        "seed_both": 274,
+        "seed_clus": 4,
+        "seed_ic": 291,
+        "seed_ice": 698,
+        "seed_ih": 133,
+        "seed_max": 660
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": 718,
+        "cut_max": 1,
+        "seed_max": 1
+      },
+      "frames": 801,
+      "frames_seed_equals_cut": 33,
+      "last_frame": 801,
+      "max_abs_seed_minus_cut": 83,
+      "nop": 2880,
+      "peak": {
+        "chill_max": 327,
+        "cut_max": 731,
+        "seed_max": 746
+      }
+    },
+    "niu-critical-melting": {
+      "chill_over_seed_max_max": 0.5314685314685315,
+      "chill_over_seed_max_median": 0.328125,
+      "chill_over_seed_max_min": 0.017857142857142856,
+      "final": {
+        "chill_clathrate": 17,
+        "chill_clus": 27,
+        "chill_cubic": 4,
+        "chill_hex": 23,
+        "chill_ice": 27,
+        "chill_interclathrate": 201,
+        "chill_interfacial": 134,
+        "chill_max": 1,
+        "chill_water": 2501,
+        "cut_clus": 8,
+        "cut_ice": 124,
+        "cut_max": 30,
+        "nop": 2880,
+        "seed_both": 0,
+        "seed_clus": 4,
+        "seed_ic": 46,
+        "seed_ice": 58,
+        "seed_ih": 12,
+        "seed_max": 18
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": null,
+        "cut_max": 1,
+        "seed_max": 1
+      },
+      "frames": 1001,
+      "frames_seed_equals_cut": 194,
+      "last_frame": 1001,
+      "max_abs_seed_minus_cut": 66,
+      "nop": 2880,
+      "peak": {
+        "chill_max": 167,
+        "cut_max": 439,
+        "seed_max": 459
+      }
+    },
+    "niu-traj1-extract": {
+      "chill_over_seed_max_max": 0.9610552763819096,
+      "chill_over_seed_max_median": 0.761864406779661,
+      "chill_over_seed_max_min": 0.25,
+      "final": {
+        "chill_clathrate": 0,
+        "chill_clus": 2,
+        "chill_cubic": 566,
+        "chill_hex": 857,
+        "chill_ice": 1423,
+        "chill_interclathrate": 1,
+        "chill_interfacial": 82,
+        "chill_max": 1422,
+        "chill_water": 67,
+        "cut_clus": 1,
+        "cut_ice": 1566,
+        "cut_max": 1566,
+        "nop": 1573,
+        "seed_both": 905,
+        "seed_clus": 1,
+        "seed_ic": 179,
+        "seed_ice": 1567,
+        "seed_ih": 483,
+        "seed_max": 1567
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": 439,
+        "cut_max": 392,
+        "seed_max": 392
+      },
+      "frames": 1001,
+      "frames_seed_equals_cut": 319,
+      "last_frame": 1001,
+      "max_abs_seed_minus_cut": 32,
+      "nop": 1573,
+      "peak": {
+        "chill_max": 1530,
+        "cut_max": 1592,
+        "seed_max": 1595
+      }
+    },
+    "niu-traj2-foursite": {
+      "chill_over_seed_max_max": 0.9665505226480836,
+      "chill_over_seed_max_median": 0.6915676287492926,
+      "chill_over_seed_max_min": 0.018518518518518517,
+      "final": {
+        "chill_clathrate": 0,
+        "chill_clus": 1,
+        "chill_cubic": 1861,
+        "chill_hex": 913,
+        "chill_ice": 2774,
+        "chill_interclathrate": 4,
+        "chill_interfacial": 64,
+        "chill_max": 2774,
+        "chill_water": 38,
+        "cut_clus": 1,
+        "cut_ice": 2866,
+        "cut_max": 2866,
+        "nop": 2880,
+        "seed_both": 1415,
+        "seed_clus": 1,
+        "seed_ic": 1212,
+        "seed_ice": 2870,
+        "seed_ih": 243,
+        "seed_max": 2870
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": 375,
+        "cut_max": 363,
+        "seed_max": 363
+      },
+      "frames": 1001,
+      "frames_seed_equals_cut": 157,
+      "last_frame": 1001,
+      "max_abs_seed_minus_cut": 90,
+      "nop": 2880,
+      "peak": {
+        "chill_max": 2774,
+        "cut_max": 2868,
+        "seed_max": 2872
+      }
+    },
+    "niu-traj3-oxygen": {
+      "chill_over_seed_max_max": 0.7094972067039106,
+      "chill_over_seed_max_median": 0.3538812785388128,
+      "chill_over_seed_max_min": 0.02434077079107505,
+      "final": {
+        "chill_clathrate": 15,
+        "chill_clus": 8,
+        "chill_cubic": 932,
+        "chill_hex": 445,
+        "chill_ice": 1377,
+        "chill_interclathrate": 158,
+        "chill_interfacial": 401,
+        "chill_max": 1369,
+        "chill_water": 929,
+        "cut_clus": 1,
+        "cut_ice": 1994,
+        "cut_max": 1994,
+        "nop": 2880,
+        "seed_both": 861,
+        "seed_clus": 1,
+        "seed_ic": 993,
+        "seed_ice": 2003,
+        "seed_ih": 149,
+        "seed_max": 2003
+      },
+      "first_frame": 1,
+      "first_frame_at_or_above_nc": {
+        "chill_max": 737,
+        "cut_max": 32,
+        "seed_max": 34
+      },
+      "frames": 1551,
+      "frames_seed_equals_cut": 62,
+      "last_frame": 1551,
+      "max_abs_seed_minus_cut": 281,
+      "nop": 2880,
+      "peak": {
+        "chill_max": 1406,
+        "cut_max": 2011,
+        "seed_max": 2029
+      }
+    }
+  },
+  "workflow_parity": {
+    "checks": [
+      {
+        "key": "cages.ic",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "cages.ih",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "cages.nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "cages.water",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.clathrate",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.cubic",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.hexagonal",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.interClathrate",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.interfacial",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.reCubic",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.reHex",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.unclassified",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill.water",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.clathrate",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.cubic",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.hexagonal",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.interClathrate",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.interfacial",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.reCubic",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.reHex",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.unclassified",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "chill_plus.water",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "cn.value",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "density.centres",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "density.rho",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "domain.largest",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "domain.n",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "domain.percolation",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "hbonds.count",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "hbonds.nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "pairs.count",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "pairs.n_anion",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "pairs.n_cation",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "rdf.g",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "rdf.r",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "read.ice_nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      },
+      {
+        "key": "read.water_nop",
+        "pass": true,
+        "present": {
+          "cli": true,
+          "lua": true,
+          "python": true
+        }
+      }
+    ],
+    "inputs": {
+      "ice": {
+        "path": "/users/home/rog32/dseams2_repro/sources/seams-core/input/traj/mW_cubic.lammpstrj",
+        "sha256": "66d854880bb9431abc9eb25d68b0622d94a0160dd03e1ac7d636343d9830485d"
+      },
+      "ions": {
+        "path": "/users/home/rog32/dseams2_repro/data/fixtures/tiny-ions.lammpstrj",
+        "sha256": "f85df9d55e352d63f7b045e512cf8bffc4a94788abd5273e6b88d624f4a50f92"
+      },
+      "water": {
+        "path": "/users/home/rog32/dseams2_repro/sources/seams-core/input/traj/exampleTraj.lammpstrj",
+        "sha256": "4346edc9491bf4574c3120e62be65c6de022da38ba2ebb2105b5718648fa6358"
+      }
+    },
+    "interfaces": {
+      "cli": {
+        "cages.ic": 4096,
+        "cages.ih": 0,
+        "cages.nop": 4096,
+        "cages.water": 0,
+        "chill.clathrate": 0,
+        "chill.cubic": 4096,
+        "chill.hexagonal": 0,
+        "chill.interClathrate": 0,
+        "chill.interfacial": 0,
+        "chill.nop": 4096,
+        "chill.reCubic": 0,
+        "chill.reHex": 0,
+        "chill.unclassified": 0,
+        "chill.water": 0,
+        "chill_plus.clathrate": 0,
+        "chill_plus.cubic": 4096,
+        "chill_plus.hexagonal": 0,
+        "chill_plus.interClathrate": 0,
+        "chill_plus.interfacial": 0,
+        "chill_plus.nop": 4096,
+        "chill_plus.reCubic": 0,
+        "chill_plus.reHex": 0,
+        "chill_plus.unclassified": 0,
+        "chill_plus.water": 0,
+        "cn.value": 13.0602,
+        "density.centres": [
+          11.5367,
+          20.5469,
+          29.557,
+          38.5671,
+          47.5773,
+          56.5874,
+          65.5975,
+          74.6077,
+          83.6178,
+          92.6279,
+          101.638,
+          110.648,
+          119.658,
+          128.668,
+          137.679,
+          146.689,
+          155.699,
+          164.709,
+          173.719,
+          182.729
+        ],
+        "density.rho": [
+          0.000901763,
+          0.0010405,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000971129,
+          0.000901763,
+          0.000901763,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.000832396,
+          0.00110986,
+          0.00076303,
+          0.00076303,
+          0.000832396
+        ],
+        "domain.largest": 1,
+        "domain.n": 2,
+        "domain.percolation": 0.5,
+        "hbonds.count": 460,
+        "hbonds.nop": 250,
+        "pairs.count": 2,
+        "pairs.n_anion": 2,
+        "pairs.n_cation": 2,
+        "rdf.g": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          3.40053,
+          62.9753,
+          124.755,
+          105.265,
+          70.2999,
+          39.6181,
+          18.5714,
+          9.76987,
+          8.53854,
+          10.5279,
+          15.7921,
+          21.0248,
+          31.9745,
+          32.8216,
+          31.6533,
+          39.0975,
+          35.0961,
+          24.0778,
+          23.3731,
+          14.5174,
+          9.61359,
+          10.9091,
+          11.4348,
+          11.2815,
+          8.42354,
+          7.80421,
+          10.0054,
+          8.55816,
+          5.66584,
+          4.96349,
+          10.5297,
+          9.00572,
+          11.8166,
+          11.416,
+          9.78624
+        ],
+        "rdf.r": [
+          0.05,
+          0.15,
+          0.25,
+          0.35,
+          0.45,
+          0.55,
+          0.65,
+          0.75,
+          0.85,
+          0.95,
+          1.05,
+          1.15,
+          1.25,
+          1.35,
+          1.45,
+          1.55,
+          1.65,
+          1.75,
+          1.85,
+          1.95,
+          2.05,
+          2.15,
+          2.25,
+          2.35,
+          2.45,
+          2.55,
+          2.65,
+          2.75,
+          2.85,
+          2.95,
+          3.05,
+          3.15,
+          3.25,
+          3.35,
+          3.45,
+          3.55,
+          3.65,
+          3.75,
+          3.85,
+          3.95,
+          4.05,
+          4.15,
+          4.25,
+          4.35,
+          4.45,
+          4.55,
+          4.65,
+          4.75,
+          4.85,
+          4.95,
+          5.05,
+          5.15,
+          5.25,
+          5.35,
+          5.45,
+          5.55,
+          5.65,
+          5.75,
+          5.85,
+          5.95
+        ],
+        "read.ice_nop": 4096,
+        "read.water_nop": 250
+      },
+      "lua": {
+        "cages.ic": 4096,
+        "cages.ih": 0,
+        "cages.nop": 4096,
+        "cages.water": 0,
+        "chill.clathrate": 0,
+        "chill.cubic": 4096,
+        "chill.hexagonal": 0,
+        "chill.interClathrate": 0,
+        "chill.interfacial": 0,
+        "chill.nop": 4096,
+        "chill.reCubic": 0,
+        "chill.reHex": 0,
+        "chill.unclassified": 0,
+        "chill.water": 0,
+        "chill_plus.clathrate": 0,
+        "chill_plus.cubic": 4096,
+        "chill_plus.hexagonal": 0,
+        "chill_plus.interClathrate": 0,
+        "chill_plus.interfacial": 0,
+        "chill_plus.nop": 4096,
+        "chill_plus.reCubic": 0,
+        "chill_plus.reHex": 0,
+        "chill_plus.unclassified": 0,
+        "chill_plus.water": 0,
+        "cn.value": 13.060240963855,
+        "density.centres": [
+          11.53673954136242,
+          20.546872378680355,
+          29.557005215998295,
+          38.56713805331623,
+          47.57727089063417,
+          56.5874037279521,
+          65.59753656527005,
+          74.60766940258797,
+          83.61780223990591,
+          92.62793507722385,
+          101.63806791454178,
+          110.64820075185972,
+          119.65833358917766,
+          128.6684664264956,
+          137.6785992638135,
+          146.68873210113145,
+          155.6988649384494,
+          164.70899777576733,
+          173.71913061308527,
+          182.7292634504032
+        ],
+        "density.rho": [
+          0.0009017625096877688,
+          0.0010404952034858872,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.000971128856586828,
+          0.0009017625096877688,
+          0.0009017625096877688,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0011098615503849463,
+          0.0007630298158896506,
+          0.0007630298158896506,
+          0.0008323961627887097
+        ],
+        "domain.largest": 1,
+        "domain.n": 2,
+        "domain.percolation": 0.5,
+        "hbonds.count": 460,
+        "hbonds.nop": 250,
+        "pairs.count": 2,
+        "pairs.n_anion": 2,
+        "pairs.n_cation": 2,
+        "rdf.g": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          3.4005345218449623,
+          62.975252511813366,
+          124.75520568110767,
+          105.26540430117146,
+          70.29985404390699,
+          39.61807507535845,
+          18.571388568244114,
+          9.769874821675963,
+          8.538536489214337,
+          10.527912674884007,
+          15.792114696925609,
+          21.02483765995683,
+          31.974481629082053,
+          32.82161968667179,
+          31.65332700220825,
+          39.09750918745482,
+          35.09607856743466,
+          24.077759013043845,
+          23.37305919365684,
+          14.517380420392918,
+          9.61358648672928,
+          10.909109052352155,
+          11.434751554842324,
+          11.281467227637036,
+          8.423543275715218,
+          7.804206727104366,
+          10.005443537191717,
+          8.558155813593917,
+          5.665841494764583,
+          4.9634854689855645,
+          10.529722089718218,
+          9.005717560567426,
+          11.816563200669858,
+          11.41604075070087,
+          9.786235258752118
+        ],
+        "rdf.r": [
+          0.05,
+          0.15000000000000002,
+          0.25,
+          0.35000000000000003,
+          0.45,
+          0.55,
+          0.65,
+          0.75,
+          0.8500000000000001,
+          0.9500000000000001,
+          1.05,
+          1.1500000000000001,
+          1.25,
+          1.35,
+          1.4500000000000002,
+          1.55,
+          1.6500000000000001,
+          1.75,
+          1.85,
+          1.9500000000000002,
+          2.0500000000000003,
+          2.15,
+          2.25,
+          2.35,
+          2.45,
+          2.5500000000000003,
+          2.6500000000000004,
+          2.75,
+          2.85,
+          2.95,
+          3.0500000000000003,
+          3.1500000000000004,
+          3.25,
+          3.35,
+          3.45,
+          3.5500000000000003,
+          3.6500000000000004,
+          3.75,
+          3.85,
+          3.95,
+          4.05,
+          4.15,
+          4.25,
+          4.3500000000000005,
+          4.45,
+          4.55,
+          4.65,
+          4.75,
+          4.8500000000000005,
+          4.95,
+          5.050000000000001,
+          5.15,
+          5.25,
+          5.3500000000000005,
+          5.45,
+          5.550000000000001,
+          5.65,
+          5.75,
+          5.8500000000000005,
+          5.95
+        ],
+        "read.ice_nop": 4096,
+        "read.water_nop": 250
+      },
+      "python": {
+        "cages.ic": 4096,
+        "cages.ih": 0,
+        "cages.nop": 4096,
+        "cages.water": 0,
+        "chill.clathrate": 0,
+        "chill.cubic": 4096,
+        "chill.hexagonal": 0,
+        "chill.interClathrate": 0,
+        "chill.interfacial": 0,
+        "chill.nop": 4096,
+        "chill.reCubic": 0,
+        "chill.reHex": 0,
+        "chill.unclassified": 0,
+        "chill.water": 0,
+        "chill_plus.clathrate": 0,
+        "chill_plus.cubic": 4096,
+        "chill_plus.hexagonal": 0,
+        "chill_plus.interClathrate": 0,
+        "chill_plus.interfacial": 0,
+        "chill_plus.nop": 4096,
+        "chill_plus.reCubic": 0,
+        "chill_plus.reHex": 0,
+        "chill_plus.unclassified": 0,
+        "chill_plus.water": 0,
+        "cn.value": 13.060240963855417,
+        "density.centres": [
+          11.53673954136242,
+          20.546872378680355,
+          29.557005215998295,
+          38.56713805331623,
+          47.57727089063417,
+          56.5874037279521,
+          65.59753656527005,
+          74.60766940258797,
+          83.61780223990591,
+          92.62793507722385,
+          101.63806791454178,
+          110.64820075185972,
+          119.65833358917766,
+          128.6684664264956,
+          137.6785992638135,
+          146.68873210113145,
+          155.6988649384494,
+          164.70899777576733,
+          173.71913061308527,
+          182.7292634504032
+        ],
+        "density.rho": [
+          0.0009017625096877688,
+          0.0010404952034858872,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.000971128856586828,
+          0.0009017625096877688,
+          0.0009017625096877688,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0008323961627887097,
+          0.0011098615503849463,
+          0.0007630298158896506,
+          0.0007630298158896506,
+          0.0008323961627887097
+        ],
+        "domain.largest": 1,
+        "domain.n": 2,
+        "domain.percolation": 0.5,
+        "hbonds.count": 460,
+        "hbonds.nop": 250,
+        "pairs.count": 2,
+        "pairs.n_anion": 2,
+        "pairs.n_cation": 2,
+        "rdf.g": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          3.4005345218449623,
+          62.975252511813366,
+          124.75520568110767,
+          105.26540430117146,
+          70.29985404390699,
+          39.61807507535845,
+          18.571388568244114,
+          9.769874821675963,
+          8.538536489214337,
+          10.527912674884007,
+          15.792114696925609,
+          21.02483765995683,
+          31.974481629082053,
+          32.82161968667179,
+          31.65332700220825,
+          39.09750918745482,
+          35.09607856743466,
+          24.077759013043845,
+          23.37305919365684,
+          14.517380420392918,
+          9.61358648672928,
+          10.909109052352155,
+          11.434751554842324,
+          11.281467227637036,
+          8.423543275715218,
+          7.804206727104366,
+          10.005443537191717,
+          8.558155813593917,
+          5.665841494764583,
+          4.9634854689855645,
+          10.529722089718218,
+          9.005717560567426,
+          11.816563200669858,
+          11.41604075070087,
+          9.786235258752118
+        ],
+        "rdf.r": [
+          0.05,
+          0.15000000000000002,
+          0.25,
+          0.35000000000000003,
+          0.45,
+          0.55,
+          0.65,
+          0.75,
+          0.8500000000000001,
+          0.9500000000000001,
+          1.05,
+          1.1500000000000001,
+          1.25,
+          1.35,
+          1.4500000000000002,
+          1.55,
+          1.6500000000000001,
+          1.75,
+          1.85,
+          1.9500000000000002,
+          2.0500000000000003,
+          2.15,
+          2.25,
+          2.35,
+          2.45,
+          2.5500000000000003,
+          2.6500000000000004,
+          2.75,
+          2.85,
+          2.95,
+          3.0500000000000003,
+          3.1500000000000004,
+          3.25,
+          3.35,
+          3.45,
+          3.5500000000000003,
+          3.6500000000000004,
+          3.75,
+          3.85,
+          3.95,
+          4.05,
+          4.15,
+          4.25,
+          4.3500000000000005,
+          4.45,
+          4.55,
+          4.65,
+          4.75,
+          4.8500000000000005,
+          4.95,
+          5.050000000000001,
+          5.15,
+          5.25,
+          5.3500000000000005,
+          5.45,
+          5.550000000000001,
+          5.65,
+          5.75,
+          5.8500000000000005,
+          5.95
+        ],
+        "read.ice_nop": 4096,
+        "read.water_nop": 250
+      }
+    },
+    "schema": "dseams.workflow-parity/v1",
+    "status": "pass",
+    "versions": {
+      "cli": "seams 2.6.0",
+      "lua": "Lua 5.4.8  Copyright (C) 1994-2025 Lua.org, PUC-Rio",
+      "python": "2.6.0"
+    }
+  }
+}

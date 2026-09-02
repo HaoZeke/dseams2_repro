@@ -1,0 +1,10 @@
+atoms      4096
+rings      8192
+six-rings  8192
+
+ringNetwork/ms 147.777
+findHC/ms      4926.91
+findDDC/ms     5107.98
+nHCrings       0
+nDDCrings      8192
+nCages         1955

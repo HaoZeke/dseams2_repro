@@ -1,0 +1,993 @@
+{
+  "checks": [
+    {
+      "key": "cages.ic",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "cages.ih",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "cages.nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "cages.water",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.clathrate",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.cubic",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.hexagonal",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.interClathrate",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.interfacial",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.reCubic",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.reHex",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.unclassified",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill.water",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.clathrate",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.cubic",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.hexagonal",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.interClathrate",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.interfacial",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.reCubic",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.reHex",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.unclassified",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "chill_plus.water",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "cn.value",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "density.centres",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "density.rho",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "domain.largest",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "domain.n",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "domain.percolation",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "hbonds.count",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "hbonds.nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "pairs.count",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "pairs.n_anion",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "pairs.n_cation",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "rdf.g",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "rdf.r",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "read.ice_nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    },
+    {
+      "key": "read.water_nop",
+      "pass": true,
+      "present": {
+        "cli": true,
+        "lua": true,
+        "python": true
+      }
+    }
+  ],
+  "inputs": {
+    "ice": {
+      "path": "/users/home/rog32/dseams2_repro/sources/seams-core/input/traj/mW_cubic.lammpstrj",
+      "sha256": "66d854880bb9431abc9eb25d68b0622d94a0160dd03e1ac7d636343d9830485d"
+    },
+    "ions": {
+      "path": "/users/home/rog32/dseams2_repro/data/fixtures/tiny-ions.lammpstrj",
+      "sha256": "f85df9d55e352d63f7b045e512cf8bffc4a94788abd5273e6b88d624f4a50f92"
+    },
+    "water": {
+      "path": "/users/home/rog32/dseams2_repro/sources/seams-core/input/traj/exampleTraj.lammpstrj",
+      "sha256": "4346edc9491bf4574c3120e62be65c6de022da38ba2ebb2105b5718648fa6358"
+    }
+  },
+  "interfaces": {
+    "cli": {
+      "cages.ic": 4096,
+      "cages.ih": 0,
+      "cages.nop": 4096,
+      "cages.water": 0,
+      "chill.clathrate": 0,
+      "chill.cubic": 4096,
+      "chill.hexagonal": 0,
+      "chill.interClathrate": 0,
+      "chill.interfacial": 0,
+      "chill.nop": 4096,
+      "chill.reCubic": 0,
+      "chill.reHex": 0,
+      "chill.unclassified": 0,
+      "chill.water": 0,
+      "chill_plus.clathrate": 0,
+      "chill_plus.cubic": 4096,
+      "chill_plus.hexagonal": 0,
+      "chill_plus.interClathrate": 0,
+      "chill_plus.interfacial": 0,
+      "chill_plus.nop": 4096,
+      "chill_plus.reCubic": 0,
+      "chill_plus.reHex": 0,
+      "chill_plus.unclassified": 0,
+      "chill_plus.water": 0,
+      "cn.value": 13.0602,
+      "density.centres": [
+        11.5367,
+        20.5469,
+        29.557,
+        38.5671,
+        47.5773,
+        56.5874,
+        65.5975,
+        74.6077,
+        83.6178,
+        92.6279,
+        101.638,
+        110.648,
+        119.658,
+        128.668,
+        137.679,
+        146.689,
+        155.699,
+        164.709,
+        173.719,
+        182.729
+      ],
+      "density.rho": [
+        0.000901763,
+        0.0010405,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000971129,
+        0.000901763,
+        0.000901763,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.000832396,
+        0.00110986,
+        0.00076303,
+        0.00076303,
+        0.000832396
+      ],
+      "domain.largest": 1,
+      "domain.n": 2,
+      "domain.percolation": 0.5,
+      "hbonds.count": 460,
+      "hbonds.nop": 250,
+      "pairs.count": 2,
+      "pairs.n_anion": 2,
+      "pairs.n_cation": 2,
+      "rdf.g": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.40053,
+        62.9753,
+        124.755,
+        105.265,
+        70.2999,
+        39.6181,
+        18.5714,
+        9.76987,
+        8.53854,
+        10.5279,
+        15.7921,
+        21.0248,
+        31.9745,
+        32.8216,
+        31.6533,
+        39.0975,
+        35.0961,
+        24.0778,
+        23.3731,
+        14.5174,
+        9.61359,
+        10.9091,
+        11.4348,
+        11.2815,
+        8.42354,
+        7.80421,
+        10.0054,
+        8.55816,
+        5.66584,
+        4.96349,
+        10.5297,
+        9.00572,
+        11.8166,
+        11.416,
+        9.78624
+      ],
+      "rdf.r": [
+        0.05,
+        0.15,
+        0.25,
+        0.35,
+        0.45,
+        0.55,
+        0.65,
+        0.75,
+        0.85,
+        0.95,
+        1.05,
+        1.15,
+        1.25,
+        1.35,
+        1.45,
+        1.55,
+        1.65,
+        1.75,
+        1.85,
+        1.95,
+        2.05,
+        2.15,
+        2.25,
+        2.35,
+        2.45,
+        2.55,
+        2.65,
+        2.75,
+        2.85,
+        2.95,
+        3.05,
+        3.15,
+        3.25,
+        3.35,
+        3.45,
+        3.55,
+        3.65,
+        3.75,
+        3.85,
+        3.95,
+        4.05,
+        4.15,
+        4.25,
+        4.35,
+        4.45,
+        4.55,
+        4.65,
+        4.75,
+        4.85,
+        4.95,
+        5.05,
+        5.15,
+        5.25,
+        5.35,
+        5.45,
+        5.55,
+        5.65,
+        5.75,
+        5.85,
+        5.95
+      ],
+      "read.ice_nop": 4096,
+      "read.water_nop": 250
+    },
+    "lua": {
+      "cages.ic": 4096,
+      "cages.ih": 0,
+      "cages.nop": 4096,
+      "cages.water": 0,
+      "chill.clathrate": 0,
+      "chill.cubic": 4096,
+      "chill.hexagonal": 0,
+      "chill.interClathrate": 0,
+      "chill.interfacial": 0,
+      "chill.nop": 4096,
+      "chill.reCubic": 0,
+      "chill.reHex": 0,
+      "chill.unclassified": 0,
+      "chill.water": 0,
+      "chill_plus.clathrate": 0,
+      "chill_plus.cubic": 4096,
+      "chill_plus.hexagonal": 0,
+      "chill_plus.interClathrate": 0,
+      "chill_plus.interfacial": 0,
+      "chill_plus.nop": 4096,
+      "chill_plus.reCubic": 0,
+      "chill_plus.reHex": 0,
+      "chill_plus.unclassified": 0,
+      "chill_plus.water": 0,
+      "cn.value": 13.060240963855,
+      "density.centres": [
+        11.53673954136242,
+        20.546872378680355,
+        29.557005215998295,
+        38.56713805331623,
+        47.57727089063417,
+        56.5874037279521,
+        65.59753656527005,
+        74.60766940258797,
+        83.61780223990591,
+        92.62793507722385,
+        101.63806791454178,
+        110.64820075185972,
+        119.65833358917766,
+        128.6684664264956,
+        137.6785992638135,
+        146.68873210113145,
+        155.6988649384494,
+        164.70899777576733,
+        173.71913061308527,
+        182.7292634504032
+      ],
+      "density.rho": [
+        0.0009017625096877688,
+        0.0010404952034858872,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.000971128856586828,
+        0.0009017625096877688,
+        0.0009017625096877688,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0011098615503849463,
+        0.0007630298158896506,
+        0.0007630298158896506,
+        0.0008323961627887097
+      ],
+      "domain.largest": 1,
+      "domain.n": 2,
+      "domain.percolation": 0.5,
+      "hbonds.count": 460,
+      "hbonds.nop": 250,
+      "pairs.count": 2,
+      "pairs.n_anion": 2,
+      "pairs.n_cation": 2,
+      "rdf.g": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.4005345218449623,
+        62.975252511813366,
+        124.75520568110767,
+        105.26540430117146,
+        70.29985404390699,
+        39.61807507535845,
+        18.571388568244114,
+        9.769874821675963,
+        8.538536489214337,
+        10.527912674884007,
+        15.792114696925609,
+        21.02483765995683,
+        31.974481629082053,
+        32.82161968667179,
+        31.65332700220825,
+        39.09750918745482,
+        35.09607856743466,
+        24.077759013043845,
+        23.37305919365684,
+        14.517380420392918,
+        9.61358648672928,
+        10.909109052352155,
+        11.434751554842324,
+        11.281467227637036,
+        8.423543275715218,
+        7.804206727104366,
+        10.005443537191717,
+        8.558155813593917,
+        5.665841494764583,
+        4.9634854689855645,
+        10.529722089718218,
+        9.005717560567426,
+        11.816563200669858,
+        11.41604075070087,
+        9.786235258752118
+      ],
+      "rdf.r": [
+        0.05,
+        0.15000000000000002,
+        0.25,
+        0.35000000000000003,
+        0.45,
+        0.55,
+        0.65,
+        0.75,
+        0.8500000000000001,
+        0.9500000000000001,
+        1.05,
+        1.1500000000000001,
+        1.25,
+        1.35,
+        1.4500000000000002,
+        1.55,
+        1.6500000000000001,
+        1.75,
+        1.85,
+        1.9500000000000002,
+        2.0500000000000003,
+        2.15,
+        2.25,
+        2.35,
+        2.45,
+        2.5500000000000003,
+        2.6500000000000004,
+        2.75,
+        2.85,
+        2.95,
+        3.0500000000000003,
+        3.1500000000000004,
+        3.25,
+        3.35,
+        3.45,
+        3.5500000000000003,
+        3.6500000000000004,
+        3.75,
+        3.85,
+        3.95,
+        4.05,
+        4.15,
+        4.25,
+        4.3500000000000005,
+        4.45,
+        4.55,
+        4.65,
+        4.75,
+        4.8500000000000005,
+        4.95,
+        5.050000000000001,
+        5.15,
+        5.25,
+        5.3500000000000005,
+        5.45,
+        5.550000000000001,
+        5.65,
+        5.75,
+        5.8500000000000005,
+        5.95
+      ],
+      "read.ice_nop": 4096,
+      "read.water_nop": 250
+    },
+    "python": {
+      "cages.ic": 4096,
+      "cages.ih": 0,
+      "cages.nop": 4096,
+      "cages.water": 0,
+      "chill.clathrate": 0,
+      "chill.cubic": 4096,
+      "chill.hexagonal": 0,
+      "chill.interClathrate": 0,
+      "chill.interfacial": 0,
+      "chill.nop": 4096,
+      "chill.reCubic": 0,
+      "chill.reHex": 0,
+      "chill.unclassified": 0,
+      "chill.water": 0,
+      "chill_plus.clathrate": 0,
+      "chill_plus.cubic": 4096,
+      "chill_plus.hexagonal": 0,
+      "chill_plus.interClathrate": 0,
+      "chill_plus.interfacial": 0,
+      "chill_plus.nop": 4096,
+      "chill_plus.reCubic": 0,
+      "chill_plus.reHex": 0,
+      "chill_plus.unclassified": 0,
+      "chill_plus.water": 0,
+      "cn.value": 13.060240963855417,
+      "density.centres": [
+        11.53673954136242,
+        20.546872378680355,
+        29.557005215998295,
+        38.56713805331623,
+        47.57727089063417,
+        56.5874037279521,
+        65.59753656527005,
+        74.60766940258797,
+        83.61780223990591,
+        92.62793507722385,
+        101.63806791454178,
+        110.64820075185972,
+        119.65833358917766,
+        128.6684664264956,
+        137.6785992638135,
+        146.68873210113145,
+        155.6988649384494,
+        164.70899777576733,
+        173.71913061308527,
+        182.7292634504032
+      ],
+      "density.rho": [
+        0.0009017625096877688,
+        0.0010404952034858872,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.000971128856586828,
+        0.0009017625096877688,
+        0.0009017625096877688,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0008323961627887097,
+        0.0011098615503849463,
+        0.0007630298158896506,
+        0.0007630298158896506,
+        0.0008323961627887097
+      ],
+      "domain.largest": 1,
+      "domain.n": 2,
+      "domain.percolation": 0.5,
+      "hbonds.count": 460,
+      "hbonds.nop": 250,
+      "pairs.count": 2,
+      "pairs.n_anion": 2,
+      "pairs.n_cation": 2,
+      "rdf.g": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.4005345218449623,
+        62.975252511813366,
+        124.75520568110767,
+        105.26540430117146,
+        70.29985404390699,
+        39.61807507535845,
+        18.571388568244114,
+        9.769874821675963,
+        8.538536489214337,
+        10.527912674884007,
+        15.792114696925609,
+        21.02483765995683,
+        31.974481629082053,
+        32.82161968667179,
+        31.65332700220825,
+        39.09750918745482,
+        35.09607856743466,
+        24.077759013043845,
+        23.37305919365684,
+        14.517380420392918,
+        9.61358648672928,
+        10.909109052352155,
+        11.434751554842324,
+        11.281467227637036,
+        8.423543275715218,
+        7.804206727104366,
+        10.005443537191717,
+        8.558155813593917,
+        5.665841494764583,
+        4.9634854689855645,
+        10.529722089718218,
+        9.005717560567426,
+        11.816563200669858,
+        11.41604075070087,
+        9.786235258752118
+      ],
+      "rdf.r": [
+        0.05,
+        0.15000000000000002,
+        0.25,
+        0.35000000000000003,
+        0.45,
+        0.55,
+        0.65,
+        0.75,
+        0.8500000000000001,
+        0.9500000000000001,
+        1.05,
+        1.1500000000000001,
+        1.25,
+        1.35,
+        1.4500000000000002,
+        1.55,
+        1.6500000000000001,
+        1.75,
+        1.85,
+        1.9500000000000002,
+        2.0500000000000003,
+        2.15,
+        2.25,
+        2.35,
+        2.45,
+        2.5500000000000003,
+        2.6500000000000004,
+        2.75,
+        2.85,
+        2.95,
+        3.0500000000000003,
+        3.1500000000000004,
+        3.25,
+        3.35,
+        3.45,
+        3.5500000000000003,
+        3.6500000000000004,
+        3.75,
+        3.85,
+        3.95,
+        4.05,
+        4.15,
+        4.25,
+        4.3500000000000005,
+        4.45,
+        4.55,
+        4.65,
+        4.75,
+        4.8500000000000005,
+        4.95,
+        5.050000000000001,
+        5.15,
+        5.25,
+        5.3500000000000005,
+        5.45,
+        5.550000000000001,
+        5.65,
+        5.75,
+        5.8500000000000005,
+        5.95
+      ],
+      "read.ice_nop": 4096,
+      "read.water_nop": 250
+    }
+  },
+  "schema": "dseams.workflow-parity/v1",
+  "status": "pass",
+  "versions": {
+    "cli": "seams 2.6.0",
+    "lua": "Lua 5.4.8  Copyright (C) 1994-2025 Lua.org, PUC-Rio",
+    "python": "2.6.0"
+  }
+}

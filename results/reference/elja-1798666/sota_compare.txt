@@ -1,0 +1,731 @@
+# ic n=512 ih n=360 null n=360
+method=dseams-topo system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.4
+method=dseams-topo-4nn system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=62.0
+method=dseams-topo-seeded system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=59.5
+method=dseams-topo-seeded5 system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=56.6
+method=dseams-topo-seeded-adj system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=59.5
+method=chill+ system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.0
+method=freud-ld system=ic sigma=0.00 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=10.7
+method=freud-q6 system=ic sigma=0.00 seed=0 acc=nan cubic=nan hex=nan crystal=1.000 ms=5.6 note=ice-vs-not-only
+# ovito-ptm failed: libxkbcommon.so.0: cannot open shared object file: No such file or directory
+method=dseams-topo system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=37.7
+method=dseams-topo-4nn system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.3
+method=dseams-topo-seeded system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=66.2
+method=dseams-topo-seeded5 system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.0
+method=dseams-topo-seeded-adj system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.5
+method=chill+ system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=5.2
+method=freud-ld system=ic sigma=0.05 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=12.5
+method=freud-q6 system=ic sigma=0.05 seed=0 acc=nan cubic=nan hex=nan crystal=1.000 ms=5.2 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.4
+method=dseams-topo-4nn system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.8
+method=dseams-topo-seeded system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=44.6
+method=dseams-topo-seeded5 system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=60.9
+method=dseams-topo-seeded-adj system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.7
+method=chill+ system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=3.6
+method=freud-ld system=ic sigma=0.10 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=9.5
+method=freud-q6 system=ic sigma=0.10 seed=0 acc=nan cubic=nan hex=nan crystal=0.998 ms=4.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=37.0
+method=dseams-topo-4nn system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.0
+method=dseams-topo-seeded system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=44.7
+method=dseams-topo-seeded5 system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.2
+method=dseams-topo-seeded-adj system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.3
+method=chill+ system=ic sigma=0.15 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.3
+method=freud-ld system=ic sigma=0.15 seed=0 acc=0.977 cubic=0.977 hex=0.023 crystal=1.000 ms=9.4
+method=freud-q6 system=ic sigma=0.15 seed=0 acc=nan cubic=nan hex=nan crystal=0.865 ms=4.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.20 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=92.9
+method=dseams-topo-4nn system=ic sigma=0.20 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.6
+method=dseams-topo-seeded system=ic sigma=0.20 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.5
+method=dseams-topo-seeded5 system=ic sigma=0.20 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.4
+method=dseams-topo-seeded-adj system=ic sigma=0.20 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.6
+method=chill+ system=ic sigma=0.20 seed=0 acc=0.961 cubic=0.961 hex=0.000 crystal=0.961 ms=4.0
+method=freud-ld system=ic sigma=0.20 seed=0 acc=0.541 cubic=0.541 hex=0.449 crystal=0.990 ms=9.8
+method=freud-q6 system=ic sigma=0.20 seed=0 acc=nan cubic=nan hex=nan crystal=0.619 ms=4.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.25 seed=0 acc=0.994 cubic=0.994 hex=0.000 crystal=0.994 ms=33.0
+method=dseams-topo-4nn system=ic sigma=0.25 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.5
+method=dseams-topo-seeded system=ic sigma=0.25 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=54.7
+method=dseams-topo-seeded5 system=ic sigma=0.25 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=50.2
+method=dseams-topo-seeded-adj system=ic sigma=0.25 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.3
+method=chill+ system=ic sigma=0.25 seed=0 acc=0.844 cubic=0.844 hex=0.000 crystal=0.844 ms=3.8
+method=freud-ld system=ic sigma=0.25 seed=0 acc=0.111 cubic=0.111 hex=0.855 crystal=0.967 ms=9.6
+method=freud-q6 system=ic sigma=0.25 seed=0 acc=nan cubic=nan hex=nan crystal=0.416 ms=4.6 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.30 seed=0 acc=0.938 cubic=0.938 hex=0.000 crystal=0.938 ms=25.2
+method=dseams-topo-4nn system=ic sigma=0.30 seed=0 acc=0.984 cubic=0.984 hex=0.000 crystal=0.984 ms=35.3
+method=dseams-topo-seeded system=ic sigma=0.30 seed=0 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=47.5
+method=dseams-topo-seeded5 system=ic sigma=0.30 seed=0 acc=0.990 cubic=0.990 hex=0.000 crystal=0.990 ms=34.3
+method=dseams-topo-seeded-adj system=ic sigma=0.30 seed=0 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.4
+method=chill+ system=ic sigma=0.30 seed=0 acc=0.584 cubic=0.584 hex=0.000 crystal=0.584 ms=3.8
+method=freud-ld system=ic sigma=0.30 seed=0 acc=0.023 cubic=0.023 hex=0.742 crystal=0.766 ms=9.2
+method=freud-q6 system=ic sigma=0.30 seed=0 acc=nan cubic=nan hex=nan crystal=0.346 ms=4.2 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.35 seed=0 acc=0.826 cubic=0.826 hex=0.000 crystal=0.826 ms=22.2
+method=dseams-topo-4nn system=ic sigma=0.35 seed=0 acc=0.908 cubic=0.908 hex=0.000 crystal=0.908 ms=28.1
+method=dseams-topo-seeded system=ic sigma=0.35 seed=0 acc=0.967 cubic=0.967 hex=0.000 crystal=0.967 ms=32.3
+method=dseams-topo-seeded5 system=ic sigma=0.35 seed=0 acc=0.938 cubic=0.938 hex=0.000 crystal=0.938 ms=28.7
+method=dseams-topo-seeded-adj system=ic sigma=0.35 seed=0 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=39.8
+method=chill+ system=ic sigma=0.35 seed=0 acc=0.389 cubic=0.389 hex=0.006 crystal=0.395 ms=5.4
+method=freud-ld system=ic sigma=0.35 seed=0 acc=0.004 cubic=0.004 hex=0.463 crystal=0.467 ms=18.1
+method=freud-q6 system=ic sigma=0.35 seed=0 acc=nan cubic=nan hex=nan crystal=0.248 ms=13.2 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.40 seed=0 acc=0.227 cubic=0.227 hex=0.000 crystal=0.227 ms=12.1
+method=dseams-topo-4nn system=ic sigma=0.40 seed=0 acc=0.295 cubic=0.295 hex=0.000 crystal=0.295 ms=18.6
+method=dseams-topo-seeded system=ic sigma=0.40 seed=0 acc=0.580 cubic=0.580 hex=0.000 crystal=0.580 ms=32.3
+method=dseams-topo-seeded5 system=ic sigma=0.40 seed=0 acc=0.391 cubic=0.391 hex=0.000 crystal=0.391 ms=25.6
+method=dseams-topo-seeded-adj system=ic sigma=0.40 seed=0 acc=0.990 cubic=0.990 hex=0.000 crystal=0.990 ms=26.5
+method=chill+ system=ic sigma=0.40 seed=0 acc=0.076 cubic=0.076 hex=0.008 crystal=0.084 ms=4.1
+method=freud-ld system=ic sigma=0.40 seed=0 acc=0.000 cubic=0.000 hex=0.115 crystal=0.115 ms=9.1
+method=freud-q6 system=ic sigma=0.40 seed=0 acc=nan cubic=nan hex=nan crystal=0.186 ms=4.1 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=36.6
+method=dseams-topo-4nn system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.7
+method=dseams-topo-seeded system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=44.3
+method=dseams-topo-seeded5 system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.0
+method=dseams-topo-seeded-adj system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=51.7
+method=chill+ system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.6
+method=freud-ld system=ic sigma=0.00 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=9.1
+method=freud-q6 system=ic sigma=0.00 seed=1 acc=nan cubic=nan hex=nan crystal=1.000 ms=3.9 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=34.9
+method=dseams-topo-4nn system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.3
+method=dseams-topo-seeded system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=49.9
+method=dseams-topo-seeded5 system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.5
+method=dseams-topo-seeded-adj system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.6
+method=chill+ system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.4
+method=freud-ld system=ic sigma=0.05 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=9.2
+method=freud-q6 system=ic sigma=0.05 seed=1 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.5
+method=dseams-topo-4nn system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.8
+method=dseams-topo-seeded system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=64.4
+method=dseams-topo-seeded5 system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.7
+method=dseams-topo-seeded-adj system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.8
+method=chill+ system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=3.8
+method=freud-ld system=ic sigma=0.10 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=9.5
+method=freud-q6 system=ic sigma=0.10 seed=1 acc=nan cubic=nan hex=nan crystal=0.996 ms=4.2 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.6
+method=dseams-topo-4nn system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.7
+method=dseams-topo-seeded system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.5
+method=dseams-topo-seeded5 system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.0
+method=dseams-topo-seeded-adj system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=57.4
+method=chill+ system=ic sigma=0.15 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.5
+method=freud-ld system=ic sigma=0.15 seed=1 acc=0.980 cubic=0.980 hex=0.020 crystal=1.000 ms=9.7
+method=freud-q6 system=ic sigma=0.15 seed=1 acc=nan cubic=nan hex=nan crystal=0.906 ms=4.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.20 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.0
+method=dseams-topo-4nn system=ic sigma=0.20 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.2
+method=dseams-topo-seeded system=ic sigma=0.20 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.0
+method=dseams-topo-seeded5 system=ic sigma=0.20 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.7
+method=dseams-topo-seeded-adj system=ic sigma=0.20 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=44.9
+method=chill+ system=ic sigma=0.20 seed=1 acc=0.963 cubic=0.963 hex=0.000 crystal=0.963 ms=4.3
+method=freud-ld system=ic sigma=0.20 seed=1 acc=0.742 cubic=0.742 hex=0.258 crystal=1.000 ms=12.2
+method=freud-q6 system=ic sigma=0.20 seed=1 acc=nan cubic=nan hex=nan crystal=0.715 ms=7.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.25 seed=1 acc=0.994 cubic=0.994 hex=0.000 crystal=0.994 ms=35.9
+method=dseams-topo-4nn system=ic sigma=0.25 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.0
+method=dseams-topo-seeded system=ic sigma=0.25 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.5
+method=dseams-topo-seeded5 system=ic sigma=0.25 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.9
+method=dseams-topo-seeded-adj system=ic sigma=0.25 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.8
+method=chill+ system=ic sigma=0.25 seed=1 acc=0.826 cubic=0.826 hex=0.000 crystal=0.826 ms=4.2
+method=freud-ld system=ic sigma=0.25 seed=1 acc=0.098 cubic=0.098 hex=0.883 crystal=0.980 ms=10.1
+method=freud-q6 system=ic sigma=0.25 seed=1 acc=nan cubic=nan hex=nan crystal=0.422 ms=3.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.30 seed=1 acc=0.957 cubic=0.957 hex=0.000 crystal=0.957 ms=31.3
+method=dseams-topo-4nn system=ic sigma=0.30 seed=1 acc=0.984 cubic=0.984 hex=0.000 crystal=0.984 ms=48.9
+method=dseams-topo-seeded system=ic sigma=0.30 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.8
+method=dseams-topo-seeded5 system=ic sigma=0.30 seed=1 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=32.3
+method=dseams-topo-seeded-adj system=ic sigma=0.30 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.0
+method=chill+ system=ic sigma=0.30 seed=1 acc=0.568 cubic=0.568 hex=0.002 crystal=0.570 ms=5.3
+method=freud-ld system=ic sigma=0.30 seed=1 acc=0.012 cubic=0.012 hex=0.727 crystal=0.738 ms=10.0
+method=freud-q6 system=ic sigma=0.30 seed=1 acc=nan cubic=nan hex=nan crystal=0.328 ms=4.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.35 seed=1 acc=0.838 cubic=0.838 hex=0.000 crystal=0.838 ms=22.2
+method=dseams-topo-4nn system=ic sigma=0.35 seed=1 acc=0.928 cubic=0.928 hex=0.000 crystal=0.928 ms=30.2
+method=dseams-topo-seeded system=ic sigma=0.35 seed=1 acc=0.977 cubic=0.977 hex=0.000 crystal=0.977 ms=33.8
+method=dseams-topo-seeded5 system=ic sigma=0.35 seed=1 acc=0.963 cubic=0.963 hex=0.000 crystal=0.963 ms=106.6
+method=dseams-topo-seeded-adj system=ic sigma=0.35 seed=1 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=31.9
+method=chill+ system=ic sigma=0.35 seed=1 acc=0.354 cubic=0.354 hex=0.006 crystal=0.359 ms=4.0
+method=freud-ld system=ic sigma=0.35 seed=1 acc=0.000 cubic=0.000 hex=0.428 crystal=0.428 ms=9.6
+method=freud-q6 system=ic sigma=0.35 seed=1 acc=nan cubic=nan hex=nan crystal=0.264 ms=4.6 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.40 seed=1 acc=0.344 cubic=0.344 hex=0.000 crystal=0.344 ms=16.2
+method=dseams-topo-4nn system=ic sigma=0.40 seed=1 acc=0.484 cubic=0.484 hex=0.000 crystal=0.484 ms=17.6
+method=dseams-topo-seeded system=ic sigma=0.40 seed=1 acc=0.754 cubic=0.754 hex=0.000 crystal=0.754 ms=25.0
+method=dseams-topo-seeded5 system=ic sigma=0.40 seed=1 acc=0.631 cubic=0.631 hex=0.000 crystal=0.631 ms=22.4
+method=dseams-topo-seeded-adj system=ic sigma=0.40 seed=1 acc=0.996 cubic=0.996 hex=0.000 crystal=0.996 ms=23.7
+method=chill+ system=ic sigma=0.40 seed=1 acc=0.100 cubic=0.100 hex=0.004 crystal=0.104 ms=5.0
+method=freud-ld system=ic sigma=0.40 seed=1 acc=0.000 cubic=0.000 hex=0.133 crystal=0.133 ms=19.6
+method=freud-q6 system=ic sigma=0.40 seed=1 acc=nan cubic=nan hex=nan crystal=0.195 ms=12.9 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.5
+method=dseams-topo-4nn system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=51.6
+method=dseams-topo-seeded5 system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.0
+method=dseams-topo-seeded-adj system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.6
+method=chill+ system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.8
+method=freud-ld system=ic sigma=0.00 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=29.0
+method=freud-q6 system=ic sigma=0.00 seed=2 acc=nan cubic=nan hex=nan crystal=1.000 ms=24.1 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=36.2
+method=dseams-topo-4nn system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.9
+method=dseams-topo-seeded system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded5 system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.9
+method=dseams-topo-seeded-adj system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.2
+method=chill+ system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=3.9
+method=freud-ld system=ic sigma=0.05 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=12.0
+method=freud-q6 system=ic sigma=0.05 seed=2 acc=nan cubic=nan hex=nan crystal=1.000 ms=6.8 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.0
+method=dseams-topo-4nn system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.6
+method=dseams-topo-seeded system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded5 system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.2
+method=dseams-topo-seeded-adj system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=51.4
+method=chill+ system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.3
+method=freud-ld system=ic sigma=0.10 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=11.6
+method=freud-q6 system=ic sigma=0.10 seed=2 acc=nan cubic=nan hex=nan crystal=0.996 ms=6.5 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=38.0
+method=dseams-topo-4nn system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.4
+method=dseams-topo-seeded system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=54.5
+method=dseams-topo-seeded5 system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=54.0
+method=dseams-topo-seeded-adj system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.7
+method=chill+ system=ic sigma=0.15 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=3.8
+method=freud-ld system=ic sigma=0.15 seed=2 acc=0.982 cubic=0.982 hex=0.018 crystal=1.000 ms=13.5
+method=freud-q6 system=ic sigma=0.15 seed=2 acc=nan cubic=nan hex=nan crystal=0.863 ms=6.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.20 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=35.7
+method=dseams-topo-4nn system=ic sigma=0.20 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.2
+method=dseams-topo-seeded system=ic sigma=0.20 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.1
+method=dseams-topo-seeded5 system=ic sigma=0.20 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.3
+method=dseams-topo-seeded-adj system=ic sigma=0.20 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=62.8
+method=chill+ system=ic sigma=0.20 seed=2 acc=0.971 cubic=0.971 hex=0.000 crystal=0.971 ms=5.6
+method=freud-ld system=ic sigma=0.20 seed=2 acc=0.623 cubic=0.623 hex=0.377 crystal=1.000 ms=13.5
+method=freud-q6 system=ic sigma=0.20 seed=2 acc=nan cubic=nan hex=nan crystal=0.670 ms=7.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.25 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.8
+method=dseams-topo-4nn system=ic sigma=0.25 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.8
+method=dseams-topo-seeded system=ic sigma=0.25 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=54.1
+method=dseams-topo-seeded5 system=ic sigma=0.25 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.2
+method=dseams-topo-seeded-adj system=ic sigma=0.25 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=65.4
+method=chill+ system=ic sigma=0.25 seed=2 acc=0.848 cubic=0.848 hex=0.002 crystal=0.850 ms=5.2
+method=freud-ld system=ic sigma=0.25 seed=2 acc=0.107 cubic=0.107 hex=0.861 crystal=0.969 ms=15.2
+method=freud-q6 system=ic sigma=0.25 seed=2 acc=nan cubic=nan hex=nan crystal=0.402 ms=6.8 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.30 seed=2 acc=0.926 cubic=0.926 hex=0.000 crystal=0.926 ms=30.0
+method=dseams-topo-4nn system=ic sigma=0.30 seed=2 acc=0.984 cubic=0.984 hex=0.000 crystal=0.984 ms=37.1
+method=dseams-topo-seeded system=ic sigma=0.30 seed=2 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=38.4
+method=dseams-topo-seeded5 system=ic sigma=0.30 seed=2 acc=0.992 cubic=0.992 hex=0.000 crystal=0.992 ms=34.2
+method=dseams-topo-seeded-adj system=ic sigma=0.30 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=37.6
+method=chill+ system=ic sigma=0.30 seed=2 acc=0.557 cubic=0.557 hex=0.006 crystal=0.562 ms=3.9
+method=freud-ld system=ic sigma=0.30 seed=2 acc=0.010 cubic=0.010 hex=0.680 crystal=0.689 ms=11.2
+method=freud-q6 system=ic sigma=0.30 seed=2 acc=nan cubic=nan hex=nan crystal=0.316 ms=4.4 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.35 seed=2 acc=0.672 cubic=0.672 hex=0.000 crystal=0.672 ms=17.5
+method=dseams-topo-4nn system=ic sigma=0.35 seed=2 acc=0.828 cubic=0.828 hex=0.000 crystal=0.828 ms=26.6
+method=dseams-topo-seeded system=ic sigma=0.35 seed=2 acc=0.979 cubic=0.979 hex=0.000 crystal=0.979 ms=39.1
+method=dseams-topo-seeded5 system=ic sigma=0.35 seed=2 acc=0.955 cubic=0.955 hex=0.000 crystal=0.955 ms=30.0
+method=dseams-topo-seeded-adj system=ic sigma=0.35 seed=2 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=31.6
+method=chill+ system=ic sigma=0.35 seed=2 acc=0.213 cubic=0.213 hex=0.000 crystal=0.213 ms=4.4
+method=freud-ld system=ic sigma=0.35 seed=2 acc=0.000 cubic=0.000 hex=0.289 crystal=0.289 ms=11.0
+method=freud-q6 system=ic sigma=0.35 seed=2 acc=nan cubic=nan hex=nan crystal=0.236 ms=5.8 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.40 seed=2 acc=0.383 cubic=0.383 hex=0.000 crystal=0.383 ms=16.6
+method=dseams-topo-4nn system=ic sigma=0.40 seed=2 acc=0.396 cubic=0.396 hex=0.000 crystal=0.396 ms=16.3
+method=dseams-topo-seeded system=ic sigma=0.40 seed=2 acc=0.805 cubic=0.805 hex=0.000 crystal=0.805 ms=22.8
+method=dseams-topo-seeded5 system=ic sigma=0.40 seed=2 acc=0.699 cubic=0.699 hex=0.000 crystal=0.699 ms=35.2
+method=dseams-topo-seeded-adj system=ic sigma=0.40 seed=2 acc=0.990 cubic=0.990 hex=0.000 crystal=0.990 ms=24.3
+method=chill+ system=ic sigma=0.40 seed=2 acc=0.107 cubic=0.107 hex=0.004 crystal=0.111 ms=4.0
+method=freud-ld system=ic sigma=0.40 seed=2 acc=0.000 cubic=0.000 hex=0.145 crystal=0.145 ms=10.8
+method=freud-q6 system=ic sigma=0.40 seed=2 acc=nan cubic=nan hex=nan crystal=0.197 ms=5.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=35.8
+method=dseams-topo-4nn system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.4
+method=dseams-topo-seeded system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.3
+method=dseams-topo-seeded5 system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.6
+method=dseams-topo-seeded-adj system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.9
+method=chill+ system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.0
+method=freud-ld system=ic sigma=0.00 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=11.7
+method=freud-q6 system=ic sigma=0.00 seed=3 acc=nan cubic=nan hex=nan crystal=1.000 ms=6.5 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=34.0
+method=dseams-topo-4nn system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.6
+method=dseams-topo-seeded system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=67.1
+method=dseams-topo-seeded5 system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.9
+method=dseams-topo-seeded-adj system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.3
+method=chill+ system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.2
+method=freud-ld system=ic sigma=0.05 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=9.9
+method=freud-q6 system=ic sigma=0.05 seed=3 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.3
+method=dseams-topo-4nn system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.6
+method=dseams-topo-seeded system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=57.8
+method=dseams-topo-seeded5 system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=40.9
+method=dseams-topo-seeded-adj system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=55.2
+method=chill+ system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=3.7
+method=freud-ld system=ic sigma=0.10 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=16.6
+method=freud-q6 system=ic sigma=0.10 seed=3 acc=nan cubic=nan hex=nan crystal=1.000 ms=11.4 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.15 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=35.6
+method=dseams-topo-4nn system=ic sigma=0.15 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.0
+method=dseams-topo-seeded system=ic sigma=0.15 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=109.3
+method=dseams-topo-seeded5 system=ic sigma=0.15 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.4
+method=dseams-topo-seeded-adj system=ic sigma=0.15 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=66.8
+method=chill+ system=ic sigma=0.15 seed=3 acc=0.996 cubic=0.996 hex=0.000 crystal=0.996 ms=4.3
+method=freud-ld system=ic sigma=0.15 seed=3 acc=0.971 cubic=0.971 hex=0.029 crystal=1.000 ms=16.8
+method=freud-q6 system=ic sigma=0.15 seed=3 acc=nan cubic=nan hex=nan crystal=0.834 ms=7.8 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.20 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=35.3
+method=dseams-topo-4nn system=ic sigma=0.20 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.2
+method=dseams-topo-seeded system=ic sigma=0.20 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=50.2
+method=dseams-topo-seeded5 system=ic sigma=0.20 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.9
+method=dseams-topo-seeded-adj system=ic sigma=0.20 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.3
+method=chill+ system=ic sigma=0.20 seed=3 acc=0.980 cubic=0.980 hex=0.000 crystal=0.980 ms=4.0
+method=freud-ld system=ic sigma=0.20 seed=3 acc=0.551 cubic=0.551 hex=0.447 crystal=0.998 ms=10.3
+method=freud-q6 system=ic sigma=0.20 seed=3 acc=nan cubic=nan hex=nan crystal=0.637 ms=5.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.25 seed=3 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=32.7
+method=dseams-topo-4nn system=ic sigma=0.25 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=33.9
+method=dseams-topo-seeded system=ic sigma=0.25 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=63.3
+method=dseams-topo-seeded5 system=ic sigma=0.25 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.6
+method=dseams-topo-seeded-adj system=ic sigma=0.25 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.2
+method=chill+ system=ic sigma=0.25 seed=3 acc=0.887 cubic=0.887 hex=0.000 crystal=0.887 ms=4.2
+method=freud-ld system=ic sigma=0.25 seed=3 acc=0.145 cubic=0.145 hex=0.811 crystal=0.955 ms=10.1
+method=freud-q6 system=ic sigma=0.25 seed=3 acc=nan cubic=nan hex=nan crystal=0.469 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.30 seed=3 acc=0.934 cubic=0.934 hex=0.000 crystal=0.934 ms=24.1
+method=dseams-topo-4nn system=ic sigma=0.30 seed=3 acc=0.979 cubic=0.979 hex=0.000 crystal=0.979 ms=42.6
+method=dseams-topo-seeded system=ic sigma=0.30 seed=3 acc=0.998 cubic=0.998 hex=0.000 crystal=0.998 ms=43.2
+method=dseams-topo-seeded5 system=ic sigma=0.30 seed=3 acc=0.988 cubic=0.988 hex=0.000 crystal=0.988 ms=35.6
+method=dseams-topo-seeded-adj system=ic sigma=0.30 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=35.1
+method=chill+ system=ic sigma=0.30 seed=3 acc=0.535 cubic=0.535 hex=0.006 crystal=0.541 ms=4.4
+method=freud-ld system=ic sigma=0.30 seed=3 acc=0.012 cubic=0.012 hex=0.689 crystal=0.701 ms=23.3
+method=freud-q6 system=ic sigma=0.30 seed=3 acc=nan cubic=nan hex=nan crystal=0.309 ms=16.1 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.35 seed=3 acc=0.771 cubic=0.771 hex=0.000 crystal=0.771 ms=19.4
+method=dseams-topo-4nn system=ic sigma=0.35 seed=3 acc=0.883 cubic=0.883 hex=0.000 crystal=0.883 ms=30.1
+method=dseams-topo-seeded system=ic sigma=0.35 seed=3 acc=0.982 cubic=0.982 hex=0.000 crystal=0.982 ms=46.4
+method=dseams-topo-seeded5 system=ic sigma=0.35 seed=3 acc=0.943 cubic=0.943 hex=0.000 crystal=0.943 ms=30.8
+method=dseams-topo-seeded-adj system=ic sigma=0.35 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=32.4
+method=chill+ system=ic sigma=0.35 seed=3 acc=0.305 cubic=0.305 hex=0.004 crystal=0.309 ms=4.2
+method=freud-ld system=ic sigma=0.35 seed=3 acc=0.000 cubic=0.000 hex=0.381 crystal=0.381 ms=15.9
+method=freud-q6 system=ic sigma=0.35 seed=3 acc=nan cubic=nan hex=nan crystal=0.248 ms=11.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.40 seed=3 acc=0.525 cubic=0.525 hex=0.000 crystal=0.525 ms=16.0
+method=dseams-topo-4nn system=ic sigma=0.40 seed=3 acc=0.631 cubic=0.631 hex=0.000 crystal=0.631 ms=24.9
+method=dseams-topo-seeded system=ic sigma=0.40 seed=3 acc=0.871 cubic=0.871 hex=0.000 crystal=0.871 ms=26.9
+method=dseams-topo-seeded5 system=ic sigma=0.40 seed=3 acc=0.820 cubic=0.820 hex=0.000 crystal=0.820 ms=30.4
+method=dseams-topo-seeded-adj system=ic sigma=0.40 seed=3 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=26.5
+method=chill+ system=ic sigma=0.40 seed=3 acc=0.125 cubic=0.125 hex=0.004 crystal=0.129 ms=6.0
+method=freud-ld system=ic sigma=0.40 seed=3 acc=0.000 cubic=0.000 hex=0.162 crystal=0.162 ms=20.0
+method=freud-q6 system=ic sigma=0.40 seed=3 acc=nan cubic=nan hex=nan crystal=0.203 ms=12.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.7
+method=dseams-topo-4nn system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.7
+method=dseams-topo-seeded system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=65.7
+method=dseams-topo-seeded5 system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.5
+method=dseams-topo-seeded-adj system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.3
+method=chill+ system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.1
+method=freud-ld system=ic sigma=0.00 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=15.8
+method=freud-q6 system=ic sigma=0.00 seed=4 acc=nan cubic=nan hex=nan crystal=1.000 ms=9.7 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=51.8
+method=dseams-topo-4nn system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=59.7
+method=dseams-topo-seeded system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=71.8
+method=dseams-topo-seeded5 system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=53.9
+method=dseams-topo-seeded-adj system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=48.4
+method=chill+ system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.3
+method=freud-ld system=ic sigma=0.05 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=11.0
+method=freud-q6 system=ic sigma=0.05 seed=4 acc=nan cubic=nan hex=nan crystal=1.000 ms=5.8 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=36.6
+method=dseams-topo-4nn system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.3
+method=dseams-topo-seeded system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.2
+method=dseams-topo-seeded5 system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=39.5
+method=dseams-topo-seeded-adj system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=55.1
+method=chill+ system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.2
+method=freud-ld system=ic sigma=0.10 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=14.4
+method=freud-q6 system=ic sigma=0.10 seed=4 acc=nan cubic=nan hex=nan crystal=0.994 ms=9.3 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=36.3
+method=dseams-topo-4nn system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=49.6
+method=dseams-topo-seeded system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=47.1
+method=dseams-topo-seeded5 system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=49.7
+method=dseams-topo-seeded-adj system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=45.2
+method=chill+ system=ic sigma=0.15 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=4.3
+method=freud-ld system=ic sigma=0.15 seed=4 acc=0.986 cubic=0.986 hex=0.014 crystal=1.000 ms=11.4
+method=freud-q6 system=ic sigma=0.15 seed=4 acc=nan cubic=nan hex=nan crystal=0.896 ms=6.4 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.20 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.7
+method=dseams-topo-4nn system=ic sigma=0.20 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=42.5
+method=dseams-topo-seeded system=ic sigma=0.20 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=46.0
+method=dseams-topo-seeded5 system=ic sigma=0.20 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.9
+method=dseams-topo-seeded-adj system=ic sigma=0.20 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=60.3
+method=chill+ system=ic sigma=0.20 seed=4 acc=0.971 cubic=0.971 hex=0.000 crystal=0.971 ms=3.9
+method=freud-ld system=ic sigma=0.20 seed=4 acc=0.547 cubic=0.547 hex=0.453 crystal=1.000 ms=11.5
+method=freud-q6 system=ic sigma=0.20 seed=4 acc=nan cubic=nan hex=nan crystal=0.633 ms=6.4 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.25 seed=4 acc=0.994 cubic=0.994 hex=0.000 crystal=0.994 ms=31.2
+method=dseams-topo-4nn system=ic sigma=0.25 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=52.9
+method=dseams-topo-seeded system=ic sigma=0.25 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=58.8
+method=dseams-topo-seeded5 system=ic sigma=0.25 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.4
+method=dseams-topo-seeded-adj system=ic sigma=0.25 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=41.5
+method=chill+ system=ic sigma=0.25 seed=4 acc=0.842 cubic=0.842 hex=0.000 crystal=0.842 ms=4.5
+method=freud-ld system=ic sigma=0.25 seed=4 acc=0.111 cubic=0.111 hex=0.869 crystal=0.980 ms=9.6
+method=freud-q6 system=ic sigma=0.25 seed=4 acc=nan cubic=nan hex=nan crystal=0.453 ms=4.6 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.30 seed=4 acc=0.943 cubic=0.943 hex=0.000 crystal=0.943 ms=30.1
+method=dseams-topo-4nn system=ic sigma=0.30 seed=4 acc=0.971 cubic=0.971 hex=0.000 crystal=0.971 ms=37.4
+method=dseams-topo-seeded system=ic sigma=0.30 seed=4 acc=0.996 cubic=0.996 hex=0.000 crystal=0.996 ms=47.6
+method=dseams-topo-seeded5 system=ic sigma=0.30 seed=4 acc=0.990 cubic=0.990 hex=0.000 crystal=0.990 ms=35.5
+method=dseams-topo-seeded-adj system=ic sigma=0.30 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=43.7
+method=chill+ system=ic sigma=0.30 seed=4 acc=0.525 cubic=0.525 hex=0.002 crystal=0.527 ms=3.9
+method=freud-ld system=ic sigma=0.30 seed=4 acc=0.014 cubic=0.014 hex=0.646 crystal=0.660 ms=10.1
+method=freud-q6 system=ic sigma=0.30 seed=4 acc=nan cubic=nan hex=nan crystal=0.283 ms=5.0 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.35 seed=4 acc=0.674 cubic=0.674 hex=0.000 crystal=0.674 ms=22.4
+method=dseams-topo-4nn system=ic sigma=0.35 seed=4 acc=0.875 cubic=0.875 hex=0.000 crystal=0.875 ms=28.3
+method=dseams-topo-seeded system=ic sigma=0.35 seed=4 acc=0.975 cubic=0.975 hex=0.000 crystal=0.975 ms=33.5
+method=dseams-topo-seeded5 system=ic sigma=0.35 seed=4 acc=0.932 cubic=0.932 hex=0.000 crystal=0.932 ms=27.8
+method=dseams-topo-seeded-adj system=ic sigma=0.35 seed=4 acc=1.000 cubic=1.000 hex=0.000 crystal=1.000 ms=32.9
+method=chill+ system=ic sigma=0.35 seed=4 acc=0.250 cubic=0.250 hex=0.000 crystal=0.250 ms=4.0
+method=freud-ld system=ic sigma=0.35 seed=4 acc=0.002 cubic=0.002 hex=0.322 crystal=0.324 ms=18.1
+method=freud-q6 system=ic sigma=0.35 seed=4 acc=nan cubic=nan hex=nan crystal=0.258 ms=10.9 note=ice-vs-not-only
+method=dseams-topo system=ic sigma=0.40 seed=4 acc=0.211 cubic=0.211 hex=0.000 crystal=0.211 ms=14.6
+method=dseams-topo-4nn system=ic sigma=0.40 seed=4 acc=0.424 cubic=0.424 hex=0.000 crystal=0.424 ms=16.9
+method=dseams-topo-seeded system=ic sigma=0.40 seed=4 acc=0.617 cubic=0.617 hex=0.000 crystal=0.617 ms=25.8
+method=dseams-topo-seeded5 system=ic sigma=0.40 seed=4 acc=0.557 cubic=0.557 hex=0.000 crystal=0.557 ms=44.6
+method=dseams-topo-seeded-adj system=ic sigma=0.40 seed=4 acc=0.994 cubic=0.994 hex=0.000 crystal=0.994 ms=21.9
+method=chill+ system=ic sigma=0.40 seed=4 acc=0.088 cubic=0.088 hex=0.002 crystal=0.090 ms=5.4
+method=freud-ld system=ic sigma=0.40 seed=4 acc=0.000 cubic=0.000 hex=0.084 crystal=0.084 ms=10.2
+method=freud-q6 system=ic sigma=0.40 seed=4 acc=nan cubic=nan hex=nan crystal=0.217 ms=5.2 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.1
+method=dseams-topo-4nn system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.5
+method=dseams-topo-seeded system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.9
+method=dseams-topo-seeded5 system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=73.0
+method=dseams-topo-seeded-adj system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.6
+method=chill+ system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.5
+method=freud-ld system=ih sigma=0.00 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.3
+method=freud-q6 system=ih sigma=0.00 seed=0 acc=nan cubic=nan hex=nan crystal=1.000 ms=5.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.3
+method=dseams-topo-4nn system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.3
+method=dseams-topo-seeded system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.8
+method=dseams-topo-seeded5 system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=43.0
+method=dseams-topo-seeded-adj system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=39.9
+method=chill+ system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=3.0
+method=freud-ld system=ih sigma=0.05 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.1
+method=freud-q6 system=ih sigma=0.05 seed=0 acc=nan cubic=nan hex=nan crystal=1.000 ms=5.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.1
+method=dseams-topo-4nn system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=33.8
+method=dseams-topo-seeded system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.2
+method=dseams-topo-seeded5 system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.9
+method=dseams-topo-seeded-adj system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.6
+method=chill+ system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.7
+method=freud-ld system=ih sigma=0.10 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.7
+method=freud-q6 system=ih sigma=0.10 seed=0 acc=nan cubic=nan hex=nan crystal=0.994 ms=5.0 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.1
+method=dseams-topo-4nn system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.6
+method=dseams-topo-seeded system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.9
+method=dseams-topo-seeded5 system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.4
+method=dseams-topo-seeded-adj system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=35.4
+method=chill+ system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.9
+method=freud-ld system=ih sigma=0.15 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=10.7
+method=freud-q6 system=ih sigma=0.15 seed=0 acc=nan cubic=nan hex=nan crystal=0.878 ms=7.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.20 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=22.1
+method=dseams-topo-4nn system=ih sigma=0.20 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.0
+method=dseams-topo-seeded system=ih sigma=0.20 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.3
+method=dseams-topo-seeded5 system=ih sigma=0.20 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.6
+method=dseams-topo-seeded-adj system=ih sigma=0.20 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.1
+method=chill+ system=ih sigma=0.20 seed=0 acc=0.919 cubic=0.000 hex=0.919 crystal=0.919 ms=2.6
+method=freud-ld system=ih sigma=0.20 seed=0 acc=0.936 cubic=0.000 hex=0.936 crystal=0.936 ms=7.9
+method=freud-q6 system=ih sigma=0.20 seed=0 acc=nan cubic=nan hex=nan crystal=0.622 ms=3.9 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.25 seed=0 acc=0.978 cubic=0.000 hex=0.978 crystal=0.978 ms=20.0
+method=dseams-topo-4nn system=ih sigma=0.25 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.5
+method=dseams-topo-seeded system=ih sigma=0.25 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.7
+method=dseams-topo-seeded5 system=ih sigma=0.25 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=38.4
+method=dseams-topo-seeded-adj system=ih sigma=0.25 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.6
+method=chill+ system=ih sigma=0.25 seed=0 acc=0.797 cubic=0.000 hex=0.797 crystal=0.797 ms=2.9
+method=freud-ld system=ih sigma=0.25 seed=0 acc=0.667 cubic=0.000 hex=0.667 crystal=0.667 ms=9.4
+method=freud-q6 system=ih sigma=0.25 seed=0 acc=nan cubic=nan hex=nan crystal=0.425 ms=5.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.30 seed=0 acc=0.842 cubic=0.000 hex=0.842 crystal=0.842 ms=18.6
+method=dseams-topo-4nn system=ih sigma=0.30 seed=0 acc=0.944 cubic=0.000 hex=0.944 crystal=0.944 ms=21.6
+method=dseams-topo-seeded system=ih sigma=0.30 seed=0 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=22.1
+method=dseams-topo-seeded5 system=ih sigma=0.30 seed=0 acc=0.989 cubic=0.000 hex=0.989 crystal=0.989 ms=26.3
+method=dseams-topo-seeded-adj system=ih sigma=0.30 seed=0 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.4
+method=chill+ system=ih sigma=0.30 seed=0 acc=0.547 cubic=0.000 hex=0.547 crystal=0.547 ms=4.7
+method=freud-ld system=ih sigma=0.30 seed=0 acc=0.347 cubic=0.000 hex=0.347 crystal=0.347 ms=18.6
+method=freud-q6 system=ih sigma=0.30 seed=0 acc=nan cubic=nan hex=nan crystal=0.300 ms=14.8 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.35 seed=0 acc=0.606 cubic=0.000 hex=0.606 crystal=0.606 ms=13.3
+method=dseams-topo-4nn system=ih sigma=0.35 seed=0 acc=0.669 cubic=0.000 hex=0.669 crystal=0.669 ms=18.8
+method=dseams-topo-seeded system=ih sigma=0.35 seed=0 acc=0.894 cubic=0.000 hex=0.894 crystal=0.894 ms=19.0
+method=dseams-topo-seeded5 system=ih sigma=0.35 seed=0 acc=0.819 cubic=0.000 hex=0.819 crystal=0.819 ms=19.3
+method=dseams-topo-seeded-adj system=ih sigma=0.35 seed=0 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=22.3
+method=chill+ system=ih sigma=0.35 seed=0 acc=0.306 cubic=0.000 hex=0.306 crystal=0.306 ms=2.9
+method=freud-ld system=ih sigma=0.35 seed=0 acc=0.114 cubic=0.000 hex=0.114 crystal=0.114 ms=7.8
+method=freud-q6 system=ih sigma=0.35 seed=0 acc=nan cubic=nan hex=nan crystal=0.231 ms=4.0 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.40 seed=0 acc=0.439 cubic=0.000 hex=0.439 crystal=0.439 ms=11.6
+method=dseams-topo-4nn system=ih sigma=0.40 seed=0 acc=0.303 cubic=0.000 hex=0.303 crystal=0.303 ms=13.6
+method=dseams-topo-seeded system=ih sigma=0.40 seed=0 acc=0.672 cubic=0.000 hex=0.672 crystal=0.672 ms=18.0
+method=dseams-topo-seeded5 system=ih sigma=0.40 seed=0 acc=0.564 cubic=0.000 hex=0.564 crystal=0.564 ms=15.8
+method=dseams-topo-seeded-adj system=ih sigma=0.40 seed=0 acc=0.989 cubic=0.000 hex=0.989 crystal=0.989 ms=17.3
+method=chill+ system=ih sigma=0.40 seed=0 acc=0.122 cubic=0.000 hex=0.122 crystal=0.122 ms=3.8
+method=freud-ld system=ih sigma=0.40 seed=0 acc=0.022 cubic=0.000 hex=0.022 crystal=0.022 ms=17.0
+method=freud-q6 system=ih sigma=0.40 seed=0 acc=nan cubic=nan hex=nan crystal=0.219 ms=13.3 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.4
+method=dseams-topo-4nn system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=36.3
+method=dseams-topo-seeded system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.1
+method=dseams-topo-seeded5 system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=36.5
+method=dseams-topo-seeded-adj system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=34.8
+method=chill+ system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.5
+method=freud-ld system=ih sigma=0.00 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.6
+method=freud-q6 system=ih sigma=0.00 seed=1 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.6
+method=dseams-topo-4nn system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.1
+method=dseams-topo-seeded system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.5
+method=dseams-topo-seeded5 system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.5
+method=dseams-topo-seeded-adj system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.3
+method=chill+ system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=3.0
+method=freud-ld system=ih sigma=0.05 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=13.4
+method=freud-q6 system=ih sigma=0.05 seed=1 acc=nan cubic=nan hex=nan crystal=1.000 ms=7.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.2
+method=dseams-topo-4nn system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.2
+method=dseams-topo-seeded system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.8
+method=dseams-topo-seeded5 system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.6
+method=dseams-topo-seeded-adj system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.1
+method=chill+ system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.9
+method=freud-ld system=ih sigma=0.10 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=15.5
+method=freud-q6 system=ih sigma=0.10 seed=1 acc=nan cubic=nan hex=nan crystal=0.997 ms=11.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.2
+method=dseams-topo-4nn system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.1
+method=dseams-topo-seeded system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=49.4
+method=dseams-topo-seeded5 system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded-adj system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.0
+method=chill+ system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.7
+method=freud-ld system=ih sigma=0.15 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.1
+method=freud-q6 system=ih sigma=0.15 seed=1 acc=nan cubic=nan hex=nan crystal=0.894 ms=4.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.20 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.1
+method=dseams-topo-4nn system=ih sigma=0.20 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.2
+method=dseams-topo-seeded system=ih sigma=0.20 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.7
+method=dseams-topo-seeded5 system=ih sigma=0.20 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.0
+method=dseams-topo-seeded-adj system=ih sigma=0.20 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.4
+method=chill+ system=ih sigma=0.20 seed=1 acc=0.972 cubic=0.000 hex=0.972 crystal=0.972 ms=2.8
+method=freud-ld system=ih sigma=0.20 seed=1 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=8.2
+method=freud-q6 system=ih sigma=0.20 seed=1 acc=nan cubic=nan hex=nan crystal=0.714 ms=4.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.25 seed=1 acc=0.978 cubic=0.000 hex=0.978 crystal=0.978 ms=23.1
+method=dseams-topo-4nn system=ih sigma=0.25 seed=1 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=30.7
+method=dseams-topo-seeded system=ih sigma=0.25 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=36.3
+method=dseams-topo-seeded5 system=ih sigma=0.25 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.5
+method=dseams-topo-seeded-adj system=ih sigma=0.25 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.7
+method=chill+ system=ih sigma=0.25 seed=1 acc=0.814 cubic=0.000 hex=0.814 crystal=0.814 ms=3.1
+method=freud-ld system=ih sigma=0.25 seed=1 acc=0.731 cubic=0.000 hex=0.731 crystal=0.731 ms=11.6
+method=freud-q6 system=ih sigma=0.25 seed=1 acc=nan cubic=nan hex=nan crystal=0.450 ms=5.9 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.30 seed=1 acc=0.881 cubic=0.000 hex=0.881 crystal=0.881 ms=17.8
+method=dseams-topo-4nn system=ih sigma=0.30 seed=1 acc=0.983 cubic=0.000 hex=0.983 crystal=0.983 ms=23.8
+method=dseams-topo-seeded system=ih sigma=0.30 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.3
+method=dseams-topo-seeded5 system=ih sigma=0.30 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.0
+method=dseams-topo-seeded-adj system=ih sigma=0.30 seed=1 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.9
+method=chill+ system=ih sigma=0.30 seed=1 acc=0.606 cubic=0.000 hex=0.606 crystal=0.606 ms=2.8
+method=freud-ld system=ih sigma=0.30 seed=1 acc=0.364 cubic=0.000 hex=0.364 crystal=0.364 ms=17.6
+method=freud-q6 system=ih sigma=0.30 seed=1 acc=nan cubic=nan hex=nan crystal=0.322 ms=13.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.35 seed=1 acc=0.667 cubic=0.000 hex=0.667 crystal=0.667 ms=13.2
+method=dseams-topo-4nn system=ih sigma=0.35 seed=1 acc=0.733 cubic=0.000 hex=0.733 crystal=0.733 ms=20.4
+method=dseams-topo-seeded system=ih sigma=0.35 seed=1 acc=0.928 cubic=0.000 hex=0.928 crystal=0.928 ms=20.2
+method=dseams-topo-seeded5 system=ih sigma=0.35 seed=1 acc=0.897 cubic=0.000 hex=0.897 crystal=0.897 ms=21.4
+method=dseams-topo-seeded-adj system=ih sigma=0.35 seed=1 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=22.8
+method=chill+ system=ih sigma=0.35 seed=1 acc=0.328 cubic=0.000 hex=0.328 crystal=0.328 ms=4.2
+method=freud-ld system=ih sigma=0.35 seed=1 acc=0.142 cubic=0.000 hex=0.142 crystal=0.142 ms=10.1
+method=freud-q6 system=ih sigma=0.35 seed=1 acc=nan cubic=nan hex=nan crystal=0.258 ms=5.0 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.40 seed=1 acc=0.322 cubic=0.000 hex=0.322 crystal=0.322 ms=10.4
+method=dseams-topo-4nn system=ih sigma=0.40 seed=1 acc=0.461 cubic=0.000 hex=0.461 crystal=0.461 ms=13.3
+method=dseams-topo-seeded system=ih sigma=0.40 seed=1 acc=0.722 cubic=0.000 hex=0.722 crystal=0.722 ms=17.9
+method=dseams-topo-seeded5 system=ih sigma=0.40 seed=1 acc=0.706 cubic=0.000 hex=0.706 crystal=0.706 ms=18.2
+method=dseams-topo-seeded-adj system=ih sigma=0.40 seed=1 acc=0.986 cubic=0.000 hex=0.986 crystal=0.986 ms=17.2
+method=chill+ system=ih sigma=0.40 seed=1 acc=0.136 cubic=0.000 hex=0.136 crystal=0.136 ms=2.8
+method=freud-ld system=ih sigma=0.40 seed=1 acc=0.017 cubic=0.000 hex=0.017 crystal=0.017 ms=11.0
+method=freud-q6 system=ih sigma=0.40 seed=1 acc=nan cubic=nan hex=nan crystal=0.172 ms=7.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.5
+method=dseams-topo-4nn system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.4
+method=dseams-topo-seeded system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.9
+method=dseams-topo-seeded5 system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.1
+method=dseams-topo-seeded-adj system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.4
+method=chill+ system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.4
+method=freud-ld system=ih sigma=0.00 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.8
+method=freud-q6 system=ih sigma=0.00 seed=2 acc=nan cubic=nan hex=nan crystal=1.000 ms=6.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.3
+method=dseams-topo-4nn system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.8
+method=dseams-topo-seeded system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=42.5
+method=dseams-topo-seeded5 system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.2
+method=dseams-topo-seeded-adj system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.6
+method=chill+ system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.6
+method=freud-ld system=ih sigma=0.05 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=7.8
+method=freud-q6 system=ih sigma=0.05 seed=2 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.2
+method=dseams-topo-4nn system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.8
+method=dseams-topo-seeded system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=36.6
+method=dseams-topo-seeded5 system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.9
+method=dseams-topo-seeded-adj system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.1
+method=chill+ system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.6
+method=freud-ld system=ih sigma=0.10 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.2
+method=freud-q6 system=ih sigma=0.10 seed=2 acc=nan cubic=nan hex=nan crystal=0.992 ms=5.3 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.3
+method=dseams-topo-4nn system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.8
+method=dseams-topo-seeded system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.4
+method=dseams-topo-seeded5 system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=35.0
+method=dseams-topo-seeded-adj system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.8
+method=chill+ system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.7
+method=freud-ld system=ih sigma=0.15 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.3
+method=freud-q6 system=ih sigma=0.15 seed=2 acc=nan cubic=nan hex=nan crystal=0.839 ms=4.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.20 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.0
+method=dseams-topo-4nn system=ih sigma=0.20 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.9
+method=dseams-topo-seeded system=ih sigma=0.20 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.9
+method=dseams-topo-seeded5 system=ih sigma=0.20 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.6
+method=dseams-topo-seeded-adj system=ih sigma=0.20 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.3
+method=chill+ system=ih sigma=0.20 seed=2 acc=0.950 cubic=0.000 hex=0.950 crystal=0.950 ms=2.7
+method=freud-ld system=ih sigma=0.20 seed=2 acc=0.961 cubic=0.000 hex=0.961 crystal=0.961 ms=12.0
+method=freud-q6 system=ih sigma=0.20 seed=2 acc=nan cubic=nan hex=nan crystal=0.675 ms=5.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.25 seed=2 acc=0.989 cubic=0.000 hex=0.989 crystal=0.989 ms=22.3
+method=dseams-topo-4nn system=ih sigma=0.25 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.7
+method=dseams-topo-seeded system=ih sigma=0.25 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.7
+method=dseams-topo-seeded5 system=ih sigma=0.25 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.6
+method=dseams-topo-seeded-adj system=ih sigma=0.25 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.4
+method=chill+ system=ih sigma=0.25 seed=2 acc=0.842 cubic=0.000 hex=0.842 crystal=0.842 ms=3.2
+method=freud-ld system=ih sigma=0.25 seed=2 acc=0.708 cubic=0.000 hex=0.708 crystal=0.708 ms=9.8
+method=freud-q6 system=ih sigma=0.25 seed=2 acc=nan cubic=nan hex=nan crystal=0.428 ms=6.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.30 seed=2 acc=0.925 cubic=0.000 hex=0.925 crystal=0.925 ms=18.3
+method=dseams-topo-4nn system=ih sigma=0.30 seed=2 acc=0.961 cubic=0.000 hex=0.961 crystal=0.961 ms=24.7
+method=dseams-topo-seeded system=ih sigma=0.30 seed=2 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=26.2
+method=dseams-topo-seeded5 system=ih sigma=0.30 seed=2 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=23.8
+method=dseams-topo-seeded-adj system=ih sigma=0.30 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.2
+method=chill+ system=ih sigma=0.30 seed=2 acc=0.606 cubic=0.000 hex=0.606 crystal=0.606 ms=2.7
+method=freud-ld system=ih sigma=0.30 seed=2 acc=0.356 cubic=0.000 hex=0.356 crystal=0.356 ms=9.2
+method=freud-q6 system=ih sigma=0.30 seed=2 acc=nan cubic=nan hex=nan crystal=0.328 ms=5.6 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.35 seed=2 acc=0.689 cubic=0.000 hex=0.689 crystal=0.689 ms=15.6
+method=dseams-topo-4nn system=ih sigma=0.35 seed=2 acc=0.767 cubic=0.000 hex=0.767 crystal=0.767 ms=18.1
+method=dseams-topo-seeded system=ih sigma=0.35 seed=2 acc=0.925 cubic=0.000 hex=0.925 crystal=0.925 ms=20.4
+method=dseams-topo-seeded5 system=ih sigma=0.35 seed=2 acc=0.875 cubic=0.000 hex=0.875 crystal=0.875 ms=29.1
+method=dseams-topo-seeded-adj system=ih sigma=0.35 seed=2 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=22.8
+method=chill+ system=ih sigma=0.35 seed=2 acc=0.333 cubic=0.000 hex=0.333 crystal=0.333 ms=2.7
+method=freud-ld system=ih sigma=0.35 seed=2 acc=0.094 cubic=0.000 hex=0.094 crystal=0.094 ms=10.6
+method=freud-q6 system=ih sigma=0.35 seed=2 acc=nan cubic=nan hex=nan crystal=0.225 ms=6.1 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.40 seed=2 acc=0.369 cubic=0.000 hex=0.369 crystal=0.369 ms=10.4
+method=dseams-topo-4nn system=ih sigma=0.40 seed=2 acc=0.400 cubic=0.000 hex=0.400 crystal=0.400 ms=17.2
+method=dseams-topo-seeded system=ih sigma=0.40 seed=2 acc=0.678 cubic=0.000 hex=0.678 crystal=0.678 ms=18.2
+method=dseams-topo-seeded5 system=ih sigma=0.40 seed=2 acc=0.631 cubic=0.000 hex=0.631 crystal=0.631 ms=19.4
+method=dseams-topo-seeded-adj system=ih sigma=0.40 seed=2 acc=0.986 cubic=0.000 hex=0.986 crystal=0.986 ms=16.6
+method=chill+ system=ih sigma=0.40 seed=2 acc=0.125 cubic=0.000 hex=0.125 crystal=0.125 ms=3.1
+method=freud-ld system=ih sigma=0.40 seed=2 acc=0.061 cubic=0.000 hex=0.061 crystal=0.061 ms=11.9
+method=freud-q6 system=ih sigma=0.40 seed=2 acc=nan cubic=nan hex=nan crystal=0.197 ms=6.2 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.6
+method=dseams-topo-4nn system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=32.4
+method=dseams-topo-seeded system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.2
+method=dseams-topo-seeded5 system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded-adj system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=36.8
+method=chill+ system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.6
+method=freud-ld system=ih sigma=0.00 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=7.4
+method=freud-q6 system=ih sigma=0.00 seed=3 acc=nan cubic=nan hex=nan crystal=1.000 ms=3.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.5
+method=dseams-topo-4nn system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.2
+method=dseams-topo-seeded system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=34.3
+method=dseams-topo-seeded5 system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.6
+method=dseams-topo-seeded-adj system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.7
+method=chill+ system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=3.4
+method=freud-ld system=ih sigma=0.05 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=10.3
+method=freud-q6 system=ih sigma=0.05 seed=3 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.2
+method=dseams-topo-4nn system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.2
+method=dseams-topo-seeded system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.8
+method=dseams-topo-seeded5 system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.7
+method=dseams-topo-seeded-adj system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.5
+method=chill+ system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.9
+method=freud-ld system=ih sigma=0.10 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.0
+method=freud-q6 system=ih sigma=0.10 seed=3 acc=nan cubic=nan hex=nan crystal=0.997 ms=5.3 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.6
+method=dseams-topo-4nn system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.0
+method=dseams-topo-seeded system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.9
+method=dseams-topo-seeded5 system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.3
+method=dseams-topo-seeded-adj system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.7
+method=chill+ system=ih sigma=0.15 seed=3 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=2.7
+method=freud-ld system=ih sigma=0.15 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.5
+method=freud-q6 system=ih sigma=0.15 seed=3 acc=nan cubic=nan hex=nan crystal=0.831 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.20 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.6
+method=dseams-topo-4nn system=ih sigma=0.20 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.7
+method=dseams-topo-seeded system=ih sigma=0.20 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=34.5
+method=dseams-topo-seeded5 system=ih sigma=0.20 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.3
+method=dseams-topo-seeded-adj system=ih sigma=0.20 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=38.6
+method=chill+ system=ih sigma=0.20 seed=3 acc=0.931 cubic=0.000 hex=0.931 crystal=0.931 ms=3.7
+method=freud-ld system=ih sigma=0.20 seed=3 acc=0.961 cubic=0.000 hex=0.961 crystal=0.961 ms=10.7
+method=freud-q6 system=ih sigma=0.20 seed=3 acc=nan cubic=nan hex=nan crystal=0.647 ms=4.2 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.25 seed=3 acc=0.989 cubic=0.000 hex=0.989 crystal=0.989 ms=23.9
+method=dseams-topo-4nn system=ih sigma=0.25 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.4
+method=dseams-topo-seeded system=ih sigma=0.25 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.5
+method=dseams-topo-seeded5 system=ih sigma=0.25 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.5
+method=dseams-topo-seeded-adj system=ih sigma=0.25 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.5
+method=chill+ system=ih sigma=0.25 seed=3 acc=0.864 cubic=0.000 hex=0.864 crystal=0.864 ms=3.2
+method=freud-ld system=ih sigma=0.25 seed=3 acc=0.772 cubic=0.000 hex=0.772 crystal=0.772 ms=8.9
+method=freud-q6 system=ih sigma=0.25 seed=3 acc=nan cubic=nan hex=nan crystal=0.508 ms=5.2 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.30 seed=3 acc=0.861 cubic=0.000 hex=0.861 crystal=0.861 ms=18.8
+method=dseams-topo-4nn system=ih sigma=0.30 seed=3 acc=0.939 cubic=0.000 hex=0.939 crystal=0.939 ms=28.3
+method=dseams-topo-seeded system=ih sigma=0.30 seed=3 acc=0.992 cubic=0.000 hex=0.992 crystal=0.992 ms=27.2
+method=dseams-topo-seeded5 system=ih sigma=0.30 seed=3 acc=0.992 cubic=0.000 hex=0.992 crystal=0.992 ms=22.3
+method=dseams-topo-seeded-adj system=ih sigma=0.30 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.0
+method=chill+ system=ih sigma=0.30 seed=3 acc=0.458 cubic=0.000 hex=0.458 crystal=0.458 ms=3.0
+method=freud-ld system=ih sigma=0.30 seed=3 acc=0.214 cubic=0.000 hex=0.214 crystal=0.214 ms=9.1
+method=freud-q6 system=ih sigma=0.30 seed=3 acc=nan cubic=nan hex=nan crystal=0.306 ms=5.3 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.35 seed=3 acc=0.381 cubic=0.000 hex=0.381 crystal=0.381 ms=10.9
+method=dseams-topo-4nn system=ih sigma=0.35 seed=3 acc=0.664 cubic=0.000 hex=0.664 crystal=0.664 ms=16.4
+method=dseams-topo-seeded system=ih sigma=0.35 seed=3 acc=0.911 cubic=0.000 hex=0.911 crystal=0.911 ms=26.7
+method=dseams-topo-seeded5 system=ih sigma=0.35 seed=3 acc=0.856 cubic=0.000 hex=0.856 crystal=0.856 ms=22.7
+method=dseams-topo-seeded-adj system=ih sigma=0.35 seed=3 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=19.1
+method=chill+ system=ih sigma=0.35 seed=3 acc=0.203 cubic=0.000 hex=0.203 crystal=0.203 ms=2.9
+method=freud-ld system=ih sigma=0.35 seed=3 acc=0.067 cubic=0.000 hex=0.067 crystal=0.067 ms=8.4
+method=freud-q6 system=ih sigma=0.35 seed=3 acc=nan cubic=nan hex=nan crystal=0.231 ms=4.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.40 seed=3 acc=0.339 cubic=0.000 hex=0.339 crystal=0.339 ms=10.1
+method=dseams-topo-4nn system=ih sigma=0.40 seed=3 acc=0.408 cubic=0.000 hex=0.408 crystal=0.408 ms=47.9
+method=dseams-topo-seeded system=ih sigma=0.40 seed=3 acc=0.731 cubic=0.000 hex=0.731 crystal=0.731 ms=15.5
+method=dseams-topo-seeded5 system=ih sigma=0.40 seed=3 acc=0.669 cubic=0.000 hex=0.669 crystal=0.669 ms=17.8
+method=dseams-topo-seeded-adj system=ih sigma=0.40 seed=3 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=16.6
+method=chill+ system=ih sigma=0.40 seed=3 acc=0.169 cubic=0.000 hex=0.169 crystal=0.169 ms=3.4
+method=freud-ld system=ih sigma=0.40 seed=3 acc=0.028 cubic=0.000 hex=0.028 crystal=0.028 ms=7.6
+method=freud-q6 system=ih sigma=0.40 seed=3 acc=nan cubic=nan hex=nan crystal=0.211 ms=3.9 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.1
+method=dseams-topo-4nn system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=30.5
+method=dseams-topo-seeded system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.6
+method=dseams-topo-seeded5 system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.0
+method=dseams-topo-seeded-adj system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.6
+method=chill+ system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.6
+method=freud-ld system=ih sigma=0.00 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.6
+method=freud-q6 system=ih sigma=0.00 seed=4 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.8 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.7
+method=dseams-topo-4nn system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.5
+method=dseams-topo-seeded system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.7
+method=dseams-topo-seeded5 system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=42.3
+method=dseams-topo-seeded-adj system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=33.1
+method=chill+ system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.9
+method=freud-ld system=ih sigma=0.05 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.4
+method=freud-q6 system=ih sigma=0.05 seed=4 acc=nan cubic=nan hex=nan crystal=1.000 ms=4.5 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.2
+method=dseams-topo-4nn system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.2
+method=dseams-topo-seeded system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=34.5
+method=dseams-topo-seeded5 system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.4
+method=dseams-topo-seeded-adj system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.2
+method=chill+ system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=2.6
+method=freud-ld system=ih sigma=0.10 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=9.1
+method=freud-q6 system=ih sigma=0.10 seed=4 acc=nan cubic=nan hex=nan crystal=0.986 ms=5.3 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=23.3
+method=dseams-topo-4nn system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.7
+method=dseams-topo-seeded system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=29.9
+method=dseams-topo-seeded5 system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.9
+method=dseams-topo-seeded-adj system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=28.8
+method=chill+ system=ih sigma=0.15 seed=4 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=2.7
+method=freud-ld system=ih sigma=0.15 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=8.7
+method=freud-q6 system=ih sigma=0.15 seed=4 acc=nan cubic=nan hex=nan crystal=0.875 ms=4.8 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.20 seed=4 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=22.0
+method=dseams-topo-4nn system=ih sigma=0.20 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.4
+method=dseams-topo-seeded system=ih sigma=0.20 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=40.5
+method=dseams-topo-seeded5 system=ih sigma=0.20 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=25.9
+method=dseams-topo-seeded-adj system=ih sigma=0.20 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.8
+method=chill+ system=ih sigma=0.20 seed=4 acc=0.919 cubic=0.000 hex=0.919 crystal=0.919 ms=2.9
+method=freud-ld system=ih sigma=0.20 seed=4 acc=0.942 cubic=0.000 hex=0.942 crystal=0.942 ms=7.7
+method=freud-q6 system=ih sigma=0.20 seed=4 acc=nan cubic=nan hex=nan crystal=0.594 ms=3.9 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.25 seed=4 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=20.9
+method=dseams-topo-4nn system=ih sigma=0.25 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=31.5
+method=dseams-topo-seeded system=ih sigma=0.25 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=27.3
+method=dseams-topo-seeded5 system=ih sigma=0.25 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=24.8
+method=dseams-topo-seeded-adj system=ih sigma=0.25 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.6
+method=chill+ system=ih sigma=0.25 seed=4 acc=0.814 cubic=0.000 hex=0.814 crystal=0.814 ms=4.5
+method=freud-ld system=ih sigma=0.25 seed=4 acc=0.672 cubic=0.000 hex=0.672 crystal=0.672 ms=10.8
+method=freud-q6 system=ih sigma=0.25 seed=4 acc=nan cubic=nan hex=nan crystal=0.439 ms=7.0 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.30 seed=4 acc=0.853 cubic=0.000 hex=0.853 crystal=0.853 ms=17.1
+method=dseams-topo-4nn system=ih sigma=0.30 seed=4 acc=0.936 cubic=0.000 hex=0.936 crystal=0.936 ms=24.3
+method=dseams-topo-seeded system=ih sigma=0.30 seed=4 acc=0.986 cubic=0.000 hex=0.986 crystal=0.986 ms=23.6
+method=dseams-topo-seeded5 system=ih sigma=0.30 seed=4 acc=0.975 cubic=0.000 hex=0.975 crystal=0.975 ms=22.0
+method=dseams-topo-seeded-adj system=ih sigma=0.30 seed=4 acc=1.000 cubic=0.000 hex=1.000 crystal=1.000 ms=26.1
+method=chill+ system=ih sigma=0.30 seed=4 acc=0.517 cubic=0.000 hex=0.517 crystal=0.517 ms=2.8
+method=freud-ld system=ih sigma=0.30 seed=4 acc=0.317 cubic=0.000 hex=0.317 crystal=0.317 ms=8.4
+method=freud-q6 system=ih sigma=0.30 seed=4 acc=nan cubic=nan hex=nan crystal=0.364 ms=4.7 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.35 seed=4 acc=0.681 cubic=0.000 hex=0.681 crystal=0.681 ms=12.9
+method=dseams-topo-4nn system=ih sigma=0.35 seed=4 acc=0.761 cubic=0.000 hex=0.761 crystal=0.761 ms=19.3
+method=dseams-topo-seeded system=ih sigma=0.35 seed=4 acc=0.931 cubic=0.000 hex=0.931 crystal=0.931 ms=21.1
+method=dseams-topo-seeded5 system=ih sigma=0.35 seed=4 acc=0.911 cubic=0.000 hex=0.911 crystal=0.911 ms=18.9
+method=dseams-topo-seeded-adj system=ih sigma=0.35 seed=4 acc=0.997 cubic=0.000 hex=0.997 crystal=0.997 ms=22.7
+method=chill+ system=ih sigma=0.35 seed=4 acc=0.322 cubic=0.000 hex=0.322 crystal=0.322 ms=2.8
+method=freud-ld system=ih sigma=0.35 seed=4 acc=0.119 cubic=0.000 hex=0.119 crystal=0.119 ms=8.6
+method=freud-q6 system=ih sigma=0.35 seed=4 acc=nan cubic=nan hex=nan crystal=0.228 ms=4.8 note=ice-vs-not-only
+method=dseams-topo system=ih sigma=0.40 seed=4 acc=0.383 cubic=0.000 hex=0.383 crystal=0.383 ms=9.6
+method=dseams-topo-4nn system=ih sigma=0.40 seed=4 acc=0.322 cubic=0.000 hex=0.322 crystal=0.322 ms=13.2
+method=dseams-topo-seeded system=ih sigma=0.40 seed=4 acc=0.622 cubic=0.000 hex=0.622 crystal=0.622 ms=15.8
+method=dseams-topo-seeded5 system=ih sigma=0.40 seed=4 acc=0.575 cubic=0.000 hex=0.575 crystal=0.575 ms=14.8
+method=dseams-topo-seeded-adj system=ih sigma=0.40 seed=4 acc=0.994 cubic=0.000 hex=0.994 crystal=0.994 ms=15.6
+method=chill+ system=ih sigma=0.40 seed=4 acc=0.117 cubic=0.000 hex=0.117 crystal=0.117 ms=3.0
+method=freud-ld system=ih sigma=0.40 seed=4 acc=0.036 cubic=0.000 hex=0.036 crystal=0.036 ms=13.7
+method=freud-q6 system=ih sigma=0.40 seed=4 acc=nan cubic=nan hex=nan crystal=0.147 ms=7.8 note=ice-vs-not-only
+method=dseams-topo system=null sigma=0.00 acc=1.000 false_crystal=0.000
+method=dseams-topo-4nn system=null sigma=0.00 acc=1.000 false_crystal=0.000
+method=dseams-topo-seeded system=null sigma=0.00 acc=1.000 false_crystal=0.000
+method=dseams-topo-seeded5 system=null sigma=0.00 acc=1.000 false_crystal=0.000
+method=dseams-topo-seeded-adj system=null sigma=0.00 acc=1.000 false_crystal=0.000
+method=chill+ system=null sigma=0.00 acc=0.897 false_crystal=0.000
+method=freud-ld system=null sigma=0.00 acc=0.994 false_crystal=0.006
+method=freud-q6 system=null sigma=0.00 acc=nan false_crystal=0.231
+# availability deepice=no-public-code icecoder=no-public-code zeron2024=no-public-code (searched GitHub and package indexes)

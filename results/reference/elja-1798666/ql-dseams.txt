@@ -1,0 +1,8 @@
+tool=dseams lattice=fcc n=108 L=12.000000 cut_ql=3.200000 cut_vor=4.800000
+  ql4=0.190941 ql6=0.574524 ql8=0.403915
+  vor_q4=0.190941 vor_q6=0.574524 vor_q8=0.403915
+  templates fcc=108 hcp=0 bcc=0 sc=0 other=0
+tool=dseams lattice=bcc n=54 L=12.000000 cut_ql=4.000000 cut_vor=5.600000
+  ql4=0.509175 ql6=0.628539 ql8=0.212762
+  vor_q4=0.224025 vor_q6=0.566940 vor_q8=0.325955
+  templates fcc=0 hcp=0 bcc=54 sc=0 other=0

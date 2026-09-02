@@ -1,0 +1,9 @@
+nAtoms     1000
+frames     5
+sites      3
+full/ms    9.640
+incr/ms    7.060
+ratio      1.37
+recomp     702 / 1000
+balls      154 / 1000
+identical  yes

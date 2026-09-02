@@ -1,0 +1,808 @@
+loadavg_before_workflow: 0.09
+ WARN cache for Repodata at /users/home/rog32/.cache/rattler/cache/repodata is on a network/parallel filesystem (NFS/SMB/FUSE/BeeGFS/Lustre/GPFS/CephFS), redirected to /tmp/pixi-cache-rog32/repodata for this run. Set [cache.repodata] in config.toml or PIXI_CACHE_DIR to override, or [cache.netfs-redirect] = "never" to keep the original path.
+Assuming unrestricted shared filesystem usage.
+host: amd-compute-2
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 256
+Rules claiming more threads will be scaled down.
+Job stats:
+job                             count
+----------------------------  -------
+aggregate                           1
+all                                 1
+base_cages                          1
+base_drivers                        1
+base_scaling                        1
+build_base                          1
+build_tip                           1
+build_yoda                          1
+conditions                          1
+figshare_demos                      1
+figshare_notebook                   4
+figshare_nucleation_notebook        1
+identity_gate                       1
+install_python                      1
+ql_compare_dseams                   1
+ql_compare_python                   1
+setup_tip                           1
+sota_sweep                          1
+source_manifest                     1
+tip_cages                           1
+tip_incremental                     6
+tip_overhead                        1
+tip_pipeline                        1
+tip_scaling                         1
+tip_stages_cubic                    1
+tip_stages_nucleation               1
+tip_strong                          6
+trajectory_incremental              1
+walk_figshare                       1
+walk_public                         5
+workflow_parity                     1
+yoda_identity_gate                  1
+total                              49
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Wed Sep  2 03:46:53 2026]
+localrule source_manifest:
+    input: config/ecosystem-lock.json
+    output: results/source-manifest.json
+    jobid: 3
+    reason: Missing output files: results/source-manifest.json
+    resources: tmpdir=/tmp
+Shell command: python scripts/ecosystem_sources.py --lock config/ecosystem-lock.json manifest --root /users/home/rog32/dseams2_repro/sources --output results/source-manifest.json
+
+[Wed Sep  2 03:46:53 2026]
+localrule conditions:
+    output: results/conditions.txt
+    jobid: 2
+    reason: Missing output files: results/conditions.txt
+    resources: tmpdir=/tmp
+Shell command: 
+        {
+          echo "hostname: $(hostname)"
+          echo "jobid: ${SLURM_JOB_ID:-none}"
+          echo "partition: ${SLURM_JOB_PARTITION:-none}"
+          echo "tip_sha: $(git -C /users/home/rog32/dseams2_repro/sources/seams-core rev-parse HEAD 2>/dev/null || echo unknown)"
+          echo "base_sha: 1c8efa382c4ae88ebc68e40a991260c4d57edbd5"
+          echo "repro_sha: $(git rev-parse HEAD 2>/dev/null || echo unknown)"
+          echo "hq: $(hq --version 2>/dev/null || echo absent)"
+          lscpu | grep -E 'Model name|Socket|Core|Thread' || true
+          echo "loadavg_at_start: $(cut -d' ' -f1 /proc/loadavg)"
+        } > results/conditions.txt
+        
+[Wed Sep  2 03:46:53 2026]
+Finished jobid: 2 (Rule: conditions)
+1 of 49 steps (2%) done
+[Wed Sep  2 03:46:53 2026]
+Finished jobid: 3 (Rule: source_manifest)
+2 of 49 steps (4%) done
+Select jobs to execute...
+Execute 2 jobs...
+
+[Wed Sep  2 03:46:53 2026]
+localrule build_base:
+    input: results/source-manifest.json
+    output: results/base-build.done
+    jobid: 14
+    reason: Missing output files: results/base-build.done; Input files updated by another job: results/source-manifest.json
+    resources: tmpdir=/tmp
+Shell command: 
+        test -d /users/home/rog32/dseams2_repro/sources/seams-base || { echo "baseline tree missing; run scripts/elja_submit.sh prep" >&2; exit 1; }
+        export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"
+        meson setup /tmp/dseams2-repro-1798666/build-base /users/home/rog32/dseams2_repro/sources/seams-base --buildtype=release \
+          -Dwith_python=false -Dwith_tests=false > results/base-setup.log 2>&1
+        hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- meson compile -C /tmp/dseams2-repro-1798666/build-base
+        
+
+[Wed Sep  2 03:46:53 2026]
+localrule setup_tip:
+    input: results/source-manifest.json
+    output: results/tip-setup.done
+    jobid: 7
+    reason: Missing output files: results/tip-setup.done; Input files updated by another job: results/source-manifest.json
+    resources: tmpdir=/tmp
+Shell command: meson setup /tmp/dseams2-repro-1798666/build-repro /users/home/rog32/dseams2_repro/sources/seams-core --prefix=$CONDA_PREFIX --buildtype=release -Dwith_python=false -Dwith_tests=true > results/tip-setup.log 2>&1
+Job submitted successfully, job ID: 1
+Touching output file results/tip-setup.done.
+[Wed Sep  2 03:47:08 2026]
+Finished jobid: 7 (Rule: setup_tip)
+3 of 49 steps (6%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:47:08 2026]
+localrule build_tip:
+    input: results/tip-setup.done
+    output: results/tip-build.done
+    jobid: 6
+    reason: Missing output files: results/tip-build.done; Input files updated by another job: results/tip-setup.done
+    resources: tmpdir=/tmp
+Shell command: export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- meson compile -C /tmp/dseams2-repro-1798666/build-repro
+Job submitted successfully, job ID: 2
+Wait finished in 16s 990ms 185us 505ns: 1 job finished
+Touching output file results/tip-build.done.
+[Wed Sep  2 03:47:25 2026]
+Finished jobid: 6 (Rule: build_tip)
+4 of 49 steps (8%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:47:25 2026]
+localrule identity_gate:
+    input: results/tip-build.done
+    output: results/tip-test.log
+    jobid: 5
+    reason: Missing output files: results/tip-test.log; Input files updated by another job: results/tip-build.done
+    resources: tmpdir=/tmp
+Shell command: export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'meson test -C /tmp/dseams2-repro-1798666/build-repro > results/tip-test.log 2>&1'
+Job submitted successfully, job ID: 3
+Wait finished in 7s 805ms 868us 115ns: 1 job finished
+[Wed Sep  2 03:47:33 2026]
+Finished jobid: 5 (Rule: identity_gate)
+5 of 49 steps (10%) done
+Select jobs to execute...
+Execute 28 jobs...
+
+[Wed Sep  2 03:47:33 2026]
+localrule build_yoda:
+    input: results/tip-test.log, results/source-manifest.json
+    output: results/yoda-build.done
+    jobid: 10
+    reason: Missing output files: results/yoda-build.done; Input files updated by another job: results/source-manifest.json, results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: 
+        test -d /users/home/rog32/dseams2_repro/sources/yodaStruct/lua || { echo "locked yodaStruct source missing: /users/home/rog32/dseams2_repro/sources/yodaStruct" >&2; exit 1; }
+        export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"
+        meson setup /tmp/dseams2-repro-1798666/build-yoda /users/home/rog32/dseams2_repro/sources/yodaStruct --buildtype=release --wrap-mode=nodownload \
+          > results/yoda-setup.log 2>&1
+        hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- meson compile -C /tmp/dseams2-repro-1798666/build-yoda
+        
+Wait finished in 34s 181ms 673us 471ns: 1 job finished
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_public:
+    input: results/tip-test.log, data/public-ice/SOURCE.json
+    output: results/walks/niu-critical-melting.txt
+    jobid: 49
+    reason: Missing output files: results/walks/niu-critical-melting.txt; Input files updated by another job: results/tip-test.log
+    wildcards: dump=niu-critical-melting
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/public-ice/critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-melting 0 1 1 > results/walks/niu-critical-melting.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_stages_cubic:
+    input: results/tip-test.log
+    output: results/tip-stages-cubic.txt
+    jobid: 41
+    reason: Missing output files: results/tip-stages-cubic.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_stages traj/mW_cubic.lammpstrj 1 1 5 > /users/home/rog32/dseams2_repro/results/tip-stages-cubic.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-1000.txt
+    jobid: 35
+    reason: Missing output files: results/tip-incremental-1000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=1000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 1000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-1000.txt'
+Job submitted successfully, job ID: 4
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t4.txt
+    jobid: 20
+    reason: Missing output files: results/tip-strong-t4.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=4
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 4 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=4 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t4.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t1.txt
+    jobid: 18
+    reason: Missing output files: results/tip-strong-t1.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=1
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t1.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_stages_nucleation:
+    input: results/tip-test.log, data/figshare/nucleation.lammpstrj
+    output: results/tip-stages-nucleation.txt
+    jobid: 42
+    reason: Missing output files: results/tip-stages-nucleation.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_stages data/figshare/nucleation.lammpstrj 1 1 5 > results/tip-stages-nucleation.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-2000.txt
+    jobid: 36
+    reason: Missing output files: results/tip-incremental-2000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=2000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 2000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-2000.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t8.txt
+    jobid: 21
+    reason: Missing output files: results/tip-strong-t8.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=8
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=8 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t8.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_scaling:
+    input: results/tip-test.log
+    output: results/tip-scaling.txt
+    jobid: 11
+    reason: Missing output files: results/tip-scaling.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_scaling 1000 2000 4000 8000 16000 32000 > /users/home/rog32/dseams2_repro/results/tip-scaling.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule install_python:
+    input: results/tip-test.log, results/source-manifest.json
+    output: results/py-install.done
+    jobid: 8
+    reason: Missing output files: results/py-install.done; Input files updated by another job: results/source-manifest.json, results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; python -m pip install --no-build-isolation --no-deps --upgrade --target /tmp/dseams2-repro-1798666/python-site /users/home/rog32/dseams2_repro/sources/PydSEAMSlib && PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} python -c 'import pydseams; print(pydseams.__file__)'
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_figshare:
+    input: results/tip-test.log, data/figshare/nucleation.lammpstrj
+    output: results/walks/figshare-nucleation.txt
+    jobid: 43
+    reason: Missing output files: results/walks/figshare-nucleation.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/figshare/nucleation.lammpstrj 0 1 1 > results/walks/figshare-nucleation.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-4000.txt
+    jobid: 37
+    reason: Missing output files: results/tip-incremental-4000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=4000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 4000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-4000.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t16.txt
+    jobid: 22
+    reason: Missing output files: results/tip-strong-t16.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=16
+    resources: tmpdir=/tmp
+Job submitted successfully, job ID: 5
+Shell command: hq submit --wait --cpus 16 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=16 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t16.txt'
+Job submitted successfully, job ID: 6
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t2.txt
+    jobid: 19
+    reason: Missing output files: results/tip-strong-t2.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=2
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=2 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t2.txt'
+Job submitted successfully, job ID: 7
+Job submitted successfully, job ID: 8
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_public:
+    input: results/tip-test.log, data/public-ice/SOURCE.json
+    output: results/walks/niu-traj1-extract.txt
+    jobid: 44
+    reason: Missing output files: results/walks/niu-traj1-extract.txt; Input files updated by another job: results/tip-test.log
+    wildcards: dump=niu-traj1-extract
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/public-ice/nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-1 0 1 1 > results/walks/niu-traj1-extract.txt'
+Job submitted successfully, job ID: 9
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-8000.txt
+    jobid: 38
+    reason: Missing output files: results/tip-incremental-8000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=8000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 8000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-8000.txt'
+Job submitted successfully, job ID: 10
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_strong:
+    input: results/tip-test.log
+    output: results/tip-strong-t32.txt
+    jobid: 23
+    reason: Missing output files: results/tip-strong-t32.txt; Input files updated by another job: results/tip-test.log
+    wildcards: threads=32
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 32 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=32 /tmp/dseams2-repro-1798666/build-repro/tests/bench_strong 65536 > /users/home/rog32/dseams2_repro/results/tip-strong-t32.txt'
+Job submitted successfully, job ID: 11
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_public:
+    input: results/tip-test.log, data/public-ice/SOURCE.json
+    output: results/walks/niu-traj2-foursite.txt
+    jobid: 46
+    reason: Missing output files: results/walks/niu-traj2-foursite.txt; Input files updated by another job: results/tip-test.log
+    wildcards: dump=niu-traj2-foursite
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/public-ice/nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-2 0 1 1 > results/walks/niu-traj2-foursite.txt'
+Job submitted successfully, job ID: 12
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-16000.txt
+    jobid: 39
+    reason: Missing output files: results/tip-incremental-16000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=16000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 16000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-16000.txt'
+
+[Wed Sep  2 03:47:33 2026]
+localrule trajectory_incremental:
+    input: results/tip-test.log
+    output: results/trajectory-incremental.txt
+    jobid: 24
+    reason: Missing output files: results/trajectory-incremental.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_trajectory_incremental traj/mW_cubic.lammpstrj 11 > /users/home/rog32/dseams2_repro/results/trajectory-incremental.txt'
+Job submitted successfully, job ID: 13
+Job submitted successfully, job ID: 14
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_cages:
+    input: results/tip-test.log
+    output: results/tip-cages.txt
+    jobid: 15
+    reason: Missing output files: results/tip-cages.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_cages traj/mW_cubic.lammpstrj 1 5 > /users/home/rog32/dseams2_repro/results/tip-cages.txt'
+Job submitted successfully, job ID: 15
+Job submitted successfully, job ID: 16
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_public:
+    input: results/tip-test.log, data/public-ice/SOURCE.json
+    output: results/walks/niu-traj3-oxygen.txt
+    jobid: 47
+    reason: Missing output files: results/walks/niu-traj3-oxygen.txt; Input files updated by another job: results/tip-test.log
+    wildcards: dump=niu-traj3-oxygen
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/public-ice/nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-3 0 1 1 > results/walks/niu-traj3-oxygen.txt'
+Job submitted successfully, job ID: 17
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_incremental:
+    input: results/tip-test.log
+    output: results/tip-incremental-32000.txt
+    jobid: 40
+    reason: Missing output files: results/tip-incremental-32000.txt; Input files updated by another job: results/tip-test.log
+    wildcards: n=32000
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_rings_incremental 32000 5 3 > /users/home/rog32/dseams2_repro/results/tip-incremental-32000.txt'
+Job submitted successfully, job ID: 18
+
+[Wed Sep  2 03:47:33 2026]
+localrule ql_compare_dseams:
+    input: results/tip-test.log
+    output: results/ql-dseams.txt
+    jobid: 25
+    reason: Missing output files: results/ql-dseams.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/compare_structure_desc > results/ql-dseams.txt'
+Job submitted successfully, job ID: 19
+Job submitted successfully, job ID: 20
+
+[Wed Sep  2 03:47:33 2026]
+localrule walk_public:
+    input: results/tip-test.log, data/public-ice/SOURCE.json
+    output: results/walks/niu-critical-growing.txt
+    jobid: 48
+    reason: Missing output files: results/walks/niu-critical-growing.txt; Input files updated by another job: results/tip-test.log
+    wildcards: dump=niu-critical-growing
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/walk_compare data/public-ice/critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-growing 0 1 1 > results/walks/niu-critical-growing.txt'
+Job submitted successfully, job ID: 21
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_pipeline:
+    input: results/tip-test.log
+    output: results/tip-pipeline.txt
+    jobid: 34
+    reason: Missing output files: results/tip-pipeline.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_pipeline 1000 2000 4000 8000 16000 32000 > /users/home/rog32/dseams2_repro/results/tip-pipeline.txt'
+Job submitted successfully, job ID: 22
+
+[Wed Sep  2 03:47:33 2026]
+localrule tip_overhead:
+    input: results/tip-test.log
+    output: results/tip-overhead.txt
+    jobid: 17
+    reason: Missing output files: results/tip-overhead.txt; Input files updated by another job: results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /tmp/dseams2-repro-1798666/build-repro/tests/bench_overhead 4096 16000 > /users/home/rog32/dseams2_repro/results/tip-overhead.txt'
+Touching output file results/base-build.done.
+Job submitted successfully, job ID: 23
+[Wed Sep  2 03:47:33 2026]
+Finished jobid: 14 (Rule: build_base)
+Job submitted successfully, job ID: 24
+6 of 49 steps (12%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:47:33 2026]
+localrule base_drivers:
+    input: results/base-build.done
+    output: results/base_bench_scaling, results/base_bench_cages
+    jobid: 13
+    reason: Missing output files: results/base_bench_scaling, results/base_bench_cages; Input files updated by another job: results/base-build.done
+    resources: tmpdir=/tmp
+Shell command: 
+        EIGEN=$CONDA_PREFIX/include/eigen3
+        INC="-I/users/home/rog32/dseams2_repro/sources/seams-base/src/include/internal -I/users/home/rog32/dseams2_repro/sources/seams-base/src/include/external -I$EIGEN"
+        LINK="-L/tmp/dseams2-repro-1798666/build-base/src -lyodaLib -Wl,-rpath,/tmp/dseams2-repro-1798666/build-base/src -Wl,--enable-new-dtags -Wl,--allow-shlib-undefined"
+        g++ -std=c++20 -O2 -o results/base_bench_scaling /users/home/rog32/dseams2_repro/sources/seams-core/tests/bench_scaling.cpp $INC $LINK
+        g++ -std=c++20 -O2 -o results/base_bench_cages /users/home/rog32/dseams2_repro/sources/seams-core/tests/bench_cages_base.cpp $INC $LINK
+        
+Job submitted successfully, job ID: 25
+Job submitted successfully, job ID: 26
+Job submitted successfully, job ID: 27
+Job submitted successfully, job ID: 28
+Job submitted successfully, job ID: 29
+Wait finished in 195ms 810us 70ns: 1 job finished
+[Wed Sep  2 03:47:33 2026]
+Finished jobid: 35 (Rule: tip_incremental)
+7 of 49 steps (14%) done
+Wait finished in 382ms 195us 623ns: 1 job finished
+[Wed Sep  2 03:47:33 2026]
+Finished jobid: 36 (Rule: tip_incremental)
+8 of 49 steps (16%) done
+Wait finished in 645ms 376us 344ns: 1 job finished
+[Wed Sep  2 03:47:34 2026]
+Finished jobid: 37 (Rule: tip_incremental)
+9 of 49 steps (18%) done
+Wait finished in 631ms 106us 527ns: 1 job finished
+[Wed Sep  2 03:47:34 2026]
+Finished jobid: 25 (Rule: ql_compare_dseams)
+10 of 49 steps (20%) done
+Wait finished in 1s 204ms 489us 459ns: 1 job finished
+[Wed Sep  2 03:47:34 2026]
+Finished jobid: 38 (Rule: tip_incremental)
+11 of 49 steps (22%) done
+Wait finished in 1s 340ms 372us 993ns: 1 job finished
+[Wed Sep  2 03:47:34 2026]
+Finished jobid: 42 (Rule: tip_stages_nucleation)
+12 of 49 steps (24%) done
+Wait finished in 1s 321ms 843us 977ns: 1 job finished
+[Wed Sep  2 03:47:34 2026]
+Finished jobid: 15 (Rule: tip_cages)
+13 of 49 steps (27%) done
+Wait finished in 2s 114ms 39us 65ns: 1 job finished
+[Wed Sep  2 03:47:35 2026]
+Finished jobid: 24 (Rule: trajectory_incremental)
+14 of 49 steps (29%) done
+Wait finished in 2s 294ms 465us 440ns: 1 job finished
+[Wed Sep  2 03:47:35 2026]
+Finished jobid: 21 (Rule: tip_strong)
+15 of 49 steps (31%) done
+Wait finished in 2s 456ms 631us 533ns: 1 job finished
+[Wed Sep  2 03:47:35 2026]
+Finished jobid: 41 (Rule: tip_stages_cubic)
+16 of 49 steps (33%) done
+Wait finished in 2s 896ms 698us 117ns: 1 job finished
+[Wed Sep  2 03:47:36 2026]
+Finished jobid: 39 (Rule: tip_incremental)
+17 of 49 steps (35%) done
+Wait finished in 3s 95ms 206us 279ns: 1 job finished
+[Wed Sep  2 03:47:36 2026]
+Finished jobid: 20 (Rule: tip_strong)
+18 of 49 steps (37%) done
+Wait finished in 3s 270ms 750us 675ns: 1 job finished
+[Wed Sep  2 03:47:36 2026]
+Finished jobid: 11 (Rule: tip_scaling)
+19 of 49 steps (39%) done
+Wait finished in 3s 341ms 951us 680ns: 1 job finished
+[Wed Sep  2 03:47:36 2026]
+Finished jobid: 17 (Rule: tip_overhead)
+20 of 49 steps (41%) done
+Job submitted successfully, job ID: 30
+Wait finished in 4s 628ms 348us 398ns: 1 job finished
+[Wed Sep  2 03:47:38 2026]
+Finished jobid: 19 (Rule: tip_strong)
+21 of 49 steps (43%) done
+Wait finished in 4s 655ms 481us 252ns: 1 job finished
+[Wed Sep  2 03:47:38 2026]
+Finished jobid: 22 (Rule: tip_strong)
+22 of 49 steps (45%) done
+Processing ./sources/PydSEAMSlib
+  Preparing metadata (pyproject.toml): started
+Wait finished in 5s 838ms 932us 839ns: 1 job finished
+[Wed Sep  2 03:47:39 2026]
+Finished jobid: 40 (Rule: tip_incremental)
+23 of 49 steps (47%) done
+[Wed Sep  2 03:47:41 2026]
+Finished jobid: 13 (Rule: base_drivers)
+24 of 49 steps (49%) done
+Select jobs to execute...
+Execute 2 jobs...
+
+[Wed Sep  2 03:47:41 2026]
+localrule base_cages:
+    input: results/base_bench_cages
+    output: results/base-cages.txt
+    jobid: 16
+    reason: Missing output files: results/base-cages.txt; Input files updated by another job: results/base_bench_cages
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /users/home/rog32/dseams2_repro/results/base_bench_cages traj/mW_cubic.lammpstrj 1 5 > /users/home/rog32/dseams2_repro/results/base-cages.txt'
+
+[Wed Sep  2 03:47:41 2026]
+localrule base_scaling:
+    input: results/base_bench_scaling
+    output: results/base-scaling.txt
+    jobid: 12
+    reason: Missing output files: results/base-scaling.txt; Input files updated by another job: results/base_bench_scaling
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'cd /users/home/rog32/dseams2_repro/sources/seams-core/input && OMP_NUM_THREADS=1 /users/home/rog32/dseams2_repro/results/base_bench_scaling 1000 2000 4000 8000 16000 32000 > /users/home/rog32/dseams2_repro/results/base-scaling.txt'
+Job submitted successfully, job ID: 31
+Job submitted successfully, job ID: 32
+Wait finished in 7s 918ms 297us 495ns: 1 job finished
+[Wed Sep  2 03:47:41 2026]
+Finished jobid: 18 (Rule: tip_strong)
+25 of 49 steps (51%) done
+Wait finished in 13s 452ms 521us 658ns: 1 job finished
+[Wed Sep  2 03:47:47 2026]
+Finished jobid: 34 (Rule: tip_pipeline)
+26 of 49 steps (53%) done
+Wait finished in 31s 658ms 997us 818ns: 1 job finished
+[Wed Sep  2 03:48:05 2026]
+Finished jobid: 43 (Rule: walk_figshare)
+27 of 49 steps (55%) done
+Wait finished in 29s 176ms 826us 86ns: 1 job finished
+Touching output file results/yoda-build.done.
+[Wed Sep  2 03:48:06 2026]
+Finished jobid: 10 (Rule: build_yoda)
+28 of 49 steps (57%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:48:06 2026]
+localrule yoda_identity_gate:
+    input: results/yoda-build.done
+    output: results/yoda-test.log
+    jobid: 9
+    reason: Missing output files: results/yoda-test.log; Input files updated by another job: results/yoda-build.done
+    resources: tmpdir=/tmp
+Shell command: export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; hq submit --wait --cpus 8 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'meson test -C /tmp/dseams2-repro-1798666/build-yoda --print-errorlogs > results/yoda-test.log 2>&1'
+Job submitted successfully, job ID: 33
+Wait finished in 1s 86ms 542us 264ns: 1 job finished
+[Wed Sep  2 03:48:07 2026]
+Finished jobid: 9 (Rule: yoda_identity_gate)
+29 of 49 steps (59%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:48:07 2026]
+localrule figshare_demos:
+    input: results/yoda-test.log, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/figshare-demos/figshare-demos.json
+    jobid: 27
+    reason: Missing output files: results/figshare-demos/figshare-demos.json; Input files updated by another job: results/yoda-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 4 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'OMP_NUM_THREADS=4 python scripts/figshare_demos.py demos /users/home/rog32/dseams2_repro/sources/yodaStruct /tmp/dseams2-repro-1798666/build-yoda data/figshare results/figshare-demos'
+Job submitted successfully, job ID: 34
+Wait finished in 3s 643ms 323us 188ns: 1 job finished
+[Wed Sep  2 03:48:11 2026]
+Finished jobid: 27 (Rule: figshare_demos)
+30 of 49 steps (61%) done
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: pydseamslib
+  Building wheel for pydseamslib (pyproject.toml): started
+  Building wheel for pydseamslib (pyproject.toml): finished with status 'done'
+  Created wheel for pydseamslib: filename=pydseamslib-2.6.0-cp312-abi3-linux_x86_64.whl size=1486534 sha256=aa397318e031ff6ced16d8f5174d1b376ce48c1701e311901af297f74d70e6ea
+  Stored in directory: /tmp/pip-ephem-wheel-cache-2anpdbre/wheels/22/99/2a/b3439f434c0acc9f187763e82b341c60802c990e60cda75039
+Successfully built pydseamslib
+Installing collected packages: pydseamslib
+Successfully installed pydseamslib-2.6.0
+/tmp/dseams2-repro-1798666/python-site/pydseams/__init__.py
+Touching output file results/py-install.done.
+[Wed Sep  2 03:48:16 2026]
+Finished jobid: 8 (Rule: install_python)
+31 of 49 steps (63%) done
+Select jobs to execute...
+Execute 8 jobs...
+
+[Wed Sep  2 03:48:16 2026]
+localrule figshare_notebook:
+    input: notebooks/03_nanotube_prisms.py, results/py-install.done, scripts/execute_notebook.sh, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/notebooks/03_nanotube_prisms.ipynb
+    jobid: 31
+    reason: Missing output files: results/notebooks/03_nanotube_prisms.ipynb; Input files updated by another job: results/py-install.done
+    wildcards: nb=03_nanotube_prisms
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=2 scripts/execute_notebook.sh notebooks/03_nanotube_prisms.py results/notebooks/03_nanotube_prisms.ipynb'
+
+[Wed Sep  2 03:48:16 2026]
+localrule figshare_notebook:
+    input: notebooks/05_rdf2d.py, results/py-install.done, scripts/execute_notebook.sh, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/notebooks/05_rdf2d.ipynb
+    jobid: 33
+    reason: Missing output files: results/notebooks/05_rdf2d.ipynb; Input files updated by another job: results/py-install.done
+    wildcards: nb=05_rdf2d
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=2 scripts/execute_notebook.sh notebooks/05_rdf2d.py results/notebooks/05_rdf2d.ipynb'
+
+[Wed Sep  2 03:48:16 2026]
+localrule workflow_parity:
+    input: results/tip-test.log, results/py-install.done, results/yoda-test.log, results/source-manifest.json, data/fixtures/tiny-ions.lammpstrj
+    output: results/workflow-parity.json
+    jobid: 4
+    reason: Missing output files: results/workflow-parity.json; Input files updated by another job: results/py-install.done, results/source-manifest.json, results/tip-test.log, results/yoda-test.log
+    resources: tmpdir=/tmp
+Shell command: PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} python scripts/workflow_parity.py --seams /tmp/dseams2-repro-1798666/build-repro/seams --lua /users/home/rog32/dseams2_repro/.pixi/envs/default/bin/lua --lua-source /users/home/rog32/dseams2_repro/sources/yodaStruct --lua-build /tmp/dseams2-repro-1798666/build-yoda --water /users/home/rog32/dseams2_repro/sources/seams-core/input/traj/exampleTraj.lammpstrj --ice /users/home/rog32/dseams2_repro/sources/seams-core/input/traj/mW_cubic.lammpstrj --ions data/fixtures/tiny-ions.lammpstrj --output results/workflow-parity.json
+
+Job submitted successfully, job ID: 35
+[Wed Sep  2 03:48:16 2026]
+localrule figshare_nucleation_notebook:
+    input: notebooks/02_nucleation_cages.py, results/py-install.done, scripts/execute_notebook.sh, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/notebooks/02_nucleation_cages.ipynb, results/figshare-incremental.json
+    jobid: 30
+    reason: Missing output files: results/figshare-incremental.json, results/notebooks/02_nucleation_cages.ipynb; Input files updated by another job: results/py-install.done
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=2 scripts/execute_notebook.sh notebooks/02_nucleation_cages.py results/notebooks/02_nucleation_cages.ipynb'
+
+[Wed Sep  2 03:48:16 2026]
+localrule figshare_notebook:
+    input: notebooks/04_monolayer_rings.py, results/py-install.done, scripts/execute_notebook.sh, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/notebooks/04_monolayer_rings.ipynb
+    jobid: 32
+    reason: Missing output files: results/notebooks/04_monolayer_rings.ipynb; Input files updated by another job: results/py-install.done
+    wildcards: nb=04_monolayer_rings
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=2 scripts/execute_notebook.sh notebooks/04_monolayer_rings.py results/notebooks/04_monolayer_rings.ipynb'
+
+[Wed Sep  2 03:48:16 2026]
+localrule sota_sweep:
+    input: results/py-install.done, results/tip-test.log
+    output: results/sota_compare.txt
+    jobid: 50
+    reason: Missing output files: results/sota_compare.txt; Input files updated by another job: results/py-install.done, results/tip-test.log
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 4 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=1 SEAMS_BUILD=/tmp/dseams2-repro-1798666/build-repro python scripts/sota_compare.py --seeds 5 --sigmas 0.0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 > results/sota_compare.txt'
+
+[Wed Sep  2 03:48:16 2026]
+localrule ql_compare_python:
+    input: results/py-install.done
+    output: results/ql-python.txt
+    jobid: 26
+    reason: Missing output files: results/ql-python.txt; Input files updated by another job: results/py-install.done
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 1 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} python /users/home/rog32/dseams2_repro/sources/seams-core/scripts/compare_ql_literature.py > results/ql-python.txt'
+
+[Wed Sep  2 03:48:16 2026]
+localrule figshare_notebook:
+    input: notebooks/01_chillplus_ic.py, results/py-install.done, scripts/execute_notebook.sh, data/figshare/nucleation.lammpstrj, data/figshare/mW_cubic.lammpstrj, data/figshare/dump-240-square.lammpstrj, data/figshare/dump-6-320-310.lammpstrj, data/figshare/dump-320.lammpstrj
+    output: results/notebooks/01_chillplus_ic.ipynb
+    jobid: 29
+    reason: Missing output files: results/notebooks/01_chillplus_ic.ipynb; Input files updated by another job: results/py-install.done
+    wildcards: nb=01_chillplus_ic
+    resources: tmpdir=/tmp
+Shell command: hq submit --wait --cpus 2 --stdout results/hq-%{JOB_ID}.stdout --stderr results/hq-%{JOB_ID}.stderr -- bash -c 'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH PYTHONPATH=/tmp/dseams2-repro-1798666/python-site:${PYTHONPATH:-} OMP_NUM_THREADS=2 scripts/execute_notebook.sh notebooks/01_chillplus_ic.py results/notebooks/01_chillplus_ic.ipynb'
+Job submitted successfully, job ID: 36
+Job submitted successfully, job ID: 37
+Job submitted successfully, job ID: 38
+Job submitted successfully, job ID: 39
+Job submitted successfully, job ID: 40
+Job submitted successfully, job ID: 41
+workflow parity: pass (39 checks)
+[Wed Sep  2 03:48:18 2026]
+Finished jobid: 4 (Rule: workflow_parity)
+32 of 49 steps (65%) done
+Wait finished in 20s 299ms 174us 927ns: 1 job finished
+[Wed Sep  2 03:48:37 2026]
+Finished jobid: 32 (Rule: figshare_notebook)
+33 of 49 steps (67%) done
+Wait finished in 20s 393ms 645us 677ns: 1 job finished
+[Wed Sep  2 03:48:37 2026]
+Finished jobid: 31 (Rule: figshare_notebook)
+34 of 49 steps (69%) done
+Wait finished in 20s 641ms 169us 176ns: 1 job finished
+[Wed Sep  2 03:48:37 2026]
+Finished jobid: 29 (Rule: figshare_notebook)
+35 of 49 steps (71%) done
+Wait finished in 21s 71ms 742us 222ns: 1 job finished
+[Wed Sep  2 03:48:37 2026]
+Finished jobid: 33 (Rule: figshare_notebook)
+36 of 49 steps (73%) done
+Wait finished in 1m 741ms 655us 479ns: 1 job finished
+[Wed Sep  2 03:48:42 2026]
+Finished jobid: 16 (Rule: base_cages)
+37 of 49 steps (76%) done
+Wait finished in 1m 936ms 768us 555ns: 1 job finished
+[Wed Sep  2 03:48:42 2026]
+Finished jobid: 12 (Rule: base_scaling)
+38 of 49 steps (78%) done
+Wait finished in 27s 205ms 926us 649ns: 1 job finished
+[Wed Sep  2 03:48:44 2026]
+Finished jobid: 26 (Rule: ql_compare_python)
+39 of 49 steps (80%) done
+Wait finished in 1m 14s 17ms 686us 896ns: 1 job finished
+[Wed Sep  2 03:48:47 2026]
+Finished jobid: 44 (Rule: walk_public)
+40 of 49 steps (82%) done
+Wait finished in 35s 347ms 698us 854ns: 1 job finished
+[Wed Sep  2 03:48:52 2026]
+Finished jobid: 50 (Rule: sota_sweep)
+41 of 49 steps (84%) done
+Wait finished in 2m 422ms 111us 537ns: 1 job finished
+[Wed Sep  2 03:49:34 2026]
+Finished jobid: 48 (Rule: walk_public)
+42 of 49 steps (86%) done
+Wait finished in 2m 19s 140ms 716us 916ns: 1 job finished
+[Wed Sep  2 03:49:52 2026]
+Finished jobid: 49 (Rule: walk_public)
+43 of 49 steps (88%) done
+Wait finished in 2m 9s 674ms 274us 413ns: 1 job finished
+[Wed Sep  2 03:50:26 2026]
+Finished jobid: 30 (Rule: figshare_nucleation_notebook)
+44 of 49 steps (90%) done
+Wait finished in 3m 25s 925ms 424us 379ns: 1 job finished
+[Wed Sep  2 03:50:59 2026]
+Finished jobid: 46 (Rule: walk_public)
+45 of 49 steps (92%) done
+Wait finished in 3m 54s 453ms 43us 445ns: 1 job finished
+[Wed Sep  2 03:51:28 2026]
+Finished jobid: 47 (Rule: walk_public)
+46 of 49 steps (94%) done
+Wait finished in 3m 55s 722ms 440us 686ns: 1 job finished
+[Wed Sep  2 03:51:29 2026]
+Finished jobid: 23 (Rule: tip_strong)
+47 of 49 steps (96%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:51:29 2026]
+localrule aggregate:
+    input: results/conditions.txt, results/source-manifest.json, results/workflow-parity.json, results/tip-test.log, results/tip-scaling.txt, results/base-scaling.txt, results/tip-cages.txt, results/base-cages.txt, results/tip-overhead.txt, results/tip-strong-t1.txt, results/tip-strong-t2.txt, results/tip-strong-t4.txt, results/tip-strong-t8.txt, results/tip-strong-t16.txt, results/tip-strong-t32.txt, results/trajectory-incremental.txt, results/ql-dseams.txt, results/ql-python.txt, results/figshare-demos/figshare-demos.json, results/notebooks/01_chillplus_ic.ipynb, results/notebooks/02_nucleation_cages.ipynb, results/notebooks/03_nanotube_prisms.ipynb, results/notebooks/04_monolayer_rings.ipynb, results/notebooks/05_rdf2d.ipynb, results/figshare-incremental.json, results/tip-pipeline.txt, results/tip-incremental-1000.txt, results/tip-incremental-2000.txt, results/tip-incremental-4000.txt, results/tip-incremental-8000.txt, results/tip-incremental-16000.txt, results/tip-incremental-32000.txt, results/tip-stages-cubic.txt, results/tip-stages-nucleation.txt, results/walks/figshare-nucleation.txt, results/walks/niu-traj1-extract.txt, results/walks/niu-traj2-foursite.txt, results/walks/niu-traj3-oxygen.txt, results/walks/niu-critical-growing.txt, results/walks/niu-critical-melting.txt, results/sota_compare.txt
+    output: results/paper_manifest.json
+    jobid: 1
+    reason: Missing output files: results/paper_manifest.json; Input files updated by another job: results/base-scaling.txt, results/tip-strong-t2.txt, results/figshare-incremental.json, results/walks/figshare-nucleation.txt, results/notebooks/01_chillplus_ic.ipynb, results/tip-test.log, results/trajectory-incremental.txt, results/tip-strong-t16.txt, results/tip-scaling.txt, results/ql-dseams.txt, results/notebooks/03_nanotube_prisms.ipynb, results/tip-cages.txt, results/tip-incremental-8000.txt, results/tip-pipeline.txt, results/tip-incremental-4000.txt, results/notebooks/05_rdf2d.ipynb, results/ql-python.txt, results/tip-stages-cubic.txt, results/walks/niu-traj1-extract.txt, results/workflow-parity.json, results/tip-strong-t4.txt, results/tip-overhead.txt, results/base-cages.txt, results/notebooks/02_nucleation_cages.ipynb, results/walks/niu-critical-melting.txt, results/notebooks/04_monolayer_rings.ipynb, results/sota_compare.txt, results/tip-strong-t8.txt, results/figshare-demos/figshare-demos.json, results/tip-incremental-2000.txt, results/tip-incremental-16000.txt, results/tip-incremental-32000.txt, results/walks/niu-traj2-foursite.txt, results/tip-stages-nucleation.txt, results/tip-strong-t32.txt, results/source-manifest.json, results/conditions.txt, results/walks/niu-traj3-oxygen.txt, results/walks/niu-critical-growing.txt, results/tip-strong-t1.txt, results/tip-incremental-1000.txt
+    resources: tmpdir=/tmp
+Shell command: python scripts/aggregate.py results > results/paper_manifest.json
+[Wed Sep  2 03:51:29 2026]
+Finished jobid: 1 (Rule: aggregate)
+48 of 49 steps (98%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep  2 03:51:29 2026]
+localrule all:
+    input: results/paper_manifest.json
+    jobid: 0
+    reason: Input files updated by another job: results/paper_manifest.json
+    resources: tmpdir=/tmp
+Shell command: None
+[Wed Sep  2 03:51:29 2026]
+Finished jobid: 0 (Rule: all)
+49 of 49 steps (100%) done
+Complete log(s): /users/home/rog32/dseams2_repro/.snakemake/log/2026-09-02T034653.041719.snakemake.log
+manifest: results/paper_manifest.json
