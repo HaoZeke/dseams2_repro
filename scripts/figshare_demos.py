@@ -77,10 +77,18 @@ SCRIPT = pathlib.Path(__file__).resolve().parent.parent / "lua" / "figshare_demo
 
 
 def find_lua():
+    # The interpreter must be the one dseams_core.so links against: prefer
+    # the active environment's lua over a distro lua5.4 on PATH
+    prefix = os.environ.get("CONDA_PREFIX")
+    if prefix:
+        for name in ("lua5.4", "lua"):
+            cand = pathlib.Path(prefix) / "bin" / name
+            if cand.is_file() and os.access(cand, os.X_OK):
+                return str(cand)
     for name in ("lua5.4", "lua-5.4", "lua5.3", "lua"):
-        path = shutil.which(name)
-        if path:
-            return path
+        found = shutil.which(name)
+        if found:
+            return found
     raise FileNotFoundError("lua 5.3/5.4 not on PATH; add lua to the repro env")
 
 
