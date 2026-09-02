@@ -85,6 +85,15 @@ can tell.
 | =results/reference/= | committed campaign outputs the paper reads |
 | =zenodo/= | deposition payload staging (=scripts/stage_zenodo.sh=) |
 
+* Reference campaigns
+
+| directory | node | what |
+|-----------+------+------|
+| =results/reference/elja-1798666= | AMD EPYC 7713, exclusive =128cpu_256mem=, Slurm 1798666 | full DAG at seams-core e785640: timings, walks (every frame), five-seed sweep, notebooks, demos, parity |
+| =results/reference/terra-2026-09-01= | shared workstation | walks and sweep at the same sources; label tables identical to the Elja run line for line |
+| =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript's main tables read |
+| =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | terra | the stride-ten walks, the single-seed sweep and the residual diagnosis that preceded the campaign |
+
 * Archive for Zenodo
 
 After a full run exits 0:
