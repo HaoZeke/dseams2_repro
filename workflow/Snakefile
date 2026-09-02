@@ -647,13 +647,14 @@ rule sota_sweep:
         tbuild=TIP_BUILD,
         seeds=SWEEP_SEEDS,
         sigmas=" ".join(str(s) for s in SWEEP_SIGMAS),
+        liquid=config.get("liquid_data", "data/mW_liquid_T215_512.data"),
     shell:
         "{params.hq} bash -c "
         "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
         "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
         "SEAMS_BUILD={params.tbuild} "
         "python scripts/sota_compare.py --seeds {params.seeds} "
-        "--sigmas {params.sigmas} > {output}'"
+        "--sigmas {params.sigmas} --liquid-data {params.liquid} > {output}'"
 
 
 

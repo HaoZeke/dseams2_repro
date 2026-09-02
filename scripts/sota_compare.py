@@ -23,7 +23,9 @@ Methods:
 Scalar/vector methods get their decision fit on the ideal (sigma = 0)
 lattices and applied unchanged across the sweep; label-producing methods
 use their native labels. Metrics: accuracy on Ic and Ih, Ic/Ih confusion,
-false-crystal rate on the null. Output is key=value lines per
+false-crystal rate on the null and, with --liquid-data, on a supercooled
+mW liquid (system=liquid), which has the short-range order the random
+packing lacks. Output is key=value lines per
 (method, system, sigma).
 """
 
@@ -31,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import pathlib
 import sys
 import time
 
@@ -119,6 +122,28 @@ def neighbour_check(pos: np.ndarray, box: np.ndarray):
         r = np.sqrt((d * d).sum(axis=1))
         counts[i] = int(((r > 0.1) & (np.abs(r - BOND) < 0.1)).sum())
     assert (counts == 4).all(), f"lattice broken: counts {np.unique(counts)}"
+
+
+def read_lammps_data(path: str):
+    """Atom positions and box from a LAMMPS data file (atomic style)."""
+    lines = pathlib.Path(path).read_text().splitlines()
+    lo = np.zeros(3)
+    hi = np.zeros(3)
+    for line in lines:
+        for k, key in enumerate(("xlo xhi", "ylo yhi", "zlo zhi")):
+            if line.strip().endswith(key):
+                lo[k], hi[k] = (float(x) for x in line.split()[:2])
+    start = next(i for i, line in enumerate(lines) if line.startswith("Atoms")) + 2
+    pos = []
+    for line in lines[start:]:
+        if not line.strip():
+            if pos:
+                break
+            continue
+        cols = line.split()
+        pos.append([float(cols[2]), float(cols[3]), float(cols[4])])
+    box = hi - lo
+    return (np.asarray(pos) - lo) % box, box
 
 
 def jitter(pos: np.ndarray, box: np.ndarray, sigma: float, rng):
@@ -394,6 +419,9 @@ def main():
                         help="independent jitter realizations per sigma")
     parser.add_argument("--sigmas", type=float, nargs="+", default=SIGMAS,
                         help="Gaussian displacement standard deviations, Angstrom")
+    parser.add_argument("--liquid-data", default=None,
+                        help="LAMMPS data file of a supercooled liquid: a second "
+                             "null with real short-range order")
     args = parser.parse_args()
     sigmas = list(args.sigmas)
     seeds = list(range(args.seeds))
@@ -528,53 +556,60 @@ def main():
                     f"ms={ms:.1f}"
                 )
 
-    # False-crystal rate on the null, per label-producing method
-    for method, run in (
-        ("dseams-topo", lambda: dseams_topo(null_pos, ic_box)),
-        ("dseams-topo-4nn", lambda: dseams_topo_4nn(null_pos, ic_box)),
-        ("dseams-topo-seeded", lambda: dseams_topo_seeded(null_pos, ic_box)),
-        (
-            "dseams-topo-seeded5",
-            lambda: dseams_topo_seeded(null_pos, ic_box, 5, True),
-        ),
-        (
-            "dseams-topo-seeded-adj",
-            lambda: dseams_topo_seeded(null_pos, ic_box, ring_adjacent=True),
-        ),
-        ("chill+", lambda: chill_plus(null_pos, ic_box, scratch)),
-    ):
-        labels = run()
-        s = score(labels, "water")
+    def report_null(system, null_pos, box):
+        # False-crystal rate on a structureless system, per method
+        for method, run in (
+            ("dseams-topo", lambda: dseams_topo(null_pos, box)),
+            ("dseams-topo-4nn", lambda: dseams_topo_4nn(null_pos, box)),
+            ("dseams-topo-seeded", lambda: dseams_topo_seeded(null_pos, box)),
+            (
+                "dseams-topo-seeded5",
+                lambda: dseams_topo_seeded(null_pos, box, 5, True),
+            ),
+            (
+                "dseams-topo-seeded-adj",
+                lambda: dseams_topo_seeded(null_pos, box, ring_adjacent=True),
+            ),
+            ("chill+", lambda: chill_plus(null_pos, box, scratch)),
+        ):
+            labels = run()
+            s = score(labels, "water")
+            print(
+                f"method={method} system={system} sigma=0.00 acc={s['acc']:.3f} "
+                f"false_crystal={s['crystal']:.3f}"
+            )
+        feats = freud_features(null_pos, box)
+        ld = ld_classify(np.column_stack([feats[(4, True)], feats[(6, True)]]))
+        s = score(ld, "water")
         print(
-            f"method={method} system=null sigma=0.00 acc={s['acc']:.3f} "
+            f"method=freud-ld system={system} sigma=0.00 acc={s['acc']:.3f} "
             f"false_crystal={s['crystal']:.3f}"
         )
-    feats = freud_features(null_pos, ic_box)
-    ld = ld_classify(np.column_stack([feats[(4, True)], feats[(6, True)]]))
-    s = score(ld, "water")
-    print(
-        f"method=freud-ld system=null sigma=0.00 acc={s['acc']:.3f} "
-        f"false_crystal={s['crystal']:.3f}"
-    )
-    q6 = feats[(6, False)]
-    print(
-        f"method=freud-q6 system=null sigma=0.00 acc=nan "
-        f"false_crystal={float((q6 > q6_ice_threshold).sum()) / len(q6):.3f}"
-    )
-    if ptm_ok:
-        labels = ovito_ptm(null_pos, ic_box)
-        s = score(labels, "water")
+        q6 = feats[(6, False)]
         print(
-            f"method=ovito-ptm system=null sigma=0.00 acc={s['acc']:.3f} "
-            f"false_crystal={s['crystal']:.3f}"
+            f"method=freud-q6 system={system} sigma=0.00 acc=nan "
+            f"false_crystal={float((q6 > q6_ice_threshold).sum()) / len(q6):.3f}"
         )
-    if twist_ok and twist_classify is not None:
-        tw = twist_classify(twist_features(null_pos, ic_box).reshape(-1, 1))
-        s = score(tw, "water")
-        print(
-            f"method=twist-op system=null sigma=0.00 acc={s['acc']:.3f} "
-            f"false_crystal={s['crystal']:.3f}"
-        )
+        if ptm_ok:
+            labels = ovito_ptm(null_pos, box)
+            s = score(labels, "water")
+            print(
+                f"method=ovito-ptm system={system} sigma=0.00 acc={s['acc']:.3f} "
+                f"false_crystal={s['crystal']:.3f}"
+            )
+        if twist_ok and twist_classify is not None:
+            tw = twist_classify(twist_features(null_pos, box).reshape(-1, 1))
+            s = score(tw, "water")
+            print(
+                f"method=twist-op system={system} sigma=0.00 acc={s['acc']:.3f} "
+                f"false_crystal={s['crystal']:.3f}"
+            )
+
+    report_null("null", null_pos, ic_box)
+    if args.liquid_data:
+        liq_pos, liq_box = read_lammps_data(args.liquid_data)
+        print(f"# liquid n={len(liq_pos)} from {pathlib.Path(args.liquid_data).name}")
+        report_null("liquid", liq_pos, liq_box)
 
     print(
         "# availability deepice=no-public-code icecoder=no-public-code "
