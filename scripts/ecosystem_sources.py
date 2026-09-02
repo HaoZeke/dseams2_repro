@@ -208,12 +208,13 @@ def main() -> int:
 
     args = parser.parse_args()
     lock = load_lock(args.lock.resolve())
+    core = args.core.resolve() if getattr(args, "core", None) else None
     if args.command == "fetch":
         fetch(lock, args.root.resolve())
     elif args.command == "wire":
-        wire(lock, args.root.resolve(), args.core.resolve())
+        wire(lock, args.root.resolve(), core)
     elif args.command == "manifest":
-        manifest = source_manifest(lock, args.root.resolve(), args.core.resolve())
+        manifest = source_manifest(lock, args.root.resolve(), core)
         output = args.output.resolve()
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(
