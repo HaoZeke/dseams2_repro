@@ -102,7 +102,12 @@ def same_repository(a: str, b: str) -> bool:
 
 
 def fetch(lock: dict[str, Any], root: Path) -> None:
-    """Materialize every component at its locked revision."""
+    """Materialize every component at its locked revision.
+
+    An existing checkout under ``root`` is a cache owned by this script: it
+    is re-fetched and force-checked-out, then required to be clean. A path
+    that is not a Git checkout of the locked repository is an error.
+    """
     root.mkdir(parents=True, exist_ok=True)
     for name in sorted(lock["components"]):
         component = lock["components"][name]
@@ -112,7 +117,6 @@ def fetch(lock: dict[str, Any], root: Path) -> None:
                 raise FileExistsError(
                     f"source path is not a Git checkout: {destination}"
                 )
-            _assert_clean_repository(destination, include_untracked=False)
             configured = _git("remote", "get-url", "origin", cwd=destination)
             if not same_repository(configured, component["repository"]):
                 raise RuntimeError(
@@ -134,7 +138,8 @@ def fetch(lock: dict[str, Any], root: Path) -> None:
             component["revision"],
             cwd=destination,
         )
-        _git("checkout", "--detach", component["revision"], cwd=destination)
+        _git("checkout", "--detach", "--force", component["revision"], cwd=destination)
+        _assert_clean_repository(destination, include_untracked=False)
         actual = _git("rev-parse", "HEAD", cwd=destination)
         if actual != component["revision"]:
             raise RuntimeError(

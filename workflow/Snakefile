@@ -18,6 +18,10 @@ import shutil
 
 configfile: "config/config.yaml"
 
+# Host cargo configuration (a user-level linker choice, say) must not leak
+# into the locked Rust builds; an explicit RUSTFLAGS wins over ~/.cargo
+shell.prefix('export RUSTFLAGS="${SEAMS_RUSTFLAGS:-}"; ')
+
 ROOT = os.path.abspath(".")
 R = "results"
 LOCK = "config/ecosystem-lock.json"
