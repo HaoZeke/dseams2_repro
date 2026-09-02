@@ -1,0 +1,12 @@
+hostname: rgam5terra
+jobid: none
+partition: none
+tip_sha: 770accf96b99c080442d6047742bfef09d16af6b
+base_sha: 1c8efa382c4ae88ebc68e40a991260c4d57edbd5
+repro_sha: unknown
+hq: absent
+Model name:                              AMD Ryzen 9 9950X 16-Core Processor
+Thread(s) per core:                      2
+Core(s) per socket:                      16
+Socket(s):                               1
+loadavg_at_start: 4.32
