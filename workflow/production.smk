@@ -40,7 +40,7 @@ rule module_source:
     shell:
         r"""
         if [ -d {params.src}/.git ]; then git -C {params.src} pull -q --ff-only; \
-        else git clone -q https://github.com/HaoZeke/dseams-plumed.git {params.src}; fi
+        else git clone -q https://github.com/d-SEAMS/dseams-plumed.git {params.src}; fi
         git -C {params.src} rev-parse HEAD > {output}
         """
 

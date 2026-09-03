@@ -3,7 +3,7 @@ message: "If you use this reproducibility package, cite the d-SEAMS 2.0 paper an
 title: "dseams2_repro: reproducibility package for d-SEAMS 2.0"
 type: software
 license: MIT
-repository-code: "https://github.com/HaoZeke/dseams2_repro"
+repository-code: "https://github.com/d-SEAMS/dseams2_repro"
 authors:
   - family-names: Goswami
     given-names: Rohit
