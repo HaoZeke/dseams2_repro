@@ -163,6 +163,13 @@ can tell.
 | =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | shared workstation | the stride-ten walks, the single-seed sweep and the residual diagnosis |
 | =results/production/=, =results/brine/= | exclusive Slurm node, one job per temperature | outputs of =scripts/elja_production.sh submit= and =submit-brine= |
 
+* Changelog
+
+Released versions live in [[file:CHANGELOG.md][CHANGELOG.md]] (Keep a Changelog).
+Unreleased notes are files under =changelog.d/=. Name each
+fragment =+slug.added.md= (or =changed=, =deprecated=, =removed=,
+=fixed=, =security=). The cut is =towncrier build --version X.Y.Z=.
+
 * Archive for Zenodo
 
 =scripts/stage_zenodo.sh= copies the parsed inventory, conditions,
