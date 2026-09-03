@@ -1,0 +1,3 @@
+nAtoms    ranks   thr     devs    neigh/ms        ql/ms           index/ms        rings/ms        total/ms        
+65536     1       4       0       18.457          5.618           15.329          228.190         267.594         
+# every stage threaded on the host; best of 7 runs

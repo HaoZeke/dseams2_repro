@@ -315,7 +315,8 @@ rule tip_strong:
         atoms=config["strong_atoms"],
     shell:
         "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS={wildcards.threads} "
-        "{params.tbuild}/tests/bench_strong {params.atoms} > {params.out}'"
+        "OMP_PLACES=cores OMP_PROC_BIND=close "
+        "{params.tbuild}/tests/bench_strong {params.atoms} 7 > {params.out}'"
 
 
 rule tip_pipeline:

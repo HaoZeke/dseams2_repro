@@ -1,0 +1,3 @@
+host: workstation, AMD Ryzen 9 9950X (16 cores, 32 threads, SMT on), 46 GiB
+strong scaling: 65536 jittered molecules at the mW density, OMP_PLACES=cores OMP_PROC_BIND=close, one thread per physical core, best of 7 runs per stage
+engine: seams-core 0a7fc546 (threaded cell-list neighbour rows), GCC from the conda-forge toolchain, OpenMP on, vesin off, no MPI, no offload

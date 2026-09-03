@@ -54,6 +54,13 @@ under =profiles/=, results, and an archive tarball for deposition.
   behind it (=--fallback-hops 2=): a molecule the three-hop library
   does not name falls back to the two-hop one, and the output records
   the depth that named each molecule.
+- Strong scaling (rule =tip_strong=, =tests/bench_strong= in the engine)
+  holds 65536 molecules fixed and times every host stage of the ring
+  pipeline, neighbour list, Steinhardt kernel, index-ordered list and
+  primitive rings, as the best of seven runs at each thread count with
+  threads pinned to cores; the sum is the pipeline wall time. The
+  reference run under =results/reference/terra-2026-09-02= names the
+  machine in =MACHINE.txt=.
 - Methane occupancy of the GenIce sI and sII hydrates comes from rule
   =hydrate_occupancy= (script =scripts/hydrate_occupancy.py=): cages
   by ring-size signature on the water graph, every methane placed at

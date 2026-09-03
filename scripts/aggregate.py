@@ -102,7 +102,7 @@ def parse_strong(text):
     for line in text.splitlines():
         m = re.match(
             r"\s*(\d+)\s+\d+\s+\d+\s+\d+\s+([\d.]+)\s+([\d.]+)"
-            r"(?:\s+([\d.]+)\s+([\d.]+))?",
+            r"(?:\s+([\d.]+)\s+([\d.]+))?(?:\s+([\d.]+))?",
             line,
         )
         if m:
@@ -110,6 +110,9 @@ def parse_strong(text):
             if m.group(4) is not None:
                 row["index_ms"] = float(m.group(4))
                 row["rings_ms"] = float(m.group(5))
+                row["total_ms"] = float(m.group(6)) if m.group(6) is not None else sum(
+                    (row["neigh_ms"], row["ql_ms"], row["index_ms"], row["rings_ms"])
+                )
             return row
     return None
 
