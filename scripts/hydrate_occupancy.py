@@ -69,11 +69,15 @@ def main():
         every = []
         for sig, per_cell in sigs:
             cages = [c["vertices"] for c in frame.cages_by_signature(sig)]
-            occ = frame.guest_occupancy(cages, (6,), radius=RADIUS[sig])
+            both = frame.guest_occupancy_both(sig, (6,), radius=RADIUS[sig])
             every.extend(cages)
             emit(structure=name, signature=sig, cages=len(cages), expected=per_cell * ncell,
-                 occupied=occ.occupied, multiple=occ.multiply, free=occ.free,
-                 filled=f"{occ.occupied / max(1, len(cages)):.3f}")
+                 occupied=both.radius.occupied, multiple=both.radius.multiply,
+                 free=both.radius.free,
+                 occupied_inside=both.inside.occupied,
+                 multiple_inside=both.inside.multiply,
+                 free_inside=both.inside.free,
+                 filled=f"{both.radius.occupied / max(1, len(cages)):.3f}")
         occ = frame.guest_occupancy(every, (6,), radius=max(RADIUS[s] for s, _ in sigs))
         emit(structure=name, signature="all", cages=len(every), occupied=occ.occupied,
              multiple=occ.multiply, free=occ.free,
