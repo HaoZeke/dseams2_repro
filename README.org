@@ -117,11 +117,17 @@ produce paper numbers. LAMMPS and PLUMED inputs live in =templates/=
 (=in.seed.lammps=, =in.brine.lammps=, =plumed_seed.dat=,
 =plumed_brine.dat=).
 
-=prep= installs the production pixi environment and builds the PLUMED
-module (rule =build_module=). =submit= queues one exclusive job per
-seeding temperature. =submit-brine= queues one exclusive job per brine
-temperature. Seeding outputs land in =results/production/=. Brine
-outputs land in =results/brine/=.
+=prep= installs the production pixi environment (including =genice2=)
+and builds the PLUMED module (rule =build_module=) against the host
+PLUMED. On Elja that host is EasyBuild LAMMPS 23Jun2022-foss-2021b-kokkos
+and PLUMED 2.7.3: the conda-forge =lammps= 2025.07 binary needs
+GLIBC_2.34, which Rocky 8 does not have. =scripts/elja_lmp.sh= loads
+the modules; =SEAMS_LMP= points the DAG at that wrapper. =submit=
+queues one exclusive job per seeding temperature. =submit-brine= queues
+one exclusive job per brine temperature. =smoke= queues the tiny matrix
+in =config/production-smoke.yaml= and does not produce paper numbers.
+Seeding outputs land in =results/production/=. Brine outputs land in
+=results/brine/=.
 
 #+begin_src bash
 scripts/elja_production.sh prep

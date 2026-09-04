@@ -1,10 +1,13 @@
 # mW seeding campaign (Elja production). Run from the repository root:
 #   pixi run -e production -- snakemake -s workflow/production.smk --configfile config/production.yaml --cores all
 # The PLUMED module comes from dseams-plumed built in the production env
-# (rule build_module); LAMMPS with PLUMED from conda-forge.
+# (rule build_module). LAMMPS is SEAMS_LMP when set (EasyBuild on Elja);
+# otherwise the conda-forge lmp on PATH.
 import itertools
 import json
 import os
+
+LMP = os.environ.get("SEAMS_LMP", "lmp")
 
 configfile: "config/production.yaml"
 
@@ -93,11 +96,12 @@ rule liquid:
         P=config["pressure_bar"],
         melt=config.get("liquid_melt_steps", 20000),
         eq=config.get("liquid_eq_steps", 20000),
+        lmp=LMP,
     threads: config["lammps_threads"]
     shell:
         r"""
         d=$(dirname {output}); cp templates/mW.sw $d/; cd $d
-        OMP_NUM_THREADS={threads} lmp -sf omp -log log.liquid -in ../../../../templates/in.liquid.lammps           -var data packing.data -var T {wildcards.T} -var P {params.P}           -var steps_melt {params.melt} -var steps_eq {params.eq} -var seed 7{wildcards.T}           -var out liquid.data > lammps.out 2>&1
+        OMP_NUM_THREADS={threads} {params.lmp} -sf omp -log log.liquid -in ../../../../templates/in.liquid.lammps           -var data packing.data -var T {wildcards.T} -var P {params.P}           -var steps_melt {params.melt} -var steps_eq {params.eq} -var seed 7{wildcards.T}           -var out liquid.data > lammps.out 2>&1
         test -s liquid.data
         """
 
@@ -153,11 +157,12 @@ rule run:
         steps=config["steps"],
         dump=config["dump_every"],
         P=config["pressure_bar"],
+        lmp=LMP,
     threads: config["lammps_threads"]
     shell:
         r"""
         d=$(dirname {output.ice}); cp templates/mW.sw $d/; cd $d
-        OMP_NUM_THREADS={threads} lmp -sf omp -log log.lammps -in ../../../templates/in.seed.lammps \
+        OMP_NUM_THREADS={threads} {params.lmp} -sf omp -log log.lammps -in ../../../templates/in.seed.lammps \
           -var data seeded.data -var T {params.m[temperature]} -var P {params.P} \
           -var steps {params.steps} -var dumpevery {params.dump} -var seed {params.m[replica]}1 \
           -var plumed plumed.dat -var dump traj.lammpstrj > lammps.out 2>&1 || true
@@ -264,11 +269,12 @@ rule brine_run:
         melt=BRINE.get("melt_steps", 50000),
         steps=BRINE.get("steps", 2500000),
         dump=BRINE.get("dump_every", 25000),
+        lmp=LMP,
     threads: config["lammps_threads"]
     shell:
         r"""
         cd $(dirname {output})
-        OMP_NUM_THREADS={threads} lmp -sf omp -log log.lammps -in ../../../templates/in.brine.lammps           -var data brine.data -var groups groups.lmp -var T {params.m[temperature]} -var P {params.P}           -var steps_melt {params.melt} -var steps {params.steps} -var dumpevery {params.dump}           -var seed {params.m[replica]}3 -var plumed plumed.dat -var dump traj.lammpstrj > lammps.out 2>&1
+        OMP_NUM_THREADS={threads} {params.lmp} -sf omp -log log.lammps -in ../../../templates/in.brine.lammps           -var data brine.data -var groups groups.lmp -var T {params.m[temperature]} -var P {params.P}           -var steps_melt {params.melt} -var steps {params.steps} -var dumpevery {params.dump}           -var seed {params.m[replica]}3 -var plumed plumed.dat -var dump traj.lammpstrj > lammps.out 2>&1
         test -s BRINE
         """
 
