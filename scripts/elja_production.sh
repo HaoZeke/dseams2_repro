@@ -23,7 +23,7 @@ production_snakemake() {
     elja_host_env
     export SEAMS_LMP="$2"
     shift 2
-    exec snakemake -s workflow/production.smk "$@"
+    exec snakemake -s workflow/production.smk --nolock "$@"
   ' bash "$SCRIPT_DIR/elja_host_env.sh" "$SEAMS_LMP" "$@"
 }
 
