@@ -7,6 +7,10 @@
 # Source this file and call elja_host_env. It prepends the host lmp and
 # PLUMED 2.7.3 (the kernel LAMMPS 23Jun2022 looks up via PLUMED_KERNEL).
 elja_host_env() {
+  # Lmod init reads FPATH; foss puts a Python 3.9 SciPy-bundle on
+  # PYTHONPATH. Both break a `set -u` pixi 3.12 process.
+  local nounset=0
+  case $- in *u*) nounset=1; set +u;; esac
   if ! type module >/dev/null 2>&1; then
     if [ -f /opt/ohpc/admin/lmod/lmod/init/bash ]; then
       # shellcheck disable=SC1091
@@ -16,6 +20,7 @@ elja_host_env() {
       . /usr/share/lmod/lmod/init/bash
     else
       echo "elja_host_env: no Lmod init on this node" >&2
+      [ "$nounset" = 1 ] && set -u
       return 1
     fi
   fi
@@ -26,12 +31,14 @@ elja_host_env() {
   # Hidden modules: leading-dot versions on the hierarchical MPI path.
   module load PLUMED/.2.7.3
   module load LAMMPS/.23Jun2022-kokkos
+  unset PYTHONPATH PYTHONHOME
   local eb_plumed=/hpcapps/lib-edda/easybuild/software/PLUMED/2.7.3-foss-2021b
   if [ -z "${SEAMS_PLUMED_KERNEL:-}" ] && [ -f "$eb_plumed/lib/libplumedKernel.so" ]; then
     export PLUMED_KERNEL="$eb_plumed/lib/libplumedKernel.so"
   elif [ -n "${SEAMS_PLUMED_KERNEL:-}" ]; then
     export PLUMED_KERNEL="$SEAMS_PLUMED_KERNEL"
   fi
+  [ "$nounset" = 1 ] && set -u
   if ! command -v lmp >/dev/null 2>&1; then
     echo "elja_host_env: lmp not on PATH after module load" >&2
     return 1
