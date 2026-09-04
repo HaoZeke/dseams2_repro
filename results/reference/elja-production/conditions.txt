@@ -1,0 +1,13 @@
+campaign: mW seeding committor
+workflow: workflow/production.smk
+config: config/production.yaml
+engine_lock: seams-core v2.9.2 (d1983d537dacad4a776e6fcaead5fee752f3cc1d)
+repro_revision: b373784d
+jobs: 1801840 (T205, compute-59), 1801837 (T215, compute-58), 1801841 (T225, compute-63)
+partition: 64cpu_256mem exclusive
+matrix: T=205,215,225 K; seed sizes 50,100,200,300,450,700; polymorph=ic; replicas=12
+n_liquid: 4096
+runs: 216 ICE / COMMITTOR files
+summary: results/production/committor.txt
+figure: results/reference/elja-production/committor.tex
+cubicity: results/reference/elja-production/cubicity.txt

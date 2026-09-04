@@ -88,6 +88,25 @@ class MlLabels(unittest.TestCase):
         self.assertEqual(temps, {205, 215, 225})
 
 
+class BrinePgf(unittest.TestCase):
+    def test_summary_and_figure(self):
+        from brine_to_pgf import figure_tex, load
+
+        src = ROOT / "results" / "brine" / "summary.txt"
+        rows = load(src)
+        self.assertEqual(len(rows), 24)
+        self.assertEqual({r["T"] for r in rows}, {230, 240, 245})
+        self.assertEqual({r["pairs"] for r in rows}, {0, 10, 20, 40})
+        self.assertTrue(all(r["n"] == 5001 for r in rows))
+        grow = next(r for r in rows if r["T"] == 230 and r["pairs"] == 0)
+        self.assertGreater(grow["nmax1"], grow["nmax0"])
+        melt = next(r for r in rows if r["T"] == 245 and r["pairs"] == 40)
+        self.assertLess(melt["nmax1"], melt["nmax0"])
+        tex = figure_tex(rows)
+        self.assertIn("largest cage cluster", tex)
+        self.assertIn("ions in liquid", tex)
+
+
 class DumpStatus(unittest.TestCase):
     def test_absent_note(self):
         from dump_status import main

@@ -1,0 +1,12 @@
+hostname: amd-compute-2
+jobid: 1798666
+partition: 128cpu_256mem
+tip_sha: e785640850774b56bd540c4890869b13fa259523
+base_sha: 1c8efa382c4ae88ebc68e40a991260c4d57edbd5
+repro_sha: unknown
+hq: hyperqueue v0.19.0
+Thread(s) per core:  2
+Core(s) per socket:  64
+Socket(s):           2
+Model name:          AMD EPYC 7713 64-Core Processor
+loadavg_at_start: 0.24

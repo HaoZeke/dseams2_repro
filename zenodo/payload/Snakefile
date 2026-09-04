@@ -1,0 +1,840 @@
+# Reproducibility DAG for the d-SEAMS 2.0 paper numbers.
+#
+# Run from the repository root inside the pixi environment, on one
+# exclusively allocated node (scripts/elja_submit.sh does both):
+#
+#   pixi run -- snakemake -s workflow/Snakefile --configfile config/config.yaml --cores all
+#
+# The engine (seams-core), its baseline commit, linkcell and both language
+# front ends are locked components in config/ecosystem-lock.json and are
+# materialized under sources/ by `scripts/elja_submit.sh prep` (compute
+# nodes carry neither git nor network access). Heavy rules execute through
+# HyperQueue when an `hq` server is reachable; set SEAMS_NO_HQ=1 or run
+# without hq on PATH to execute the same commands directly.
+
+import json
+import os
+import shutil
+
+configfile: "config/config.yaml"
+
+# Host cargo configuration (a user-level linker choice, say) must not leak
+# into the locked Rust builds; an explicit RUSTFLAGS wins over ~/.cargo
+RUST_ENV = 'export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"; '
+
+ROOT = os.path.abspath(".")
+R = "results"
+LOCK = "config/ecosystem-lock.json"
+# Build directories default to the working tree but move to node-local
+# storage (SEAMS_BUILD_ROOT) on clusters whose NFS clocks skew against
+# the nodes, which meson refuses
+BUILD = os.path.abspath(os.environ.get("SEAMS_BUILD_ROOT", "."))
+TIP_BUILD = os.path.join(BUILD, "build-repro")
+BASE_BUILD = os.path.join(BUILD, "build-base")
+SOURCE_ROOT = os.path.abspath(
+    os.environ.get("DSEAMS_SOURCE_ROOT", os.path.join(ROOT, "sources"))
+)
+with open(LOCK, encoding="utf-8") as lock_file:
+    SOURCE_LOCK = json.load(lock_file)
+
+
+def component(name):
+    return os.path.join(SOURCE_ROOT, SOURCE_LOCK["components"][name]["directory"])
+
+
+CORE = component("seams-core")
+BASE_TREE = component("seams-base")
+PYTHON_ROOT = component("pydseamslib")
+YODA_ROOT = component("yodastruct")
+CORE_INPUT = os.path.join(CORE, "input")
+PYTHON_SITE = os.path.join(BUILD, "python-site")
+YODA_BUILD = os.path.join(BUILD, "build-yoda")
+LUA_EXE = shutil.which("lua") or "lua"
+ABS = lambda p: os.path.join(ROOT, p)
+
+
+def hq(cpus):
+    if os.environ.get("SEAMS_NO_HQ") or shutil.which("hq") is None:
+        return ""
+    return ("hq submit --wait --cpus {} "
+            "--stdout results/hq-%{{JOB_ID}}.stdout "
+            "--stderr results/hq-%{{JOB_ID}}.stderr --").format(cpus)
+
+
+FIGSHARE_DIR = config.get("figshare_dir", "data/figshare")
+FIGSHARE_FILES = [
+    "nucleation.lammpstrj",
+    "mW_cubic.lammpstrj",
+    "dump-240-square.lammpstrj",
+    "dump-6-320-310.lammpstrj",
+    "dump-320.lammpstrj",
+]
+PUBLIC_ICE_DIR = config.get("public_ice_dir", "data/public-ice")
+# name -> (relative path inside PUBLIC_ICE_DIR, oxygen type)
+PUBLIC_DUMPS = {
+    "niu-traj1-extract": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-1", 1),
+    "niu-traj2-foursite": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-2", 1),
+    "niu-traj3-oxygen": ("nucleation/Ice_nucleation_trajectory/Nucleation_trajectory-3", 1),
+    "niu-critical-growing": ("critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-growing", 1),
+    "niu-critical-melting": ("critical/Critical-nucleus_analysis-trajectory/Critical-nucleus-analysis-melting", 1),
+}
+WALK_STRIDE = config.get("walk_stride", 1)
+SWEEP_SEEDS = config.get("sweep_seeds", 5)
+SWEEP_SIGMAS = config.get("sweep_sigmas", [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4])
+
+
+rule all:
+    input:
+        R + "/paper_manifest.json",
+
+
+rule conditions:
+    output:
+        R + "/conditions.txt",
+    params:
+        base=config["base_sha"],
+        core=CORE,
+    shell:
+        r"""
+        {{
+          echo "hostname: $(hostname)"
+          echo "jobid: ${{SLURM_JOB_ID:-none}}"
+          echo "partition: ${{SLURM_JOB_PARTITION:-none}}"
+          echo "tip_sha: $(git -C {params.core} rev-parse HEAD 2>/dev/null || echo unknown)"
+          echo "base_sha: {params.base}"
+          echo "repro_sha: $(git rev-parse HEAD 2>/dev/null || echo unknown)"
+          echo "hq: $(hq --version 2>/dev/null || echo absent)"
+          lscpu | grep -E 'Model name|Socket|Core|Thread' || true
+          echo "loadavg_at_start: $(cut -d' ' -f1 /proc/loadavg)"
+        }} > {output}
+        """
+
+
+rule source_manifest:
+    input:
+        lock=LOCK,
+    output:
+        R + "/source-manifest.json",
+    params:
+        root=SOURCE_ROOT,
+    shell:
+        "python scripts/ecosystem_sources.py --lock {input.lock} manifest "
+        "--root {params.root} --output {output}"
+
+
+rule setup_tip:
+    input:
+        R + "/source-manifest.json",
+    output:
+        touch(R + "/tip-setup.done"),
+    params:
+        log=R + "/tip-setup.log",
+        bdir=TIP_BUILD,
+        core=CORE,
+    shell:
+        "meson setup {params.bdir} {params.core} --prefix=$CONDA_PREFIX "
+        "--buildtype=release -Dwith_python=false -Dwith_tests=true "
+        "> {params.log} 2>&1"
+
+
+rule build_tip:
+    input:
+        R + "/tip-setup.done",
+    output:
+        touch(R + "/tip-build.done"),
+    params:
+        hq=lambda wc: hq(8),
+        bdir=TIP_BUILD,
+    shell:
+        RUST_ENV + "{params.hq} meson compile -C {params.bdir}"
+
+
+rule identity_gate:
+    # A red suite aborts the DAG; no table row is emitted from a red tree
+    input:
+        R + "/tip-build.done",
+    output:
+        R + "/tip-test.log",
+    params:
+        hq=lambda wc: hq(8),
+        bdir=TIP_BUILD,
+    shell:
+        RUST_ENV + "{params.hq} bash -c 'meson test -C {params.bdir} > {output} 2>&1'"
+
+
+rule install_python:
+    input:
+        gate=R + "/tip-test.log",
+        source=R + "/source-manifest.json",
+    output:
+        touch(R + "/py-install.done"),
+    params:
+        source=PYTHON_ROOT,
+        site=PYTHON_SITE,
+    shell:
+        RUST_ENV + "python -m pip install --no-build-isolation --no-deps --upgrade "
+        "--target {params.site} {params.source} && "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
+        "python -c 'import pydseams; print(pydseams.__file__)'"
+
+
+rule build_base:
+    input:
+        R + "/source-manifest.json",
+    output:
+        touch(R + "/base-build.done"),
+    params:
+        tree=BASE_TREE,
+        bbuild=BASE_BUILD,
+        hq=lambda wc: hq(8),
+    shell:
+        r"""
+        test -d {params.tree} || {{ echo "baseline tree missing; run scripts/elja_submit.sh prep" >&2; exit 1; }}
+        export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
+        meson setup {params.bbuild} {params.tree} --buildtype=release \
+          -Dwith_python=false -Dwith_tests=false > results/base-setup.log 2>&1
+        {params.hq} meson compile -C {params.bbuild}
+        """
+
+
+rule base_drivers:
+    # The baseline predates the bench targets; its drivers compile directly
+    # against the baseline library
+    input:
+        R + "/base-build.done",
+    output:
+        scaling=R + "/base_bench_scaling",
+        cages=R + "/base_bench_cages",
+    params:
+        tree=BASE_TREE,
+        bbuild=BASE_BUILD,
+        core=CORE,
+    shell:
+        r"""
+        EIGEN=$CONDA_PREFIX/include/eigen3
+        INC="-I{params.tree}/src/include/internal -I{params.tree}/src/include/external -I$EIGEN"
+        LINK="-L{params.bbuild}/src -lyodaLib -Wl,-rpath,{params.bbuild}/src -Wl,--enable-new-dtags -Wl,--allow-shlib-undefined"
+        g++ -std=c++20 -O2 -o {output.scaling} {params.core}/tests/bench_scaling.cpp $INC $LINK
+        g++ -std=c++20 -O2 -o {output.cages} {params.core}/tests/bench_cages_base.cpp $INC $LINK
+        """
+
+
+rule tip_scaling:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-scaling.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        sizes=" ".join(str(s) for s in config["scaling_sizes"]),
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_scaling {params.sizes} > {params.out}'"
+
+
+rule base_scaling:
+    input:
+        R + "/base_bench_scaling",
+    output:
+        R + "/base-scaling.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        bin=lambda wc, input: ABS(input[0]),
+        hq=lambda wc: hq(1),
+        sizes=" ".join(str(s) for s in config["scaling_sizes"]),
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.bin} {params.sizes} > {params.out}'"
+
+
+rule tip_cages:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-cages.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        traj=config["trajectory"],
+        reps=config["cage_reps"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_cages {params.traj} 1 {params.reps} "
+        "> {params.out}'"
+
+
+rule base_cages:
+    input:
+        R + "/base_bench_cages",
+    output:
+        R + "/base-cages.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        bin=lambda wc, input: ABS(input[0]),
+        hq=lambda wc: hq(1),
+        traj=config["trajectory"],
+        reps=config["cage_reps"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.bin} {params.traj} 1 {params.reps} > {params.out}'"
+
+
+rule tip_overhead:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-overhead.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        sizes=" ".join(str(s) for s in config["overhead_sizes"]),
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_overhead {params.sizes} > {params.out}'"
+
+
+rule tip_strong:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-strong-t{threads}.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(int(wc.threads)),
+        tbuild=TIP_BUILD,
+        atoms=config["strong_atoms"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS={wildcards.threads} "
+        "OMP_PLACES=cores OMP_PROC_BIND=close "
+        "{params.tbuild}/tests/bench_strong {params.atoms} 7 > {params.out}'"
+
+
+rule tip_pipeline:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-pipeline.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        sizes=" ".join(str(s) for s in config["scaling_sizes"]),
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_pipeline {params.sizes} > {params.out}'"
+
+
+rule tip_incremental:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-incremental-{n}.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        frames=config["incremental_frames"],
+        sites=config["incremental_sites"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_rings_incremental {wildcards.n} "
+        "{params.frames} {params.sites} > {params.out}'"
+
+
+rule tip_stages_cubic:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/tip-stages-cubic.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        traj=config["trajectory"],
+        reps=config["cage_reps"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_stages {params.traj} 1 1 {params.reps} "
+        "> {params.out}'"
+
+
+rule tip_stages_nucleation:
+    input:
+        gate=R + "/tip-test.log",
+        traj=FIGSHARE_DIR + "/nucleation.lammpstrj",
+    output:
+        R + "/tip-stages-nucleation.txt",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        reps=config["cage_reps"],
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_stages {input.traj} 1 1 {params.reps} "
+        "> {output}'"
+
+
+rule trajectory_incremental:
+    # Exactness referee and steady-state timings for the incremental rings
+    # and the incremental cage affiliation; nonzero exit on any inequality
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/trajectory-incremental.txt",
+    params:
+        cwd=CORE_INPUT,
+        out=lambda wc, output: ABS(output[0]),
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        traj=config["trajectory"],
+        frames=config["trajectory_frames"],
+    shell:
+        "{params.hq} bash -c 'cd {params.cwd} && OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/bench_trajectory_incremental {params.traj} "
+        "{params.frames} > {params.out}'"
+
+
+rule ql_compare_dseams:
+    input:
+        R + "/tip-test.log",
+    output:
+        R + "/ql-dseams.txt",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/compare_structure_desc > {output}'"
+
+
+rule ql_compare_python:
+    input:
+        R + "/py-install.done",
+    output:
+        R + "/ql-python.txt",
+    params:
+        hq=lambda wc: hq(1),
+        site=PYTHON_SITE,
+        script=os.path.join(CORE, "scripts", "compare_ql_literature.py"),
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
+        "python {params.script} > {output}'"
+
+
+rule figshare_fetch:
+    # Network access; on clusters whose compute nodes are offline this
+    # runs during `scripts/elja_submit.sh prep` and verifies here as a no-op
+    output:
+        expand(FIGSHARE_DIR + "/{f}", f=FIGSHARE_FILES),
+    shell:
+        "python scripts/figshare_demos.py fetch " + FIGSHARE_DIR
+
+
+rule build_yoda:
+    # yodaStruct is require("dseams"), not an in-tree seams-core binary.
+    # The source manifest verifies that its wrap points at this engine.
+    input:
+        gate=R + "/tip-test.log",
+        source=R + "/source-manifest.json",
+    output:
+        touch(R + "/yoda-build.done"),
+    params:
+        hq=lambda wc: hq(8),
+        yoda=YODA_ROOT,
+        bdir=YODA_BUILD,
+    shell:
+        r"""
+        test -d {params.yoda}/lua || {{ echo "locked yodaStruct source missing: {params.yoda}" >&2; exit 1; }}
+        export RUSTFLAGS="${{SEAMS_RUSTFLAGS:-}}"
+        meson setup {params.bdir} {params.yoda} --buildtype=release --wrap-mode=nodownload \
+          > results/yoda-setup.log 2>&1
+        {params.hq} meson compile -C {params.bdir}
+        """
+
+
+rule yoda_identity_gate:
+    input:
+        R + "/yoda-build.done",
+    output:
+        R + "/yoda-test.log",
+    params:
+        hq=lambda wc: hq(8),
+        bdir=YODA_BUILD,
+    shell:
+        RUST_ENV + "{params.hq} bash -c 'meson test -C {params.bdir} "
+        "--print-errorlogs > {output} 2>&1'"
+
+
+rule workflow_parity:
+    input:
+        gate=R + "/tip-test.log",
+        python=R + "/py-install.done",
+        yoda=R + "/yoda-test.log",
+        source=R + "/source-manifest.json",
+        ions="data/fixtures/tiny-ions.lammpstrj",
+    output:
+        R + "/workflow-parity.json",
+    params:
+        cli=os.path.join(TIP_BUILD, "seams"),
+        lua=LUA_EXE,
+        yoda=YODA_ROOT,
+        yoda_build=YODA_BUILD,
+        site=PYTHON_SITE,
+        water=os.path.join(CORE_INPUT, "traj", "exampleTraj.lammpstrj"),
+        ice=os.path.join(CORE_INPUT, "traj", "mW_cubic.lammpstrj"),
+    shell:
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} "
+        "python scripts/workflow_parity.py "
+        "--seams {params.cli} --lua {params.lua} "
+        "--lua-source {params.yoda} --lua-build {params.yoda_build} "
+        "--water {params.water} --ice {params.ice} --ions {input.ions} "
+        "--output {output}"
+
+
+rule figshare_demos:
+    # The five 1.0 figshare deposits through require("dseams"); nonzero
+    # exit on any failed demo
+    input:
+        yoda=R + "/yoda-test.log",
+        traj=expand(FIGSHARE_DIR + "/{f}", f=FIGSHARE_FILES),
+    output:
+        R + "/figshare-demos/figshare-demos.json",
+    params:
+        hq=lambda wc: hq(4),
+        yoda=YODA_ROOT,
+        bdir=YODA_BUILD,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=4 "
+        "python scripts/figshare_demos.py demos "
+        "{params.yoda} {params.bdir} " + FIGSHARE_DIR + " "
+        + R + "/figshare-demos'"
+
+
+NOTEBOOKS = [
+    "01_chillplus_ic",
+    "02_nucleation_cages",
+    "03_nanotube_prisms",
+    "04_monolayer_rings",
+    "05_rdf2d",
+]
+
+NOTEBOOK_INPUTS = dict(
+    py=R + "/py-install.done",
+    runner="scripts/execute_notebook.sh",
+    traj=expand(FIGSHARE_DIR + "/{f}", f=FIGSHARE_FILES),
+)
+
+
+rule figshare_notebook:
+    # Percent-format sources under notebooks/; jupytext converts
+    # and papermill executes. Execution is the test (each notebook
+    # asserts its own headline numbers) and the executed .ipynb is the
+    # artifact. 02_nucleation_cages is a separate rule because it also
+    # writes figshare-incremental.json (Snakemake deletes declared
+    # outputs before the job, so a later test -s stamp cannot see a
+    # side-effect file).
+    input:
+        nb="notebooks/{nb}.py",
+        **NOTEBOOK_INPUTS,
+    output:
+        R + "/notebooks/{nb}.ipynb",
+    wildcard_constraints:
+        nb="(?!02_nucleation_cages).+",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=2 "
+        "scripts/execute_notebook.sh {input.nb} {output}'"
+
+
+rule figshare_nucleation_notebook:
+    input:
+        nb="notebooks/02_nucleation_cages.py",
+        **NOTEBOOK_INPUTS,
+    output:
+        ipynb=R + "/notebooks/02_nucleation_cages.ipynb",
+        incremental=R + "/figshare-incremental.json",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=2 "
+        "scripts/execute_notebook.sh {input.nb} {output.ipynb}'"
+
+
+rule public_ice_fetch:
+    # Materials Cloud 10.24435/materialscloud:2020.0005/v1; same offline
+    # caveat as figshare_fetch
+    output:
+        PUBLIC_ICE_DIR + "/SOURCE.json",
+    shell:
+        "python scripts/public_ice.py fetch " + PUBLIC_ICE_DIR
+
+
+# --- Applications: per-frame comparison with CHILL+ on public trajectories
+
+
+rule walk_figshare:
+    # CHILL+ counts and largest cluster, cage membership on the cutoff graph,
+    # seeded assignment; every frame of the 148-frame mW nucleation deposit
+    input:
+        gate=R + "/tip-test.log",
+        traj=FIGSHARE_DIR + "/nucleation.lammpstrj",
+    output:
+        R + "/walks/figshare-nucleation.txt",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/walk_compare {input.traj} 0 1 1 > {output}'"
+
+
+rule walk_public:
+    input:
+        gate=R + "/tip-test.log",
+        source=PUBLIC_ICE_DIR + "/SOURCE.json",
+    output:
+        R + "/walks/{dump}.txt",
+    wildcard_constraints:
+        dump="niu-.+",
+    params:
+        hq=lambda wc: hq(1),
+        tbuild=TIP_BUILD,
+        traj=lambda wc: os.path.join(PUBLIC_ICE_DIR, PUBLIC_DUMPS[wc.dump][0]),
+        otype=lambda wc: PUBLIC_DUMPS[wc.dump][1],
+        stride=WALK_STRIDE,
+    shell:
+        "{params.hq} bash -c 'OMP_NUM_THREADS=1 "
+        "{params.tbuild}/tests/walk_compare {params.traj} 0 {params.otype} "
+        "{params.stride} > {output}'"
+
+
+# --- Comparison with existing tools on labelled lattices
+
+
+rule sota_sweep:
+    # Per-molecule accuracy of every runnable classifier on jittered Ic and
+    # Ih lattices and a disordered null, repeated over seeds, with the wall
+    # time of each method on the same frames
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/sota_compare.txt",
+    params:
+        hq=lambda wc: hq(4),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+        seeds=SWEEP_SEEDS,
+        sigmas=" ".join(str(s) for s in SWEEP_SIGMAS),
+        liquid=config.get("liquid_data", "data/mW_liquid_T215_512.data"),
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/sota_compare.py --seeds {params.seeds} "
+        "--sigmas {params.sigmas} --liquid-data {params.liquid} > {output}'"
+
+
+
+rule genice_atlas:
+    # Specificity over the GenIce polymorph library: ice I positives,
+    # dense polymorphs, empty clathrate frameworks, porous ices and
+    # amorphous networks, ideal and under positional noise
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/genice_atlas.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/genice_atlas.py > {output}'"
+
+
+rule ion_atlas:
+    # Ice labels of the water network around substitutional Na and Cl in
+    # GenIce ice Ih, Ic and the sI framework, ions removed from the graph
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/ion_atlas.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/ion_atlas.py > {output}'"
+
+
+rule polymorph_library:
+    # Topology key library over the GenIce lattices (three hops, mutual
+    # four-nearest graph) read back against the jittered ice I lattices and
+    # the displaced atlas. Needs the engine's topology keys (pydseamslib
+    # 2.8 or later); not part of the manifest until the lock carries them.
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        library=R + "/polymorph_library.txt",
+        match=R + "/polymorph_match.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/polymorph_library.py --hops 3 --fallback-hops 2 --library-out {output.library} "
+        "> {output.match}'"
+
+rule hydrate_occupancy:
+    # Methane occupancy of the GenIce sI and sII hydrates: cages by ring-size
+    # signature on the water graph, every guest placed at the nearest periodic
+    # cage centroid. Needs the engine's signature enumerator and guest
+    # occupancy (pydseamslib past 2.8.1).
+    input:
+        py=R + "/py-install.done",
+        gate=R + "/tip-test.log",
+    output:
+        R + "/hydrate_occupancy.txt",
+    params:
+        hq=lambda wc: hq(2),
+        site=PYTHON_SITE,
+        tbuild=TIP_BUILD,
+    shell:
+        "{params.hq} bash -c "
+        "'LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH "
+        "PYTHONPATH={params.site}:${{PYTHONPATH:-}} OMP_NUM_THREADS=1 "
+        "SEAMS_BUILD={params.tbuild} "
+        "python scripts/hydrate_occupancy.py > {output}'"
+
+
+rule hydrate_occupancy_figure:
+    input:
+        R + "/hydrate_occupancy.txt",
+    output:
+        R + "/hydrate_occupancy.tex",
+    shell:
+        "python scripts/hydrate_occupancy_to_pgf.py {input} {output}"
+
+
+rule msm_features:
+    # Feature table of the Niu committor pair from walk_compare. Columns
+    # follow IceFeaturizer; this is not a fitted MSM.
+    input:
+        growing=R + "/walks/niu-critical-growing.txt",
+        melting=R + "/walks/niu-critical-melting.txt",
+    output:
+        csv=R + "/msm_features.csv",
+        tex=R + "/msm_features.tex",
+    params:
+        walks=R + "/walks",
+    shell:
+        "python scripts/msm_features.py {params.walks} {output.csv} && "
+        "python scripts/msm_features_to_pgf.py {output.csv} {output.tex}"
+
+
+rule shear_status:
+    # Re-score data/shear/*.lammpstrj with walk_compare when a dump is
+    # present; otherwise a dated absence note.
+    output:
+        R + "/shear/status.txt",
+    shell:
+        "python scripts/dump_status.py --name shear --dumps data/shear "
+        "--out {output}"
+
+
+rule inp_status:
+    # Substrate-excluded ice: water-only IceFeaturizer when a dump sits
+    # under data/inp; otherwise a dated absence note.
+    output:
+        R + "/inp/status.txt",
+    shell:
+        "python scripts/dump_status.py --name inp --dumps data/inp "
+        "--out {output}"
+
+
+rule brine_status:
+    # 5 ns Madrid 2019 fronts: figures come from summary.txt; this note
+    # records whether that file exists.
+    output:
+        "results/brine/status.txt",
+    shell:
+        "python scripts/dump_status.py --name brine --dumps results/brine "
+        "--need summary.txt --out {output}"
+
+rule aggregate:
+    input:
+        conditions=R + "/conditions.txt",
+        source=R + "/source-manifest.json",
+        parity=R + "/workflow-parity.json",
+        gate=R + "/tip-test.log",
+        tip_scaling=R + "/tip-scaling.txt",
+        base_scaling=R + "/base-scaling.txt",
+        tip_cages=R + "/tip-cages.txt",
+        base_cages=R + "/base-cages.txt",
+        overhead=R + "/tip-overhead.txt",
+        strong=expand(
+            R + "/tip-strong-t{t}.txt", t=config["strong_threads"]
+        ),
+        trajectory=R + "/trajectory-incremental.txt",
+        ql_dseams=R + "/ql-dseams.txt",
+        ql_python=R + "/ql-python.txt",
+        figshare_demos=R + "/figshare-demos/figshare-demos.json",
+        atlas=R + "/genice_atlas.txt",
+        ions=R + "/ion_atlas.txt",
+        figshare_notebooks=expand(
+            R + "/notebooks/{nb}.ipynb", nb=NOTEBOOKS
+        ),
+        figshare_incremental=R + "/figshare-incremental.json",
+        pipeline=R + "/tip-pipeline.txt",
+        incremental=expand(
+            R + "/tip-incremental-{n}.txt", n=config["scaling_sizes"]
+        ),
+        stages_cubic=R + "/tip-stages-cubic.txt",
+        stages_nucleation=R + "/tip-stages-nucleation.txt",
+        walks=[R + "/walks/figshare-nucleation.txt"]
+        + expand(R + "/walks/{dump}.txt", dump=list(PUBLIC_DUMPS)),
+        sota=R + "/sota_compare.txt",
+    output:
+        R + "/paper_manifest.json",
+    params:
+        results=R,
+    shell:
+        "python scripts/aggregate.py {params.results} > {output}"

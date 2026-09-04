@@ -1,0 +1,11 @@
+tag: v2.7.0
+package: dseams2_repro
+engine: seams-core v2.9.2 (d1983d537dacad4a776e6fcaead5fee752f3cc1d)
+pydseamslib: c252b6408cb1aaa00b8573d861de9d53937f11cf
+yodastruct: a905ca57b2eb030902b307d93c8e72f2cf077eda
+linkcell: 558401547e524b1b8015da856026ceb636d05651
+seams-base: 1c8efa382c4ae88ebc68e40a991260c4d57edbd5
+exclusive-node-timings: results/reference/elja-1798666 (seams-core e785640850774b56bd540c4890869b13fa259523)
+production: results/production (Slurm 1801837, 1801840, 1801841)
+brine: results/brine (Slurm 1801845, 1801846, 1801847)
+manuscript: not included

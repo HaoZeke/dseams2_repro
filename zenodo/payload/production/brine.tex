@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.6cm},
+  width=0.48\textwidth, height=0.42\textwidth,
+  xlabel={NaCl pairs},
+  grid=major,
+  grid style={gray!18},
+  tick label style={font=\sffamily\small},
+  label style={font=\sffamily\small},
+  title style={font=\sffamily\small},
+  legend style={font=\sffamily\footnotesize, draw=none, fill=white,
+    fill opacity=0.88, text opacity=1},
+  legend cell align=left,
+]
+\nextgroupplot[title={largest cage cluster, last stride}, ylabel={molecules}, legend to name=appbrineleg, legend columns=3]
+\addplot[teal!80!black, very thick, mark=square*] coordinates {(0,1203.5) (10,1128.0) (20,984.5) (40,886.5)};
+\addlegendentry{$230\,\mathrm{K}$}
+\addplot[teal!50!black, thick, mark=*] coordinates {(0,1275.0) (10,1087.0) (20,889.0) (40,844.0)};
+\addlegendentry{$240\,\mathrm{K}$}
+\addplot[coral!80!red, very thick, mark=o] coordinates {(0,1319.5) (10,941.0) (20,816.5) (40,722.0)};
+\addlegendentry{$245\,\mathrm{K}$}
+\nextgroupplot[title={ions in liquid, last stride}, ylabel={ions}]
+\addplot[teal!80!black, very thick, mark=square*] coordinates {(0,0.00) (10,8.00) (20,27.50) (40,59.50)};
+\addplot[teal!50!black, thick, mark=*] coordinates {(0,0.00) (10,11.50) (20,32.50) (40,61.00)};
+\addplot[coral!80!red, very thick, mark=o] coordinates {(0,0.00) (10,15.00) (20,36.50) (40,72.50)};
+\end{groupplot}
+\node at ($(group c1r1.south)!0.5!(group c2r1.south)$) [below=1.15cm] {\pgfplotslegendfromname{appbrineleg}};
+\end{tikzpicture}

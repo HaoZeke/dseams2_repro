@@ -1,6 +1,6 @@
 [workspace]
 name = "dseams2_repro"
-version = "0.1.0"
+version = "2.7.0"
 description = "Reproducibility package for the d-SEAMS 2.0 paper: Snakemake + HyperQueue campaign over the locked engine, front ends and public trajectories"
 channels = ["conda-forge"]
 platforms = ["linux-64"]
@@ -54,7 +54,7 @@ dry-run = "snakemake -s workflow/Snakefile --configfile config/config.yaml --dry
 smoke = "SEAMS_NO_HQ=1 snakemake -s workflow/Snakefile --configfile config/smoke.yaml --cores all --printshellcmds"
 test = "python scripts/test_aggregate.py && python scripts/test_ecosystem_sources.py && python scripts/test_workflow_parity.py && python scripts/test_committor_to_pgf.py && python scripts/test_applications_pgf.py"
 stage-zenodo = "bash scripts/stage_zenodo.sh"
-package-archive = "bash -c 'set -e; ts=$(date -u +%Y%m%d); out=dseams2_repro_archive_${ts}.tar.xz; tar --exclude=./.pixi --exclude=./.git --exclude=./sources --exclude=./build-* --exclude=./python-site --exclude=./.snakemake --exclude=./data/figshare --exclude=./data/public-ice --exclude=__pycache__ -cJf \"$out\" .; sha256sum \"$out\" | tee \"$out.sha256\"'"
+package-archive = "bash -c 'set -e; ts=$(date -u +%Y%m%d); out=dseams2_repro_archive_${ts}.tar.xz; tar --exclude=./.pixi --exclude=./.git --exclude=./sources --exclude=./build-* --exclude=./python-site --exclude=./.snakemake --exclude=./data/figshare --exclude=./data/public-ice --exclude=__pycache__ --exclude=./results/brine/*.out --exclude=./results/production/*.out --exclude=traj.lammpstrj -cJf \"$out\" .; sha256sum \"$out\" | tee \"$out.sha256\"'"
 
 # LAMMPS with PLUMED for the seeding campaign; plumed is pinned by lammps.
 # On Elja the conda-forge lammps binary needs GLIBC_2.34; scripts/elja_lmp.sh

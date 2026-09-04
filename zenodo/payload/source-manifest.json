@@ -1,0 +1,25 @@
+{
+  "components": {
+    "linkcell": {
+      "repository": "https://github.com/d-SEAMS/linkcell.git",
+      "revision": "558401547e524b1b8015da856026ceb636d05651"
+    },
+    "pydseamslib": {
+      "repository": "https://github.com/d-SEAMS/PydSEAMSlib.git",
+      "revision": "36fa59d72489db289b4ff2933c511f5838c7a6ec"
+    },
+    "seams-base": {
+      "repository": "https://github.com/d-SEAMS/seams-core.git",
+      "revision": "1c8efa382c4ae88ebc68e40a991260c4d57edbd5"
+    },
+    "seams-core": {
+      "repository": "https://github.com/HaoZeke/seams-core.git",
+      "revision": "e785640850774b56bd540c4890869b13fa259523"
+    },
+    "yodastruct": {
+      "repository": "https://github.com/HaoZeke/yodaStruct.git",
+      "revision": "9f0dc7ad981892fd87120c3251869ff71ad698f9"
+    }
+  },
+  "schema": "dseams.source-manifest/v1"
+}

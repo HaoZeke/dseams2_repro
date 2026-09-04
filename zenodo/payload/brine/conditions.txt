@@ -1,0 +1,13 @@
+campaign: ice/brine direct coexistence
+workflow: workflow/production.smk
+config: config/production.yaml
+engine_lock: seams-core v2.9.2 (d1983d537dacad4a776e6fcaead5fee752f3cc1d)
+repro_revision: b373784d
+jobs: 1801845 (T230, compute-89), 1801846 (T240, compute-88), 1801847 (T245, compute-58)
+partition: 64cpu_256mem exclusive
+matrix: T=230,240,245 K; NaCl pairs=0,10,20,40; replicas=2
+system: GenIce Ih TIP4P/2005, Madrid 2019 ions, 1152 molecules
+run: 5 ns front, plumed_stride 500 (1 ps), 5001 BRINE rows per replica
+observables: DSEAMS_CAGES nice,nmax,nclus,nic,nih,nmixed,chill*,sixrings,nionice,nionfront,nionliq
+summary: results/brine/summary.txt (24 rows)
+figure: results/brine/brine.tex

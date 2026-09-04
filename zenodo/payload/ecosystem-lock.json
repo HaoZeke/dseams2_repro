@@ -1,0 +1,30 @@
+{
+  "schema": "dseams.ecosystem-lock/v1",
+  "components": {
+    "linkcell": {
+      "directory": "linkcell",
+      "repository": "https://github.com/d-SEAMS/linkcell.git",
+      "revision": "558401547e524b1b8015da856026ceb636d05651"
+    },
+    "pydseamslib": {
+      "directory": "PydSEAMSlib",
+      "repository": "https://github.com/d-SEAMS/PydSEAMSlib.git",
+      "revision": "c252b6408cb1aaa00b8573d861de9d53937f11cf"
+    },
+    "seams-base": {
+      "directory": "seams-base",
+      "repository": "https://github.com/d-SEAMS/seams-core.git",
+      "revision": "1c8efa382c4ae88ebc68e40a991260c4d57edbd5"
+    },
+    "seams-core": {
+      "directory": "seams-core",
+      "repository": "https://github.com/d-SEAMS/seams-core.git",
+      "revision": "d1983d537dacad4a776e6fcaead5fee752f3cc1d"
+    },
+    "yodastruct": {
+      "directory": "yodaStruct",
+      "repository": "https://github.com/d-SEAMS/yodaStruct.git",
+      "revision": "a905ca57b2eb030902b307d93c8e72f2cf077eda"
+    }
+  }
+}

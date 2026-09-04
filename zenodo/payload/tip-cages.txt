@@ -1,0 +1,18 @@
+atoms      4096
+rings      8192
+six-rings  8192
+
+backends   vesin=on sphericart=off nauty=off ira=off
+
+steinhardtQl l=6/ms         3.790
+ringNetwork/ms              21.355
+findHC/ms                   68.655
+findHC+findDDC/ms           71.618
+findDDC alone/ms            2.962
+shapeMatchHC/ms             0.002
+matched HCs 0
+shapeMatchDDC/ms            44.823
+matched DDCs 1950
+
+HC rings   0
+DDC rings  8192
