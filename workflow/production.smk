@@ -240,6 +240,8 @@ rule brine_plumed:
                             ions.append(aid)
 
         def ranges(ids):
+            if not ids:
+                return ""
             ids = sorted(ids)
             out, start, prev = [], ids[0], ids[0]
             for x in ids[1:]:
@@ -252,7 +254,12 @@ rule brine_plumed:
 
         text = open("templates/plumed_brine.dat").read()
         text = (text.replace("@MODULE@", input.module).replace("@OXYGENS@", ranges(oxygens))
-                .replace("@IONS@", ranges(ions)).replace("@STRIDE@", str(params.stride)))
+                .replace("@STRIDE@", str(params.stride)))
+        # pairs=0 has no ions; IONS= is not a valid PLUMED atom list
+        if ions:
+            text = text.replace("@IONS@", ranges(ions))
+        else:
+            text = text.replace("IONS=@IONS@", "")
         open(output[0], "w").write(text)
 
 
