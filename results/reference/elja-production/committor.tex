@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=3 by 1, horizontal sep=1.3cm, ylabels at=edge left},
+  width=0.33\textwidth, height=0.42\textwidth,
+  xmin=0, xmax=750, ymin=-0.05, ymax=1.08,
+  xlabel={seed size $N$}, ylabel={grown fraction $p$},
+  xtick={50,200,450,700},
+  grid=major,
+  grid style={gray!18},
+  tick label style={font=\sffamily\small},
+  label style={font=\sffamily\small},
+  title style={font=\sffamily\small},
+  legend style={font=\sffamily\footnotesize, draw=none, fill=white,
+    fill opacity=0.88, text opacity=1},
+  legend cell align=left,
+]
+\nextgroupplot[title={$205\,\mathrm{K}$}, legend to name=appcommleg, legend columns=2]
+\addplot[teal!80!black, very thick, mark=square*] coordinates {(50,0.083) (100,0.000) (200,0.917) (300,1.000) (450,1.000) (700,1.000)};
+\addlegendentry{cage $n_{\max}$}
+\addplot[coral!80!red, very thick, mark=o] coordinates {(50,0.000) (100,0.000) (200,0.000) (300,0.000) (450,0.000) (700,0.000)};
+\addlegendentry{CHILL+ $n_{\max}$}
+\nextgroupplot[title={$215\,\mathrm{K}$}]
+\addplot[teal!80!black, very thick, mark=square*] coordinates {(50,0.000) (100,0.000) (200,0.000) (300,0.917) (450,1.000) (700,1.000)};
+\addplot[coral!80!red, very thick, mark=o] coordinates {(50,0.000) (100,0.000) (200,0.000) (300,0.000) (450,0.000) (700,0.000)};
+\nextgroupplot[title={$225\,\mathrm{K}$}]
+\addplot[teal!80!black, very thick, mark=square*] coordinates {(50,0.000) (100,0.000) (200,0.000) (300,0.083) (450,0.667) (700,1.000)};
+\addplot[coral!80!red, very thick, mark=o] coordinates {(50,0.000) (100,0.000) (200,0.000) (300,0.000) (450,0.000) (700,0.000)};
+\end{groupplot}
+\node at ($(group c1r1.south)!0.5!(group c3r1.south)$) [below=1.15cm] {\pgfplotslegendfromname{appcommleg}};
+\end{tikzpicture}

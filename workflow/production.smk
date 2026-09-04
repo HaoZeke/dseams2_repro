@@ -30,6 +30,8 @@ def run_meta(wc):
 rule all:
     input:
         R + "/committor.txt",
+        R + "/committor.tex",
+        R + "/committor-table.tex",
 
 
 rule module_source:
@@ -181,6 +183,16 @@ rule committor:
     shell:
         "python scripts/committor.py " + R + " --melt {params.melt} > {output}"
 
+
+rule committor_figure:
+    input:
+        R + "/committor.txt",
+    output:
+        fig=R + "/committor.tex",
+        tab=R + "/committor-table.tex",
+    shell:
+        "python scripts/committor_to_pgf.py {input} {output.fig} {output.tab}"
+
 # --- Ice/brine direct coexistence: TIP4P/2005 water, Madrid 2019 NaCl ---
 BRINE = config.get("brine", {})
 BRINE_RUNS = [
@@ -293,3 +305,12 @@ rule brine_all:
         RB + "/summary.txt",
     shell:
         "python scripts/brine_summary.py " + RB + " > {output}"
+
+
+rule brine_figure:
+    input:
+        RB + "/summary.txt",
+    output:
+        RB + "/brine.tex",
+    shell:
+        "python scripts/brine_to_pgf.py {input} {output}"

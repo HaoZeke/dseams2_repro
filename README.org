@@ -71,11 +71,15 @@ under =profiles/=, results, and an archive tarball for deposition.
   stops on a committor basin. Comparison is the topological nucleus
   against the CHILL+ nucleus. =scripts/seed_ice.py= cuts each seed.
   =scripts/committor.py= reads the =ICE= files.
+  =scripts/committor_to_pgf.py= writes the Applications figure and
+  table from =committor.txt=.
 - Ice/brine direct coexistence uses the same production directed
   acyclic graph (DAG). A GenIce ice Ih slab, TIP4P/2005 water and
   Madrid 2019 NaCl run at 230 K, 240 K and 245 K, with the ions off the
   graph. =scripts/brine_system.py= builds the box.
   =scripts/brine_summary.py= reads the =BRINE= files.
+  =scripts/brine_to_pgf.py= writes the Applications brine figure from
+  that summary.
 - Cross-frontend parity of the stable workflows (CLI, Python, Lua) and a
   source inventory of every locked component.
 
@@ -175,6 +179,7 @@ can tell.
 | =results/reference/elja-1788072=, =elja-1788816= | Xeon Platinum 8358, exclusive =64cpu_256mem= | the v2.6.0 timing campaign the manuscript tables read |
 | =results/reference/walks=, =sota_compare-terra.txt=, =seeded_residual*.txt= | shared workstation | the stride-ten walks, the single-seed sweep and the residual diagnosis |
 | =results/production/=, =results/brine/= | exclusive Slurm node, one job per temperature | outputs of =scripts/elja_production.sh submit= and =submit-brine= |
+| =results/reference/elja-production= | exclusive =64cpu_256mem= | seeding committor.txt and the pgfplots figure/table the Applications section reads |
 
 * Changelog
 
