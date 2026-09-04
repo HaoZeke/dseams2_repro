@@ -73,10 +73,10 @@ print(*[f'results/brine/T{$T}_m{m}_r{r}/BRINE' for m,r in itertools.product(b['p
   ;;
 smoke)
   : "${ELJA_ACCOUNT:=chem-ui}"
-  mkdir -p results/production results/brine
+  mkdir -p results/production results/brine results/smoke results/smoke-brine
   sbatch --partition="${ELJA_PARTITION:-64cpu_256mem}" --ntasks=1 --cpus-per-task=8 \
     --time="${ELJA_SMOKE_TIME:-00:30:00}" --mem=16G --account="$ELJA_ACCOUNT" --job-name="prod-smoke" \
-    --output=results/production/smoke-%j.out \
+    --output=results/smoke/smoke-%j.out \
     --wrap "CONFIG=config/production-smoke.yaml $ROOT/scripts/elja_production.sh run --configfile config/production-smoke.yaml --cores 8 --keep-going"
   ;;
 run)

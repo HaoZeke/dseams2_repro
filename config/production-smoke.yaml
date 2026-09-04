@@ -1,4 +1,7 @@
 # Tiny matrix for a laptop or one terra core: not a result.
+# Separate trees so a smoke cannot rewrite the production packing.
+results_root: results/smoke
+brine_root: results/smoke-brine
 n_liquid: 512
 temperatures: [215]
 seed_sizes: [50, 100]

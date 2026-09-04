@@ -11,7 +11,7 @@ LMP = os.environ.get("SEAMS_LMP", "lmp")
 
 configfile: "config/production.yaml"
 
-R = "results/production"
+R = config.get("results_root", "results/production")
 MODULE = os.path.abspath(config.get("module", "build-plumed/libdseams_plumed.so"))
 PLUMED_SRC = config.get("plumed_source", "sources/dseams-plumed")
 RUNS = [
@@ -189,7 +189,7 @@ BRINE_RUNS = [
         BRINE.get("temperatures", []), BRINE.get("pairs", []), range(BRINE.get("replicas", 0))
     )
 ]
-RB = "results/brine"
+RB = config.get("brine_root", "results/brine")
 
 
 def brine_meta(wc):

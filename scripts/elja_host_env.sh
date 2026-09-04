@@ -33,11 +33,19 @@ elja_host_env() {
   module load LAMMPS/.23Jun2022-kokkos
   unset PYTHONPATH PYTHONHOME
   local eb_plumed=/hpcapps/lib-edda/easybuild/software/PLUMED/2.7.3-foss-2021b
+  local eb_lammps=/hpcapps/lib-edda/easybuild/software/LAMMPS/23Jun2022-foss-2021b-kokkos
   if [ -z "${SEAMS_PLUMED_KERNEL:-}" ] && [ -f "$eb_plumed/lib/libplumedKernel.so" ]; then
     export PLUMED_KERNEL="$eb_plumed/lib/libplumedKernel.so"
   elif [ -n "${SEAMS_PLUMED_KERNEL:-}" ]; then
     export PLUMED_KERNEL="$SEAMS_PLUMED_KERNEL"
   fi
+  # foss prepends Python 3.9; conda lmp is glibc-broken. Host bins first,
+  # then the pixi env so `python` / genice2 stay 3.12.
+  local front=""
+  [ -d "$eb_lammps/bin" ] && front="$eb_lammps/bin"
+  [ -d "$eb_plumed/bin" ] && front="$front${front:+:}$eb_plumed/bin"
+  [ -n "${CONDA_PREFIX:-}" ] && front="$front${front:+:}$CONDA_PREFIX/bin"
+  [ -n "$front" ] && export PATH="$front:$PATH"
   [ "$nounset" = 1 ] && set -u
   if ! command -v lmp >/dev/null 2>&1; then
     echo "elja_host_env: lmp not on PATH after module load" >&2
