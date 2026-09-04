@@ -744,6 +744,61 @@ rule hydrate_occupancy:
         "SEAMS_BUILD={params.tbuild} "
         "python scripts/hydrate_occupancy.py > {output}'"
 
+
+rule hydrate_occupancy_figure:
+    input:
+        R + "/hydrate_occupancy.txt",
+    output:
+        R + "/hydrate_occupancy.tex",
+    shell:
+        "python scripts/hydrate_occupancy_to_pgf.py {input} {output}"
+
+
+rule msm_features:
+    # Feature table of the Niu committor pair from walk_compare. Columns
+    # follow IceFeaturizer; this is not a fitted MSM.
+    input:
+        growing=R + "/walks/niu-critical-growing.txt",
+        melting=R + "/walks/niu-critical-melting.txt",
+    output:
+        csv=R + "/msm_features.csv",
+        tex=R + "/msm_features.tex",
+    params:
+        walks=R + "/walks",
+    shell:
+        "python scripts/msm_features.py {params.walks} {output.csv} && "
+        "python scripts/msm_features_to_pgf.py {output.csv} {output.tex}"
+
+
+rule shear_status:
+    # Re-score data/shear/*.lammpstrj with walk_compare when a dump is
+    # present; otherwise a dated absence note.
+    output:
+        R + "/shear/status.txt",
+    shell:
+        "python scripts/dump_status.py --name shear --dumps data/shear "
+        "--out {output}"
+
+
+rule inp_status:
+    # Substrate-excluded ice: water-only IceFeaturizer when a dump sits
+    # under data/inp; otherwise a dated absence note.
+    output:
+        R + "/inp/status.txt",
+    shell:
+        "python scripts/dump_status.py --name inp --dumps data/inp "
+        "--out {output}"
+
+
+rule brine_status:
+    # 5 ns Madrid 2019 fronts: figures come from summary.txt; this note
+    # records whether that file exists.
+    output:
+        "results/brine/status.txt",
+    shell:
+        "python scripts/dump_status.py --name brine --dumps results/brine "
+        "--need summary.txt --out {output}"
+
 rule aggregate:
     input:
         conditions=R + "/conditions.txt",

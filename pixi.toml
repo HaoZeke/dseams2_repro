@@ -52,7 +52,7 @@ submit = "bash scripts/elja_submit.sh submit"
 run-local = "SEAMS_NO_HQ=1 snakemake -s workflow/Snakefile --configfile config/config.yaml --cores all --printshellcmds"
 dry-run = "snakemake -s workflow/Snakefile --configfile config/config.yaml --dry-run --cores 1"
 smoke = "SEAMS_NO_HQ=1 snakemake -s workflow/Snakefile --configfile config/smoke.yaml --cores all --printshellcmds"
-test = "python scripts/test_aggregate.py && python scripts/test_ecosystem_sources.py && python scripts/test_workflow_parity.py && python scripts/test_committor_to_pgf.py"
+test = "python scripts/test_aggregate.py && python scripts/test_ecosystem_sources.py && python scripts/test_workflow_parity.py && python scripts/test_committor_to_pgf.py && python scripts/test_applications_pgf.py"
 stage-zenodo = "bash scripts/stage_zenodo.sh"
 package-archive = "bash -c 'set -e; ts=$(date -u +%Y%m%d); out=dseams2_repro_archive_${ts}.tar.xz; tar --exclude=./.pixi --exclude=./.git --exclude=./sources --exclude=./build-* --exclude=./python-site --exclude=./.snakemake --exclude=./data/figshare --exclude=./data/public-ice --exclude=__pycache__ -cJf \"$out\" .; sha256sum \"$out\" | tee \"$out.sha256\"'"
 

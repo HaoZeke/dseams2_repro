@@ -1,0 +1,7 @@
+name=brine
+date=2026-09-04
+dumps=results/brine
+need=results/brine/summary.txt
+need_present=False
+status=absent
+note=summary.txt is not in the package on 2026-09-04; no figure numbers are taken from an unfinished run.

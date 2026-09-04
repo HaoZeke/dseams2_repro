@@ -32,6 +32,10 @@ rule all:
         R + "/committor.txt",
         R + "/committor.tex",
         R + "/committor-table.tex",
+        R + "/cubicity.txt",
+        R + "/cubicity.tex",
+        R + "/cubicity-table.tex",
+        R + "/ml_labels.csv",
 
 
 rule module_source:
@@ -193,6 +197,34 @@ rule committor_figure:
     shell:
         "python scripts/committor_to_pgf.py {input} {output.fig} {output.tab}"
 
+
+rule cubicity:
+    input:
+        expand(R + "/{run}/ICE", run=RUNS),
+    output:
+        R + "/cubicity.txt",
+    shell:
+        "python scripts/cubicity.py " + R + " > {output}"
+
+
+rule cubicity_figure:
+    input:
+        R + "/cubicity.txt",
+    output:
+        fig=R + "/cubicity.tex",
+        tab=R + "/cubicity-table.tex",
+    shell:
+        "python scripts/cubicity_to_pgf.py {input} {output.fig} {output.tab}"
+
+
+rule ml_labels:
+    input:
+        expand(R + "/{run}/ICE", run=RUNS),
+    output:
+        R + "/ml_labels.csv",
+    shell:
+        "python scripts/ml_labels.py " + R + " {output}"
+
 # --- Ice/brine direct coexistence: TIP4P/2005 water, Madrid 2019 NaCl ---
 BRINE = config.get("brine", {})
 BRINE_RUNS = [
@@ -314,3 +346,11 @@ rule brine_figure:
         RB + "/brine.tex",
     shell:
         "python scripts/brine_to_pgf.py {input} {output}"
+
+
+rule brine_status:
+    output:
+        RB + "/status.txt",
+    shell:
+        "python scripts/dump_status.py --name brine --dumps " + RB + " "
+        "--need summary.txt --out {output}"

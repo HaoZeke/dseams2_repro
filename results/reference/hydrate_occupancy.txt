@@ -1,0 +1,8 @@
+structure=sI+CH4 rep=2x2x2 water=368 methane=64
+structure=sI+CH4 signature=512 cages=16 expected=16 occupied=16 multiple=0 free=48 filled=1.000
+structure=sI+CH4 signature=51262 cages=48 expected=48 occupied=48 multiple=0 free=16 filled=1.000
+structure=sI+CH4 signature=all cages=64 occupied=64 multiple=0 free=0 centre_max=0.031 centre_mean=0.016
+structure=sII+CH4 rep=1x1x1 water=136 methane=24
+structure=sII+CH4 signature=512 cages=16 expected=16 occupied=16 multiple=0 free=8 filled=1.000
+structure=sII+CH4 signature=5:12,6:4 cages=8 expected=8 occupied=8 multiple=0 free=16 filled=1.000
+structure=sII+CH4 signature=all cages=24 occupied=24 multiple=0 free=0 centre_max=1.225 centre_mean=0.216

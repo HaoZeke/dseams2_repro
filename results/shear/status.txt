@@ -1,0 +1,6 @@
+name=shear
+date=2026-09-04
+dumps=data/shear
+n_dumps=0
+status=absent
+note=no *.lammpstrj under data/shear on 2026-09-04; the rule is the consumer, not a substitute dump.
