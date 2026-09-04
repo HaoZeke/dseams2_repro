@@ -63,8 +63,10 @@ submit-brine)
   for T in $(pixi run -e production -- python -c "import yaml;print(*yaml.safe_load(open('$CONFIG'))['brine']['temperatures'])"); do
     TARGETS=$(pixi run -e production -- python -c "
 import yaml,itertools
-b=yaml.safe_load(open('$CONFIG'))['brine']
-print(*[f'results/brine/T{$T}_m{m}_r{r}/BRINE' for m,r in itertools.product(b['pairs'],range(b['replicas']))])")
+cfg=yaml.safe_load(open('$CONFIG'))
+b=cfg['brine']
+root=cfg.get('brine_root','results/brine')
+print(*[f'{root}/T{$T}_m{m}_r{r}/BRINE' for m,r in itertools.product(b['pairs'],range(b['replicas']))])")
     sbatch --partition="${ELJA_PARTITION:-64cpu_256mem}" --exclusive --ntasks=1 --cpus-per-task=32 \
       --time="${ELJA_TIME:-48:00:00}" --mem=32G --account="$ELJA_ACCOUNT" --job-name="brine-T$T" \
       --output=results/brine/brine-T$T-%j.out \
